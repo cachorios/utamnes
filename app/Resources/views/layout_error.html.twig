@@ -1,0 +1,41 @@
+{% extends '::base.html.twig' %}
+
+
+{% block body %}
+
+
+    {% if logout is not defined or logout is null %}
+        {% set logout_path = path('logout') %}
+    {% else %}
+        {% set logout_path = path('autogestion_logout') %}
+    {% endif %}
+
+    {% include 'includes/topbar.html.twig' %}
+    {% include 'includes/navbar.html.twig' %}
+    <section id="main">
+        {% if block('breadcrumbs') is not empty %}
+            <div class="row-fluid">
+                <div class="span12">
+
+                    <hr class="main">
+                    <ul class="breadcrumbs">
+                        {% block breadcrumbs %}{% endblock breadcrumbs %}
+                    </ul>
+                    <hr class="main">
+                </div>
+            </div>
+        {% endif %}
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    {% block contenido %}
+
+                    {% endblock contenido %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock body %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+{% block javascripts %}{% endblock javascripts %}

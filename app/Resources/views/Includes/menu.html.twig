@@ -1,0 +1,57 @@
+{% import ':includes:gen_menu.html.twig' as menu %}
+
+<div class="mainnav">
+    <div class="container">
+
+        <a data-target=".mainnav-collapse" data-toggle="collapse" class="mainnav-toggle">
+            <span class="sr-only">Toggle navigation</span>
+            <i class="fa fa-bars"></i>
+        </a>
+
+        <nav role="navigation" class="collapse mainnav-collapse">
+            {#<form role="search" class="mainnav-form pull-right">#}
+                {#<input type="text" placeholder="Search" class="form-control input-md mainnav-search-query">#}
+                {#<button class="btn btn-sm mainnav-form-btn"><i class="fa fa-search"></i></button>#}
+            {#</form>#}
+            {{ menu.menu('Inicio',path('homepage')) }}
+                {{ menu.item('Panel', 'fa-dashboard', path('homepage'))  }}
+            {{ menu.finmenu() }}
+
+                {{ menu.menu('Productos','#') }}
+                    {{ menu.item('Categorisa', 'fa-dashboard', path('categoria'))  }}
+                    {#{{ menu.submenu('Comercio', 'fa-dashboard')  }}#}
+                        {#{{ menu.item('Comercio', 'fa-dashboard', '#')  }}#}
+                        {#{{ menu.item('Espectaculo Público', 'fa-dashboard', path('escomercio'))  }}#}
+                    {#{{ menu.finsubmenu() }}#}
+                    {#{{ menu.item('Convenio', 'fa-dashboard', path('convenio'))  }}#}
+                    {#{{ menu.item('Intimación y Boleta de deuda', 'fa-dashboard', '#')  }}#}
+                    {#{{ menu.item('Carnet Sanitario', 'fa-dashboard', '#')  }}#}
+                    {#{{ menu.item('Cementerio', 'fa-dashboard', path('unidad'))  }}#}
+
+                    {#{{ menu.submenu('Dominio Público', 'fa-dashboard')  }}#}
+                        {#{{ menu.item('Administración Dominio Público','fa-dashboard', path('dominio') ) }}#}
+                        {#{{ menu.item('Administración DDJJ','fa-dashboard', path('ddjj_new') ) }}#}
+
+                    {#{{ menu.finsubmenu() }}#}
+
+                    {{ menu.item('Productos', 'fa-dashboard', path("producto"))  }}
+                    {{ menu.item('Compras', 'fa-dashboard', path("compra"))  }}
+                {{ menu.finmenu() }}
+
+
+
+                {{ menu.menu('Seguridad','#') }}
+                    {{ menu.item('Usuarios','fa-dashboard',path('usuario')) }}
+                    {#{{ menu.item('Solicitudes de Adhesión','fa-dashboard',path('solicitud')) }}#}
+                    {#{{ menu.submenu('Parametros','fa-dashboard') }}#}
+                        {#{{ menu.item('Entes Recaudadores','fa-dashboard',path('enterecaudador')) }}#}
+                        {#{{ menu.item('Tasas por Ente Recaudador','fa-dashboard',path('tasaporente')) }}#}
+                    {#{{ menu.finsubmenu() }}#}
+                {{ menu.finmenu() }}
+
+        </nav>
+    </div> <!-- /.container -->
+</div>
+
+
+

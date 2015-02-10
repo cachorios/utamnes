@@ -1,0 +1,8 @@
+parameters:
+#    utilidad.example.class: RBSoft\UtilidadBundle\Example
+
+services:
+    form.type_extension.help_message:
+        class: RBSoft\UtilidadBundle\Form\Extension\HelpMessageTypeExtension
+        tags:
+          - { name: "form.type_extension", alias: "form" }

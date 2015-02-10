@@ -1,0 +1,9 @@
+login:
+    titulo: Wellcome to Cabañas Wanfried
+    footer: By RBSoft
+    mensaje: Please, begin session for access.
+    usuario: User
+    clave: Password
+    recordarme: Reminder me
+    perdio_clave: Lost your password?
+    btn_ingresar: Login

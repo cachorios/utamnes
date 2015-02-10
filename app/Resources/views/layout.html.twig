@@ -1,0 +1,22 @@
+{% extends "AppBundle:admin:base.html.twig" %}
+{% block body %}
+<div class="content">
+    <div class="container">
+        {% block container %}
+        <div class="row">
+            <div class="col-md-12">
+                {% block workarea %}{% endblock %}
+                {% block contenido %}{% endblock %}
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+        {% endblock container %}
+    </div><!-- /.container -->
+</div><!-- .content -->
+
+{% endblock body %}
+
+{% block javascript_footer %}
+    {{ parent() }}
+    {#Para upload#}
+    <script src="{{ asset('bundles/rbsoftabmgenerador/fileupload//js/fileinput.min.js')}} "></script>
+{% endblock %}

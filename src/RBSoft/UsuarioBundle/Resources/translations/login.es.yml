@@ -1,0 +1,9 @@
+login:
+    btn_ingresar: Ingresar
+    clave: Clave
+    footer: 'By RBSoft'
+    mensaje: 'Por favor, inicie sesión para obtener acceso.'
+    perdio_clave: 'Perdio su clave?'
+    recordarme: Recordarme
+    titulo: 'Bienvenido a Cabañas Wanfried !!'
+    usuario: Usuario

@@ -1,0 +1,45 @@
+{% macro campo(nombre, requerido, valor, tipo, id) %}
+    <input type="{{ tipo|default('text') }}" name="{{ nombre }}" id="{{ id | default(nombre)}}" value="{{ valor }}" {{ requerido ? 'required="required"' : '' }} />
+{% endmacro %}
+
+
+
+{% macro  menu(label, ref) %}
+<ul class="mainnav-menu">
+    <li class="dropdown ">
+        <a data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="{{ ref }}">
+            {{ label }} <i class="mainnav-caret"></i>
+        </a>
+        <ul role="menu" class="dropdown-menu">
+{% endmacro %}
+
+{% macro finmenu() %}
+        </ul>
+    </li>
+</ul>
+{% endmacro %}
+
+
+{% macro submenu(label,icon) %}
+<li class="dropdown-submenu">
+    <a href="#" tabindex="-1">
+        <i class="fa {{ icon }}"></i>
+        &nbsp;&nbsp;{{ label }}
+    </a>
+    <ul class="dropdown-menu">
+{% endmacro %}
+
+{% macro finsubmenu() %}
+    </ul>
+</li>
+
+{% endmacro %}
+
+{% macro item(label, icon, ref) %}
+    <li>
+        <a href="{{ ref }}">
+            <i class="fa {{ icon }}"></i>
+            &nbsp;&nbsp;{{ label }}
+        </a>
+    </li>
+{% endmacro %}
