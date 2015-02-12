@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<skipper version="3.0.2.1162" name="Utamnes" mvc="Symfony2" orm="Doctrine2" uuid="bab0e905-6e69-4e2e-827b-85bff4cc7d48">
+  <module name="AppBundle" import-format="Doctrine2Php" import-path="src/AppBundle/Entity" uuid="2140ef8e-083e-49ee-a78e-c6e15b018f29">
+    <entity name="Empleador" description="Entida que adminstrara los empleadores que aportan a utamnes" uuid="dd509940-9781-4d86-af3b-8db01833e2c9">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="fdebd764-f593-4ca8-9f40-d3f2bee222bd"/>
+    </entity>
+    <entity name="Persona" description="Personas fisicas que seran los trabajadores de los empleadores para un periodo dado." uuid="08c1e097-c641-4fe8-bea1-818ae44b2abf">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="13c4ba61-1cb2-4294-89c1-ba143f96d8be"/>
+    </entity>
+    <entity name="Trabajador" uuid="915bebf4-7ffa-4d7a-83c0-73e51303f421">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="c48f68f2-6208-41ad-a8d8-5b73d7276658"/>
+      <field name="empleador_id" type="integer" uuid="578df204-8f7d-4a67-9e76-7df8b1df013c"/>
+      <field name="persona_id" type="integer" uuid="b6d3b1c8-5b23-49d5-8079-38bf562711db"/>
+    </entity>
+    <association from="Trabajador" to="Empleador" caption="Empleador Trabajador" owner-alias="trabajador" inverse-alias="empleador" many-owner="true" many-inverse="false" uuid="7c85d268-f08f-49fe-8ddf-ff005aa83a8a">
+      <association-field from="empleador_id" to="id"/>
+    </association>
+    <association from="Trabajador" to="Persona" caption="Persona Trabajador" owner-alias="trabajador" inverse-alias="persona" many-owner="true" many-inverse="false" uuid="883a7692-3821-4713-9ab8-b35170c76ed2">
+      <association-field from="persona_id" to="id"/>
+    </association>
+    <entity name="Periodo" uuid="1dc89d28-901e-472a-ace0-a3faa67bfb75">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="8221df56-20f1-4517-a057-30141912982d"/>
+    </entity>
+    <entity name="Obligacion" uuid="5ab7136a-d629-4382-87c1-d100d3f69da0">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="fe51892e-5159-453c-a86b-92bda35f9024"/>
+      <field name="periodo_id" type="integer" uuid="e0ef29c6-d831-49b7-ad61-668d4369b932"/>
+    </entity>
+    <association from="Obligacion" to="Periodo" caption="Periodo Obligacion" owner-alias="obligacion" inverse-alias="periodo" many-owner="true" many-inverse="false" uuid="7a05710d-e112-40be-bc80-60447a961447">
+      <association-field from="periodo_id" to="id"/>
+    </association>
+    <entity name="Ctacte" uuid="c1a53a10-4d96-4b27-87b7-fe0bb09a41f3">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="89a106c9-0cf3-477e-bfa6-7a1b785eef4c"/>
+      <field name="concepto_id" type="integer" uuid="d95e9617-1845-479a-bfb9-3787aae7445e"/>
+      <field name="obligacion_id" type="integer" uuid="4a56d641-f492-434c-b313-5b54de062f5c"/>
+    </entity>
+    <association from="Ctacte" to="Concepto" caption="Concepto Ctacte" owner-alias="ctacte" inverse-alias="concepto" many-owner="true" many-inverse="false" uuid="44a21e95-7fab-45b4-b28e-eccfb22618ad">
+      <association-field from="concepto_id" to="id"/>
+    </association>
+    <association from="Ctacte" to="Obligacion" caption="Obligacion Ctacte" owner-alias="ctacte" inverse-alias="obligacion" many-owner="true" many-inverse="false" uuid="6a5b0695-f22b-4580-ba98-fd40554552d1">
+      <association-field from="obligacion_id" to="id"/>
+    </association>
+    <entity name="Liquidacion" uuid="670a7574-b74f-4ea0-8507-9e009ce0ce74">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="5da88409-8d95-44ff-a2a8-2c84524b5c8e"/>
+      <field name="trabajador_periodo_id" type="integer" uuid="f446b15d-54cd-44a9-870b-26fc4711e127"/>
+    </entity>
+    <association from="Liquidacion" to="TrabajadorPeriodo" caption="TrabajadorPeriodo Liquidacion" owner-alias="liquidacion" inverse-alias="trabajadorPeriodo" many-owner="true" many-inverse="false" uuid="4ef0c406-128f-4d4b-82bd-24375beb942e">
+      <association-field from="trabajador_periodo_id" to="id"/>
+    </association>
+    <entity name="Concepto" uuid="229abf80-eb5d-41ed-bcd7-dd8e18209b48">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="9325b77f-7087-4719-882e-b50439e9b6f0"/>
+    </entity>
+    <entity name="TrabajadorConcepto" uuid="782d969b-3a8d-44a0-b062-edb31c945dca">
+      <field name="id" type="integer" primary="true" uuid="66443075-75d9-4f80-87db-3998b33ad785"/>
+      <field name="trabajador_id" type="integer" required="true" uuid="f1ed201d-277b-451c-89ab-a1b560bac99d"/>
+      <field name="concepto_id" type="integer" required="true" uuid="bcd2fde1-ecf8-4c8c-9fc6-03b6456742f8"/>
+      <index name="tabajadorConceptoUk" unique="true">
+        <index-field name="trabajador_id"/>
+        <index-field name="concepto_id"/>
+      </index>
+    </entity>
+    <many-to-many mn-entity="TrabajadorConcepto" caption="Trabajador to Concepto" uuid="41ebc1b5-11aa-47eb-a9f6-799d5a642919">
+      <many-to-many-entity name="Concepto" owning-side="true" alias="concepto" uuid="1b956652-c09f-4790-acf6-f97f7c1948c9">
+        <many-to-many-field from="concepto_id" to="id"/>
+      </many-to-many-entity>
+      <many-to-many-entity name="Trabajador" owning-side="false" alias="trabajador" uuid="d0d78c1f-0d9b-48b8-8536-49ae34928fc3">
+        <many-to-many-field from="trabajador_id" to="id"/>
+      </many-to-many-entity>
+    </many-to-many>
+    <entity name="TrabajadorPeriodo" uuid="edd7dde7-0292-4079-929f-7841fd8402cf">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="fa95c710-5495-4244-a1cb-4026d26e85e0"/>
+      <field name="periodo_id" type="integer" uuid="c1b7859f-3231-4764-8262-e551e27ae445"/>
+      <field name="empleador_concepto_id" type="integer" uuid="85cf4d65-5415-409e-89ab-964b55dfa278"/>
+    </entity>
+    <association from="TrabajadorPeriodo" to="Periodo" caption="Periodo TrabajadorPeriodo" owner-alias="trabajadorPeriodo" inverse-alias="periodo" many-owner="true" many-inverse="false" uuid="113507fd-1f83-48c6-919a-6494e5dcbf45">
+      <association-field from="periodo_id" to="id"/>
+    </association>
+    <association from="TrabajadorPeriodo" to="TrabajadorConcepto" caption="EmpleadorConcepto TrabajadorPeriodo" owner-alias="trabajadorPeriodo" inverse-alias="empleadorConcepto" many-owner="true" many-inverse="false" uuid="6989f6c7-6335-4af5-ac8b-41db151109d6">
+      <association-field from="empleador_concepto_id" to="id"/>
+    </association>
+  </module>
+  <visual-data>
+    <entity uuid="08c1e097-c641-4fe8-bea1-818ae44b2abf" bg-color="4294967295" hdr-color="4292006610" position-x="21" position-y="224" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
+    <association uuid="113507fd-1f83-48c6-919a-6494e5dcbf45" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <entity uuid="1dc89d28-901e-472a-ace0-a3faa67bfb75" bg-color="4294967295" hdr-color="4292006610" position-x="622" position-y="172" size-x="0" size-x2="150" size-y="0" size-y2="45"/>
+    <module uuid="2140ef8e-083e-49ee-a78e-c6e15b018f29" bg-color="4293391869" position-x="61" position-y="72" size-x="11" size-x2="825" size-y="22" size-y2="536"/>
+    <entity uuid="229abf80-eb5d-41ed-bcd7-dd8e18209b48" bg-color="4294967295" hdr-color="4292006610" position-x="508" position-y="362" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
+    <many-to-many-association uuid="41ebc1b5-11aa-47eb-a9f6-799d5a642919" color="4288059030"/>
+    <association uuid="44a21e95-7fab-45b4-b28e-eccfb22618ad" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="4ef0c406-128f-4d4b-82bd-24375beb942e" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <entity uuid="5ab7136a-d629-4382-87c1-d100d3f69da0" bg-color="4294967295" hdr-color="4292006610" position-x="239" position-y="-3" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
+    <entity uuid="670a7574-b74f-4ea0-8507-9e009ce0ce74" bg-color="4294967295" hdr-color="4292006610" position-x="344" position-y="97" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
+    <association uuid="6989f6c7-6335-4af5-ac8b-41db151109d6" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="6a5b0695-f22b-4580-ba98-fd40554552d1" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <entity uuid="782d969b-3a8d-44a0-b062-edb31c945dca" bg-color="4294967295" hdr-color="4292006610" position-x="143" position-y="369" size-x="0" size-x2="130" size-y="0" size-y2="74"/>
+    <association uuid="7a05710d-e112-40be-bc80-60447a961447" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="7c85d268-f08f-49fe-8ddf-ff005aa83a8a" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="883a7692-3821-4713-9ab8-b35170c76ed2" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <entity uuid="915bebf4-7ffa-4d7a-83c0-73e51303f421" bg-color="4294967295" hdr-color="4292006610" position-x="92" position-y="121" size-x="0" size-x2="117" size-y="0" size-y2="59"/>
+    <project uuid="bab0e905-6e69-4e2e-827b-85bff4cc7d48" size-x="0" size-x2="994" size-y="0" size-y2="731"/>
+    <entity uuid="c1a53a10-4d96-4b27-87b7-fe0bb09a41f3" bg-color="4294967295" hdr-color="4292006610" position-x="442" position-y="18" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
+    <entity uuid="dd509940-9781-4d86-af3b-8db01833e2c9" bg-color="4294967295" hdr-color="4292006610" position-x="8" position-y="26" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
+    <entity uuid="edd7dde7-0292-4079-929f-7841fd8402cf" bg-color="4294967295" hdr-color="4292006610" position-x="328" position-y="248" size-x="0" size-x2="160" size-y="0" size-y2="59"/>
+  </visual-data>
+</skipper>
