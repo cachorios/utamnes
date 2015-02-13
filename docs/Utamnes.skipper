@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <skipper version="3.0.2.1162" name="Utamnes" mvc="Symfony2" orm="Doctrine2" uuid="bab0e905-6e69-4e2e-827b-85bff4cc7d48">
-  <module name="AppBundle" import-format="Doctrine2Php" import-path="src/AppBundle/Entity" uuid="2140ef8e-083e-49ee-a78e-c6e15b018f29">
+  <module name="AppBundle" import-format="Doctrine2Php" import-path="../src/AppBundle" uuid="2140ef8e-083e-49ee-a78e-c6e15b018f29">
     <entity name="Empleador" description="Entida que adminstrara los empleadores que aportan a utamnes" uuid="dd509940-9781-4d86-af3b-8db01833e2c9">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="fdebd764-f593-4ca8-9f40-d3f2bee222bd"/>
     </entity>
@@ -80,19 +80,19 @@
   </module>
   <visual-data>
     <entity uuid="08c1e097-c641-4fe8-bea1-818ae44b2abf" bg-color="4294967295" hdr-color="4292006610" position-x="21" position-y="224" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
-    <association uuid="113507fd-1f83-48c6-919a-6494e5dcbf45" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="113507fd-1f83-48c6-919a-6494e5dcbf45" caption1-position-x="3" caption1-position-y="-12" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="1dc89d28-901e-472a-ace0-a3faa67bfb75" bg-color="4294967295" hdr-color="4292006610" position-x="622" position-y="172" size-x="0" size-x2="150" size-y="0" size-y2="45"/>
-    <module uuid="2140ef8e-083e-49ee-a78e-c6e15b018f29" bg-color="4293391869" position-x="61" position-y="72" size-x="11" size-x2="825" size-y="22" size-y2="536"/>
+    <module uuid="2140ef8e-083e-49ee-a78e-c6e15b018f29" bg-color="4293391869" position-x="61" position-y="73" size-x="11" size-x2="825" size-y="22" size-y2="536"/>
     <entity uuid="229abf80-eb5d-41ed-bcd7-dd8e18209b48" bg-color="4294967295" hdr-color="4292006610" position-x="508" position-y="362" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
     <many-to-many-association uuid="41ebc1b5-11aa-47eb-a9f6-799d5a642919" color="4288059030"/>
-    <association uuid="44a21e95-7fab-45b4-b28e-eccfb22618ad" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <association uuid="4ef0c406-128f-4d4b-82bd-24375beb942e" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="44a21e95-7fab-45b4-b28e-eccfb22618ad" caption1-position-x="43" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="4ef0c406-128f-4d4b-82bd-24375beb942e" caption1-position-x="-60" caption1-position-y="4" center-position-x="0" center-position-y="3" color="4288059030"/>
     <entity uuid="5ab7136a-d629-4382-87c1-d100d3f69da0" bg-color="4294967295" hdr-color="4292006610" position-x="239" position-y="-3" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
     <entity uuid="670a7574-b74f-4ea0-8507-9e009ce0ce74" bg-color="4294967295" hdr-color="4292006610" position-x="344" position-y="97" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
-    <association uuid="6989f6c7-6335-4af5-ac8b-41db151109d6" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="6989f6c7-6335-4af5-ac8b-41db151109d6" caption1-position-x="0" caption1-position-y="28" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="6a5b0695-f22b-4580-ba98-fd40554552d1" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="782d969b-3a8d-44a0-b062-edb31c945dca" bg-color="4294967295" hdr-color="4292006610" position-x="143" position-y="369" size-x="0" size-x2="130" size-y="0" size-y2="74"/>
-    <association uuid="7a05710d-e112-40be-bc80-60447a961447" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="7a05710d-e112-40be-bc80-60447a961447" caption1-position-x="124" caption1-position-y="1" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="7c85d268-f08f-49fe-8ddf-ff005aa83a8a" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="883a7692-3821-4713-9ab8-b35170c76ed2" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="915bebf4-7ffa-4d7a-83c0-73e51303f421" bg-color="4294967295" hdr-color="4292006610" position-x="92" position-y="121" size-x="0" size-x2="117" size-y="0" size-y2="59"/>
