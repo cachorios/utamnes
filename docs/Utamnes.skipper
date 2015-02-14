@@ -3,19 +3,41 @@
   <module name="AppBundle" import-format="Doctrine2Php" import-path="../src/AppBundle" uuid="2140ef8e-083e-49ee-a78e-c6e15b018f29">
     <entity name="Empleador" description="Entida que adminstrara los empleadores que aportan a utamnes" uuid="dd509940-9781-4d86-af3b-8db01833e2c9">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="fdebd764-f593-4ca8-9f40-d3f2bee222bd"/>
+      <field name="razon" type="string" size="64" required="true" uuid="62fb8a5c-e930-4dc9-b528-bdaef17212c9"/>
+      <field name="cuit" type="string" size="11" required="true" uuid="1c816617-cf82-46ab-9dbb-79f24027276b"/>
+      <field name="direccion" type="string" size="128" uuid="70bfdc61-0a84-4850-b124-f7cfc4295dfb"/>
+      <field name="telefono" type="string" size="64" uuid="d4822048-6a73-45e3-b5e1-6f3a7cc4780a"/>
+      <field name="email" type="string" size="64" uuid="7b110c84-a554-4ec7-941a-898677f88577"/>
+      <field name="localidad" type="integer" uuid="9e699218-24fe-4785-9ee2-de632fae73b3"/>
+      <field name="fecha_actualizacion" type="datetime" required="true" uuid="5771894a-d204-481f-9010-16d5da22c511"/>
+      <field name="usuario" type="string" size="32" required="true" uuid="1fb5134e-d719-412e-85ca-3b82ec0ef46b"/>
     </entity>
     <entity name="Persona" description="Personas fisicas que seran los trabajadores de los empleadores para un periodo dado." uuid="08c1e097-c641-4fe8-bea1-818ae44b2abf">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="13c4ba61-1cb2-4294-89c1-ba143f96d8be"/>
+      <field name="cuil" type="string" size="11" required="true" uuid="99e11303-aa08-477c-b1f7-68b7ab522257"/>
+      <field name="nombre" type="string" size="64" required="true" uuid="696a3995-c981-4796-9b11-ad841d50269a"/>
+      <field name="direccion" type="string" size="128" required="true" uuid="d92548f0-2e2f-4f8d-898b-3c3c5413edb2"/>
+      <field name="telefono" type="string" size="64" uuid="4dcf4964-cff4-4762-9cbe-f2e78b98d170"/>
+      <field name="email" type="string" size="64" uuid="31547948-1b8f-4fd8-b1af-2ae34c07b077"/>
+      <field name="sexo" type="string" size="1" required="true" uuid="4bdcb6b9-b86b-489b-aeb9-5539900e66dd"/>
+      <field name="localidad" type="integer" required="true" uuid="0992cd33-5415-4a61-a491-1df5d5416a77"/>
+      <field name="estado_civil" type="string" size="1" required="true" uuid="e9a37a9a-f6b7-41aa-9cdb-61eb837bcd5f"/>
+      <field name="fecha_actualizacion" type="datetime" required="true" uuid="f05ad70f-3b36-43c9-9225-70be39767fac"/>
+      <field name="usuario" type="string" size="32" required="true" uuid="9e795e11-329f-4134-a294-5f824c30659c"/>
     </entity>
     <entity name="Trabajador" uuid="915bebf4-7ffa-4d7a-83c0-73e51303f421">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="c48f68f2-6208-41ad-a8d8-5b73d7276658"/>
-      <field name="empleador_id" type="integer" uuid="578df204-8f7d-4a67-9e76-7df8b1df013c"/>
-      <field name="persona_id" type="integer" uuid="b6d3b1c8-5b23-49d5-8079-38bf562711db"/>
+      <field name="cuil" type="string" size="11" required="true" uuid="5b820e79-144b-43fa-84bd-ceb5b41b2c62"/>
+      <field name="legajo" type="string" size="10" required="true" uuid="c67aba29-be3c-49b7-9659-c7d4efe3bfa9"/>
+      <field name="empleador_id" type="integer" required="true" uuid="4e97d938-5e1d-4877-b930-528cecd8000d"/>
+      <field name="persona_id" type="integer" required="true" uuid="17b40587-9bc0-4117-9b96-dfe630baae50"/>
+      <field name="fecha_actualizacion" type="datetime" required="true" uuid="24981d55-fe0d-42f4-a267-6e61d2f90e54"/>
+      <field name="usuario" type="string" size="32" required="true" uuid="16f15a1b-87c7-46b7-96fe-eb199d19b876"/>
     </entity>
-    <association from="Trabajador" to="Empleador" caption="Empleador Trabajador" owner-alias="trabajador" inverse-alias="empleador" many-owner="true" many-inverse="false" uuid="7c85d268-f08f-49fe-8ddf-ff005aa83a8a">
+    <association from="Trabajador" to="Empleador" caption="Empleador Trabajador" owner-alias="trabajador" inverse-alias="empleador" many-owner="true" many-inverse="false" parent-required="true" uuid="f8915add-24e7-4a8a-9ba9-965956c9e479">
       <association-field from="empleador_id" to="id"/>
     </association>
-    <association from="Trabajador" to="Persona" caption="Persona Trabajador" owner-alias="trabajador" inverse-alias="persona" many-owner="true" many-inverse="false" uuid="883a7692-3821-4713-9ab8-b35170c76ed2">
+    <association from="Trabajador" to="Persona" caption="Persona Trabajador" owner-alias="trabajador" inverse-alias="persona" many-owner="true" many-inverse="false" parent-required="true" uuid="6bcf180c-8370-4caa-8dbd-4c0a1cfd289d">
       <association-field from="persona_id" to="id"/>
     </association>
     <entity name="Periodo" uuid="1dc89d28-901e-472a-ace0-a3faa67bfb75">
@@ -48,57 +70,56 @@
     </association>
     <entity name="Concepto" uuid="229abf80-eb5d-41ed-bcd7-dd8e18209b48">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="9325b77f-7087-4719-882e-b50439e9b6f0"/>
+      <field name="numero" type="integer" required="true" unique="true" uuid="8a433cfe-ff8d-41b5-a943-282d28acf51b"/>
+      <field name="descripcion" type="string" size="64" required="true" uuid="ec37c61d-4817-40e4-b9a3-d090e8f8573c"/>
+      <field name="descripcion_corta" type="string" size="32" required="true" uuid="858e79c9-ef00-41c5-b65d-3ee4d0f781a8"/>
+      <field name="obligatorio" type="boolean" required="true" uuid="d3a1d20b-0a05-4ef9-9f03-4794c4c20b17"/>
+      <field name="activo" type="boolean" required="true" uuid="c4e8c011-816b-40a2-8f46-ef5ae1b3ea9b"/>
+      <field name="fecha_actualizacion" type="datetime" required="true" uuid="ec073e07-a4db-4c3c-839c-6cca974cba5d"/>
+      <field name="usuario" type="string" size="32" required="true" uuid="1e43e63f-dcc9-404f-8ccb-09325e5c9796"/>
     </entity>
-    <entity name="TrabajadorConcepto" uuid="782d969b-3a8d-44a0-b062-edb31c945dca">
-      <field name="id" type="integer" primary="true" uuid="66443075-75d9-4f80-87db-3998b33ad785"/>
-      <field name="trabajador_id" type="integer" required="true" uuid="f1ed201d-277b-451c-89ab-a1b560bac99d"/>
-      <field name="concepto_id" type="integer" required="true" uuid="bcd2fde1-ecf8-4c8c-9fc6-03b6456742f8"/>
-      <index name="tabajadorConceptoUk" unique="true">
-        <index-field name="trabajador_id"/>
-        <index-field name="concepto_id"/>
-      </index>
-    </entity>
-    <many-to-many mn-entity="TrabajadorConcepto" caption="Trabajador to Concepto" uuid="41ebc1b5-11aa-47eb-a9f6-799d5a642919">
-      <many-to-many-entity name="Concepto" owning-side="true" alias="concepto" uuid="1b956652-c09f-4790-acf6-f97f7c1948c9">
-        <many-to-many-field from="concepto_id" to="id"/>
-      </many-to-many-entity>
-      <many-to-many-entity name="Trabajador" owning-side="false" alias="trabajador" uuid="d0d78c1f-0d9b-48b8-8536-49ae34928fc3">
-        <many-to-many-field from="trabajador_id" to="id"/>
-      </many-to-many-entity>
-    </many-to-many>
     <entity name="TrabajadorPeriodo" uuid="edd7dde7-0292-4079-929f-7841fd8402cf">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="fa95c710-5495-4244-a1cb-4026d26e85e0"/>
       <field name="periodo_id" type="integer" uuid="c1b7859f-3231-4764-8262-e551e27ae445"/>
-      <field name="empleador_concepto_id" type="integer" uuid="85cf4d65-5415-409e-89ab-964b55dfa278"/>
     </entity>
     <association from="TrabajadorPeriodo" to="Periodo" caption="Periodo TrabajadorPeriodo" owner-alias="trabajadorPeriodo" inverse-alias="periodo" many-owner="true" many-inverse="false" uuid="113507fd-1f83-48c6-919a-6494e5dcbf45">
       <association-field from="periodo_id" to="id"/>
     </association>
-    <association from="TrabajadorPeriodo" to="TrabajadorConcepto" caption="EmpleadorConcepto TrabajadorPeriodo" owner-alias="trabajadorPeriodo" inverse-alias="empleadorConcepto" many-owner="true" many-inverse="false" uuid="6989f6c7-6335-4af5-ac8b-41db151109d6">
-      <association-field from="empleador_concepto_id" to="id"/>
+    <entity name="TrabajadorConcepto" uuid="37058f32-3eb0-4a50-8816-26a53b98c28b">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="6997e16a-38fa-4d72-bd99-885356c2c1a1"/>
+      <field name="trabajador_id" type="integer" required="true" uuid="b4612c73-3ced-42db-8591-5f04b6c29fc7"/>
+      <field name="concepto_id" type="integer" required="true" uuid="9cba7dfb-f2c6-446e-9735-7f9f5042ce37"/>
+      <field name="fecha_actualizacion" type="datetime" required="true" uuid="d4d23077-1795-4419-8287-5d3c7153e984"/>
+      <field name="usuario" type="string" size="32" required="true" uuid="faad1963-8785-4118-9706-f2645ec49ad2"/>
+    </entity>
+    <association from="TrabajadorConcepto" to="Trabajador" caption="Trabajador TrabajadorConcepto" owner-alias="trabajadorConcepto" inverse-alias="trabajador" many-owner="true" many-inverse="false" parent-required="true" uuid="9f696ca3-8957-4388-a038-a2fd8effdfdc">
+      <association-field from="trabajador_id" to="id"/>
+    </association>
+    <association from="TrabajadorConcepto" to="Concepto" caption="Concepto TrabajadorConcepto" owner-alias="trabajadorConcepto" inverse-alias="concepto" many-owner="true" many-inverse="false" parent-required="true" uuid="8c917ae9-4b0a-4644-a3d4-a52cb391a12e">
+      <association-field from="concepto_id" to="id"/>
     </association>
   </module>
   <visual-data>
-    <entity uuid="08c1e097-c641-4fe8-bea1-818ae44b2abf" bg-color="4294967295" hdr-color="4292006610" position-x="21" position-y="224" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
+    <entity uuid="08c1e097-c641-4fe8-bea1-818ae44b2abf" bg-color="4294967295" hdr-color="4292006610" position-x="-25" position-y="238" size-x="0" size-x2="115" size-y="0" size-y2="115"/>
     <association uuid="113507fd-1f83-48c6-919a-6494e5dcbf45" caption1-position-x="3" caption1-position-y="-12" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <entity uuid="1dc89d28-901e-472a-ace0-a3faa67bfb75" bg-color="4294967295" hdr-color="4292006610" position-x="622" position-y="172" size-x="0" size-x2="150" size-y="0" size-y2="45"/>
-    <module uuid="2140ef8e-083e-49ee-a78e-c6e15b018f29" bg-color="4293391869" position-x="61" position-y="73" size-x="11" size-x2="825" size-y="22" size-y2="536"/>
-    <entity uuid="229abf80-eb5d-41ed-bcd7-dd8e18209b48" bg-color="4294967295" hdr-color="4292006610" position-x="508" position-y="362" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
-    <many-to-many-association uuid="41ebc1b5-11aa-47eb-a9f6-799d5a642919" color="4288059030"/>
-    <association uuid="44a21e95-7fab-45b4-b28e-eccfb22618ad" caption1-position-x="43" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <association uuid="4ef0c406-128f-4d4b-82bd-24375beb942e" caption1-position-x="-60" caption1-position-y="4" center-position-x="0" center-position-y="3" color="4288059030"/>
-    <entity uuid="5ab7136a-d629-4382-87c1-d100d3f69da0" bg-color="4294967295" hdr-color="4292006610" position-x="239" position-y="-3" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
-    <entity uuid="670a7574-b74f-4ea0-8507-9e009ce0ce74" bg-color="4294967295" hdr-color="4292006610" position-x="344" position-y="97" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
-    <association uuid="6989f6c7-6335-4af5-ac8b-41db151109d6" caption1-position-x="0" caption1-position-y="28" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <entity uuid="1dc89d28-901e-472a-ace0-a3faa67bfb75" bg-color="4294967295" hdr-color="4292006610" position-x="372" position-y="-5" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
+    <module uuid="2140ef8e-083e-49ee-a78e-c6e15b018f29" bg-color="4293391869" position-x="61" position-y="73" size-x="39" size-x2="848" size-y="22" size-y2="592"/>
+    <entity uuid="229abf80-eb5d-41ed-bcd7-dd8e18209b48" bg-color="4294967295" hdr-color="4292006610" position-x="535" position-y="356" size-x="0" size-x2="152" size-y="0" size-y2="129"/>
+    <entity uuid="37058f32-3eb0-4a50-8816-26a53b98c28b" bg-color="4294967295" hdr-color="4292006610" position-x="195" position-y="357" size-x="0" size-x2="115" size-y="0" size-y2="59"/>
+    <association uuid="44a21e95-7fab-45b4-b28e-eccfb22618ad" caption1-position-x="-11" caption1-position-y="0" center-position-x="0" center-position-y="8" color="4288059030"/>
+    <association uuid="4ef0c406-128f-4d4b-82bd-24375beb942e" caption1-position-x="2" caption1-position-y="4" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <entity uuid="5ab7136a-d629-4382-87c1-d100d3f69da0" bg-color="4294967295" hdr-color="4292006610" position-x="426" position-y="86" size-x="0" size-x2="104" size-y="0" size-y2="45"/>
+    <entity uuid="670a7574-b74f-4ea0-8507-9e009ce0ce74" bg-color="4294967295" hdr-color="4292006610" position-x="605" position-y="159" size-x="0" size-x2="150" size-y="0" size-y2="45"/>
     <association uuid="6a5b0695-f22b-4580-ba98-fd40554552d1" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <entity uuid="782d969b-3a8d-44a0-b062-edb31c945dca" bg-color="4294967295" hdr-color="4292006610" position-x="143" position-y="369" size-x="0" size-x2="130" size-y="0" size-y2="74"/>
-    <association uuid="7a05710d-e112-40be-bc80-60447a961447" caption1-position-x="124" caption1-position-y="1" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <association uuid="7c85d268-f08f-49fe-8ddf-ff005aa83a8a" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <association uuid="883a7692-3821-4713-9ab8-b35170c76ed2" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <entity uuid="915bebf4-7ffa-4d7a-83c0-73e51303f421" bg-color="4294967295" hdr-color="4292006610" position-x="92" position-y="121" size-x="0" size-x2="117" size-y="0" size-y2="59"/>
+    <association uuid="6bcf180c-8370-4caa-8dbd-4c0a1cfd289d" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="7a05710d-e112-40be-bc80-60447a961447" caption1-position-x="8" caption1-position-y="5" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="8c917ae9-4b0a-4644-a3d4-a52cb391a12e" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <entity uuid="915bebf4-7ffa-4d7a-83c0-73e51303f421" bg-color="4294967295" hdr-color="4292006610" position-x="212" position-y="138" size-x="0" size-x2="117" size-y="0" size-y2="87"/>
+    <association uuid="9f696ca3-8957-4388-a038-a2fd8effdfdc" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <project uuid="bab0e905-6e69-4e2e-827b-85bff4cc7d48" size-x="0" size-x2="994" size-y="0" size-y2="731"/>
-    <entity uuid="c1a53a10-4d96-4b27-87b7-fe0bb09a41f3" bg-color="4294967295" hdr-color="4292006610" position-x="442" position-y="18" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
-    <entity uuid="dd509940-9781-4d86-af3b-8db01833e2c9" bg-color="4294967295" hdr-color="4292006610" position-x="8" position-y="26" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
-    <entity uuid="edd7dde7-0292-4079-929f-7841fd8402cf" bg-color="4294967295" hdr-color="4292006610" position-x="328" position-y="248" size-x="0" size-x2="160" size-y="0" size-y2="59"/>
+    <entity uuid="c1a53a10-4d96-4b27-87b7-fe0bb09a41f3" bg-color="4294967295" hdr-color="4292006610" position-x="441" position-y="193" size-x="0" size-x2="115" size-y="0" size-y2="59"/>
+    <entity uuid="dd509940-9781-4d86-af3b-8db01833e2c9" bg-color="4294967295" hdr-color="4292006610" position-x="-26" position-y="9" size-x="0" size-x2="115" size-y="0" size-y2="115"/>
+    <entity uuid="edd7dde7-0292-4079-929f-7841fd8402cf" bg-color="4294967295" hdr-color="4292006610" position-x="629" position-y="7" size-x="0" size-x2="104" size-y="0" size-y2="45"/>
+    <association uuid="f8915add-24e7-4a8a-9ba9-965956c9e479" caption1-position-x="0" caption1-position-y="0" center-position-x="1" center-position-y="0" color="4288059030"/>
   </visual-data>
 </skipper>
