@@ -50,7 +50,7 @@ class Trabajador {
             $this->trabajador->setPersona($this->persona);
             $this->em->persist($this->trabajador);
             $this->asignarConceptos();
-            
+
             $this->em->flush();
         }else{
             throw new \Exception ("Los datos no son validos.");
