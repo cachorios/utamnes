@@ -15,3 +15,5 @@
 /composer.lock
 /web/bundles/*
 /web/assetic/*
+
+/src/AppBundle/Entity/*.php~
