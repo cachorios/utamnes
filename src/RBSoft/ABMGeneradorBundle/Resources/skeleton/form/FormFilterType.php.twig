@@ -38,7 +38,7 @@ class {{ form_class }} extends AbstractType
 
             $event->getForm()->addError(new FormError('Filtro limpio'));
         };
-        $builder->addEventListener(FormEvents::POST_BIND, $listener);
+        $builder->addEventListener(FormEvents::POST_SUBMIT, $listener);
     }
 
     public function getName()

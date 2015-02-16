@@ -1,31 +1,36 @@
 {% block extends %}
-    {{ "{% extends 'LarABMGeneradorBundle::layout.html.twig' %}" }}
+    {{ "{% extends '@RBSoftABMGenerador/layout.html.twig' %}" }}
 {% endblock extends %}
+
     {{ "{% block id '" ~entity~ "' %} "}}
     {% block body %}
         {{ "{% block contenido -%}" }}
         {{ "{% embed '::portlet.html.twig' with {'titulo': 'Editar " ~  entity  ~ ": ' ~ entity} %}" }}
+        {{ "    {% block in_header %} "}}
+        {% set hide_edit, hide_delete = true, false %}
+        <div class='pull-right'>
+            <div class="row">
+                {% include 'crud/views/others/record_actions.html.twig' %}
+            </div>
+        </div>
+        {{ "    {% endblock %}" }}
+
         {{ "        {% block cuerpo %} " }}
         <p></p>
         {{ '
             {{ form_start(edit_form) }}
                 {{ form_widget(edit_form) }}
-                <div class="col-sm-offset-2">
-                    <input type="submit" value="Guardar" class="btn btn-success">
+                <div class="col-sm-offset-2 inner-actions">
+                    <input type="submit" value="Guardar" class="form-submit-button btn btn-sm btn-default btn-primary">
+                    <a class="page-close-button btn btn-sm btn-default" href="{{ path(\'' ~ route_name_prefix ~ '\')}}">Cerrar <span class="glyphicon glyphicon-remove"></span></a>
+
                 </div>
 
             {{ form_end(edit_form) }}
         ' }}
-
-        {% set hide_edit, hide_delete = true, false %}
-
-                <div class="row">
-                    {% include 'crud/views/others/record_actions.html.twig' %}
-                </div>
-
         {{ "{% endblock %} "}}
-    {{ "{% endembed %} "}}
+        {{ "{% endembed %} "}}
 
 
-    {{ "{% endblock contenido %}" }}
-{% endblock body %}
+        {{ "{% endblock contenido %}" }}
+    {% endblock body %}

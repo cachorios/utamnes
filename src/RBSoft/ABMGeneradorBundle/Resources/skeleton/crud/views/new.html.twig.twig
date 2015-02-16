@@ -1,33 +1,44 @@
-
 {% block extends %}
-    {{ "{% extends 'LarABMGeneradorBundle::layout.html.twig' %}" }}
+    {{ "{% extends '@RBSoftABMGenerador/layout.html.twig' %}" }}
 {% endblock extends %}
     {{ "{% block id '" ~entity~ "' %} "}}
     {% block body %}
         {{ "{% block contenido -%}" }}
         {{ "{% embed '::portlet.html.twig' with {'titulo': 'Nuevo " ~  entity  ~ "' } %}" }}
+        {{ "    {% block in_header %} "}}
+        {% set hide_edit, hide_delete = true, true %}
+        <div class='pull-right'>
+            <div class="row">
+                {% include 'crud/views/others/record_actions.html.twig' %}
+            </div>
+        </div>
+        {{ "    {% endblock %}" }}
+
         {{ "        {% block cuerpo %} " }}
+        {{ "        {% for type, flashMessages in app.session.flashbag.all() %} " }}
+        {{ "            {% for flashMessage in flashMessages %} " }}
+        {{ "                <div class='alert alert-{{ type }}'> " }}
+        {{ "                    {{ flashMessage }} " }}
+        {{ "                </div> " }}
+        {{ "            {% endfor %} " }}
+        {{ "        {% endfor %}" }}
         <p>{#menseje acorde#}</p>
         {{ '
             {{ form_start(form) }}
                 {{ form_widget(form) }}
-                <div class="col-sm-offset-2">
-                    <input type="submit" value="Guardar" class="btn btn-success">
+                <div class="col-sm-offset-2 inner-actions">
+                    <button title="Guardar" class="form-submit-button btn btn-sm btn-default btn-primary" value="save_and_add" name="save_mode" type="submit">Guardar y Nuevo <span class="glyphicon glyphicon-ok"></span></button>
+                    <button title="Guardar y Salir" class="form-submit-button btn btn-sm btn-default btn-secondary" value="save_and_close" name="save_mode" type="submit">Guardar<span class="glyphicon glyphicon-remove"></span></button>
+                    <a class="page-close-button btn btn-sm btn-default" href="{{ path(\'' ~ route_name_prefix ~ '\')}}">Cerrar <span class="glyphicon glyphicon-remove"></span></a>
                 </div>
 
             {{ form_end(form) }}
         ' }}
 
-        {% set hide_edit, hide_delete = true, true %}
 
-        <div class="row">
-            {% include 'crud/views/others/record_actions.html.twig' %}
-        </div>
 
         {{ "{% endblock %} "}}
         {{ "{% endembed %} "}}
-
-
 
         {{ "{% endblock contenido %}" }}
     {% endblock body %}

@@ -5,7 +5,7 @@
      *
 {% block phpdoc_method_annotations %}
 {% if 'annotation' == format %}
-     * @Route("/", name="{{ route_name_prefix }}_create")
+     * @Route("/new", name="{{ route_name_prefix }}_create")
      * @Method("POST")
      * @Template("{{ bundle }}:{{ entity }}:new.html.twig")
 {% endif %}
@@ -25,10 +25,13 @@
             $em->persist($entity);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('success',"El {{ entity }} $entity se creó correctamente.");
             {% if 'show' in actions -%}
-                return $this->redirect($this->generateUrl('{{ route_name_prefix }}_show', array('id' => $entity->getId())));
+                if ($request->request->get('save_mode')== 'save_and_close') {
+                    return $this->redirect($this->generateUrl('{{ route_name_prefix }}'));
+                }
+                return $this->redirect($this->generateUrl('{{ route_name_prefix }}_new'));
             {%- else -%}
-                $this->get('session')->getFlashBag()->add('success',"El {{ entity }} $entity se creó correctamente.");
                 return $this->redirect($this->generateUrl('{{ route_name_prefix }}'));
             {%- endif %}
 

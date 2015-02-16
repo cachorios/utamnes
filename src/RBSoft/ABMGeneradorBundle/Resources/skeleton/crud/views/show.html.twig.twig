@@ -1,43 +1,49 @@
 {% block extends %}
-    {{ "{% extends 'LarABMGeneradorBundle::layout.html.twig' %}" }}
+    {{ "{% extends '@RBSoftABMGenerador/layout.html.twig' %}" }}
 {% endblock extends %}
 
 {% block body %}
     {{ "{% block contenido -%}" }}
     {{ "{% embed '::portlet.html.twig' with {'titulo': 'Ver " ~  entity  ~ ": ' ~ entity} %}" }}
-    {{ "        {% block cuerpo %} " }}
-         <p></p>
-
-
-
-        <table class="table">
-                <tbody>
-                {%- for field, metadata in fields %}
-
-                    <tr>
-                        <th>{{ field|capitalize }}</th>
-
-                        {%- if metadata.type in ['date', 'datetime'] %}
-
-                            <td>{{ '{{ entity.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d H:i:s\') }}' }}</td>
-
-                        {%- else %}
-
-                            <td>{{ '{{ entity.' ~ field|replace({'_': ''}) ~ ' }}' }}</td>
-
-                        {%- endif %}
-
-                    </tr>
-
-                {%- endfor %}
-
-                </tbody>
-            </table>
-
-        {% set hide_edit, hide_delete = false, false %}
+    {{ "    {% block in_header %} "}}
+    {% set hide_edit, hide_delete = false, false %}
+    <div class='pull-right'>
         <div class="row">
             {% include 'crud/views/others/record_actions.html.twig' %}
         </div>
+    </div>
+    {{ "    {% endblock %}" }}
+    {{ "        {% block cuerpo %} " }}
+    <p></p>
+
+    <table class="table">
+        <tbody>
+        {%- for field, metadata in fields %}
+
+            <tr>
+                <th class="show-header">{{ field|capitalize }}</th>
+
+                {%- if metadata.type in ['date', 'datetime'] %}
+
+                    <td>{{ '{{ entity.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d H:i:s\') }}' }}</td>
+
+                {%- elseif metadata.type in ['boolean'] %}
+
+                    <td>{{ '{{ entity.' ~ field|replace({'_': ''}) ~ '? \'<span class="label label-success">Si</span>\' : \'<span class=\"label label-default\">No</span>\'  }}' }}</td>
+
+                {%- else %}
+
+                    <td>{{ '{{ entity.' ~ field|replace({'_': ''}) ~ ' }}' }}</td>
+
+                {%- endif %}
+
+            </tr>
+
+        {%- endfor %}
+
+        </tbody>
+    </table>
+
 
     {{ "{% endblock %} "}}
     {{ "{% endembed %} "}}
