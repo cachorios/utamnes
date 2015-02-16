@@ -1,8 +1,5 @@
 <?php
-<<<<<<< HEAD
-=======
 namespace AppBundle\Entity;
->>>>>>> 3c1926b9fef51f4a4a60f4dcfe06918d0c639709
 use Doctrine\ORM\Mapping AS ORM;
 
 /**
@@ -18,12 +15,10 @@ class Persona
     private $id;
 
     /**
-<<<<<<< HEAD
      * @ORM\OneToMany(targetEntity="Trabajador", mappedBy="persona")
      */
     private $trabajador;
-}
-=======
+    /**
      * @ORM\Column(type="string", length=11, nullable=false)
      */
     private $cuil;

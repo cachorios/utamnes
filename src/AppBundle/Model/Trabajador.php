@@ -16,35 +16,36 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManager;
 use RBSoft\UsuarioBundle\Entity\Usuario;
 
-class Trabajador {
-    protected   $trabajador,
-                $empleador,
-                $persona,
-                $condeptos;
+class Trabajador
+{
+    protected $trabajador,
+        $empleador,
+        $persona,
+        $conceptos;
 
-    protected   $em,
-                $usuario;
+    protected $em,
+        $usuario;
 
-    public function __construct(EntityManager $em,Usuario $usuario)
+    public function __construct(EntityManager $em, Usuario $usuario)
     {
         $this->em = $em;
         $this->usuario = $usuario;
 
     }
-    public  function nuevo($cuil=null,$legajo =null,Empleador $empleador =null,Persona $persona =null,Collection $conceptos =null)
+
+    public function nuevo($legajo, Empleador $empleador, Persona $persona, Collection $conceptos = null)
     {
-        $this->trabajador= new \AppBundle\Entity\Trabajador();
-        $this->trabajador->setCuil($cuil);
+        $this->trabajador = new \AppBundle\Entity\Trabajador();
         $this->trabajador->setLegajo($legajo);
         $this->trabajador->setEmpleador($empleador);
 
         $this->persona = $persona;
-        $this->condeptos = $conceptos;
+        $this->conceptos = $conceptos;
     }
 
-    public  function guardar()
+    public function guardar()
     {
-        if($this->validar()){
+        if ($this->validar()) {
             $this->em->beginTransaction();
             $this->em->persist($this->persona);
             $this->trabajador->setPersona($this->persona);
@@ -52,14 +53,14 @@ class Trabajador {
             $this->asignarConceptos();
 
             $this->em->flush();
-        }else{
+        } else {
             throw new \Exception ("Los datos no son validos.");
         }
     }
 
     private function asignarConceptos()
     {
-        foreach($this->condeptos as $concepto){
+        foreach ($this->conceptos as $concepto) {
             $aux = new TrabajadorConcepto($this->trabajador, $concepto, $this->usuario, new \DateTime("now"));
             $this->em->persist($aux);
         }
@@ -67,8 +68,22 @@ class Trabajador {
 
     public function validar()
     {
-        return true;
+        $conceptos = $this->em->getRepository('AppBundle:Concepto')->findBy(array('obligatorio' => true));
+        foreach ($this->conceptos as $concepto) {
+            if ($concepto->getObligatorio()) {
+                foreach ($conceptos as $concObl) {
+                    if ($concepto->getId() == $concObl->getId()) {
+                        $conceptos->remove($concObl);
+                        continue;
+                    }
+                }
+            }
+        }
+        foreach ($conceptos as $concepto) {
+            $this->conceptos->add($concepto);
+        }
 
+        return true;
     }
 
 } 
