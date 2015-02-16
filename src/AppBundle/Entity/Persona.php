@@ -69,4 +69,10 @@ class Persona
      * @ORM\OneToMany(targetEntity="Trabajador", mappedBy="persona")
      */
     private $trabajador;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Empleador", inversedBy="persona")
+     * @ORM\JoinColumn(name="empleador_id", referencedColumnName="id")
+     */
+    private $empleador;
 }
