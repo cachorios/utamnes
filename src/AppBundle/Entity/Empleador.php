@@ -56,7 +56,12 @@ class Empleador
     private $usuario;
 
     /**
-     * @ORM\OneToMany(targetEntity="Trabajador", mappedBy="empleador")
+     * @ORM\OneToMany(targetEntity="Persona", mappedBy="empleador")
+     */
+    private $persona;
+
+    /**
+     * 
      */
     private $trabajador;
 }

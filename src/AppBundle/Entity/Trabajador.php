@@ -36,8 +36,8 @@ class Trabajador
     private $trabajadorConcepto;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Empleador", inversedBy="trabajador")
-     * @ORM\JoinColumn(name="empleador_id", referencedColumnName="id", nullable=false)
+     * 
+     * 
      */
     private $empleador;
 
