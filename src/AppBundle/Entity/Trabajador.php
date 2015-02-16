@@ -1,5 +1,6 @@
 <?php
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping AS ORM;
 
 /**
@@ -42,12 +43,7 @@ class Trabajador
 
     /**
      * @ORM\ManyToOne(targetEntity="Persona", inversedBy="trabajador")
-     * @ORM\JoinColumn(name="persona_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="persona_id", referencedColumnName="id", nullable=false)
      */
     private $persona;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Concepto", mappedBy="trabajador")
-     */
-    private $concepto;
 }

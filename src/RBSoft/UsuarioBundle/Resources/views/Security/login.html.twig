@@ -1,0 +1,75 @@
+{% extends "::base.html.twig" %}
+
+{% block navbar  %}{% endblock %}
+{% block topbar %}{% endblock %}
+{% block body %}
+
+    <div class="account-wrapper">
+
+        <div class="account-body">
+
+            <h3 style="line-height: 35px;">Bienvenido a  UTA Misiones</h3>
+
+            <h5>Por favor, inicie sesi&oacute;n para obtener acceso.</h5>
+            {% if error %}
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <h4>Error!</h4>
+                    {{ error | trans }}
+                </div>
+
+            {% endif %}
+            <form class="form account-form" method="POST" action="{{ path('fos_user_security_check') }}" >
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                <input type="hidden" name="_target_path" value="/" />
+                <div class="form-group">
+                    <label for="login-username" class="placeholder-hidden">Usuario</label>
+                    <input type="text" class="form-control" id="login-username" placeholder="Usuario" tabindex="1" name="_username" value="{{ last_username }}" required>
+                </div> <!-- /.form-group -->
+
+                <div class="form-group">
+                    <label for="login-password" class="placeholder-hidden">Clave</label>
+                    <input type="password" class="form-control" id="login-password" placeholder="Clave" tabindex="2" name="_password" required>
+                </div> <!-- /.form-group -->
+
+                <div class="form-group clearfix">
+                    <div class="pull-left">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" class="" value="" tabindex="3"> <small>Recordarme</small>
+                        </label>
+                    </div>
+
+                    {#<div class="pull-right">#}
+                        {#<small><a href="./account-forgot.html">Perdio su clave?</a></small>#}
+                    {#</div>#}
+                </div> <!-- /.form-group -->
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block btn-lg" tabindex="4">
+                        Ingresar &nbsp; <i class="fa fa-play-circle"></i>
+                    </button>
+                </div> <!-- /.form-group -->
+
+            </form>
+
+
+        </div> <!-- /.account-body -->
+
+        {#<div class="account-footer">#}
+            {#<p>#}
+                {#IPSM Informatica & Rios Soft#}
+            {#</p>#}
+        {#</div> <!-- /.account-footer -->#}
+
+    </div> <!-- /.account-wrapper -->
+
+
+
+{% endblock %}
+
+{% block stylesheets %}
+    {#<link rel="stylesheet" href="{{ asset("bundles/usuario/css/login.css") }}">#}
+    {#<link rel="stylesheet" href="{{ asset("bundles/usuario/css/animate-custom.css") }}">#}
+{% endblock %}
+
+

@@ -1,5 +1,7 @@
 <?php
+
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping AS ORM;
 
 /**
@@ -54,15 +56,6 @@ class Concepto
      */
     private $ctacte;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Trabajador", inversedBy="concepto")
-     * @ORM\JoinTable(
-     *     name="TrabajadorConcepto",
-     *     joinColumns={@ORM\JoinColumn(name="concepto_id", referencedColumnName="id", nullable=false)},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="trabajador_id", referencedColumnName="id", nullable=false)}
-     * )
-     */
-    private $trabajador;
     /**
      * @ORM\OneToMany(targetEntity="TrabajadorConcepto", mappedBy="concepto")
      */

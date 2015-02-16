@@ -1,5 +1,6 @@
 <?php
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping AS ORM;
 
 /**
@@ -14,10 +15,6 @@ class Empleador
      */
     private $id;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Trabajador", mappedBy="empleador")
-     */
-    private $trabajador;
     /**
      * @ORM\Column(type="string", length=64, nullable=false)
      */
@@ -57,4 +54,9 @@ class Empleador
      * @ORM\Column(type="string", length=32, nullable=false)
      */
     private $usuario;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Trabajador", mappedBy="empleador")
+     */
+    private $trabajador;
 }

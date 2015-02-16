@@ -1,8 +1,6 @@
 <?php
-<<<<<<< HEAD
-=======
 namespace AppBundle\Entity;
->>>>>>> 3c1926b9fef51f4a4a60f4dcfe06918d0c639709
+
 use Doctrine\ORM\Mapping AS ORM;
 
 /**
@@ -22,41 +20,4 @@ class Liquidacion
      * @ORM\JoinColumn(name="trabajador_periodo_id", referencedColumnName="id")
      */
     private $trabajadorPeriodo;
-<<<<<<< HEAD
 }
-=======
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set trabajadorPeriodo
-     *
-     * @param \AppBundle\Entity\TrabajadorPeriodo $trabajadorPeriodo
-     * @return Liquidacion
-     */
-    public function setTrabajadorPeriodo(\AppBundle\Entity\TrabajadorPeriodo $trabajadorPeriodo = null)
-    {
-        $this->trabajadorPeriodo = $trabajadorPeriodo;
-
-        return $this;
-    }
-
-    /**
-     * Get trabajadorPeriodo
-     *
-     * @return \AppBundle\Entity\TrabajadorPeriodo 
-     */
-    public function getTrabajadorPeriodo()
-    {
-        return $this->trabajadorPeriodo;
-    }
-}
->>>>>>> 3c1926b9fef51f4a4a60f4dcfe06918d0c639709

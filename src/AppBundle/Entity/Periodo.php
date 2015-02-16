@@ -1,8 +1,6 @@
 <?php
-<<<<<<< HEAD
-=======
 namespace AppBundle\Entity;
->>>>>>> 3c1926b9fef51f4a4a60f4dcfe06918d0c639709
+
 use Doctrine\ORM\Mapping AS ORM;
 
 /**
@@ -26,92 +24,4 @@ class Periodo
      * @ORM\OneToMany(targetEntity="TrabajadorPeriodo", mappedBy="periodo")
      */
     private $trabajadorPeriodo;
-<<<<<<< HEAD
 }
-=======
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->obligacion = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->trabajadorPeriodo = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Add obligacion
-     *
-     * @param \AppBundle\Entity\Obligacion $obligacion
-     * @return Periodo
-     */
-    public function addObligacion(\AppBundle\Entity\Obligacion $obligacion)
-    {
-        $this->obligacion[] = $obligacion;
-
-        return $this;
-    }
-
-    /**
-     * Remove obligacion
-     *
-     * @param \AppBundle\Entity\Obligacion $obligacion
-     */
-    public function removeObligacion(\AppBundle\Entity\Obligacion $obligacion)
-    {
-        $this->obligacion->removeElement($obligacion);
-    }
-
-    /**
-     * Get obligacion
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getObligacion()
-    {
-        return $this->obligacion;
-    }
-
-    /**
-     * Add trabajadorPeriodo
-     *
-     * @param \AppBundle\Entity\TrabajadorPeriodo $trabajadorPeriodo
-     * @return Periodo
-     */
-    public function addTrabajadorPeriodo(\AppBundle\Entity\TrabajadorPeriodo $trabajadorPeriodo)
-    {
-        $this->trabajadorPeriodo[] = $trabajadorPeriodo;
-
-        return $this;
-    }
-
-    /**
-     * Remove trabajadorPeriodo
-     *
-     * @param \AppBundle\Entity\TrabajadorPeriodo $trabajadorPeriodo
-     */
-    public function removeTrabajadorPeriodo(\AppBundle\Entity\TrabajadorPeriodo $trabajadorPeriodo)
-    {
-        $this->trabajadorPeriodo->removeElement($trabajadorPeriodo);
-    }
-
-    /**
-     * Get trabajadorPeriodo
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTrabajadorPeriodo()
-    {
-        return $this->trabajadorPeriodo;
-    }
-}
->>>>>>> 3c1926b9fef51f4a4a60f4dcfe06918d0c639709
