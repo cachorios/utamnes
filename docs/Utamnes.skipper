@@ -27,7 +27,6 @@
     </entity>
     <entity name="Trabajador" uuid="915bebf4-7ffa-4d7a-83c0-73e51303f421">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="c48f68f2-6208-41ad-a8d8-5b73d7276658"/>
-      <field name="cuil" type="string" size="11" required="true" uuid="5b820e79-144b-43fa-84bd-ceb5b41b2c62"/>
       <field name="legajo" type="string" size="10" required="true" uuid="c67aba29-be3c-49b7-9659-c7d4efe3bfa9"/>
       <field name="empleador_id" type="integer" required="true" uuid="4e97d938-5e1d-4877-b930-528cecd8000d"/>
       <field name="persona_id" type="integer" required="true" uuid="17b40587-9bc0-4117-9b96-dfe630baae50"/>

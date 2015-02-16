@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping AS ORM;
  */
 class Persona
 {
+
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -70,3 +72,4 @@ class Persona
      */
     private $trabajador;
 }
+
