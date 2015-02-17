@@ -26,10 +26,10 @@ class Trabajador
     protected $em,
         $usuario;
 
-    public function __construct(EntityManager $em, Usuario $usuario)
+    public function __construct(EntityManager $em, $token_st)
     {
         $this->em = $em;
-        $this->usuario = $usuario;
+        $this->usuario = $token_st->getToken()->getUser();
 
     }
 

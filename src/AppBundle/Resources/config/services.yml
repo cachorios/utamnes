@@ -1,0 +1,4 @@
+services:
+    uta.trabajador:
+        class: AppBundle\Model\Trabajador
+        arguments: [@doctrine.orm.entity_manager , @security.token_storage]
