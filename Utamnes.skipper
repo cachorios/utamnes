@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+<skipper version="3.0.2.1162" name="Utamnes" mvc="Symfony2" orm="Doctrine2" uuid="2b049800-898a-4811-be62-e69e6f9142fc">
+  <module name="AppBundle\Entity" import-format="Doctrine2Php" import-path="src/AppBundle/Entity" uuid="49dad520-5f8c-4679-96f3-fcdf17942366">
+    <entity name="Concepto" uuid="b81bd47e-7ee6-4a11-8039-a199d740cd60">
+      <field name="id" type="integer" required="true" primary="true" uuid="761570a6-3f32-46d1-8b5c-734120f70ff7">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="numero" type="integer" required="true" unique="true" uuid="af033818-1875-4d86-a1dd-cb39d3f05b16"/>
+      <field name="descripcion" type="string" size="64" required="true" uuid="82177797-ed93-4c75-bf5c-5c9b47f58754"/>
+      <field name="descripcion_corta" type="string" size="32" required="true" uuid="0f431cb6-1681-4aab-983a-d0bb4262a8aa"/>
+      <field name="obligatorio" type="boolean" required="true" uuid="c7897359-7e4e-4e8d-994c-325d079c1a70"/>
+      <field name="activo" type="boolean" required="true" uuid="6d5832e7-f913-445e-97bc-5fe17003a335"/>
+      <field name="fecha_actualizacion" type="datetime" required="true" uuid="755b2304-4a12-48d2-b5f1-5a45b2f24a60"/>
+      <field name="usuario_id" type="integer" uuid="9b525ec9-9226-42ea-928b-7380ddfc7a12"/>
+      <orm-attributes>
+        <attribute name="export-file-name">Concepto.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="Concepto" to="Usuario" caption="Usuario Concepto" owner-alias="concepto" inverse-alias="usuario" many-owner="true" many-inverse="false" uuid="964f2760-e061-4cce-ae07-f26f05cf516e">
+      <association-field from="usuario_id" to="id"/>
+    </association>
+    <entity name="TrabajadorToConcepto" uuid="a27c1550-9722-48b2-a4a6-bbb1f43d1ff8">
+      <field name="id" type="integer" required="true" unique="true" primary="true" uuid="aa2c3e5b-cdf6-4cbd-aef6-fd03dcd403f9"/>
+      <field name="concepto_id" required="true" uuid="915e81b3-156f-489a-addc-9f8705fc8a38"/>
+      <field name="trabajador_id" required="true" uuid="013eaaf2-9ef5-4ef7-b2fd-65fd53625c8b"/>
+    </entity>
+    <many-to-many mn-entity="TrabajadorToConcepto" uuid="c664fdd2-78c3-4079-be17-ce9228e5d27a">
+      <many-to-many-entity name="Concepto" owning-side="true" alias="concepto" uuid="0b70b914-22a2-45e7-b551-a788a30acdcd">
+        <many-to-many-field from="concepto_id" to="id"/>
+      </many-to-many-entity>
+      <many-to-many-entity name="Trabajador" owning-side="false" alias="trabajador" uuid="ea1732c3-56f8-4f28-99d1-f9ee093611b6">
+        <many-to-many-field from="trabajador_id" to="id"/>
+        <orm-attributes>
+          <attribute name="cascade">
+            <attribute name="cascade-persist">true</attribute>
+          </attribute>
+        </orm-attributes>
+      </many-to-many-entity>
+    </many-to-many>
+    <entity name="Ctacte" uuid="e03327c8-69f7-44bb-9893-968fa3614871">
+      <field name="id" type="integer" required="true" primary="true" uuid="0698a8f2-ac49-4e17-8c87-bb52a0932437">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="concepto_id" uuid="5463e9ed-fb15-4602-83db-ce40952e65c3"/>
+      <field name="obligacion_id" uuid="d4ef32a5-e8ae-4dff-837b-26638cc84d18"/>
+      <orm-attributes>
+        <attribute name="export-file-name">Ctacte.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="Ctacte" to="Concepto" owner-alias="ctacte" inverse-alias="concepto" many-owner="true" many-inverse="false" uuid="17708227-6b5d-4fa3-bcde-0d6fd0fd7639">
+      <association-field from="concepto_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="Ctacte" to="Obligacion" owner-alias="ctacte" inverse-alias="obligacion" many-owner="true" many-inverse="false" uuid="405bec94-a78e-4b9f-934c-4213f9c01d2b">
+      <association-field from="obligacion_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="Empleador" uuid="bdff3984-e143-486e-8ac9-3a0338d00bf2">
+      <field name="id" type="integer" required="true" primary="true" uuid="60bccaff-fba1-491a-8efb-78374f983f52">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="razon" type="string" size="64" required="true" uuid="2ac19dbf-798d-44a8-bcdf-e89690dd65e7"/>
+      <field name="cuit" type="string" size="11" required="true" uuid="0acdd0a8-87cb-4d66-a9fb-352c59b0582a"/>
+      <field name="direccion" type="string" size="128" uuid="83728dfb-80f7-41a1-8185-b43fab74314c"/>
+      <field name="telefono" type="string" size="64" uuid="de3a9c82-cbcd-441d-a21d-6c721384fefa"/>
+      <field name="email" type="string" size="64" uuid="893bd4cb-9e51-4e88-bd15-f6fd3dbd5ff6"/>
+      <field name="localidad" type="string" size="32" uuid="80dffebb-2bcf-41bb-be7e-d800ff88bd0d"/>
+      <field name="fecha_actualizacion" type="datetime" required="true" uuid="07423266-3a5c-4bb4-9b57-3fb26b582ea8"/>
+      <field name="usuario_id" type="integer" uuid="e1f62f48-797e-4009-9510-f402ec685d0f"/>
+      <orm-attributes>
+        <attribute name="export-file-name">Empleador.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="Empleador" to="Usuario" caption="Usuario Empleador" owner-alias="empleador" inverse-alias="usuario" many-owner="true" many-inverse="false" uuid="2ed7255e-5719-4e82-863b-9e7dc9ab6e2b">
+      <association-field from="usuario_id" to="id"/>
+    </association>
+    <entity name="Liquidacion" uuid="2a735220-be03-4ac2-a3e7-1e3fd7f1411f">
+      <field name="id" type="integer" required="true" primary="true" uuid="db3bc83f-dbda-48b3-b6ed-c0c26dedb68b">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="trabajador_periodo_id" uuid="b4627409-0b61-4e91-9196-af6b1233cb2c"/>
+      <orm-attributes>
+        <attribute name="export-file-name">Liquidacion.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="Liquidacion" to="TrabajadorPeriodo" owner-alias="liquidacion" inverse-alias="trabajadorPeriodo" many-owner="true" many-inverse="false" uuid="4f09e48b-bfa7-4a06-9619-f7022ace0a84">
+      <association-field from="trabajador_periodo_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="Obligacion" uuid="f9a13525-567a-4cfc-8184-5a2f2eed4dc1">
+      <field name="id" type="integer" required="true" primary="true" uuid="6e88ddaf-682e-4117-9471-6b3048c746ce">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="periodo_id" uuid="165c3e71-cdf0-4e20-9265-e4c26553f75f"/>
+      <orm-attributes>
+        <attribute name="export-file-name">Obligacion.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="Obligacion" to="Periodo" owner-alias="obligacion" inverse-alias="periodo" many-owner="true" many-inverse="false" uuid="bb48f37b-61ec-4f60-b74e-01faed7d24ac">
+      <association-field from="periodo_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="Periodo" uuid="78bd4201-69ad-4ecf-a692-70bbb87d77db">
+      <field name="id" type="integer" required="true" primary="true" uuid="616c803c-5ba1-4936-aeff-1c84cb5f8a96">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <orm-attributes>
+        <attribute name="export-file-name">Periodo.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="Trabajador" uuid="141d20d4-8e5f-45ce-92d0-58f8621ae78f">
+      <field name="id" type="integer" required="true" primary="true" uuid="c3d95f97-d825-4c16-b446-3f90bc9437ce">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="empleador_id" required="true" uuid="03ed6318-9715-4003-b727-0e61995db69c"/>
+      <field name="legajo" type="string" size="12" required="true" uuid="57a17654-e004-406f-8b56-0feb30c28374"/>
+      <field name="nombre" type="string" size="64" required="true" uuid="129e5f15-5e90-4f94-809d-19a9e70c2c46"/>
+      <field name="cuil" type="string" size="11" required="true" uuid="ab1f8783-115a-4d21-a4fb-ad9eb69a113d"/>
+      <field name="sexo" type="string" size="1" required="true" uuid="aa708140-c4ed-4c32-84d0-b170dc4fed24"/>
+      <field name="estado_civil" type="string" size="1" required="true" uuid="bed30100-89f6-477b-9396-db43401abaca"/>
+      <field name="email" type="string" size="64" uuid="73feffbd-3154-43a4-94c7-b99fc21b77a9"/>
+      <field name="telefono" type="string" size="64" uuid="a0c334b4-2e89-4bff-8d15-86ceec94d66c"/>
+      <field name="direccion" type="string" size="128" uuid="25bc170b-b639-4466-9477-80c523bd56bb"/>
+      <field name="localidad" type="integer" required="true" uuid="7caa0a17-e460-4c92-ba14-465f7bb86d81"/>
+      <field name="usuario_id" type="integer" required="true" uuid="221c222b-92fc-4b94-8e8b-8cc40b80b593"/>
+      <field name="fecha_actualizacion" type="datetime" required="true" uuid="d177585b-b371-412a-b50d-bc2fdced3375"/>
+      <orm-attributes>
+        <attribute name="export-file-name">Trabajador.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="Trabajador" to="Empleador" owner-alias="trabajador" inverse-alias="empleador" many-owner="true" many-inverse="false" parent-required="true" uuid="99287a39-f2d0-432c-a3af-ae2d95f50fde">
+      <association-field from="empleador_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="Trabajador" to="Usuario" caption="Usuario Trabajador" owner-alias="trabajador" inverse-alias="usuario" many-owner="true" many-inverse="false" parent-required="true" uuid="09e98d4f-6707-4a6b-a3c2-ca82b26b959c">
+      <association-field from="usuario_id" to="id"/>
+    </association>
+    <entity name="TrabajadorPeriodo" uuid="a69832ec-dbf9-40f9-9fd3-cb6577922649">
+      <field name="id" type="integer" required="true" primary="true" uuid="d87a293b-1b21-4098-b902-a616e048d803">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="periodo_id" uuid="05d94a62-4564-41d7-85a3-e5486e6abcf0"/>
+      <orm-attributes>
+        <attribute name="export-file-name">TrabajadorPeriodo.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="TrabajadorPeriodo" to="Periodo" owner-alias="trabajadorPeriodo" inverse-alias="periodo" many-owner="true" many-inverse="false" uuid="9332e81e-146f-4179-98fe-c07e358bcbb1">
+      <association-field from="periodo_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <orm-attributes>
+      <attribute name="namespace">AppBundle\Entity</attribute>
+    </orm-attributes>
+  </module>
+  <module name="RBSoft\UsuarioBundle\Entity" import-format="Doctrine2Php" import-path="src/RBSoft/UsuarioBundle/Entity" uuid="c4c2471c-cc0d-4899-85b4-93cedee2a59a">
+    <entity name="Usuario" uuid="152100d3-c74d-417b-a4bf-4fe7c07fce48">
+      <field name="id" type="integer" required="true" primary="true" uuid="10b18017-f067-4df3-b2d4-4fcb8cdeb2b7">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <orm-attributes>
+        <attribute name="table">fos_user</attribute>
+        <attribute name="export-file-name">Usuario.php</attribute>
+      </orm-attributes>
+    </entity>
+    <orm-attributes>
+      <attribute name="namespace">RBSoft\UsuarioBundle\Entity</attribute>
+    </orm-attributes>
+  </module>
+  <visual-data>
+    <association uuid="09e98d4f-6707-4a6b-a3c2-ca82b26b959c" caption1-position-x="-11" caption1-position-y="6" caption2-position-x="0" caption2-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
+    <entity uuid="141d20d4-8e5f-45ce-92d0-58f8621ae78f" bg-color="4294967295" hdr-color="4292006610" position-x="17" position-y="277" size-x="0" size-x2="152" size-y="0" size-y2="199"/>
+    <entity uuid="152100d3-c74d-417b-a4bf-4fe7c07fce48" bg-color="4294967295" hdr-color="4292006610" position-x="20" position-y="40" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
+    <association uuid="17708227-6b5d-4fa3-bcde-0d6fd0fd7639" color="4278876221"/>
+    <entity uuid="2a735220-be03-4ac2-a3e7-1e3fd7f1411f" bg-color="4294967295" hdr-color="4292006610" position-x="287" position-y="326" size-x="0" size-x2="113" size-y="0" size-y2="45"/>
+    <project uuid="2b049800-898a-4811-be62-e69e6f9142fc" size-x="0" size-x2="1050" size-y="0" size-y2="837"/>
+    <association uuid="2ed7255e-5719-4e82-863b-9e7dc9ab6e2b" caption1-position-x="5" caption1-position-y="-17" caption2-position-x="0" caption2-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
+    <association uuid="405bec94-a78e-4b9f-934c-4213f9c01d2b" color="4284601169"/>
+    <module uuid="49dad520-5f8c-4679-96f3-fcdf17942366" bg-color="4293391869" position-x="50" position-y="50" size-x="0" size-x2="576" size-y="0" size-y2="763"/>
+    <association uuid="4f09e48b-bfa7-4a06-9619-f7022ace0a84" color="4291674923"/>
+    <entity uuid="78bd4201-69ad-4ecf-a692-70bbb87d77db" bg-color="4294967295" hdr-color="4292006610" position-x="500" position-y="419" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
+    <association uuid="9332e81e-146f-4179-98fe-c07e358bcbb1" color="4291261615"/>
+    <association uuid="964f2760-e061-4cce-ae07-f26f05cf516e" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
+    <association uuid="99287a39-f2d0-432c-a3af-ae2d95f50fde" color="4289928996"/>
+    <entity uuid="a27c1550-9722-48b2-a4a6-bbb1f43d1ff8" bg-color="4294967295" hdr-color="4292006610" position-x="200" position-y="200" size-x="0" size-x2="130" size-y="0" size-y2="74"/>
+    <entity uuid="a69832ec-dbf9-40f9-9fd3-cb6577922649" bg-color="4294967295" hdr-color="4292006610" position-x="375" position-y="550" size-x="0" size-x2="93" size-y="0" size-y2="45"/>
+    <entity uuid="b81bd47e-7ee6-4a11-8039-a199d740cd60" bg-color="4294967295" hdr-color="4292006610" position-x="20" position-y="40" size-x="0" size-x2="152" size-y="0" size-y2="129"/>
+    <association uuid="bb48f37b-61ec-4f60-b74e-01faed7d24ac" color="4294218527"/>
+    <entity uuid="bdff3984-e143-486e-8ac9-3a0338d00bf2" bg-color="4294967295" hdr-color="4292006610" position-x="100" position-y="572" size-x="0" size-x2="152" size-y="0" size-y2="143"/>
+    <module uuid="c4c2471c-cc0d-4899-85b4-93cedee2a59a" bg-color="4293391335" position-x="868" position-y="150" size-x="0" size-x2="109" size-y="0" size-y2="100"/>
+    <many-to-many-association uuid="c664fdd2-78c3-4079-be17-ce9228e5d27a" color="4287255714"/>
+    <entity uuid="e03327c8-69f7-44bb-9893-968fa3614871" bg-color="4294967295" hdr-color="4292006610" position-x="441" position-y="40" size-x="0" size-x2="78" size-y="0" size-y2="59"/>
+    <entity uuid="f9a13525-567a-4cfc-8184-5a2f2eed4dc1" bg-color="4294967295" hdr-color="4292006610" position-x="445" position-y="279" size-x="0" size-x2="69" size-y="0" size-y2="45"/>
+  </visual-data>
+</skipper>

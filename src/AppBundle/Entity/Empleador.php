@@ -41,7 +41,7 @@ class Empleador
     private $email;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=32, nullable=true)
      */
     private $localidad;
 
@@ -51,25 +51,25 @@ class Empleador
     private $fecha_actualizacion;
 
     /**
-     * @ORM\Column(type="string", length=32, nullable=false)
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Trabajador", mappedBy="empleador")
+     */
+    private $trabajador;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="RBSoft\UsuarioBundle\Entity\Usuario", inversedBy="empleador")
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id", nullable=true)
      */
     private $usuario;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Persona", mappedBy="empleador")
-     */
-    private $persona;
 
-    /**
-     * 
-     */
-    private $trabajador;
+
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->persona = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->trabajador = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -200,7 +200,7 @@ class Empleador
     /**
      * Set localidad
      *
-     * @param integer $localidad
+     * @param string $localidad
      * @return Empleador
      */
     public function setLocalidad($localidad)
@@ -213,7 +213,7 @@ class Empleador
     /**
      * Get localidad
      *
-     * @return integer 
+     * @return string 
      */
     public function getLocalidad()
     {
@@ -244,12 +244,45 @@ class Empleador
     }
 
     /**
-     * Set usuario
+     * Add trabajador
      *
-     * @param string $usuario
+     * @param \AppBundle\Entity\Trabajador $trabajador
      * @return Empleador
      */
-    public function setUsuario($usuario)
+    public function addTrabajador(\AppBundle\Entity\Trabajador $trabajador)
+    {
+        $this->trabajador[] = $trabajador;
+
+        return $this;
+    }
+
+    /**
+     * Remove trabajador
+     *
+     * @param \AppBundle\Entity\Trabajador $trabajador
+     */
+    public function removeTrabajador(\AppBundle\Entity\Trabajador $trabajador)
+    {
+        $this->trabajador->removeElement($trabajador);
+    }
+
+    /**
+     * Get trabajador
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTrabajador()
+    {
+        return $this->trabajador;
+    }
+
+    /**
+     * Set usuario
+     *
+     * @param \RBSoft\UsuarioBundle\Entity\Usuario $usuario
+     * @return Empleador
+     */
+    public function setUsuario(\RBSoft\UsuarioBundle\Entity\Usuario $usuario = null)
     {
         $this->usuario = $usuario;
 
@@ -259,43 +292,10 @@ class Empleador
     /**
      * Get usuario
      *
-     * @return string 
+     * @return \RBSoft\UsuarioBundle\Entity\Usuario 
      */
     public function getUsuario()
     {
         return $this->usuario;
-    }
-
-    /**
-     * Add persona
-     *
-     * @param \AppBundle\Entity\Persona $persona
-     * @return Empleador
-     */
-    public function addPersona(\AppBundle\Entity\Persona $persona)
-    {
-        $this->persona[] = $persona;
-
-        return $this;
-    }
-
-    /**
-     * Remove persona
-     *
-     * @param \AppBundle\Entity\Persona $persona
-     */
-    public function removePersona(\AppBundle\Entity\Persona $persona)
-    {
-        $this->persona->removeElement($persona);
-    }
-
-    /**
-     * Get persona
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getPersona()
-    {
-        return $this->persona;
     }
 }

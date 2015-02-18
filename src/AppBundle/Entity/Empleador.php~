@@ -41,7 +41,7 @@ class Empleador
     private $email;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=32, nullable=true)
      */
     private $localidad;
 
@@ -51,17 +51,17 @@ class Empleador
     private $fecha_actualizacion;
 
     /**
-     * @ORM\Column(type="string", length=32, nullable=false)
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Trabajador", mappedBy="empleador")
+     */
+    private $trabajador;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="RBSoft\UsuarioBundle\Entity\Usuario", inversedBy="empleador")
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
      */
     private $usuario;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Persona", mappedBy="empleador")
-     */
-    private $persona;
 
-    /**
-     * 
-     */
-    private $trabajador;
+
 }

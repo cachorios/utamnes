@@ -16,10 +16,12 @@ class Liquidacion
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TrabajadorPeriodo", inversedBy="liquidacion")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TrabajadorPeriodo", inversedBy="liquidacion")
      * @ORM\JoinColumn(name="trabajador_periodo_id", referencedColumnName="id")
      */
     private $trabajadorPeriodo;
+
+
 
     /**
      * Get id

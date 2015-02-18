@@ -16,15 +16,16 @@ class TrabajadorPeriodo
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Liquidacion", mappedBy="trabajadorPeriodo")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Liquidacion", mappedBy="trabajadorPeriodo")
      */
     private $liquidacion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Periodo", inversedBy="trabajadorPeriodo")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Periodo", inversedBy="trabajadorPeriodo")
      * @ORM\JoinColumn(name="periodo_id", referencedColumnName="id")
      */
     private $periodo;
+
     /**
      * Constructor
      */

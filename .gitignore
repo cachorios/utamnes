@@ -17,3 +17,4 @@
 /web/assetic/*
 
 /src/AppBundle/Entity/*.php~
+/src/*/*Bundle/Entity/*.php~

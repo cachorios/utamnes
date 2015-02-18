@@ -16,12 +16,12 @@ class Periodo
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Obligacion", mappedBy="periodo")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Obligacion", mappedBy="periodo")
      */
     private $obligacion;
 
     /**
-     * @ORM\OneToMany(targetEntity="TrabajadorPeriodo", mappedBy="periodo")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\TrabajadorPeriodo", mappedBy="periodo")
      */
     private $trabajadorPeriodo;
     /**

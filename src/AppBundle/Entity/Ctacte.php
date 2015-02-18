@@ -15,16 +15,18 @@ class Ctacte
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Concepto", inversedBy="ctacte")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Concepto", inversedBy="ctacte")
      * @ORM\JoinColumn(name="concepto_id", referencedColumnName="id")
      */
     private $concepto;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Obligacion", inversedBy="ctacte")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Obligacion", inversedBy="ctacte")
      * @ORM\JoinColumn(name="obligacion_id", referencedColumnName="id")
      */
     private $obligacion;
+
+
 
     /**
      * Get id

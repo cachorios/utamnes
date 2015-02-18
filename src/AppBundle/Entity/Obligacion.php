@@ -16,12 +16,12 @@ class Obligacion
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ctacte", mappedBy="obligacion")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ctacte", mappedBy="obligacion")
      */
     private $ctacte;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Periodo", inversedBy="obligacion")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Periodo", inversedBy="obligacion")
      * @ORM\JoinColumn(name="periodo_id", referencedColumnName="id")
      */
     private $periodo;

@@ -47,27 +47,27 @@ class Concepto
     private $fecha_actualizacion;
 
     /**
-     * @ORM\Column(type="string", length=32, nullable=false)
+     * @ORM\ManyToOne(targetEntity="RBSoft\UsuarioBundle\Entity\Usuario", inversedBy="concepto")
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
      */
     private $usuario;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ctacte", mappedBy="concepto")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ctacte", mappedBy="concepto")
      */
     private $ctacte;
 
     /**
-     * @ORM\OneToMany(targetEntity="TrabajadorConcepto", mappedBy="concepto")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Trabajador", inversedBy="concepto")
+     * @ORM\JoinTable(
+     *     name="TrabajadorToConcepto",
+     *     joinColumns={@ORM\JoinColumn(name="concepto_id", referencedColumnName="id", nullable=false)},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="trabajador_id", referencedColumnName="id", nullable=false)}
+     * )
      */
-    private $trabajadorConcepto;
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->ctacte = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->trabajadorConcepto = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    private $trabajador;
+
+
 
     /**
      * Get id
@@ -77,6 +77,16 @@ class Concepto
     public function getId()
     {
         return $this->id;
+    }
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ctacte = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->trabajador = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -274,35 +284,35 @@ class Concepto
     }
 
     /**
-     * Add trabajadorConcepto
+     * Add trabajador
      *
-     * @param \AppBundle\Entity\TrabajadorConcepto $trabajadorConcepto
+     * @param \AppBundle\Entity\Trabajador $trabajador
      * @return Concepto
      */
-    public function addTrabajadorConcepto(\AppBundle\Entity\TrabajadorConcepto $trabajadorConcepto)
+    public function addTrabajador(\AppBundle\Entity\Trabajador $trabajador)
     {
-        $this->trabajadorConcepto[] = $trabajadorConcepto;
+        $this->trabajador[] = $trabajador;
 
         return $this;
     }
 
     /**
-     * Remove trabajadorConcepto
+     * Remove trabajador
      *
-     * @param \AppBundle\Entity\TrabajadorConcepto $trabajadorConcepto
+     * @param \AppBundle\Entity\Trabajador $trabajador
      */
-    public function removeTrabajadorConcepto(\AppBundle\Entity\TrabajadorConcepto $trabajadorConcepto)
+    public function removeTrabajador(\AppBundle\Entity\Trabajador $trabajador)
     {
-        $this->trabajadorConcepto->removeElement($trabajadorConcepto);
+        $this->trabajador->removeElement($trabajador);
     }
 
     /**
-     * Get trabajadorConcepto
+     * Get trabajador
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getTrabajadorConcepto()
+    public function getTrabajador()
     {
-        return $this->trabajadorConcepto;
+        return $this->trabajador;
     }
 }

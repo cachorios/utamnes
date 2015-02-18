@@ -1,0 +1,9 @@
+AppBundle\Entity\Empleador:
+    emp{1..100}:
+        razon: <es_AR:company()>
+        cuit: <randomNumber(8)>
+        direccion: <es_AR:address()>
+        telefono: <es_AR:phoneNumber()>
+        email: <email()>
+        localidad: <es_AR:city()>
+        fecha_actualizacion: <dateTime('now')>

@@ -16,7 +16,47 @@ class Trabajador
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=false)
+     * @ORM\Column(type="string", length=1, nullable=false)
+     */
+    private $estado_civil;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $localidad;
+
+    /**
+     * @ORM\Column(type="string", length=1, nullable=false)
+     */
+    private $sexo;
+
+    /**
+     * @ORM\Column(type="string", length=64, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=64, nullable=true)
+     */
+    private $telefono;
+
+    /**
+     * @ORM\Column(type="string", length=128, nullable=true)
+     */
+    private $direccion;
+
+    /**
+     * @ORM\Column(type="string", length=64, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @ORM\Column(type="string", length=11, nullable=false)
+     */
+    private $cuil;
+
+    /**
+     * @ORM\Column(type="string", length=12, nullable=false)
      */
     private $legajo;
 
@@ -26,32 +66,42 @@ class Trabajador
     private $fecha_actualizacion;
 
     /**
-     * @ORM\Column(type="string", length=32, nullable=false)
+     * @ORM\ManyToOne(targetEntity="RBSoft\UsuarioBundle\Entity\Usuario", inversedBy="trabajador")
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id",  nullable=true)
      */
     private $usuario;
 
     /**
-     * @ORM\OneToMany(targetEntity="TrabajadorConcepto", mappedBy="trabajador")
+     * 
      */
     private $trabajadorConcepto;
 
     /**
      * 
      * 
-     */
+     @ORM\ManyToOne(targetEntity="AppBundle\Entity\Empleador", inversedBy="trabajador")
+     @ORM\JoinColumn(name="empleador_id", referencedColumnName="id", nullable=false)*/
     private $empleador;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Persona", inversedBy="trabajador")
-     * @ORM\JoinColumn(name="persona_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Concepto", mappedBy="trabajador", cascade={"persist"})
+     */
+    private $concepto;
+
+    /**
+     * 
+     * 
      */
     private $persona;
+
+
+
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->trabajadorConcepto = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->concepto = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -62,6 +112,190 @@ class Trabajador
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set estado_civil
+     *
+     * @param string $estadoCivil
+     * @return Trabajador
+     */
+    public function setEstadoCivil($estadoCivil)
+    {
+        $this->estado_civil = $estadoCivil;
+
+        return $this;
+    }
+
+    /**
+     * Get estado_civil
+     *
+     * @return string 
+     */
+    public function getEstadoCivil()
+    {
+        return $this->estado_civil;
+    }
+
+    /**
+     * Set localidad
+     *
+     * @param integer $localidad
+     * @return Trabajador
+     */
+    public function setLocalidad($localidad)
+    {
+        $this->localidad = $localidad;
+
+        return $this;
+    }
+
+    /**
+     * Get localidad
+     *
+     * @return integer 
+     */
+    public function getLocalidad()
+    {
+        return $this->localidad;
+    }
+
+    /**
+     * Set sexo
+     *
+     * @param string $sexo
+     * @return Trabajador
+     */
+    public function setSexo($sexo)
+    {
+        $this->sexo = $sexo;
+
+        return $this;
+    }
+
+    /**
+     * Get sexo
+     *
+     * @return string 
+     */
+    public function getSexo()
+    {
+        return $this->sexo;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Trabajador
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set telefono
+     *
+     * @param string $telefono
+     * @return Trabajador
+     */
+    public function setTelefono($telefono)
+    {
+        $this->telefono = $telefono;
+
+        return $this;
+    }
+
+    /**
+     * Get telefono
+     *
+     * @return string 
+     */
+    public function getTelefono()
+    {
+        return $this->telefono;
+    }
+
+    /**
+     * Set direccion
+     *
+     * @param string $direccion
+     * @return Trabajador
+     */
+    public function setDireccion($direccion)
+    {
+        $this->direccion = $direccion;
+
+        return $this;
+    }
+
+    /**
+     * Get direccion
+     *
+     * @return string 
+     */
+    public function getDireccion()
+    {
+        return $this->direccion;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Trabajador
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set cuil
+     *
+     * @param string $cuil
+     * @return Trabajador
+     */
+    public function setCuil($cuil)
+    {
+        $this->cuil = $cuil;
+
+        return $this;
+    }
+
+    /**
+     * Get cuil
+     *
+     * @return string 
+     */
+    public function getCuil()
+    {
+        return $this->cuil;
     }
 
     /**
@@ -113,10 +347,10 @@ class Trabajador
     /**
      * Set usuario
      *
-     * @param string $usuario
+     * @param \RBSoft\UsuarioBundle\Entity\Usuario $usuario
      * @return Trabajador
      */
-    public function setUsuario($usuario)
+    public function setUsuario(\RBSoft\UsuarioBundle\Entity\Usuario $usuario = null)
     {
         $this->usuario = $usuario;
 
@@ -126,7 +360,7 @@ class Trabajador
     /**
      * Get usuario
      *
-     * @return string 
+     * @return \RBSoft\UsuarioBundle\Entity\Usuario 
      */
     public function getUsuario()
     {
@@ -134,58 +368,58 @@ class Trabajador
     }
 
     /**
-     * Add trabajadorConcepto
+     * Set empleador
      *
-     * @param \AppBundle\Entity\TrabajadorConcepto $trabajadorConcepto
+     * @param \AppBundle\Entity\Empleador $empleador
      * @return Trabajador
      */
-    public function addTrabajadorConcepto(\AppBundle\Entity\TrabajadorConcepto $trabajadorConcepto)
+    public function setEmpleador(\AppBundle\Entity\Empleador $empleador)
     {
-        $this->trabajadorConcepto[] = $trabajadorConcepto;
+        $this->empleador = $empleador;
 
         return $this;
     }
 
     /**
-     * Remove trabajadorConcepto
+     * Get empleador
      *
-     * @param \AppBundle\Entity\TrabajadorConcepto $trabajadorConcepto
+     * @return \AppBundle\Entity\Empleador 
      */
-    public function removeTrabajadorConcepto(\AppBundle\Entity\TrabajadorConcepto $trabajadorConcepto)
+    public function getEmpleador()
     {
-        $this->trabajadorConcepto->removeElement($trabajadorConcepto);
+        return $this->empleador;
     }
 
     /**
-     * Get trabajadorConcepto
+     * Add concepto
+     *
+     * @param \AppBundle\Entity\Concepto $concepto
+     * @return Trabajador
+     */
+    public function addConcepto(\AppBundle\Entity\Concepto $concepto)
+    {
+        $this->concepto[] = $concepto;
+
+        return $this;
+    }
+
+    /**
+     * Remove concepto
+     *
+     * @param \AppBundle\Entity\Concepto $concepto
+     */
+    public function removeConcepto(\AppBundle\Entity\Concepto $concepto)
+    {
+        $this->concepto->removeElement($concepto);
+    }
+
+    /**
+     * Get concepto
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getTrabajadorConcepto()
+    public function getConcepto()
     {
-        return $this->trabajadorConcepto;
-    }
-
-    /**
-     * Set persona
-     *
-     * @param \AppBundle\Entity\Persona $persona
-     * @return Trabajador
-     */
-    public function setPersona(\AppBundle\Entity\Persona $persona)
-    {
-        $this->persona = $persona;
-
-        return $this;
-    }
-
-    /**
-     * Get persona
-     *
-     * @return \AppBundle\Entity\Persona 
-     */
-    public function getPersona()
-    {
-        return $this->persona;
+        return $this->concepto;
     }
 }
