@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping AS ORM;
  * @ORM\Entity
  * @ORM\Table(
  *     uniqueConstraints={
- *         @ORM\UniqueConstraint(name="Legajo unico", columns={"empleador_id","legajo"}),
- *         @ORM\UniqueConstraint(name="cuitunico", columns={"empleador_id","cuil"})
+ *         @ORM\UniqueConstraint(name="trabajadorLejajoUk", columns={"empleador_id","legajo"}),
+ *         @ORM\UniqueConstraint(name="trabajadorCuitUk", columns={"empleador_id","cuil"})
  *     }
  * )
  */
