@@ -67,32 +67,26 @@ class Trabajador
 
     /**
      * @ORM\ManyToOne(targetEntity="RBSoft\UsuarioBundle\Entity\Usuario", inversedBy="trabajador")
-     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id",  nullable=true)
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id", nullable=false)
      */
     private $usuario;
 
-    /**
-     * 
-     */
-    private $trabajadorConcepto;
 
     /**
-     * 
-     * 
-     @ORM\ManyToOne(targetEntity="AppBundle\Entity\Empleador", inversedBy="trabajador")
-     @ORM\JoinColumn(name="empleador_id", referencedColumnName="id", nullable=false)*/
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Empleador", inversedBy="trabajador")
+    * @ORM\JoinColumn(name="empleador_id", referencedColumnName="id", nullable=false)
+     */
     private $empleador;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Concepto", mappedBy="trabajador", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Concepto", inversedBy="trabajador", cascade={"all"})
+     * @ORM\JoinTable(
+     *     name="ConceptoToTrabajador",
+     *     joinColumns={@ORM\JoinColumn(name="trabajador_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="concepto_id", referencedColumnName="id", nullable=false)}
+     * )
      */
     private $concepto;
-
-    /**
-     * 
-     * 
-     */
-    private $persona;
 
 
 
@@ -422,4 +416,9 @@ class Trabajador
     {
         return $this->concepto;
     }
+
+    public function __toString(){
+        return $this->getNombre();
+    }
+
 }

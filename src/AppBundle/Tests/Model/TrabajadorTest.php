@@ -35,6 +35,7 @@ class TrabajadorTest extends  KernelTestCase{
             ->get('doctrine')->getManager();
 
         $user_st = static::$kernel->getContainer()->get('security.token_storage');
+
         /*
         $user_st = $this->getMock('\Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage');
 
@@ -44,17 +45,26 @@ class TrabajadorTest extends  KernelTestCase{
 
         //$user_st->getToken()->getUser();
         */
-
+        /*
         $tks = new TokenStorage();
-        $tks->setToken($this->logIn());
+        $tks->setToken($this->logIn());*/
+
+        $user_st->setToken($this->logIn());
+
         $this->trabajadorModel = new Trabajador($this->em,$user_st);
+
 
     }
 
     private function logIn(){
         $session = static::$kernel->getContainer()->get('session');
         $firewall = "main";
-        $token = new UsernamePasswordToken('cachorios','11',$firewall,array("ROLE_ADMIN"));
+
+        $user = $this->em->getRepository("UsuarioBundle:Usuario")->findOneBy(array("username" =>"cachorios"));
+
+        $token = new UsernamePasswordToken($user,'11',$firewall,array("ROLE_ADMIN"));
+
+
         $session->set('_security_'.$firewall, serialize($token));
         $session->save();
         return $token;
@@ -64,7 +74,7 @@ class TrabajadorTest extends  KernelTestCase{
     /**
      * Este escenario lee los conceptos obligatorios a asignar, siempre deben ser 2!!!
      */
-    public function testGetConceptos()
+    public function testGetConceptosObligatorios()
     {
         $conceptos = $this->trabajadorModel->getConceptosObligatorios();
         $this->assertTrue(count($conceptos) == 2, "Verificando conceptos, los obligatorios son 2");
@@ -76,7 +86,7 @@ class TrabajadorTest extends  KernelTestCase{
     public function testagregarConceptosObligatorios(){
         $this->trabajadorModel->iniciar(new \AppBundle\Entity\Trabajador(),new \Doctrine\Common\Collections\ArrayCollection());
 
-        $this->assertTrue($this->trabajadorModel->agregarConceptosObligatorios());
+        $this->assertTrue($this->trabajadorModel->agregarConceptosObligatorios(),"Minimamente son dos conceptos");
     }
 
     /**
@@ -98,7 +108,6 @@ class TrabajadorTest extends  KernelTestCase{
         $trabajador->setTelefono("4475212");
         $trabajador->setDireccion("Ch. 113");
         $trabajador->setLocalidad("Posadas");
-
 
         $this->trabajadorModel->iniciar($trabajador,new \Doctrine\Common\Collections\ArrayCollection());
 

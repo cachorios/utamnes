@@ -34,11 +34,10 @@ class Trabajador{
     public function __construct(EntityManager $em, $token_st)
     {
         $this->em = $em;
-        if($token_st->getToken())
+//        if($token_st->getToken())
             $this->usuario = $token_st->getToken()->getUser();
-        else
-            $this->usuario = null;
-
+//        else
+//            $this->usuario = null;
     }
 
     public function iniciar(\AppBundle\Entity\Trabajador $trabajador, Collection $conceptos = null)
@@ -50,7 +49,7 @@ class Trabajador{
 
     public function guardar()
     {
-        $ok = true;
+        $ok = false;
 
         /**
          * Datos de la modificacion para auditoria
@@ -60,15 +59,18 @@ class Trabajador{
 
         $this->em->beginTransaction();
         try {
+            if(!$this->asignarConceptos())
+                throw new \Exception("No se asigno conceptos.");
+
             $this->em->persist($this->trabajador);
-           // $this->asignarConceptos();
             $this->em->flush();
             $this->em->commit();
+            $ok = true;
         }catch (\Exception $e){
             echo "\n".$e->getMessage();
             $this->em->rollback();
             $this->em->close();
-            $ok = false;
+
         }
 
         return $ok;
@@ -86,12 +88,13 @@ class Trabajador{
      */
     private function asignarConceptos()
     {
+        $ok = false;
         $this->agregarConceptosObligatorios();
         foreach ($this->conceptos as $concepto) {
             $this->trabajador->addConcepto($concepto);
-            //$aux = new TrabajadorConcepto($this->trabajador, $concepto);
-            //$this->em->persist($aux);
+            $ok = true;
         }
+        return $ok;
     }
 
     /**
@@ -125,6 +128,7 @@ class Trabajador{
 
     public function getConceptosObligatorios()
     {
+
         $conceptos = $this->em->getRepository('AppBundle:Concepto')
             ->findBy(array(
                     'obligatorio' => true,

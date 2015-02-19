@@ -58,7 +58,7 @@ class Empleador
 
     /**
      * @ORM\ManyToOne(targetEntity="RBSoft\UsuarioBundle\Entity\Usuario", inversedBy="empleador")
-     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
      */
     private $usuario;
 
@@ -297,5 +297,9 @@ class Empleador
     public function getUsuario()
     {
         return $this->usuario;
+    }
+
+    public function __toString(){
+        return $this->getRazon();
     }
 }

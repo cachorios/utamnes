@@ -23,24 +23,6 @@
     <association from="Concepto" to="Usuario" caption="Usuario Concepto" owner-alias="concepto" inverse-alias="usuario" many-owner="true" many-inverse="false" uuid="964f2760-e061-4cce-ae07-f26f05cf516e">
       <association-field from="usuario_id" to="id"/>
     </association>
-    <entity name="TrabajadorToConcepto" uuid="a27c1550-9722-48b2-a4a6-bbb1f43d1ff8">
-      <field name="id" type="integer" required="true" unique="true" primary="true" uuid="aa2c3e5b-cdf6-4cbd-aef6-fd03dcd403f9"/>
-      <field name="concepto_id" required="true" uuid="915e81b3-156f-489a-addc-9f8705fc8a38"/>
-      <field name="trabajador_id" required="true" uuid="013eaaf2-9ef5-4ef7-b2fd-65fd53625c8b"/>
-    </entity>
-    <many-to-many mn-entity="TrabajadorToConcepto" uuid="c664fdd2-78c3-4079-be17-ce9228e5d27a">
-      <many-to-many-entity name="Concepto" owning-side="true" alias="concepto" uuid="0b70b914-22a2-45e7-b551-a788a30acdcd">
-        <many-to-many-field from="concepto_id" to="id"/>
-      </many-to-many-entity>
-      <many-to-many-entity name="Trabajador" owning-side="false" alias="trabajador" uuid="ea1732c3-56f8-4f28-99d1-f9ee093611b6">
-        <many-to-many-field from="trabajador_id" to="id"/>
-        <orm-attributes>
-          <attribute name="cascade">
-            <attribute name="cascade-persist">true</attribute>
-          </attribute>
-        </orm-attributes>
-      </many-to-many-entity>
-    </many-to-many>
     <entity name="Ctacte" uuid="e03327c8-69f7-44bb-9893-968fa3614871">
       <field name="id" type="integer" required="true" primary="true" uuid="0698a8f2-ac49-4e17-8c87-bb52a0932437">
         <orm-attributes>
@@ -198,6 +180,24 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
+    <entity name="ConceptoToTrabajador" uuid="fc4fd8ab-78f9-4cd0-9485-e338daa6b1d4">
+      <field name="concepto_id" type="integer" required="true" primary="true" uuid="a69863c6-d906-4708-b677-b23d27a6d40d"/>
+      <field name="trabajador_id" type="integer" required="true" primary="true" uuid="59d183c6-4955-474f-a71b-f167dc720add"/>
+    </entity>
+    <many-to-many mn-entity="ConceptoToTrabajador" caption="Concepto to Trabajador" uuid="8373b1df-801f-4afb-acb1-9b3c08249ffc">
+      <many-to-many-entity name="Trabajador" owning-side="true" alias="trabajador" uuid="033ba312-5823-4885-8c61-088ce1c6ac0e">
+        <many-to-many-field from="trabajador_id" to="id"/>
+        <orm-attributes>
+          <attribute name="cascade">
+            <attribute name="cascade-all">true</attribute>
+          </attribute>
+          <attribute name="on-delete">CASCADE</attribute>
+        </orm-attributes>
+      </many-to-many-entity>
+      <many-to-many-entity name="Concepto" owning-side="false" alias="concepto" uuid="a434337a-0614-41e2-87a4-800f37836686">
+        <many-to-many-field from="concepto_id" to="id"/>
+      </many-to-many-entity>
+    </many-to-many>
     <orm-attributes>
       <attribute name="namespace">AppBundle\Entity</attribute>
     </orm-attributes>
@@ -226,23 +226,23 @@
     <entity uuid="152100d3-c74d-417b-a4bf-4fe7c07fce48" bg-color="4294967295" hdr-color="4292006610" position-x="20" position-y="40" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
     <association uuid="17708227-6b5d-4fa3-bcde-0d6fd0fd7639" color="4278876221"/>
     <entity uuid="2a735220-be03-4ac2-a3e7-1e3fd7f1411f" bg-color="4294967295" hdr-color="4292006610" position-x="287" position-y="326" size-x="0" size-x2="113" size-y="0" size-y2="45"/>
-    <project uuid="2b049800-898a-4811-be62-e69e6f9142fc" size-x="0" size-x2="1050" size-y="0" size-y2="837"/>
+    <project uuid="2b049800-898a-4811-be62-e69e6f9142fc" size-x="0" size-x2="1194" size-y="0" size-y2="863"/>
     <association uuid="2ed7255e-5719-4e82-863b-9e7dc9ab6e2b" caption1-position-x="5" caption1-position-y="-17" caption2-position-x="0" caption2-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <association uuid="405bec94-a78e-4b9f-934c-4213f9c01d2b" color="4284601169"/>
-    <module uuid="49dad520-5f8c-4679-96f3-fcdf17942366" bg-color="4293391869" position-x="50" position-y="50" size-x="0" size-x2="576" size-y="0" size-y2="763"/>
+    <module uuid="49dad520-5f8c-4679-96f3-fcdf17942366" bg-color="4293391869" position-x="50" position-y="50" size-x="0" size-x2="759" size-y="0" size-y2="763"/>
     <association uuid="4f09e48b-bfa7-4a06-9619-f7022ace0a84" color="4291674923"/>
     <entity uuid="78bd4201-69ad-4ecf-a692-70bbb87d77db" bg-color="4294967295" hdr-color="4292006610" position-x="500" position-y="419" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
+    <many-to-many-association uuid="8373b1df-801f-4afb-acb1-9b3c08249ffc" color="4288059030"/>
     <association uuid="9332e81e-146f-4179-98fe-c07e358bcbb1" color="4291261615"/>
     <association uuid="964f2760-e061-4cce-ae07-f26f05cf516e" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <association uuid="99287a39-f2d0-432c-a3af-ae2d95f50fde" color="4289928996"/>
-    <entity uuid="a27c1550-9722-48b2-a4a6-bbb1f43d1ff8" bg-color="4294967295" hdr-color="4292006610" position-x="200" position-y="200" size-x="0" size-x2="130" size-y="0" size-y2="74"/>
     <entity uuid="a69832ec-dbf9-40f9-9fd3-cb6577922649" bg-color="4294967295" hdr-color="4292006610" position-x="375" position-y="550" size-x="0" size-x2="93" size-y="0" size-y2="45"/>
     <entity uuid="b81bd47e-7ee6-4a11-8039-a199d740cd60" bg-color="4294967295" hdr-color="4292006610" position-x="20" position-y="40" size-x="0" size-x2="152" size-y="0" size-y2="129"/>
     <association uuid="bb48f37b-61ec-4f60-b74e-01faed7d24ac" color="4294218527"/>
     <entity uuid="bdff3984-e143-486e-8ac9-3a0338d00bf2" bg-color="4294967295" hdr-color="4292006610" position-x="100" position-y="572" size-x="0" size-x2="152" size-y="0" size-y2="143"/>
-    <module uuid="c4c2471c-cc0d-4899-85b4-93cedee2a59a" bg-color="4293391335" position-x="868" position-y="150" size-x="0" size-x2="109" size-y="0" size-y2="100"/>
-    <many-to-many-association uuid="c664fdd2-78c3-4079-be17-ce9228e5d27a" color="4287255714"/>
+    <module uuid="c4c2471c-cc0d-4899-85b4-93cedee2a59a" bg-color="4293391335" position-x="887" position-y="150" size-x="0" size-x2="109" size-y="0" size-y2="100"/>
     <entity uuid="e03327c8-69f7-44bb-9893-968fa3614871" bg-color="4294967295" hdr-color="4292006610" position-x="441" position-y="40" size-x="0" size-x2="78" size-y="0" size-y2="59"/>
     <entity uuid="f9a13525-567a-4cfc-8184-5a2f2eed4dc1" bg-color="4294967295" hdr-color="4292006610" position-x="445" position-y="279" size-x="0" size-x2="69" size-y="0" size-y2="45"/>
+    <entity uuid="fc4fd8ab-78f9-4cd0-9485-e338daa6b1d4" bg-color="4294967295" hdr-color="4292006610" position-x="220" position-y="190" size-x="0" size-x2="130" size-y="0" size-y2="60"/>
   </visual-data>
 </skipper>

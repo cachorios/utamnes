@@ -53,19 +53,17 @@ class Concepto
     private $usuario;
 
     /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Trabajador", mappedBy="concepto")
+     * 
+     */
+    private $trabajador;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ctacte", mappedBy="concepto")
      */
     private $ctacte;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Trabajador", inversedBy="concepto")
-     * @ORM\JoinTable(
-     *     name="TrabajadorToConcepto",
-     *     joinColumns={@ORM\JoinColumn(name="concepto_id", referencedColumnName="id", nullable=false)},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="trabajador_id", referencedColumnName="id", nullable=false)}
-     * )
-     */
-    private $trabajador;
+
 
 
 
@@ -314,5 +312,9 @@ class Concepto
     public function getTrabajador()
     {
         return $this->trabajador;
+    }
+
+    public function __toString(){
+        return $this->getDescripcion();
     }
 }
