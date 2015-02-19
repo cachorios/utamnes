@@ -146,6 +146,14 @@
       <field name="localidad" type="integer" required="true" uuid="7caa0a17-e460-4c92-ba14-465f7bb86d81"/>
       <field name="usuario_id" type="integer" required="true" uuid="221c222b-92fc-4b94-8e8b-8cc40b80b593"/>
       <field name="fecha_actualizacion" type="datetime" required="true" uuid="d177585b-b371-412a-b50d-bc2fdced3375"/>
+      <index name="Legajo unico" description="Los legajos deben ser unicos para el empleador" unique="true">
+        <index-field name="empleador_id"/>
+        <index-field name="legajo"/>
+      </index>
+      <index name="cuitunico" unique="true">
+        <index-field name="empleador_id"/>
+        <index-field name="cuil"/>
+      </index>
       <orm-attributes>
         <attribute name="export-file-name">Trabajador.php</attribute>
       </orm-attributes>
