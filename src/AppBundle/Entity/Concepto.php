@@ -314,7 +314,4 @@ class Concepto
         return $this->trabajador;
     }
 
-    public function __toString(){
-        return $this->getDescripcion();
-    }
 }

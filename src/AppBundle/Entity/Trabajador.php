@@ -5,6 +5,12 @@ use Doctrine\ORM\Mapping AS ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="trabajadorLejajoUk", columns={"empleador_id","legajo"}),
+ *         @ORM\UniqueConstraint(name="trabajadorCuitUk", columns={"empleador_id","cuil"})
+ *     }
+ * )
  */
 class Trabajador
 {
@@ -417,8 +423,5 @@ class Trabajador
         return $this->concepto;
     }
 
-    public function __toString(){
-        return $this->getNombre();
-    }
 
 }
