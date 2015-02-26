@@ -36,19 +36,6 @@ class TrabajadorTest extends  KernelTestCase{
 
         $user_st = static::$kernel->getContainer()->get('security.token_storage');
 
-        /*
-        $user_st = $this->getMock('\Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage');
-
-        $user_st->expects($this->once())
-            ->method('getToken')
-            ->will($this->returnValue(  new TokenStorage() ));
-
-        //$user_st->getToken()->getUser();
-        */
-        /*
-        $tks = new TokenStorage();
-        $tks->setToken($this->logIn());*/
-
         $user_st->setToken($this->logIn());
 
         $this->trabajadorModel = new Trabajador($this->em,$user_st);

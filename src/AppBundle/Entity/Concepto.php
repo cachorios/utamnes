@@ -54,7 +54,7 @@ class Concepto
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Trabajador", mappedBy="concepto")
-     * 
+     *
      */
     private $trabajador;
 
@@ -64,13 +64,10 @@ class Concepto
     private $ctacte;
 
 
-
-
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -103,7 +100,7 @@ class Concepto
     /**
      * Get numero
      *
-     * @return integer 
+     * @return integer
      */
     public function getNumero()
     {
@@ -126,7 +123,7 @@ class Concepto
     /**
      * Get descripcion
      *
-     * @return string 
+     * @return string
      */
     public function getDescripcion()
     {
@@ -149,7 +146,7 @@ class Concepto
     /**
      * Get descripcion_corta
      *
-     * @return string 
+     * @return string
      */
     public function getDescripcionCorta()
     {
@@ -172,7 +169,7 @@ class Concepto
     /**
      * Get obligatorio
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getObligatorio()
     {
@@ -195,7 +192,7 @@ class Concepto
     /**
      * Get activo
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getActivo()
     {
@@ -218,7 +215,7 @@ class Concepto
     /**
      * Get fecha_actualizacion
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getFechaActualizacion()
     {
@@ -241,7 +238,7 @@ class Concepto
     /**
      * Get usuario
      *
-     * @return string 
+     * @return string
      */
     public function getUsuario()
     {
@@ -274,7 +271,7 @@ class Concepto
     /**
      * Get ctacte
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCtacte()
     {
@@ -307,11 +304,15 @@ class Concepto
     /**
      * Get trabajador
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTrabajador()
     {
         return $this->trabajador;
     }
 
+    public function __toString()
+    {
+        return $this->getDescripcion();
+    }
 }

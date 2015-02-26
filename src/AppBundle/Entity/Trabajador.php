@@ -79,8 +79,8 @@ class Trabajador
 
 
     /**
-    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Empleador", inversedBy="trabajador")
-    * @ORM\JoinColumn(name="empleador_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Empleador", inversedBy="trabajador")
+     * @ORM\JoinColumn(name="empleador_id", referencedColumnName="id", nullable=false)
      */
     private $empleador;
 
@@ -95,7 +95,6 @@ class Trabajador
     private $concepto;
 
 
-
     /**
      * Constructor
      */
@@ -107,7 +106,7 @@ class Trabajador
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -130,7 +129,7 @@ class Trabajador
     /**
      * Get estado_civil
      *
-     * @return string 
+     * @return string
      */
     public function getEstadoCivil()
     {
@@ -153,7 +152,7 @@ class Trabajador
     /**
      * Get localidad
      *
-     * @return integer 
+     * @return integer
      */
     public function getLocalidad()
     {
@@ -176,7 +175,7 @@ class Trabajador
     /**
      * Get sexo
      *
-     * @return string 
+     * @return string
      */
     public function getSexo()
     {
@@ -199,7 +198,7 @@ class Trabajador
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -222,7 +221,7 @@ class Trabajador
     /**
      * Get telefono
      *
-     * @return string 
+     * @return string
      */
     public function getTelefono()
     {
@@ -245,7 +244,7 @@ class Trabajador
     /**
      * Get direccion
      *
-     * @return string 
+     * @return string
      */
     public function getDireccion()
     {
@@ -268,7 +267,7 @@ class Trabajador
     /**
      * Get nombre
      *
-     * @return string 
+     * @return string
      */
     public function getNombre()
     {
@@ -291,7 +290,7 @@ class Trabajador
     /**
      * Get cuil
      *
-     * @return string 
+     * @return string
      */
     public function getCuil()
     {
@@ -314,7 +313,7 @@ class Trabajador
     /**
      * Get legajo
      *
-     * @return string 
+     * @return string
      */
     public function getLegajo()
     {
@@ -337,7 +336,7 @@ class Trabajador
     /**
      * Get fecha_actualizacion
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getFechaActualizacion()
     {
@@ -360,7 +359,7 @@ class Trabajador
     /**
      * Get usuario
      *
-     * @return \RBSoft\UsuarioBundle\Entity\Usuario 
+     * @return \RBSoft\UsuarioBundle\Entity\Usuario
      */
     public function getUsuario()
     {
@@ -383,7 +382,7 @@ class Trabajador
     /**
      * Get empleador
      *
-     * @return \AppBundle\Entity\Empleador 
+     * @return \AppBundle\Entity\Empleador
      */
     public function getEmpleador()
     {
@@ -416,12 +415,15 @@ class Trabajador
     /**
      * Get concepto
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getConcepto()
     {
         return $this->concepto;
     }
 
-
+    public function __toString()
+    {
+        return $this->getNombre();
+    }
 }
