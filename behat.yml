@@ -1,15 +1,19 @@
 default:
-#    suites:
-#        default:
-#            contexts:
-#                - FeatureContext:
-#                    session:   '@session'
+    suites:
+        default:
+            contexts:
+                - FeatureContext:
+                    session:   '@session'
 #    paths:
 #        features: behat/features
+        my_suite:
+            type: symfony_bundle
+            bundle: AppBundle
 
     extensions:
         Behat\Symfony2Extension: ~
-            #mink-driver: true
+#            mink-driver: true
+
 
         Behat\Symfony2Extension: ~
         Behat\MinkExtension:
