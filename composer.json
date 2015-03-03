@@ -33,16 +33,30 @@
         "gregwar/image-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "~2.0@dev"
 
-
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
         "fzaninotto/faker": "dev-master",
         "nelmio/alice": "*",
+        "behat/behat": "3.0.x-dev",
         "behat/symfony2-extension": "*",
         "behat/mink-extension": "*",
-        "behat/mink-browserkit-driver": "*"
+        "behat/mink-browserkit-driver": "*",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-zombie-driver": "*",
+        "phpspec/phpspec" :      "*"
     },
+
+
+
+
+
+
+
+
+
+
+
     "scripts": {
         "post-root-package-install": [
             "SymfonyStandard\\Composer::hookRootPackageInstall"
@@ -67,6 +81,7 @@
     "config": {
         "bin-dir": "bin"
     },
+
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",

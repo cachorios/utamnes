@@ -34,6 +34,7 @@ class AppKernel extends Kernel
             new RBSoft\UtilidadBundle\UtilidadBundle(),
 
             new AppBundle\AppBundle(),
+            new UserAdminBundle\UserAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

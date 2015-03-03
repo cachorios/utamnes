@@ -1,0 +1,45 @@
+    {% extends '@RBSoftABMGenerador/layout.html.twig' %}
+
+    {% block contenido -%}
+    {% embed '::portlet.html.twig' with {'titulo': 'Ver Usuario: ' ~ entity} %}
+        {% block in_header %} 
+        <div class='pull-right'>
+        <div class="row">
+                <div class="col-md-1 ">
+        <div class="pull-right">
+            {{ form(delete_form) }}
+        </div>
+    </div>
+    <a href="{{ path('admin_usuario_edit', { 'id': entity.id }) }}"
+       class="btn btn-sm btn-default">
+        Editar
+    </a>
+
+
+
+
+
+<a href="{{ path('admin_usuario') }}" class="btn btn-sm btn-default">
+    Ir a la lista
+</a>
+
+
+        </div>
+    </div>
+        {% endblock %}
+            {% block cuerpo %} 
+    <p></p>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th class="show-header">Id</th>
+                    <td>{{ entity.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    {% endblock %} 
+    {% endembed %} 
+    {% endblock contenido %}

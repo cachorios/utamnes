@@ -1,26 +1,32 @@
+
 default:
     suites:
-        default:
-            contexts:
-                - FeatureContext:
-                    session:   '@session'
-#    paths:
-#        features: behat/features
-        my_suite:
+#        app:
+#            type: symfony_bundle
+#            bundle: AppBundle
+#            contexts:
+#                - AppBundle\FeaturesContext
+        usuario:
             type: symfony_bundle
-            bundle: AppBundle
-
+            bundle: UsuarioBundle
+            contexts:
+                - RBSoft\UsuarioBundle\Behat\Context\UsuarioContext
     extensions:
         Behat\Symfony2Extension: ~
-#            mink-driver: true
 
-
-        Behat\Symfony2Extension: ~
         Behat\MinkExtension:
-            default_session: 'symfony2'
+            base_url: http://localhost/utamnes/web/app_test.php
             sessions:
-                symfony2:
-                    symfony2: ~
+                default:
+                    goutte: ~
+                goutte:
+                    goutte: ~
+                zombie:
+                    zombie: ~
+#                selenium2:
+#                    selenium2: ~
+#                symfony2:
+#                    symfony2: ~
 
   #formatter:
   #  name: pretty,html
