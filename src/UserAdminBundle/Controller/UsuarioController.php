@@ -104,19 +104,23 @@ class UsuarioController extends Controller
      *
      * @Route("/new", name="admin_usuario_create")
      * @Method("POST")
-     * @Template("UsuarioBundle:Usuario:new.html.twig")
+     * @Template("UserAdminBundle:Usuario:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Usuario();
+        $userManager = $this->container->get('fos_user.user_manager');
+        $entity = $userManager->createUser();
+            //new Usuario();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $userManager->updateUser($entity);
+            /*
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
+            */
             $this->get('session')->getFlashBag()->add('success',"El Usuario $entity se creó correctamente.");
             if ($request->request->get('save_mode')== 'save_and_close') {
                     return $this->redirect($this->generateUrl('admin_usuario'));
@@ -157,6 +161,7 @@ class UsuarioController extends Controller
      */
     public function newAction()
     {
+
         $entity = new Usuario();
         $form   = $this->createCreateForm($entity);
 
@@ -240,7 +245,7 @@ class UsuarioController extends Controller
      *
      * @Route("/{id}/edit", name="admin_usuario_update")
      * @Method("PUT")
-     * @Template("UsuarioBundle:Usuario:edit.html.twig")
+     * @Template("UserAdminBundle:Usuario:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
