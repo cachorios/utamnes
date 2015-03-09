@@ -115,7 +115,7 @@ class UsuarioController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $userManager->updateUser($entity);
+            $userManager->updateUser($entity, true);
             /*
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
@@ -213,8 +213,10 @@ class UsuarioController extends Controller
             throw $this->createNotFoundException('Unable to find Usuario entity.');
         }
 
+//        $entity->setPassword("");
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
+
 
         return array(
             'entity'      => $entity,
@@ -256,13 +258,20 @@ class UsuarioController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Usuario entity.');
         }
+        $oldPassword = $entity->getPassword();
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
+
         if ($editForm->isValid()) {
-            $em->flush();
+            //$em->flush();
+            if( $entity->getPassword()== null){
+                $entity->setPassword($oldPassword);
+            }
+            $manager = $this->container->get("fos_user.user_manager");
+            $manager->updateUser($entity,true);
             $this->get('session')->getFlashBag()->add('success',"El Usuario $entity se actualizó correctamente.");
             return $this->redirect($this->generateUrl('admin_usuario'));
         }

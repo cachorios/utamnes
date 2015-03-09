@@ -11,11 +11,11 @@ class UsuarioType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options){
         $builder
-            ->add("username")
+            ->add("username",null, array('label' => "Usuario"))
             ->add("email")
 //            ->add("password","password")
             ->add("password","repeated", array(
-                    'type' => "password",
+                    'type' => "text",
                     'invalid_message' => "Las claves deben ser identicas",
                     'required' => false,
                     'first_options' => array('label' => 'Clave'),
