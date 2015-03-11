@@ -1,0 +1,45 @@
+    {% extends '@RBSoftABMGenerador/layout.html.twig' %}
+
+    {% block id 'Concepto' %} 
+            {% block contenido -%}
+        {% embed '::portlet.html.twig' with {'titulo': 'Editar Concepto: ' ~ entity} %}
+            {% block in_header %} 
+                <div class='pull-right'>
+            <div class="row">
+                
+    <div class="col-md-2 ">
+        <div class="pull-right">
+            {{ form(delete_form) }}
+        </div>
+    </div>
+
+
+
+<a href="{{ path('admin_concepto') }}" class="btn btn-sm btn-default">
+    Ir a la lista
+</a>
+
+
+            </div>
+        </div>
+            {% endblock %}
+
+                {% block cuerpo %} 
+        <p></p>
+        
+            {{ form_start(edit_form) }}
+                {{ form_widget(edit_form) }}
+                <div class="col-sm-offset-2 inner-actions">
+                    <input type="submit" value="Guardar" class="form-submit-button btn btn-sm btn-default btn-primary">
+                    <a class="page-close-button btn btn-sm btn-default" href="{{ path('admin_concepto')}}">Cerrar <span class="glyphicon glyphicon-remove"></span></a>
+
+                </div>
+
+            {{ form_end(edit_form) }}
+        
+        {% endblock %} 
+        {% endembed %} 
+
+
+        {% endblock contenido %}
+    
