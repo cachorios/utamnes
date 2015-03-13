@@ -1,7 +1,7 @@
     {% extends '::layout.html.twig' %}
-    {% block id 'Concepto' %} 
+    {% block id 'Empleador' %} 
             {% block contenido -%}
-        {% embed '::portlet.html.twig' with {'titulo': 'Nuevo Concepto' } %}
+        {% embed '::portlet.html.twig' with {'titulo': 'Nuevo Empleador' } %}
             {% block in_header %} 
                 <div class='pull-right'>
             <div class="row">
@@ -9,7 +9,7 @@
 
 
 
-<a href="{{ path('admin_concepto') }}" class="btn btn-sm btn-default">
+<a href="{{ path('admin_empleador') }}" class="btn btn-sm btn-default">
     Ir a la lista
 </a>
 
@@ -33,7 +33,7 @@
                 <div class="col-sm-offset-2 inner-actions">
                     <button title="Guardar" class="form-submit-button btn btn-sm btn-default btn-primary" value="save_and_add" name="save_mode" type="submit">Guardar y Nuevo <span class="glyphicon glyphicon-ok"></span></button>
                     <button title="Guardar y Salir" class="form-submit-button btn btn-sm btn-default btn-secondary" value="save_and_close" name="save_mode" type="submit">Guardar<span class="glyphicon glyphicon-remove"></span></button>
-                    <a class="page-close-button btn btn-sm btn-default" href="{{ path('admin_concepto')}}">Cerrar <span class="glyphicon glyphicon-remove"></span></a>
+                    <a class="page-close-button btn btn-sm btn-default" href="{{ path('admin_empleador')}}">Cerrar <span class="glyphicon glyphicon-remove"></span></a>
                 </div>
 
             {{ form_end(form) }}

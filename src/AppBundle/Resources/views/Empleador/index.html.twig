@@ -1,15 +1,15 @@
     {% extends '::layout.html.twig' %}
 
-{% block id 'Concepto' %} 
+{% block id 'Empleador' %} 
 
     {% block contenido -%}
-    {% embed '::portlet.html.twig' with {'titulo': 'Lista de Concepto <small>(' ~ pager.totalItemCount ~ ' )</small>' } %}  
+    {% embed '::portlet.html.twig' with {'titulo': 'Lista de Empleador <small>(' ~ pager.totalItemCount ~ ' )</small>' } %}  
         {% block in_header %} 
     <div class='pull-right'>
 
-            <a href="{{ path('admin_concepto_new') }}" class="button_nuevo btn btn-sm btn-primary">
+            <a href="{{ path('admin_empleador_new') }}" class="button_nuevo btn btn-sm btn-primary">
 
-        {{'Nuevo Concepto'|trans }}
+        {{'Nuevo Empleador'|trans }}
 
         </a>
 
@@ -27,7 +27,7 @@
             {% endfor %}
 
     <form method='post' action='.' class='form-horizontal'>
-                    {% embed 'modal.html.twig' with { 'modal_id': 'filters', 'modal_titulo': 'Filtro de Conceptos'} %} 
+                    {% embed 'modal.html.twig' with { 'modal_id': 'filters', 'modal_titulo': 'Filtro de Empleadors'} %} 
                         {% block modal_contenido %} 
                             {{ form_rest(filterform) }} 
                         {% endblock %} 
@@ -59,12 +59,13 @@
         <thead>
         <tr>
             <th class="{{ pager.isSorted('id') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'id '|trans | capitalize  }} </th>
-            <th class="{{ pager.isSorted('numero') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'numero '|trans | capitalize  }} </th>
-            <th class="{{ pager.isSorted('descripcion') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'descripcion '|trans | capitalize  }} </th>
-            <th class="{{ pager.isSorted('descripcion_corta') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'descripcion_corta '|trans | capitalize  }} </th>
-            <th class="{{ pager.isSorted('obligatorio') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'obligatorio '|trans | capitalize  }} </th>
-            <th class="{{ pager.isSorted('activo') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'activo '|trans | capitalize  }} </th>
-            <th class="{{ pager.isSorted('fecha_actualizacion') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'fecha_actualizacion '|trans | capitalize  }} </th>
+            <th class="{{ pager.isSorted('razon') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'razon '|trans | capitalize  }} </th>
+            <th class="{{ pager.isSorted('cuit') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'cuit '|trans | capitalize  }} </th>
+            {#<th class="{{ pager.isSorted('direccion') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'direccion '|trans | capitalize  }} </th>#}
+            <th class="{{ pager.isSorted('telefono') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'telefono '|trans | capitalize  }} </th>
+            <th class="{{ pager.isSorted('email') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'email '|trans | capitalize  }} </th>
+            <th class="{{ pager.isSorted('localidad') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'localidad '|trans | capitalize  }} </th>
+            {#<th class="{{ pager.isSorted('fecha_actualizacion') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'fecha_actualizacion '|trans | capitalize  }} </th>#}
             <th class="actions">{{'Acciones'|trans }}</th>
 
         </tr>
@@ -72,17 +73,20 @@
         <tbody>
         {% for entity in pager %}
         <tr>
-                    <td><a href="{{ path('admin_concepto_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                    <td>{{ entity.numero }}</td>
-                    <td>{{ entity.descripcion }}</td>
-                    <td>{{ entity.descripcioncorta }}</td>
-                    <td>{{ entity.obligatorio? '<span class="label label-primary">Si</span>' : '<span class="label label-default">No</span>'  }}</td>                    <td>{{ entity.activo? '<span class="label label-primary">Si</span>' : '<span class="label label-default">No</span>'  }}</td>                    <td>{% if entity.fechaactualizacion %}{{ entity.fechaactualizacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td><a href="{{ path('admin_empleador_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td>{{ entity.razon }}</td>
+                    <td>{{ entity.cuit }}</td>
+                    {#<td>{{ entity.direccion }}</td>#}
+                    <td>{{ entity.telefono }}</td>
+                    <td>{{ entity.email }}</td>
+                    <td>{{ entity.localidad }}</td>
+                    {#<td>{% if entity.fechaactualizacion %}{{ entity.fechaactualizacion|date('Y-m-d H:i:s') }}{% endif %}</td>#}
                     <td class="actions">
 <div class="btn-group">
-    <a href="{{ path('admin_concepto_show', { 'id': entity.id }) }}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Ver mas información" >
+    <a href="{{ path('admin_empleador_show', { 'id': entity.id }) }}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Ver mas información" >
         <span class="glyphicon glyphicon-eye-open"></span>
         </a>
-    <a href="{{ path('admin_concepto_edit', { 'id': entity.id }) }}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Editar los datos" >
+    <a href="{{ path('admin_empleador_edit', { 'id': entity.id }) }}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Editar los datos" >
         <span class="glyphicon glyphicon-edit"></span>
         </a>
 </div>

@@ -6,30 +6,29 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Component\Pager\Paginator;
 
-use AppBundle\Entity\Trabajador;
-use AppBundle\Form\TrabajadorType;
-use AppBundle\Form\TrabajadorFilterType;
+use AppBundle\Entity\Empleador;
+use AppBundle\Form\EmpleadorType;
+use AppBundle\Form\EmpleadorFilterType;
 
 
 
 
 /**
- * Trabajador controller.
+ * Empleador controller.
  *
- * @Route("/app/trabajador")
+ * @Route("/admin/empleador")
  */
-class TrabajadorController extends Controller
+class EmpleadorController extends Controller
 {
 
     /**
-     * Lists all Trabajador entities.
+     * Lists all Empleador entities.
      *
-     * @Route("/", name="app_trabajador")
-     * @Method("GET")
+     * @Route("/", name="admin_empleador")
+     * @ Method("GET")
      * @Template()
      */
     public function indexAction(Request $request)
@@ -66,14 +65,14 @@ class TrabajadorController extends Controller
     private function filter(Request $request)
     {
         $session = $request->getSession();
-        $filterForm = $this->createForm(new TrabajadorFilterType());
+        $filterForm = $this->createForm(new EmpleadorFilterType());
 
         $em = $this->getDoctrine()->getManager();
-        $queryBuilder = $em->getRepository('AppBundle:Trabajador')->createQueryBuilder("q");
+        $queryBuilder = $em->getRepository('AppBundle:Empleador')->createQueryBuilder("q");
 
         // Reset filter
         if ($request->getMethod() == 'POST' && $request->get('submit-filter') == 'reset') {
-            $session->remove('TrabajadorControllerFilter');
+            $session->remove('EmpleadorControllerFilter');
         }
 
         // Filter action
@@ -87,13 +86,13 @@ class TrabajadorController extends Controller
                 $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
                 // Save filter to session
                 $filterData = $filterForm->getData();
-                $session->set('TrabajadorControllerFilter', $filterData);
+                $session->set('EmpleadorControllerFilter', $filterData);
             }
         } else {
             // Get filter from session
-            if ($session->has('TrabajadorControllerFilter')) {
-                $filterData = $session->get('TrabajadorControllerFilter');
-                $filterForm = $this->createForm(new TrabajadorFilterType(), $filterData);
+            if ($session->has('EmpleadorControllerFilter')) {
+                $filterData = $session->get('EmpleadorControllerFilter');
+                $filterForm = $this->createForm(new EmpleadorFilterType(), $filterData);
                 $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
            }
         }
@@ -101,15 +100,15 @@ class TrabajadorController extends Controller
     }
 
     /**
-     * Creates a new Trabajador entity.
+     * Creates a new Empleador entity.
      *
-     * @Route("/new", name="app_trabajador_create")
+     * @Route("/new", name="admin_empleador_create")
      * @Method("POST")
-     * @Template("AppBundle:Trabajador:new.html.twig")
+     * @Template("AppBundle:Empleador:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Trabajador();
+        $entity = new Empleador();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -118,11 +117,11 @@ class TrabajadorController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('success',"El Trabajador $entity se creó correctamente.");
+            $this->get('session')->getFlashBag()->add('success',"El Empleador $entity se creó correctamente.");
             if ($request->request->get('save_mode')== 'save_and_close') {
-                    return $this->redirect($this->generateUrl('app_trabajador'));
+                    return $this->redirect($this->generateUrl('admin_empleador'));
                 }
-                return $this->redirect($this->generateUrl('app_trabajador_new'));
+                return $this->redirect($this->generateUrl('admin_empleador_new'));
         }
 
         return array(
@@ -132,16 +131,16 @@ class TrabajadorController extends Controller
     }
 
     /**
-    * Creates a form to create a Trabajador entity.
+    * Creates a form to create a Empleador entity.
     *
-    * @param Trabajador $entity The entity
+    * @param Empleador $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Trabajador $entity)
+    private function createCreateForm(Empleador $entity)
     {
-        $form = $this->createForm(new TrabajadorType(), $entity, array(
-            'action' => $this->generateUrl('app_trabajador_create'),
+        $form = $this->createForm(new EmpleadorType(), $entity, array(
+            'action' => $this->generateUrl('admin_empleador_create'),
             'method' => 'POST',
         ));
 
@@ -150,15 +149,15 @@ class TrabajadorController extends Controller
     }
 
     /**
-     * Displays a form to create a new Trabajador entity.
+     * Displays a form to create a new Empleador entity.
      *
-     * @Route("/new", name="app_trabajador_new")
+     * @Route("/new", name="admin_empleador_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Trabajador();
+        $entity = new Empleador();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -168,9 +167,9 @@ class TrabajadorController extends Controller
     }
 
     /**
-     * Finds and displays a Trabajador entity.
+     * Finds and displays a Empleador entity.
      *
-     * @Route("/{id}", name="app_trabajador_show")
+     * @Route("/{id}", name="admin_empleador_show")
      * @Method("GET")
      * @Template()
      */
@@ -178,10 +177,10 @@ class TrabajadorController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Trabajador')->find($id);
+        $entity = $em->getRepository('AppBundle:Empleador')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Trabajador entity.');
+            throw $this->createNotFoundException('Unable to find Empleador entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,9 +192,9 @@ class TrabajadorController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Trabajador entity.
+     * Displays a form to edit an existing Empleador entity.
      *
-     * @Route("/{id}/edit", name="app_trabajador_edit")
+     * @Route("/{id}/edit", name="admin_empleador_edit")
      * @Method("GET")
      * @Template()
      */
@@ -203,10 +202,10 @@ class TrabajadorController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Trabajador')->find($id);
+        $entity = $em->getRepository('AppBundle:Empleador')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Trabajador entity.');
+            throw $this->createNotFoundException('Unable to find Empleador entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -220,16 +219,16 @@ class TrabajadorController extends Controller
     }
 
     /**
-    * Creates a form to edit a Trabajador entity.
+    * Creates a form to edit a Empleador entity.
     *
-    * @param Trabajador $entity The entity
+    * @param Empleador $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Trabajador $entity)
+    private function createEditForm(Empleador $entity)
     {
-        $form = $this->createForm(new TrabajadorType(), $entity, array(
-            'action' => $this->generateUrl('app_trabajador_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new EmpleadorType(), $entity, array(
+            'action' => $this->generateUrl('admin_empleador_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -237,20 +236,20 @@ class TrabajadorController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Trabajador entity.
+     * Edits an existing Empleador entity.
      *
-     * @Route("/{id}/edit", name="app_trabajador_update")
+     * @Route("/{id}/edit", name="admin_empleador_update")
      * @Method("PUT")
-     * @Template("AppBundle:Trabajador:edit.html.twig")
+     * @Template("AppBundle:Empleador:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Trabajador')->find($id);
+        $entity = $em->getRepository('AppBundle:Empleador')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Trabajador entity.');
+            throw $this->createNotFoundException('Unable to find Empleador entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -259,8 +258,8 @@ class TrabajadorController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success',"El Trabajador $entity se actualizó correctamente.");
-            return $this->redirect($this->generateUrl('app_trabajador'));
+            $this->get('session')->getFlashBag()->add('success',"El Empleador $entity se actualizó correctamente.");
+            return $this->redirect($this->generateUrl('admin_empleador'));
         }
 
         return array(
@@ -270,9 +269,9 @@ class TrabajadorController extends Controller
         );
     }
     /**
-     * Deletes a Trabajador entity.
+     * Deletes a Empleador entity.
      *
-     * @Route("/{id}", name="app_trabajador_delete")
+     * @Route("/{id}", name="admin_empleador_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -282,21 +281,21 @@ class TrabajadorController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Trabajador')->find($id);
+            $entity = $em->getRepository('AppBundle:Empleador')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Trabajador entity.');
+                throw $this->createNotFoundException('Unable to find Empleador entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('app_trabajador'));
+        return $this->redirect($this->generateUrl('admin_empleador'));
     }
 
     /**
-     * Creates a form to delete a Trabajador entity by id.
+     * Creates a form to delete a Empleador entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -305,7 +304,7 @@ class TrabajadorController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('app_trabajador_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('admin_empleador_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array(
                 'label' => 'Delete',
