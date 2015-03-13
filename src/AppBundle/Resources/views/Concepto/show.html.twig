@@ -1,0 +1,69 @@
+    {% extends '::layout.html.twig' %}
+
+    {% block contenido -%}
+    {% embed '::portlet.html.twig' with {'titulo': 'Ver Concepto: ' ~ entity} %}
+        {% block in_header %} 
+        <div class='pull-right'>
+        <div class="row">
+                <div class="col-md-1 ">
+        <div class="pull-right">
+            {{ form(delete_form) }}
+        </div>
+    </div>
+    <a href="{{ path('admin_concepto_edit', { 'id': entity.id }) }}"
+       class="btn btn-sm btn-default">
+        Editar
+    </a>
+
+
+
+
+
+<a href="{{ path('admin_concepto') }}" class="btn btn-sm btn-default">
+    Ir a la lista
+</a>
+
+
+        </div>
+    </div>
+        {% endblock %}
+            {% block cuerpo %} 
+    <p></p>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th class="show-header">Id</th>
+                    <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th class="show-header">Numero</th>
+                    <td>{{ entity.numero }}</td>
+            </tr>
+            <tr>
+                <th class="show-header">Descripcion</th>
+                    <td>{{ entity.descripcion }}</td>
+            </tr>
+            <tr>
+                <th class="show-header">Descripcion_corta</th>
+                    <td>{{ entity.descripcioncorta }}</td>
+            </tr>
+            <tr>
+                <th class="show-header">Obligatorio</th>
+                    <td>{{ entity.obligatorio? '<span class="label label-success">Si</span>' : '<span class="label label-default">No</span>'  }}</td>
+            </tr>
+            <tr>
+                <th class="show-header">Activo</th>
+                    <td>{{ entity.activo? '<span class="label label-success">Si</span>' : '<span class="label label-default">No</span>'  }}</td>
+            </tr>
+            <tr>
+                <th class="show-header">Fecha_actualizacion</th>
+                    <td>{{ entity.fechaactualizacion|date('d-m-y H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    {% endblock %} 
+    {% endembed %} 
+    {% endblock contenido %}
