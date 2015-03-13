@@ -14,13 +14,13 @@ class UsuarioType extends AbstractType
             ->add("username",null, array('label' => "Usuario"))
             ->add("email")
 //            ->add("password","password")
-            ->add("password","repeated", array(
-                    'type' => "text",
-                    'invalid_message' => "Las claves deben ser identicas",
-                    'required' => false,
-                    'first_options' => array('label' => 'Clave'),
-                    'second_options' => array('label' => 'Repetir Clave'),
-                ))
+//            ->add("password","repeated", array(
+//                    'type' => "password",
+//                    'invalid_message' => "Las claves deben ser identicas",
+//                    'required' => false,
+//                    'first_options' => array('label' => 'Clave'),
+//                    'second_options' => array('label' => 'Repetir Clave'),
+//                ))
 
             ;
 
