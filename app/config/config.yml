@@ -6,7 +6,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -81,3 +81,53 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: RBSoft\UsuarioBundle\Entity\Usuario
+
+    use_listener:           true
+    use_flash_notifications: true
+    use_username_form_type: true
+
+    from_email:
+        address: cachorios@gmail.com%
+        sender_name: "UTA Misiones"
+
+    profile:
+        form:
+            type:               fos_user_profile
+            name:               fos_user_profile_form
+            validation_groups:  [Profile, Default]
+    change_password:
+        form:
+            type:               fos_user_change_password
+            name:               fos_user_change_password_form
+            validation_groups:  [ChangePassword, Default]
+
+#    service:
+#            mailer: fos_user.mailer.twig_swift
+
+    registration:
+        confirmation:
+            from_email:
+                address: cachorios@gmail.com%
+                sender_name: "UTA Misiones"
+            enabled:    true
+            template: UserAdminBundle:Usuario:confirmacion.email.html.twig
+        form:
+            type:               fos_user_registration
+            name:               fos_user_registration_form
+            validation_groups:  [Registration, Default]
+
+    resetting:
+        token_ttl: 86400
+        email:
+            template: UserAdminBundle:Usuario:reset.email.html.twig
+
+        form:
+            type:               fos_user_resetting
+            name:               fos_user_resetting_form
+            validation_groups:  [ResetPassword, Default]
+    service:
+        mailer:                 fos_user.mailer.twig_swift
+        email_canonicalizer:    fos_user.util.canonicalizer.default
+        username_canonicalizer: fos_user.util.canonicalizer.default
+        token_generator:        fos_user.util.token_generator.default
+        user_manager:           fos_user.user_manager.default

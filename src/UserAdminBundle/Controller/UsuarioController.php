@@ -2,6 +2,8 @@
 
 namespace UserAdminBundle\Controller;
 
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -19,7 +21,7 @@ use UserAdminBundle\Form\UsuarioFilterType;
 /**
  * Usuario controller.
  *
- * @Route("/admin/usuario")
+ * @Route("/admin/usuario", name="admin_usuario")
  */
 class UsuarioController extends Controller
 {
@@ -108,13 +110,23 @@ class UsuarioController extends Controller
      */
     public function createAction(Request $request)
     {
+
         $userManager = $this->container->get('fos_user.user_manager');
         $entity = $userManager->createUser();
-            //new Usuario();
+
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->get('event_dispatcher');
+
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
+        $entity->setPlainPassword( $this->getInicialPsw() );
+        $entity->addRole("ROLE_UTA");
+
+
         if ($form->isValid()) {
+            $event = new FormEvent($form, $request);
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
             $userManager->updateUser($entity, true);
             /*
             $em = $this->getDoctrine()->getManager();
@@ -328,4 +340,11 @@ class UsuarioController extends Controller
         ;
     }
 
+
+    private function getInicialPsw(){
+        $prefijos = array("Lar","LAR", "LAr", "L_A_R","L-A-R","EA","eA","Taragui", "MunDo");
+
+        return $prefijos[rand(0,count($prefijos)-1)]. substr(microtime(),0,8);
+
+    }
 }

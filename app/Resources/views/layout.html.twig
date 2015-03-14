@@ -7,6 +7,7 @@
             <div class="col-md-12">
                 {% block workarea %}{% endblock %}
                 {% block contenido %}{% endblock %}
+                {% block fos_user_content %}{% endblock %}
             </div><!-- /.col -->
         </div><!-- /.row -->
         {% endblock container %}
@@ -14,27 +15,7 @@
 </div><!-- .content -->
 
 
-
-
-{#<section id="main">#}
-{#{% if block('breadcrumbs') is not empty %}#}
-{#<div class="row-fluid">#}
-{#<div class="span12">#}
-
-{#<hr class="main">#}
-{#<ul class="breadcrumbs">#}
-{#{% block breadcrumbs %}{% endblock breadcrumbs %}#}
-{#</ul>#}
-{#<hr class="main">#}
-
-
-
-{#<div>&copy; Municipalidad de Posadas <br> Direcci&oacute;n General de Administraci&oacute;n y Desarrollo de Sistemas</div>#}
-{#<div>Creado por el Equipo Inform&aacute;tico</div>#}
-
 {% endblock body %}
-{#{% include 'includes/topbar.html.twig' %}#}
-
 
 {#{% block stylesheets %}{% endblock stylesheets %}#}
 {#{% block javascripts %}{% endblock javascripts %}#}

@@ -9,12 +9,14 @@
         </a>
 
         <nav role="navigation" class="collapse mainnav-collapse">
-            {#<form role="search" class="mainnav-form pull-right">#}
-                {#<input type="text" placeholder="Search" class="form-control input-md mainnav-search-query">#}
-                {#<button class="btn btn-sm mainnav-form-btn"><i class="fa fa-search"></i></button>#}
-            {#</form>#}
+            <form role="search" class="mainnav-form pull-right">
+                <input type="text" placeholder="Búsqueda" class="form-control input-md mainnav-search-query">
+                <button class="btn btn-sm mainnav-form-btn"><i class="fa fa-search"></i></button>
+            </form>
 
-                {#{{ menu.menu('Secciones','#') }}#}
+                {{ menu.menuItem('Inicio',path("home_admin") ) }}
+                {{ menu.finmenuItem() }}
+                {{ menu.menu('Tablas','#') }}
                     {#{{ menu.item('Catastro/Inmueble', 'fa-dashboard', path('catastro'))  }}#}
                     {#{{ menu.submenu('Comercio', 'fa-dashboard')  }}#}
                         {#{{ menu.item('Comercio', 'fa-dashboard', '#')  }}#}
@@ -38,8 +40,8 @@
                     {#{{ menu.finsubmenu() }}#}
                     {#{{ menu.item('Otras Tasas', 'fa-dashboard', '#')  }}#}
                     {#{{ menu.item('Publicidad y Propaganda', 'fa-dashboard', path('cartel'))  }}#}
-                    {#{{ menu.item('Seguimiento de Tramite', 'fa-dashboard', '#')  }}#}
-                {#{{ menu.finmenu() }}#}
+                    {{ menu.item('Usuarios de UTA', 'fa-dashboard', path("home_admin") )  }}
+                {{ menu.finmenu() }}
 
 
 

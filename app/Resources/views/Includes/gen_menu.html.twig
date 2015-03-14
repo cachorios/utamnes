@@ -20,6 +20,18 @@
 {% endmacro %}
 
 
+
+{% macro  menuItem(label, ref) %}
+<ul class="mainnav-menu">
+    <li class=""><a href="{{ ref }}">Inicio<span class="sr-only"></span></a>
+{% endmacro %}
+
+{% macro finmenuItem() %}
+    </li>
+</ul>
+{% endmacro %}
+
+
 {% macro submenu(label,icon) %}
 <li class="dropdown-submenu">
     <a href="#" tabindex="-1">
