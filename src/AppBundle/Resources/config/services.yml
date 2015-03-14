@@ -2,3 +2,7 @@ services:
     uta.trabajador:
         class: AppBundle\Model\Trabajador
         arguments: [@doctrine.orm.entity_manager , @security.token_storage]
+
+    uta.empleadormodel:
+        class: AppBundle\Model\EmpleadorModel
+        arguments: [@doctrine.orm.entity_manager , @security.token_storage]

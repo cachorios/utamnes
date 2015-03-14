@@ -113,9 +113,12 @@ class EmpleadorController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($entity);
+//            $em->flush();
+            $empleadorModel = $this->get('uta.empleadormodel');
+            $empleadorModel->setEmpleador($entity);
+            $empleadorModel->guardar();
 
             $this->get('session')->getFlashBag()->add('success',"El Empleador $entity se creó correctamente.");
             if ($request->request->get('save_mode')== 'save_and_close') {
