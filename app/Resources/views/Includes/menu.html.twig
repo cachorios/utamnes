@@ -40,7 +40,9 @@
                     {#{{ menu.finsubmenu() }}#}
                     {#{{ menu.item('Otras Tasas', 'fa-dashboard', '#')  }}#}
                     {#{{ menu.item('Publicidad y Propaganda', 'fa-dashboard', path('cartel'))  }}#}
-                    {{ menu.item('Usuarios de UTA', 'fa-dashboard', path("home_admin") )  }}
+                    {{ menu.item('Empleadores', 'fa-dashboard', path("admin_empleador") )  }}
+                    {{ menu.item('Conceptos', 'fa-dashboard', path("admin_concepto") )  }}
+                    {{ menu.item('Usuarios de UTA', 'fa-dashboard', path("admin_usuario") )  }}
                 {{ menu.finmenu() }}
 
 
