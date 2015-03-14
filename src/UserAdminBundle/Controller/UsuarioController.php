@@ -60,6 +60,7 @@ class UsuarioController extends Controller
             8,/*limit per page*/
             array('distinct' => false)
         );
+        $pagination->setTemplate('KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig');
         return $pagination;
 
     }
