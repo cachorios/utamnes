@@ -31,7 +31,8 @@
         "whiteoctober/breadcrumbs-bundle": "dev-master",
         "stof/doctrine-extensions-bundle" : "1.x",
         "gregwar/image-bundle": "dev-master",
-        "friendsofsymfony/user-bundle": "~2.0@dev"
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "kartik-v/bootstrap-fileinput": "dev-master"
 
     },
     "require-dev": {

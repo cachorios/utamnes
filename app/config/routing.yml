@@ -1,6 +1,11 @@
-user_admin:
+_user_admin:
     resource: "@UserAdminBundle/Controller/"
     type:     annotation
+    prefix:   /
+
+_user:
+    resource: "@UsuarioBundle/Controller/"
+    resource: "@UsuarioBundle/Resources/config/routing.yml"
     prefix:   /
 
 fos_user:
@@ -9,3 +14,4 @@ fos_user:
 app:
     resource: @AppBundle/Controller/
     type:     annotation
+

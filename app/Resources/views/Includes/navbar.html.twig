@@ -1,5 +1,5 @@
 <nav role="navigation" class="collapse navbar-collapse">
-
+    {#
     <ul class="nav navbar-nav noticebar navbar-left">
 
         <li class="dropdown">
@@ -74,7 +74,7 @@
                 <li>
                     <a class="noticebar-item" href="./page-notifications.html">
                   <span class="noticebar-item-image">
-                    {#<img alt="" style="width: 50px" src="./img/avatars/avatar-1-md.jpg">#}
+
                      <img alt="" style="width: 50px" src="{{ asset('assets/img/avatars/avatar-1-md.jpg') }}">
                   </span>
 
@@ -89,7 +89,6 @@
                 <li>
                     <a class="noticebar-item" href="./page-notifications.html">
                   <span class="noticebar-item-image">
-                    {#<img alt="" style="width: 50px" src="./img/avatars/avatar-2-md.jpg">#}
                       <img alt="" style="width: 50px" src="{{ asset('assets/img/avatars/avatar-2-md.jpg') }}">
 
                   </span>
@@ -129,7 +128,7 @@
         </li>
 
     </ul>
-
+    #}
 
 
     <ul class="nav navbar-nav navbar-right">
@@ -142,9 +141,11 @@
             <a href="javascript:;">Recursos</a>
         </li>
 
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <li class="dropdown navbar-profile">
+
             <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle">
-                <img alt="" class="navbar-profile-avatar" src="{{ asset('assets/img/avatars/avatar-1-xs.jpg') }}">
+                <img alt="" class="navbar-profile-avatar" src="{{ asset('uploads/users/' ~ app.user.foto) }}">
                 <span class="navbar-profile-label">rod@rod.me &nbsp;</span>
                 <i class="fa fa-caret-down"></i>
             </a>
@@ -152,39 +153,40 @@
             <ul role="menu" class="dropdown-menu">
 
                 <li>
-                    <a href="./page-profile.html">
+                    <a href="{{ path("fos_user_profile_edit") }}">
                         <i class="fa fa-user"></i>
-                        &nbsp;&nbsp;My Profile
+                        &nbsp;&nbsp;Mi Perfil
                     </a>
                 </li>
 
                 <li>
-                    <a href="./page-pricing.html">
-                        <i class="fa fa-dollar"></i>
-                        &nbsp;&nbsp;Plans &amp; Billing
+                    <a href="{{ path("fos_user_profile_edit") }}">
+                        <i class="fa fa-user"></i>
+                        &nbsp;&nbsp;Cambiar Clave
                     </a>
                 </li>
 
-                <li>
-                    <a href="./page-settings.html">
-                        <i class="fa fa-cogs"></i>
-                        &nbsp;&nbsp;Settings
-                    </a>
-                </li>
+
+                {#<li>#}
+                    {#<a href="./page-settings.html">#}
+                        {#<i class="fa fa-cogs"></i>#}
+                        {#&nbsp;&nbsp;Settings#}
+                    {#</a>#}
+                {#</li>#}
 
                 <li class="divider"></li>
 
                 <li>
-                    <a href="./account-login.html">
+                    <a href="{{ path("fos_user_security_logout") }}">
                         <i class="fa fa-sign-out"></i>
-                        &nbsp;&nbsp;Logout
+                        &nbsp;&nbsp;Salir
                     </a>
                 </li>
 
             </ul>
 
         </li>
-
+        {% endif %}
     </ul>
 
 </nav>

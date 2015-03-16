@@ -1,0 +1,21 @@
+{% extends "layout.html.twig" %}
+
+
+
+
+
+{% block id 'Prodile' %}
+
+{% block contenido -%}
+    {% embed '::portlet.html.twig' with {'titulo': '<span class="small">Perfil:</span>  ' ~ user.nombre } %}
+        {% block in_header %}
+            <div class='pull-right'></div>
+        {% endblock %}
+
+        {% block cuerpo %}
+            <p></p>
+
+            {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+        {% endblock %}
+    {% endembed %}
+{% endblock contenido %}

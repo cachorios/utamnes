@@ -14,8 +14,10 @@ class AdminController extends Controller
      */
     public function homeAdminAction()
     {
-        return array(
-                // ...
-            );    }
+        return $this->redirect( "profile" );
+//        return array(
+//                // ...
+//            );
+    }
 
 }

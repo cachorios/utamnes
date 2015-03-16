@@ -1,0 +1,59 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
+
+    <div class="row">
+        <div class="col-md-3">
+            {{ form_row(form['foto']) }}
+        </div>
+        <div class="col-md-9">
+            {{ form_row(form['username']) }}
+            {{ form_row(form['nombre']) }}
+            {{ form_row(form['telefono']) }}
+            {{ form_row(form['email']) }}
+            {{ form_row(form['current_password']) }}
+            {{ form_widget(form)  }}
+        </div>
+    </div>
+
+
+    <div class="col-sm-4"></div>
+
+    <div class="col-sm-8">
+
+        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" class="btn btn-primary pull-right"/>
+
+    </div>
+
+</form>
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#fos_user_profile_form_foto").fileinput({
+            {% set imagen_src = (user.foto  == null ? asset("assets/img/user_defaul.png" ) : asset("uploads/users/" ~ user.foto  )) %}
+            initialPreview: ["<img src='{{ imagen_src }}' class='file-preview-image'>"],
+
+            showCaption: false,
+            showRemove: false,
+            showUpload: false,
+
+            overwriteInitial: true,
+
+
+            showPreview: true,
+            browseClass: "btn btn-primary btn-sm",
+            {#fileType: "any",#}
+            allowedFileTypes: ['image'],
+            allowedPreviewTypes: ['image'],
+            'allowedFileExtensions': ['jpg', 'png', 'gif']
+
+
+        });
+
+
+    });
+
+</script>

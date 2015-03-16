@@ -1,0 +1,65 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="fos_user_user_show">
+    <form class="form-horizontal">
+
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    {{ 'profile.show.username'|trans }}:
+                </label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">{{ user.username }}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    {{ 'Apellido y Nombre'|trans }}:
+                </label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">{{ user.nombre }}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    {{ 'Telefono'|trans }}:
+                </label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">{{ user.telefono }}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    {{ 'Móvil'|trans }}:
+                </label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">{{ user.movil }}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    {{ 'profile.show.email'|trans }}:
+                </label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">{{ user.email }}</p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-sm-4">
+            <img src="{{ asset( user.foto  == null ? "assets/img/user_defaul.png"  : "uploads/users/" ~ user.foto  ) }}" class="img-responsive  img-thumbnail"  />
+         </div>
+
+
+
+
+    </div>
+    </form>
+</div>

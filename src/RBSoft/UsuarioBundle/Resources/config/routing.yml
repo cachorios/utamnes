@@ -13,13 +13,13 @@ usuario_login_check:
 usuario_logout:
     path: /logout
 
-#----- Admin Login ------#
-admin_login:
-    path: /admin/login
-    defaults: { _controller: UsuarioBundle:Default:login}
-
-admin_login_check:
-    path: /admin/login_check
-
-admin_logout:
-    path: /admin/logout
+##----- Admin Login ------#
+#admin_login:
+#    path: /admin/login
+#    defaults: { _controller: UsuarioBundle:Default:login}
+#
+#admin_login_check:
+#    path: /admin/login_check
+#
+#admin_logout:
+#    path: /logout

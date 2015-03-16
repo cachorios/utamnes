@@ -17,10 +17,9 @@ assetic:
             inputs:
 #                - %kernel.root_dir%/../web/assets/bootstrap-2.3.2/less/bootstrap.less
 #                - @BricksSiteBundle/Resources/less/*.less
-#                - @BricksWikiBundle/Resources/less/*.less
-#                - @BricksUserBundle/Resources/less/*.less
-#                - @BricksMessageBundle/Resources/less/*.less
+
             filters: lessphp
+
         stylesheets:
             inputs:
                 #-- Font Awesome CSS --#
@@ -31,66 +30,12 @@ assetic:
                 - %kernel.root_dir%/../web/assets/css/mvpready-admin.css
                 - %kernel.root_dir%/../web/assets/css/mvpready-flat.css
 
+                - bundles/rbsoftabmgenerador/fileupload//css/fileinput.min.css
+#                - bundles/app/js/admin/plugins/bootstrap-datepicker/datepicker3.css
 
 
-#                - %kernel.root_dir%/../web/assets/css/jquery-ui.css
-#
 
-#
-#
-#                - %kernel.root_dir%/../web/assets/css/openweb/openwebicons-bootstrap.css
-#
-#                - %kernel.root_dir%/../web/assets/css/uniform.default.css
-#                - %kernel.root_dir%/../web/assets/css/jquery.gritter.css
-#                - %kernel.root_dir%/../web/assets/css/jquery-jvectormap.css
-#                - %kernel.root_dir%/../web/assets/css/simplePagination.css
-#
-#                - %kernel.root_dir%/../web/assets/css/datepicker.css
-#
-#                - %kernel.root_dir%/../web/assets/css/fullcalendar/fullcalendar.css
-#
-#                - %kernel.root_dir%/../web/assets/css/general/colors.css
-#
-#                - %kernel.root_dir%/../web/assets/css/general/base.css
-#                - %kernel.root_dir%/../web/assets/css/general/layout.css
-#                - %kernel.root_dir%/../web/assets/css/general/overrides.css
-#
-#
-#
-#                - %kernel.root_dir%/../web/assets/css/ui/boxes.css
-#                - %kernel.root_dir%/../web/assets/css/ui/sidebar.css
-#                - %kernel.root_dir%/../web/assets/css/ui/breadcrumbs.css
-#                - %kernel.root_dir%/../web/assets/css/ui/footer.css
-#
-#
-#                - %kernel.root_dir%/../web/assets/css/chosen/chosen.css
-#                - %kernel.root_dir%/../web/assets/css/chosen/chosen_fix.css
-#
-#                - %kernel.root_dir%/../web/assets/css/dataTables/jquery.dataTables.bootstrap.css
-#
-#                - %kernel.root_dir%/../web/assets/css/components/buttons.css
-#                - %kernel.root_dir%/../web/assets/css/components/forms.css
-#                - %kernel.root_dir%/../web/assets/css/components/progress.css
-#                - %kernel.root_dir%/../web/assets/css/components/tabbable.css
-#                - %kernel.root_dir%/../web/assets/css/components/tags.css
-#                - %kernel.root_dir%/../web/assets/css/components/modals.css
-#                - %kernel.root_dir%/../web/assets/css/components/gauges.css
-#                - %kernel.root_dir%/../web/assets/css/components/sliders.css
-#                - %kernel.root_dir%/../web/assets/css/components/charts.css
-#                - %kernel.root_dir%/../web/assets/css/components/tables.css
-#                - %kernel.root_dir%/../web/assets/css/components/datepicker.css
-#                - %kernel.root_dir%/../web/assets/css/components/alerts.css
-#                - %kernel.root_dir%/../web/assets/css/components/knobs.css
-#                - %kernel.root_dir%/../web/assets/css/components/extras.css
-#                - %kernel.root_dir%/../web/assets/css/components/reports.css
-#                - %kernel.root_dir%/../web/assets/css/components/widgets.css
-#                - %kernel.root_dir%/../web/assets/css/components/big-labels.css
-#                - %kernel.root_dir%/../web/assets/css/components/sample_pages.css
-#
-#                - %kernel.root_dir%/../web/assets/css/extensions/bootstrap-modal.css
 #                - %kernel.root_dir%/../web/assets/css/extensions/bootstrap-image-gallery.css
-
-
                 #- %kernel.root_dir%/../web/assets/css/main.css
 
                 - @lesses
@@ -101,56 +46,18 @@ assetic:
         javascripts_header:
             inputs:
 #                - %kernel.root_dir%/../web/assets/js/jquery-ui.js
-#                - %kernel.root_dir%/../web/assets/js/angular.js
-#                - %kernel.root_dir%/../web/assets/js/angular-resource.js
                 - bundles/fosjsrouting/js/router.js
+#                - bundles/app/js/frontend/ajaxTool.js
+#                - bundles/rbsoftabmgenerador/fileupload//js/fileinput.js
             filters:
                 - cssrewrite
                 - ?yui_js
         javascripts_footer:
             inputs:
-                #-- Bootstrap core JavaScript
-                #-- Core JS --#
-#                - %kernel.root_dir%/../web/assets/js/libs/jquery-1.9.1.min.js
-#                - %kernel.root_dir%/../web/assets/js/libs/jquery-1.10.2.min.js
-#                - %kernel.root_dir%/../web/assets/js/libs/bootstrap.min.js
-
-                #    <!--[if lt IE 9]>
-                    #<script src="./js/libs/excanvas.compiled.js"></script>
-                #<![endif]-->
-
-#                <!-- Plugin JS -->
-
-#                <script src="./js/plugins/flot/jquery.flot.js"></script>
-#                <script src="./js/plugins/flot/jquery.flot.tooltip.min.js"></script>
-#                <script src="./js/plugins/flot/jquery.flot.pie.js"></script>
-#                <script src="./js/plugins/flot/jquery.flot.resize.js"></script>
-
-#                <!-- App JS -->
-#                <script src="./js/mvpready-core.js"></script>
-#                <script src="./js/mvpready-admin.js"></script>
-
-#                <!-- Plugin JS -->
-#                <script src="./js/demos/flot/line.js"></script>
-#                <script src="./js/demos/flot/pie.js"></script>
-#                <script src="./js/demos/flot/auto.js"></script>
-
-
-#
-#                - %kernel.root_dir%/../web/assets/js/bootstrap.js
-#                - %kernel.root_dir%/../web/assets/js/chosen.jquery.js
-#                - %kernel.root_dir%/../web/assets/js/jquery.uniform.js
-#                - %kernel.root_dir%/../web/assets/js/jquery.knob.js
-#                - %kernel.root_dir%/../web/assets/js/jquery.piety.js
-#
-#                - %kernel.root_dir%/../web/assets/js/jquery.gritter.js
-#                - %kernel.root_dir%/../web/assets/js/notifications.js
-#
-#                - %kernel.root_dir%/../web/assets/js/load-image.js
-#
-
-
-
+#                - bundles/app/js/admin/plugins/bootstrap-datepicker/bootstrap-datepicker.js
+#                - bundles/app/js/admin/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.js
+#                - bundles/app/js/admin/mvpready-core.js
+#                - bundles/app/js/admin/mvpready-admin.js
 
             filters:
                 - cssrewrite

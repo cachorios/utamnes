@@ -26,10 +26,25 @@
     <!-- App CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/mvpready-admin.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/mvpready-flat.css') }}">
-    <!-- <link href="./css/custom.css" rel="stylesheet">-->
+    {% stylesheets '@stylesheets' %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+
+    <link href="{{ asset('bundles/jbfileuploader/lib/jquery-file-upload/css/jquery.fileupload.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('bundles/jbfileuploader/css/jbfileupload.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('bundles/jbfileuploader/lib/jcrop/css/jquery.Jcrop.min.css') }}" type="text/css" rel="stylesheet" />
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Bootstrap core JavaScript
+<!-- Core JS -->
+
+    <script src="{{ asset('assets/js/libs/jquery-1.10.2.min.js') }} "></script>
+    <script src="{{ asset('assets/js/libs/jquery.mb.browser.js') }} "></script>
+    <script src="{{ asset('assets/js/libs/jquery.msgbox.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/libs/bootstrap.min.js') }} "></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -41,21 +56,28 @@
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
-    {#<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>#}
 
-    {% if is_granted('ROLE_ADMIN')  %}
-        <style>
+
+    {#<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>#}
+    <style>
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_UTA')   %}
+
             .navbar-inverse{
                 background-color: #362b36;
             }
-            .navbar {
-                border: 1px solid transparent;
-                margin-bottom: 20px;
-                min-height: 95px;
-                position: relative;
-            }
-        </style>
+
+
+    {% else %}
+
     {% endif %}
+    .navbar {
+        border: 1px solid transparent;
+        margin-bottom: 20px;
+        min-height: 95px;
+        position: relative;
+    }
+    </style>
+    <script src="{{ asset('bundles/rbsoftabmgenerador/fileupload/js/fileinput.min.js')}} "></script>
 </head>
 
 <body class="{% block id '' %} ">
@@ -97,27 +119,9 @@
 
 <div id="winModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" ></div>
 <div id="veil"></div>
-<div id="prLoading">Cargando...</div>
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Core JS -->
-
-<script src="{{ asset('assets/js/libs/jquery-1.10.2.min.js') }} "></script>
-<script src="{{ asset('assets/js/libs/jquery.mb.browser.js') }} "></script>
-<script src="{{ asset('assets/js/libs/jquery.msgbox.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('assets/js/libs/bootstrap.min.js') }} "></script>
-
-<script>
-
-    var mp_sistemas = angular.module("mp_sistemas", [ "ngResource" ]);
-    mp_sistemas.config(function ($interpolateProvider) {
-        $interpolateProvider.startSymbol('[[');
-        $interpolateProvider.endSymbol(']]');
-    });
+<div id="prLoading" style="display: none">Cargando...</div>
 
 
-</script>
 
 <!--[if lt IE 9]>
 <script src="{{ asset('assets/js/libs/excanvas.compiled.js')}} "></script>
@@ -137,10 +141,7 @@
 {#<script src="{{ asset('assets/js/demos/flot/line.js') }} "></script>#}
 {#<script src="{{ asset('assets/js/demos/flot/pie.js') }} "></script>#}
 {#<script src="{{ asset('assets/js/demos/flot/auto.js') }} "></script>#}
-<script src="{{ asset('bundles/autogestion/js/notifications.js') }}" type="text/javascript"></script>
-<script src="{{ asset('bundles/utilidades/js/main.angular.js') }}" type="text/javascript"></script>
-<script src="{{ asset('bundles/utilidades/js/compSeccionTipo.js') }}" type="text/javascript" ></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+
 
 
 {% block javascript_footer %}
@@ -152,6 +153,7 @@
 {% endjavascripts %}
 
 {#<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>#}
+
 
 
 

@@ -1,0 +1,20 @@
+{% extends "layout.html.twig" %}
+
+{% block id 'request_password' %}
+
+ {% block topbar %}
+
+ {% endblock %}
+{% block contenido -%}
+    <br><br><br>
+    {% embed '::portlet.html.twig' with {'titulo': 'Pedido de Clave '} %}
+        {% block in_header %}
+            <div class='pull-right'></div>
+        {% endblock %}
+
+        {% block cuerpo %}
+            <p></p>
+            {% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+        {% endblock %}
+    {% endembed %}
+{% endblock contenido %}

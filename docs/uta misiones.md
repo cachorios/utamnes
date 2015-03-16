@@ -19,9 +19,14 @@ Tanto Administración como Auto-gestión dependen del usuario con el cual se ing
 
 ### Usuarios de Administración ###
 
-Para administrar el sitio se requieren roles especiales, (`ROLE_ADMIN, ROLE_UTA`), como es necesario que existe el primer usuario, este se creará por consola de comando, a partir de esto, ingresará al sitio y podra crear otros usuarios, y realizar tares de administración.
+Para administrar el sitio se requieren roles especiales, (`ROLE_ADMIN, ROLE_UTA`), como es necesario que existe el primer usuario, este se creará por consola de comando, a partir de esto, ingresará al sitio y podrá crear otros usuarios, y realizar tares de administración.
 
-Para crear un usuario de este tipo, se requiere un seudonimo, email, al crear el usuario, se envía por correo información para confirmación de usuario.    
+Para crear un usuario de este tipo, se requiere un seudónimo para usuario, email, al crear el usuario, se envía por correo información para la confirmación del usuario. El usuario tendrá que entrar a su correo, y  pulsar en el link enviado. 
+
+A partir de allí ingresa al sitio y su cuenta queda habilitada, pudiendo cambiar (recomendado) su clave de acceso.
+
+  
+    
 
 
   

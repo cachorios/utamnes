@@ -35,6 +35,7 @@ twig:
             - UtilidadBundle:Form:bootstrap_3_horizontal_layout.html.twig
             - UtilidadBundle:Form:find.html.twig
 
+
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
@@ -92,7 +93,7 @@ fos_user:
 
     profile:
         form:
-            type:               fos_user_profile
+            type:               usuario_profile
             name:               fos_user_profile_form
             validation_groups:  [Profile, Default]
     change_password:
@@ -131,3 +132,4 @@ fos_user:
         username_canonicalizer: fos_user.util.canonicalizer.default
         token_generator:        fos_user.util.token_generator.default
         user_manager:           fos_user.user_manager.default
+
