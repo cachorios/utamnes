@@ -2,12 +2,10 @@
 
 {% block id 'request_password' %}
 
- {% block topbar %}
-
- {% endblock %}
+ {% block topbar %} {% endblock %}
 {% block contenido -%}
     <br><br><br>
-    {% embed '::portlet.html.twig' with {'titulo': 'Pedido de Clave '} %}
+    {% embed '::portlet.html.twig' with {'titulo': 'Reseteo de Clave '} %}
         {% block in_header %}
             <div class='pull-right'></div>
         {% endblock %}

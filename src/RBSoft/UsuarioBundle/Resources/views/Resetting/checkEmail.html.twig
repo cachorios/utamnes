@@ -13,7 +13,7 @@
 
         {% block cuerpo %}
             <p></p>
-            {{ 'resetting.check_email'|trans({'%email%': email}) }}
+            {{ 'resetting.check_email'|trans({'%email%': email},'FOSUserBundle') }}
         {% endblock %}
     {% endembed %}
 {% endblock contenido %}

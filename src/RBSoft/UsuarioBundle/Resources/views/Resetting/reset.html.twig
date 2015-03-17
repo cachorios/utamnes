@@ -1,5 +1,18 @@
 {% extends "layout.html.twig" %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Resetting:reset_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block topbar %} {% endblock %}
+
+{% block contenido -%}
+    <br><br><br>
+    {% embed '::portlet.html.twig' with {'titulo': 'Reseteo de Clave '} %}
+        {% block in_header %}
+            <div class='pull-right'></div>
+        {% endblock %}
+
+        {% block cuerpo %}
+            <p></p>
+
+            {% include "FOSUserBundle:Resetting:reset_content.html.twig" %}
+        {% endblock %}
+    {% endembed %}
+{% endblock contenido %}

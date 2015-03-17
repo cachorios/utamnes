@@ -39,9 +39,10 @@
                         </label>
                     </div>
 
-                    {#<div class="pull-right">#}
-                        {#<small><a href="./account-forgot.html">Perdio su clave?</a></small>#}
-                    {#</div>#}
+                    <div class="pull-right">
+                        <small><a href="{{ path('fos_user_resetting_request') }}">Perdio su clave?</a></small>
+                    </div>
+
                 </div> <!-- /.form-group -->
 
                 <div class="form-group">
