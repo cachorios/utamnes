@@ -47,12 +47,12 @@ class Usuario extends BaseUser {
 
     /**
     * @var String $telefono
-    * @ORM\Column(type="string", length=64)
+    * @ORM\Column(type="string", length=64, nullable=true)
     */
     private $telefono;
     /**
      * @var String $movil
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $movil;
 

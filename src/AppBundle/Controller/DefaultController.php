@@ -8,10 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="homepage")
      */
     public function indexAction()
     {
-        return $this->render('default/index.html.twig');
+        return $this->redirect( $this->generateUrl("fos_user_profile_show"));
+//        return $this->render('default/index.html.twig');
     }
 }

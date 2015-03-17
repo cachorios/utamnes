@@ -1,116 +1,119 @@
-    {% extends '::layout.html.twig' %}
+{% extends '::layout.html.twig' %}
 
 {% block id 'Empleador' %} 
 
     {% block contenido -%}
-    {% embed '::portlet.html.twig' with {'titulo': 'Lista de Empleador <small>(' ~ pager.totalItemCount ~ ' )</small>' } %}  
-        {% block in_header %} 
-    <div class='pull-right'>
+        {% embed '::portlet.html.twig' with {'titulo': 'Lista de Empleadores <small>(' ~ pager.totalItemCount ~ ' )</small>' } %}
+            {% block in_header %}
+                <div class='pull-right'>
+                    <a href="{{ path('admin_empleador_new') }}" class="button_nuevo btn btn-sm btn-primary">
+                        {{ 'Nuevo Empleador'|trans }}
 
-            <a href="{{ path('admin_empleador_new') }}" class="button_nuevo btn btn-sm btn-primary">
+                    </a>
 
-        {{'Nuevo Empleador'|trans }}
+                </div>
 
-        </a>
+            {% endblock %}
 
-        </div>
+            {% block cuerpo %}
+                {% for type, flashMessages in app.session.flashbag.all() %}
+                    {% for flashMessage in flashMessages %}
+                        <div class='alert alert-{{ type }}'>
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                <form method='post' action='.' class='form-horizontal'>
+                    {% embed 'modal.html.twig' with { 'modal_id': 'filters', 'modal_titulo': 'Filtro de Empleadors'} %}
+                        {% block modal_contenido %}
+                            {{ form_rest(filterform) }}
+                        {% endblock %}
 
-        {% endblock %}
+                        {% block modal_botones %}
 
-        {% block cuerpo %} 
-            {% for type, flashMessages in app.session.flashbag.all() %} 
-                {% for flashMessage in flashMessages %} 
-                    <div class='alert alert-{{ type }}'> 
-                        {{ flashMessage }} 
-                    </div> 
-                {% endfor %} 
-            {% endfor %}
+                            <input type='submit' class='btn btn-success' name='submit-filter' value='Aplicar'/>
 
-    <form method='post' action='.' class='form-horizontal'>
-                    {% embed 'modal.html.twig' with { 'modal_id': 'filters', 'modal_titulo': 'Filtro de Empleadors'} %} 
-                        {% block modal_contenido %} 
-                            {{ form_rest(filterform) }} 
-                        {% endblock %} 
+                            <input type='submit' class='btn btn-primary' name='submit-filter' value="reset"/>
 
-                        {% block modal_botones %} 
-
-        <input type='submit' class='btn btn-success' name='submit-filter' value='Aplicar'/>
-
-        <input type='submit' class='btn btn-primary' name='submit-filter' value="reset"/>
-
-                        {% endblock modal_botones %} 
-                    {% endembed %} 
-    </form>
+                        {% endblock modal_botones %}
+                    {% endembed %}
+                </form>
 
 
-    <div class="row">
-        <div class="col-lg-10">
-        </div>
-        <div class="col-lg-2">
-            <div class="pull-right">
-                <a class='btn bg-success btn-xs dropdown-toggle' data-toggle='modal' data-target='#filters'>
-                    Filtro
-                    <span class='caret'></span>
-                </a>
-            </div>
-        </div>
-    </div>
-    <table class="table table-striped table-bordered  table-responsive">
-        <thead>
-        <tr>
-            <th class="{{ pager.isSorted('id') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'id '|trans | capitalize  }} </th>
-            <th class="{{ pager.isSorted('razon') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'razon '|trans | capitalize  }} </th>
-            <th class="{{ pager.isSorted('cuit') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'cuit '|trans | capitalize  }} </th>
-            {#<th class="{{ pager.isSorted('direccion') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'direccion '|trans | capitalize  }} </th>#}
-            <th class="{{ pager.isSorted('telefono') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'telefono '|trans | capitalize  }} </th>
-            <th class="{{ pager.isSorted('email') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'email '|trans | capitalize  }} </th>
-            <th class="{{ pager.isSorted('localidad') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'localidad '|trans | capitalize  }} </th>
-            {#<th class="{{ pager.isSorted('fecha_actualizacion') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'fecha_actualizacion '|trans | capitalize  }} </th>#}
-            <th class="actions">{{'Acciones'|trans }}</th>
+                <div class="row">
+                    <div class="col-lg-10">
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="pull-right">
+                            <a class='btn bg-success btn-xs dropdown-toggle' data-toggle='modal' data-target='#filters'>
+                                Filtro
+                                <span class='caret'></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered  table-responsive">
+                    <thead>
+                    <tr>
+                        <th class="{{ pager.isSorted('id') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'id '|trans | capitalize }} </th>
+                        <th class="{{ pager.isSorted('razon') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'razon '|trans | capitalize }} </th>
+                        <th class="{{ pager.isSorted('cuit') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'cuit '|trans | capitalize }} </th>
+                        {#<th class="{{ pager.isSorted('direccion') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'direccion '|trans | capitalize  }} </th>#}
+                        <th class="{{ pager.isSorted('telefono') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'telefono '|trans | capitalize }} </th>
+                        <th class="{{ pager.isSorted('email') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'email '|trans | capitalize }} </th>
+                        <th class="{{ pager.isSorted('localidad') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'localidad '|trans | capitalize }} </th>
+                        {#<th class="{{ pager.isSorted('fecha_actualizacion') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'fecha_actualizacion '|trans | capitalize  }} </th>#}
+                        <th class="actions">{{ 'Acciones'|trans }}</th>
 
-        </tr>
-        </thead>
-        <tbody>
-        {% for entity in pager %}
-        <tr>
-                    <td><a href="{{ path('admin_empleador_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                    <td>{{ entity.razon }}</td>
-                    <td>{{ entity.cuit }}</td>
-                    {#<td>{{ entity.direccion }}</td>#}
-                    <td>{{ entity.telefono }}</td>
-                    <td>{{ entity.email }}</td>
-                    <td>{{ entity.localidad }}</td>
-                    {#<td>{% if entity.fechaactualizacion %}{{ entity.fechaactualizacion|date('Y-m-d H:i:s') }}{% endif %}</td>#}
-                    <td class="actions">
-<div class="btn-group">
-    <a href="{{ path('admin_empleador_show', { 'id': entity.id }) }}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Ver mas información" >
-        <span class="glyphicon glyphicon-eye-open"></span>
-        </a>
-    <a href="{{ path('admin_empleador_edit', { 'id': entity.id }) }}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Editar los datos" >
-        <span class="glyphicon glyphicon-edit"></span>
-        </a>
-</div>
-                    </td>
-        </tr>
-        {% else %}
-        <tr >
-            <td class="last-row" colspan="100" style="text-align: center;">{{'sin resultados'|trans }}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in pager %}
+                        <tr>
+                            <td><a href="{{ path('admin_empleador_show', { 'id': entity.id }) }}">{{ entity.id }}</a>
+                            </td>
+                            <td>{{ entity.razon }}</td>
+                            <td>{{ entity.cuit }}</td>
+                            {#<td>{{ entity.direccion }}</td>#}
+                            <td>{{ entity.telefono }}</td>
+                            <td>{{ entity.email }}</td>
+                            <td>{{ entity.localidad }}</td>
+                            {#<td>{% if entity.fechaactualizacion %}{{ entity.fechaactualizacion|date('Y-m-d H:i:s') }}{% endif %}</td>#}
+                            <td class="actions">
+                                <div class="btn-group">
+                                    <a href="{{ path('admin_empleador_show', { 'id': entity.id }) }}"
+                                       class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"
+                                       title="Ver mas información">
+                                        <span class="glyphicon glyphicon-eye-open"></span>
+                                    </a>
+                                    <a href="{{ path('admin_empleador_edit', { 'id': entity.id }) }}"
+                                       class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"
+                                       title="Editar los datos">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td class="last-row" colspan="100"
+                                style="text-align: center;">{{ 'sin resultados'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
 
-    <div class="row">
-        <div class="col-lg-10">
-            {{ knp_pagination_render(pager) }}
+                <div class="row">
+                    <div class="col-lg-10">
+                        {{ knp_pagination_render(pager) }}
 
-        </div>
+                    </div>
                     <div class="col-lg-2">
 
-            </div>
-            </div>
+                    </div>
+                </div>
 
-         {% endblock %} 
-     {% endembed %} 
+            {% endblock %}
+        {% endembed %}
 
     {% endblock contenido %}
