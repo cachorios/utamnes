@@ -1,0 +1,240 @@
+[1mCaracterística:[22m Administración de Empleadores
+    Como en la aplicacion es un auto-gestion de empleadores
+    Debemos brindar las  tareas basica de CRUD
+
+  [1mAntecedentes:[22m                                                   [30m# src\AppBundle\Features\empleador.feature:8[39m
+    [32mDado que estoy en la pagina "[39m[32;1m/admin[39;22m[32m"[39m                          [30m# AppBundle\EmpleadorAdmin::yoEstoyEnLaPagina()[39m
+    [32mY que estoy autenticado como "[39m[32;1mcachorios@gmail.com[39;22m[32m" clave "[39m[32;1m11[39;22m[32m"[39m [30m# AppBundle\EmpleadorAdmin::estoyAutenticadoComo()[39m
+
+  [1mEscenario:[22m Lista de Empleadores                           [30m# src\AppBundle\Features\empleador.feature:12[39m
+    [32mCuando voy a la pagina "[39m[32;1m/admin/empleador/[39;22m[32m"[39m              [30m# AppBundle\EmpleadorAdmin::yoEstoyEnLaPagina()[39m
+    [32mEntonces deberia estar en la pagina "[39m[32;1m/admin/empleador/[39;22m[32m"[39m [30m# AppBundle\EmpleadorAdmin::yoDeberiaEstarEn()[39m
+    [32mY debo ver "[39m[32;1mLista de Empleadores[39;22m[32m" [39m[32;1mcomo titulo[39;22m[32m[39m           [30m# AppBundle\EmpleadorAdmin::YoDeberiaVerEnLaCabecera()[39m
+
+  [1mEscenario:[22m Nuevo empleador                                   [30m# src\AppBundle\Features\empleador.feature:18[39m
+    [32mDado que estoy en la pagina "[39m[32;1m/admin/empleador/[39;22m[32m"[39m            [30m# AppBundle\EmpleadorAdmin::yoEstoyEnLaPagina()[39m
+    [32mCuando presiono en el link "[39m[32;1mNuevo Empleado[39;22m[32m"[39m                [30m# AppBundle\EmpleadorAdmin::presionoEnLink()[39m
+    [32mEntonces deberia estar en la pagina "[39m[32;1m/admin/empleador/new[39;22m[32m"[39m [30m# AppBundle\EmpleadorAdmin::yoDeberiaEstarEn()[39m
+    [32mY debo ver "[39m[32;1mNuevo Empleador[39;22m[32m" [39m[32;1mcomo titulo[39;22m[32m[39m                   [30m# AppBundle\EmpleadorAdmin::YoDeberiaVerEnLaCabecera()[39m
+
+  [1mEscenario:[22m Rellenar formulario Nuevo Empleador                               [30m# src\AppBundle\Features\empleador.feature:24[39m
+    [32mDado que estoy en la pagina "[39m[32;1m/admin/empleador/new[39;22m[32m"[39m                         [30m# AppBundle\EmpleadorAdmin::yoEstoyEnLaPagina()[39m
+    [32mY aun no existe el empleador Amarilla Eugenia[39m                              [30m# AppBundle\EmpleadorAdmin::aunNoExisteElEmpleadorAmarillaEugenia()[39m
+    [32mY relleno el campo "[39m[32;1mappbundle_empleador_razon[39;22m[32m" con "[39m[32;1mAmarilla Eugenia[39;22m[32m"[39m      [30m# AppBundle\EmpleadorAdmin::rellenarCampo()[39m
+    [32mY relleno el campo "[39m[32;1mappbundle_empleador_cuit[39;22m[32m" con "[39m[32;1m2716111111[39;22m[32m"[39m             [30m# AppBundle\EmpleadorAdmin::rellenarCampo()[39m
+    [32mY relleno el campo "[39m[32;1mappbundle_empleador_direccion[39;22m[32m" con "[39m[32;1mCalle 69 Cas 9821[39;22m[32m"[39m [30m# AppBundle\EmpleadorAdmin::rellenarCampo()[39m
+    [32mY relleno el campo "[39m[32;1mappbundle_empleador_telefono[39;22m[32m" con "[39m[32;1m154720203[39;22m[32m"[39m          [30m# AppBundle\EmpleadorAdmin::rellenarCampo()[39m
+    [32mY relleno el campo "[39m[32;1mappbundle_empleador_email[39;22m[32m" con "[39m[32;1meugeolay@hotmail.com[39;22m[32m"[39m  [30m# AppBundle\EmpleadorAdmin::rellenarCampo()[39m
+    [32mY relleno el campo "[39m[32;1mappbundle_empleador_localidad[39;22m[32m" con "[39m[32;1mPosadas[39;22m[32m"[39m           [30m# AppBundle\EmpleadorAdmin::rellenarCampo()[39m
+    [32mCuando presiono en el boton "[39m[32;1mGuardar[39;22m[32m"[39m                                      [30m# AppBundle\EmpleadorAdmin::presionarEnBoton()[39m
+      │ <!--<![endif]--><head><title>UTA Misiones</title><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="description" content=""/><meta name="author" content="LAR"/><!-- Google Font: O00pen Sans --><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic"/><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,300,700"/><!-- Font Awesome CSS --><link rel="stylesheet" href="/utamnes/web/assets/css/font-awesome.min.css"/><!-- Bootstrap CSS --><link rel="stylesheet" href="/utamnes/web/assets/css/bootstrap.min.css"/><!-- App CSS --><link rel="stylesheet" href="/utamnes/web/assets/css/mvpready-admin.css"/><link rel="stylesheet" href="/utamnes/web/assets/css/mvpready-flat.css"/><link rel="stylesheet" type="text/css" href="/utamnes/web/app_dev.php/css/a30bb4e_part_1.css"/><link href="/utamnes/web/bundles/jbfileuploader/lib/jquery-file-upload/css/jquery.fileupload.css" type="text/css" rel="stylesheet"/><link href="/utamnes/web/bundles/jbfileuploader/css/jbfileupload.css" type="text/css" rel="stylesheet"/><link href="/utamnes/web/bundles/jbfileuploader/lib/jcrop/css/jquery.Jcrop.min.css" type="text/css" rel="stylesheet"/><!-- Favicon --><link rel="shortcut icon" href="favicon.ico"/><!-- Bootstrap core JavaScript
+      │ <!-- Core JS --><script src="/utamnes/web/assets/js/libs/jquery-1.10.2.min.js "/><script src="/utamnes/web/assets/js/libs/jquery.mb.browser.js "/><script src="/utamnes/web/assets/js/libs/jquery.msgbox.min.js" type="text/javascript"/><script src="/utamnes/web/assets/js/libs/bootstrap.min.js "/><script src="http://code.jquery.com/jquery-migrate-1.2.1.js"/><!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries --><!--[if lt IE 9]>
+      │     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      │     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      │     <![endif]--><script type="text/javascript" src="/utamnes/web/app_dev.php/js/1e643b1_part_1.js"/><style><![CDATA[
+      │     
+      │             .navbar-inverse{
+      │                 background-color: #362b36;
+      │             }
+      │ 
+      │         .navbar {
+      │         border: 1px solid transparent;
+      │         margin-bottom: 20px;
+      │         min-height: 95px;
+      │         position: relative;
+      │     }
+      │     ]]></style><script src="/utamnes/web/bundles/rbsoftabmgenerador/fileupload/js/fileinput.min.js "/></head><body class="Empleador ">
+      │ 
+      │ 
+      │ <div id="wrapper">
+      │     <header class="navbar navbar-inverse" role="banner"><div class="container">
+      │             <div class="navbar-header">
+      │                 <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+      │                     <span class="sr-only">Cambiar Navegaci&amp;ocute;n</span>
+      │                     <i class="fa fa-cog"/>
+      │                 </button>
+      │ 
+      │                 <a href="/utamnes/web/app_dev.php/admin" class="navbar-brand navbar-brand-img">
+      │                     <img src="/utamnes/web/assets/img/logo.png" width="70%" alt="UTA LOGO "/></a>
+      │             </div>
+      │                             <nav role="navigation" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li>
+      │             <a href="javascript:;">Acerca de</a>
+      │         </li>
+      │ 
+      │         <li>
+      │             <a href="javascript:;">Recursos</a>
+      │         </li>
+      │ 
+      │                 <li class="dropdown navbar-profile">
+      │ 
+      │             <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle">
+      │                 <img alt="" class="navbar-profile-avatar" src="/utamnes/web/uploads/users/user55079a82e3453.jpg"/><span class="navbar-profile-label">rod@rod.me  </span>
+      │                 <i class="fa fa-caret-down"/>
+      │             </a>
+      │ 
+      │             <ul role="menu" class="dropdown-menu"><li>
+      │                     <a href="/utamnes/web/app_dev.php/profile/edit">
+      │                         <i class="fa fa-user"/>
+      │                           Mi Perfil
+      │                     </a>
+      │                 </li>
+      │ 
+      │                 <li>
+      │                     <a href="/utamnes/web/app_dev.php/profile/change-password">
+      │                         <i class="fa fa-user"/>
+      │                           Cambiar Clave
+      │                     </a>
+      │                 </li>
+      │ 
+      │ 
+      │                                                                                                                         
+      │                 <li class="divider"/>
+      │ 
+      │                 <li>
+      │                     <a href="/utamnes/web/app_dev.php/logout">
+      │                         <i class="fa fa-sign-out"/>
+      │                           Salir
+      │                     </a>
+      │                 </li>
+      │ 
+      │             </ul></li>
+      │             </ul></nav></div>
+      │         <!-- /.container -->
+      │     </header><div class="mainnav">
+      │     <div class="container">
+      │ 
+      │         <a data-target=".mainnav-collapse" data-toggle="collapse" class="mainnav-toggle">
+      │             <span class="sr-only">Toggle navigation</span>
+      │             <i class="fa fa-bars"/>
+      │         </a>
+      │ 
+      │         <nav role="navigation" class="collapse mainnav-collapse"><form role="search" class="mainnav-form pull-right">
+      │                 <input type="text" placeholder="Búsqueda" class="form-control input-md mainnav-search-query"/><button class="btn btn-sm mainnav-form-btn"><i class="fa fa-search"/></button>
+      │             </form>
+      │ 
+      │                 <ul class="mainnav-menu"><li class=""><a href="/utamnes/web/app_dev.php/admin">Inicio<span class="sr-only"/></a>
+      │ 
+      │                     </li>
+      │ </ul><ul class="mainnav-menu"><li class="dropdown ">
+      │         <a data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="#">
+      │             Tablas <i class="mainnav-caret"/>
+      │         </a>
+      │         <ul role="menu" class="dropdown-menu"><li>
+      │         <a href="/utamnes/web/app_dev.php/admin/empleador/">
+      │             <i class="fa fa-dashboard"/>
+      │               Empleadores
+      │         </a>
+      │     </li>
+      │ 
+      │                         <li>
+      │         <a href="/utamnes/web/app_dev.php/admin/concepto/">
+      │             <i class="fa fa-dashboard"/>
+      │               Conceptos
+      │         </a>
+      │     </li>
+      │ 
+      │                         <li>
+      │         <a href="/utamnes/web/app_dev.php/admin/usuario/">
+      │             <i class="fa fa-dashboard"/>
+      │               Usuarios de UTA
+      │         </a>
+      │     </li>
+      │ 
+      │                         </ul></li>
+      │ </ul></nav></div> <!-- /.container -->
+      │ </div>
+      │ 
+      │ 
+      │ 
+      │ 
+      │ 
+      │             
+      │         <div class="content">
+      │     <div class="container">
+      │                 <div class="row">
+      │             <div class="col-md-12">
+      │                                 <div class="portlet ">
+      │ 
+      │     <h3 class="portlet-title ">
+      │         <u>Nuevo Empleador</u>
+      │          
+      │                 <div class="pull-right">
+      │             <div class="row">
+      │                 
+      │ 
+      │ 
+      │ 
+      │ <a href="/utamnes/web/app_dev.php/admin/empleador/" class="btn btn-sm btn-default">
+      │     Ir a la lista
+      │ </a>
+      │ 
+      │ 
+      │             </div>
+      │         </div>
+      │                 </h3>
+      │ 
+      │     <div class="portlet-body ">
+      │          
+      │                  
+      │                      
+      │                         <div class="alert alert-success"> 
+      │                             El Empleador Amarilla Eugenia se creó correctamente. 
+      │                         </div> 
+      │                      
+      │                         <p/>
+      │         
+      │             <form name="appbundle_empleador" method="post" action="/utamnes/web/app_dev.php/admin/empleador/new" class="form-horizontal">
+      │                 <div id="appbundle_empleador"><div class="form-group"><label class="col-sm-2 control-label required" for="appbundle_empleador_razon">Razon</label><div class="col-sm-10"><input type="text" id="appbundle_empleador_razon" name="appbundle_empleador[razon]" required="required" maxlength="64" class="form-control"/></div></div><div class="form-group"><label class="col-sm-2 control-label required" for="appbundle_empleador_cuit">Cuit</label><div class="col-sm-10"><input type="text" id="appbundle_empleador_cuit" name="appbundle_empleador[cuit]" required="required" maxlength="11" class="form-control"/></div></div><div class="form-group"><label class="col-sm-2 control-label" for="appbundle_empleador_direccion">Direccion</label><div class="col-sm-10"><input type="text" id="appbundle_empleador_direccion" name="appbundle_empleador[direccion]" maxlength="128" class="form-control"/></div></div><div class="form-group"><label class="col-sm-2 control-label" for="appbundle_empleador_telefono">Telefono</label><div class="col-sm-10"><input type="text" id="appbundle_empleador_telefono" name="appbundle_empleador[telefono]" maxlength="64" class="form-control"/></div></div><div class="form-group"><label class="col-sm-2 control-label" for="appbundle_empleador_email">Email</label><div class="col-sm-10"><input type="text" id="appbundle_empleador_email" name="appbundle_empleador[email]" maxlength="64" class="form-control"/></div></div><div class="form-group"><label class="col-sm-2 control-label" for="appbundle_empleador_localidad">Localidad</label><div class="col-sm-10"><input type="text" id="appbundle_empleador_localidad" name="appbundle_empleador[localidad]" maxlength="32" class="form-control"/></div></div>    <div class="form-group"><label class="col-sm-2 control-label required" for="appbundle_empleador_fecha_actualizacion">Fecha actualizacion</label><div class="col-sm-10"><input type="text" id="appbundle_empleador_fecha_actualizacion" name="appbundle_empleador[fecha_actualizacion]" required="required" readonly="readonly" class="form-control"/></div></div>            <input type="hidden" id="appbundle_empleador__token" name="appbundle_empleador[_token]" class="form-control" value="hB49rpUKqYBVrLrPXYgadZti8_rIKQLYhMS_w4qcjqU"/></div>
+      │                 <div class="col-sm-offset-2 inner-actions">
+      │                     <button title="Guardar" class="form-submit-button btn btn-sm btn-default btn-primary" value="save_and_add" name="save_mode" type="submit">Guardar y Nuevo <span class="glyphicon glyphicon-ok"/></button>
+      │                     <button title="Guardar y Salir" class="form-submit-button btn btn-sm btn-default btn-secondary" value="save_and_close" name="save_mode" type="submit">Guardar<span class="glyphicon glyphicon-remove"/></button>
+      │                     <a class="page-close-button btn btn-sm btn-default" href="/utamnes/web/app_dev.php/admin/empleador/">Cerrar <span class="glyphicon glyphicon-remove"/></a>
+      │                 </div>
+      │ 
+      │             </form>
+      │         
+      │ 
+      │ 
+      │ 
+      │             </div> <!-- /.portlet-body -->
+      │ 
+      │ </div> 
+      │ 
+      │                                     </div><!-- /.col -->
+      │         </div><!-- /.row -->
+      │             </div><!-- /.container -->
+      │ </div><!-- .content -->
+      │ 
+      │ 
+      │ </div>
+      │ <!-- /#wrapper -->
+      │ 
+      │ <footer class="footer"><div class="container">
+      │         <p class="pull-left">Copyright © 2015 - RBSoft </p>
+      │     </div>
+      │ </footer><div id="winModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"/>
+      │ <div id="veil"/>
+      │ <div id="prLoading" style="display: none">Cargando...</div>
+      │ 
+      │ 
+      │ 
+      │ <!--[if lt IE 9]>
+      │ <script src="/utamnes/web/assets/js/libs/excanvas.compiled.js "></script>
+      │ <![endif]-->
+      │ 
+      │ <!-- Plugin JS -->
+      │ 
+      │ <!-- App JS -->
+      │ <script src="/utamnes/web/assets/js/mvpready-core.js "/><script src="/utamnes/web/assets/js/mvpready-admin.js "/><!-- Plugin JS --><script type="text/javascript" src="/utamnes/web/app_dev.php/js/f10a762_part_1.js"/><div id="sfwdt3aabd9" class="sf-toolbar" style="display: none"/><script><![CDATA[/*<![CDATA[*/    Sfjs = (function() {        "use strict";        var noop = function() {},            profilerStorageKey = 'sf2/profiler/',            request = function(url, onSuccess, onError, payload, options) {                var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');                options = options || {};                options.maxTries = options.maxTries || 0;                xhr.open(options.method || 'GET', url, true);                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');                xhr.onreadystatechange = function(state) {                    if (4 !== xhr.readyState) {                        return null;                    }                    if (xhr.status == 404 && options.maxTries > 1) {                        setTimeout(function(){                            options.maxTries--;                            request(url, onSuccess, onError, payload, options);                        }, 500);                        return null;                    }                    if (200 === xhr.status) {                        (onSuccess || noop)(xhr);                    } else {                        (onError || noop)(xhr);                    }                };                xhr.send(payload || '');            },            hasClass = function(el, klass) {                return el.className && el.className.match(new RegExp('\\b' + klass + '\\b'));            },            removeClass = function(el, klass) {                if (el.className) {                    el.className = el.className.replace(new RegExp('\\b' + klass + '\\b'), ' ');                }            },            addClass = function(el, klass) {                if (!hasClass(el, klass)) {                    el.className += " " + klass;                }            },            getPreference = function(name) {                if (!window.localStorage) {                    return null;                }                return localStorage.getItem(profilerStorageKey + name);            },            setPreference = function(name, value) {                if (!window.localStorage) {                    return null;                }                localStorage.setItem(profilerStorageKey + name, value);            },            requestStack = [],            renderAjaxRequests = function() {                var requestCounter = document.querySelectorAll('.sf-toolbar-ajax-requests');                if (!requestCounter.length) {                    return;                }                var tbodies = document.querySelectorAll('.sf-toolbar-ajax-request-list');                var state = 'ok';                if (tbodies.length) {                    var tbody = tbodies[0];                    var rows = document.createDocumentFragment();                    if (requestStack.length) {                        for (var i = 0; i < requestStack.length; i++) {                            var request = requestStack[i];                            var row = document.createElement('tr');                            rows.appendChild(row);                            var methodCell = document.createElement('td');                            methodCell.textContent = request.method;                            row.appendChild(methodCell);                            var pathCell = document.createElement('td');                            pathCell.className = 'sf-ajax-request-url';                            pathCell.textContent = request.url;                            pathCell.setAttribute('title', request.url);                            row.appendChild(pathCell);                            var durationCell = document.createElement('td');                            durationCell.className = 'sf-ajax-request-duration';                            if (request.duration) {                                durationCell.textContent = request.duration + "ms";                            } else {                                durationCell.textContent = '-';                            }                            row.appendChild(durationCell);                            row.appendChild(document.createTextNode(' '));                            var profilerCell = document.createElement('td');                            if (request.profilerUrl) {                                var profilerLink = document.createElement('a');                                profilerLink.setAttribute('href', request.profilerUrl);                                profilerLink.textContent = request.profile;                                profilerCell.appendChild(profilerLink);                            } else {                                profilerCell.textContent = 'n/a';                            }                            row.appendChild(profilerCell);                            var requestState = 'ok';                            if (request.error) {                                requestState = 'error';                                if (state != "loading" && i > requestStack.length - 4) {                                    state = 'error';                                }                            } else if (request.loading) {                                requestState = 'loading';                                state = 'loading'                            }                            row.className = 'sf-ajax-request sf-ajax-request-' + requestState;                        }                        var infoSpan = document.querySelectorAll(".sf-toolbar-ajax-info")[0];                        var children = Array.prototype.slice.call(tbody.children);                        for (var i = 0; i < children.length; i++) {                            tbody.removeChild(children[i]);                        }                        tbody.appendChild(rows);                        if (infoSpan) {                            var text = requestStack.length + ' call' + (requestStack.length > 1 ? 's' : '');                            infoSpan.textContent = text;                        }                    } else {                        var cell = document.createElement('td');                        cell.setAttribute('colspan', '4');                        cell.textContent = "No AJAX requests yet.";                        var row = document.createElement('tr');                        row.appendChild(cell);                        tbody.appendChild(row);                    }                }                requestCounter[0].textContent = requestStack.length;                var className = 'sf-toolbar-ajax-requests sf-toolbar-status';                if (state == 'ok') {                    className += ' sf-toolbar-status-green';                } else if (state == 'error') {                    className += ' sf-toolbar-status-red';                } else {                    className += ' sf-ajax-request-loading';                }                requestCounter[0].className = className;            };        var addEventListener;        var el = document.createElement('div');        if (!'addEventListener' in el) {            addEventListener = function (element, eventName, callback) {                element.attachEvent('on' + eventName, callback);            };        } else {            addEventListener = function (element, eventName, callback) {                element.addEventListener(eventName, callback, false);            };        }                    if (window.XMLHttpRequest) {                var proxied = XMLHttpRequest.prototype.open;                XMLHttpRequest.prototype.open = function(method, url, async, user, pass) {                    var self = this;                    /* prevent logging AJAX calls to static and inline files, like templates */                    if (url.substr(0, 1) === '/' && !url.match(new RegExp("^/bundles|^/_wdt"))) {                        var stackElement = {                            loading: true,                            error: false,                            url: url,                            method: method,                            start: new Date()                        };                        requestStack.push(stackElement);                        this.addEventListener('readystatechange', function() {                            if (self.readyState == 4) {                                stackElement.duration = new Date() - stackElement.start;                                stackElement.loading = false;                                stackElement.error = self.status < 200 || self.status >= 400;                                stackElement.profile = self.getResponseHeader("X-Debug-Token");                                stackElement.profilerUrl = self.getResponseHeader("X-Debug-Token-Link");                                Sfjs.renderAjaxRequests();                            }                        }, false);                        Sfjs.renderAjaxRequests();                    }                    proxied.apply(this, Array.prototype.slice.call(arguments));                };            }                return {            hasClass: hasClass,            removeClass: removeClass,            addClass: addClass,            getPreference: getPreference,            setPreference: setPreference,            addEventListener: addEventListener,            request: request,            renderAjaxRequests: renderAjaxRequests,            load: function(selector, url, onSuccess, onError, options) {                var el = document.getElementById(selector);                if (el && el.getAttribute('data-sfurl') !== url) {                    request(                        url,                        function(xhr) {                            el.innerHTML = xhr.responseText;                            el.setAttribute('data-sfurl', url);                            removeClass(el, 'loading');                            (onSuccess || noop)(xhr, el);                        },                        function(xhr) { (onError || noop)(xhr, el); },                        '',                        options                    );                }                return this;            },            toggle: function(selector, elOn, elOff) {                var i,                    style,                    tmp = elOn.style.display,                    el = document.getElementById(selector);                elOn.style.display = elOff.style.display;                elOff.style.display = tmp;                if (el) {                    el.style.display = 'none' === tmp ? 'none' : 'block';                }                return this;            }        }    })();/*]]]]><![CDATA[>*/]]></script><script><![CDATA[/*<![CDATA[*/    (function () {                Sfjs.load(            'sfwdt3aabd9',            '/utamnes/web/app_dev.php/_wdt/3aabd9',            function(xhr, el) {                el.style.display = -1 !== xhr.responseText.indexOf('sf-toolbarreset') ? 'block' : 'none';                if (el.style.display == 'none') {                    return;                }                if (Sfjs.getPreference('toolbar/displayState') == 'none') {                    document.getElementById('sfToolbarMainContent-3aabd9').style.display = 'none';                    document.getElementById('sfToolbarClearer-3aabd9').style.display = 'none';                    document.getElementById('sfMiniToolbar-3aabd9').style.display = 'block';                } else {                    document.getElementById('sfToolbarMainContent-3aabd9').style.display = 'block';                    document.getElementById('sfToolbarClearer-3aabd9').style.display = 'block';                    document.getElementById('sfMiniToolbar-3aabd9').style.display = 'none';                }                Sfjs.renderAjaxRequests();                /* Handle toolbar-info position */                var toolbarBlocks = document.getElementsByClassName('sf-toolbar-block');                for (var i = 0; i < toolbarBlocks.length; i += 1) {                    toolbarBlocks[i].onmouseover = function () {                        var toolbarInfo = this.getElementsByClassName('sf-toolbar-info')[0];                        var pageWidth = document.body.clientWidth;                        var elementWidth = toolbarInfo.offsetWidth;                        var leftValue = (elementWidth + this.offsetLeft) - pageWidth;                        var rightValue = (elementWidth + (pageWidth - this.offsetLeft)) - pageWidth;                        /* Reset right and left value, useful on window resize */                        toolbarInfo.style.right = '';                        toolbarInfo.style.left = '';                        if (leftValue > 0 && rightValue > 0) {                            toolbarInfo.style.right = (rightValue * -1) + 'px';                        } else if (leftValue < 0) {                            toolbarInfo.style.left = 0;                        } else {                            toolbarInfo.style.right = '-1px';                        }                    };                }            },            function(xhr) {                if (xhr.status !== 0) {                    confirm('An error occurred while loading the web debug toolbar (' + xhr.status + ': ' + xhr.statusText + ').\n\nDo you want to open the profiler?') && (window.location = '/utamnes/web/app_dev.php/_profiler/3aabd9');                }            },            {'maxTries': 5}        );    })();/*]]]]><![CDATA[>*/]]></script></body>
+    [31mEntonces deberia estar en la pagina "[39m[31;1m/admin/empleador/[39;22m[31m"[39m                    [30m# AppBundle\EmpleadorAdmin::yoDeberiaEstarEn()[39m
+[31m      Current page is "/utamnes/web/app_dev.php/admin/empleador/new", but "/utamnes/web/app_dev.php/admin/empleador/" expected. (Behat\Mink\Exception\ExpectationException)[39m
+    [36mY debo ver "[39m[36;1mLista de Empleadores[39;22m[36m" [39m[36;1mcomo titulo[39;22m[36m[39m                              [30m# AppBundle\EmpleadorAdmin::YoDeberiaVerEnLaCabecera()[39m
+    [36mY debo ver el mensaje de [39m[36;1msuccess[39;22m[36m "[39m[36;1mse creó correctamente[39;22m[36m"[39m                   [30m# AppBundle\EmpleadorAdmin::deberiaVerElMensaje()[39m
+
+--- [31mFailed scenarios:[39m
+
+    [31msrc\AppBundle\Features\empleador.feature:24[39m
+
+3 scenarios ([32m2 passed[39m, [31m1 failed[39m)
+25 steps ([32m22 passed[39m, [31m1 failed[39m, [36m2 skipped[39m)
+0m8.91s (17.39Mb)

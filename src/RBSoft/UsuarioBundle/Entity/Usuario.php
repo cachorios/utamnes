@@ -24,24 +24,24 @@ class Usuario extends BaseUser {
      */
     protected $id;
 
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Trabajador", mappedBy="usuario")
-     */
-    private $trabajador;
-
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Empleador", mappedBy="usuario")
-     */
-    private $empleador;
-
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Concepto", mappedBy="usuario")
-     */
-    private $concepto;
+//    /**
+//     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Trabajador", mappedBy="usuario")
+//     */
+//    private $trabajador;
+//
+//    /**
+//     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Empleador", mappedBy="usuario")
+//     */
+//    private $empleador;
+//
+//    /**
+//     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Concepto", mappedBy="usuario")
+//     */
+//    private $concepto;
 
     /**
      * @var String $nombre
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $nombre;
 

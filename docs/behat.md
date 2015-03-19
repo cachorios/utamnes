@@ -73,7 +73,7 @@ Se pueden diferenciar claramente tres grupos que cumplen funciones distintas:
 	
 	    [Examples|Scenarios]:
 	      | agent1 | agent2 |
-	      | D      | M      |
+	      | D      
 
 
 ### El mismo ejemplo en español ###

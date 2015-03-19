@@ -5,4 +5,4 @@ services:
 
     uta.empleadormodel:
         class: AppBundle\Model\EmpleadorModel
-        arguments: [@doctrine.orm.entity_manager , @security.token_storage]
+        arguments: [@service_container]
