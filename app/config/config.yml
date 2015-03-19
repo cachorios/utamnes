@@ -120,12 +120,13 @@ fos_user:
     resetting:
         token_ttl: 86400
         email:
-            template: UserAdminBundle:Usuario:reset.email.html.twig
+            template: UsuarioBundle:Resetting:resetting.email.html.twig
 
         form:
             type:               fos_user_resetting
             name:               fos_user_resetting_form
             validation_groups:  [ResetPassword, Default]
+
     service:
         mailer:                 fos_user.mailer.twig_swift
         email_canonicalizer:    fos_user.util.canonicalizer.default

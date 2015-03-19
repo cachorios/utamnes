@@ -39,13 +39,14 @@
         "sensio/generator-bundle": "~2.3",
         "fzaninotto/faker": "dev-master",
         "nelmio/alice": "*",
-        "behat/behat": "3.0.x-dev",
-        "behat/symfony2-extension": "*",
-        "behat/mink-extension": "*",
-        "behat/mink-browserkit-driver": "*",
+        "behat/behat": "~3.0",
+        "behat/symfony2-extension": "~2.0",
+        "behat/mink-extension": "~2.0",
+        "behat/mink-browserkit-driver": "~1.2",
         "behat/mink-goutte-driver": "*",
         "behat/mink-zombie-driver": "*",
-        "phpspec/phpspec" :      "*"
+        "phpspec/phpspec" :      "*",
+        "phpunit/phpunit": "~4.1"
     },
 
 

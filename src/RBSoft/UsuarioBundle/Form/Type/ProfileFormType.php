@@ -41,6 +41,7 @@ class ProfileFormType extends AbstractType
             ->add("username", null, array('label' => "Usuario"))
             ->add("nombre")
             ->add("telefono")
+            ->add("movil",null,array("label" => "Teléfono Móvil"))
             ->add("email");
         if ($builder->getData()) {
             $builder

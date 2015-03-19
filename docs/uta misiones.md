@@ -26,8 +26,10 @@ Para crear un usuario de este tipo, se requiere un seudónimo para usuario, emai
 A partir de allí ingresa al sitio y su cuenta queda habilitada, pudiendo cambiar (recomendado) su clave de acceso.
 
   
+### Empleador ###
     
-
+Los usuarios de administración son los encargados de crear empleadores, para realizar esta tarea, ingresar al sitio
+como administrador, 
 
   
   

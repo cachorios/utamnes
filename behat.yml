@@ -1,11 +1,11 @@
 
 default:
     suites:
-#        app:
-#            type: symfony_bundle
-#            bundle: AppBundle
-#            contexts:
-#                - AppBundle\FeaturesContext
+        app:
+            type: symfony_bundle
+            bundle: AppBundle
+            contexts:
+                - AppBundle\EmpleadorAdmin
         usuario:
             type: symfony_bundle
             bundle: UsuarioBundle

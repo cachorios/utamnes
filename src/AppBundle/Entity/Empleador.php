@@ -57,10 +57,14 @@ class Empleador
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="RBSoft\UsuarioBundle\Entity\Usuario", inversedBy="empleador")
-     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="RBSoft\UsuarioBundle\Entity\Usuario", cascade={"all"} )
      */
     private $usuario;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="RBSoft\UsuarioBundle\Entity\Usuario")
+     */
+    private $usuario_actualizador;
 
 
 
@@ -301,5 +305,28 @@ class Empleador
 
     public function __toString(){
         return $this->getRazon();
+    }
+
+    /**
+     * Set usuario_actualizador
+     *
+     * @param \RBSoft\UsuarioBundle\Entity\Usuario $usuarioActualizador
+     * @return Empleador
+     */
+    public function setUsuarioActualizador(\RBSoft\UsuarioBundle\Entity\Usuario $usuarioActualizador = null)
+    {
+        $this->usuario_actualizador = $usuarioActualizador;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario_actualizador
+     *
+     * @return \RBSoft\UsuarioBundle\Entity\Usuario 
+     */
+    public function getUsuarioActualizador()
+    {
+        return $this->usuario_actualizador;
     }
 }
