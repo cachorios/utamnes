@@ -16,10 +16,10 @@ class EmpleadorType extends AbstractType
     {
         $builder
             ->add('razon')
-            ->add('cuit')
+            ->add('cuit',null,new \MinLength(3))
             ->add('direccion')
             ->add('telefono')
-            ->add('email')
+            ->add('email','email')
             ->add('localidad')
             ->add('fecha_actualizacion',null, array(
                     'format' => 'dd-MM-yyyy hh:mm:ss',
