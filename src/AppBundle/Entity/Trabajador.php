@@ -417,7 +417,7 @@ class Trabajador
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getConcepto()
+    public function getConceptos()
     {
         return $this->concepto;
     }

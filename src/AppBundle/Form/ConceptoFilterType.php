@@ -15,13 +15,13 @@ class ConceptoFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'filter_number_range')
+//            ->add('id', 'filter_number_range')
             ->add('numero', 'filter_number_range')
             ->add('descripcion', 'filter_text', array('condition_pattern' => FilterOperands::STRING_BOTH))
             ->add('descripcion_corta', 'filter_text', array('condition_pattern' => FilterOperands::STRING_BOTH))
 //            ->add('obligatorio', 'filter_choice')
 //            ->add('activo', 'filter_choice')
-            ->add('fecha_actualizacion', 'filter_date_range')
+//            ->add('fecha_actualizacion', 'filter_date_range')
         ;
 
         $listener = function(FormEvent $event)

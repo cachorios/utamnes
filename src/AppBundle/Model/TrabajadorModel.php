@@ -11,13 +11,17 @@ namespace AppBundle\Model;
 
 use AppBundle\Entity\Empleador;
 use AppBundle\Entity\TrabajadorConcepto;
+use AppBundle\Servicios\EmpleadorActivo;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManager;
 use RBSoft\UsuarioBundle\Entity\Usuario;
 use RBSoft\UtilidadBundle\Libs\Util;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 
-class Trabajador{
+class TrabajadorModel
+{
 
     /**
      * @var \AppBundle\Entity\Trabajador
@@ -30,17 +34,19 @@ class Trabajador{
     protected $conceptos;
 
     protected $em, $usuario;
+    protected $empleador;
 
-    public function __construct(EntityManager $em, $token_st)
+    public function __construct(EntityManager $em , $token_st , EmpleadorActivo $empleadorActivo)
     {
         $this->em = $em;
 //        if($token_st->getToken())
-            $this->usuario = $token_st->getToken()->getUser();
+        $this->usuario = $token_st->getToken()->getUser();
+        $this->empleador = $empleadorActivo->getEmpleador();
 //        else
 //            $this->usuario = null;
     }
 
-    public function iniciar(\AppBundle\Entity\Trabajador $trabajador, Collection $conceptos = null)
+    public function iniciar(\AppBundle\Entity\Trabajador $trabajador, ArrayCollection $conceptos)
     {
         $this->trabajador = $trabajador;
         $this->conceptos = $conceptos;
@@ -59,15 +65,18 @@ class Trabajador{
 
         $this->em->beginTransaction();
         try {
-            if(!$this->asignarConceptos())
+            if (!$this->asignarConceptos()) {
                 throw new \Exception("No se asigno conceptos.");
+            }
+
+            $this->trabajador->setEmpleador($this->empleador);
+            $this->trabajador->setUsuario($this->empleador->getUsuario());
 
             $this->em->persist($this->trabajador);
             $this->em->flush();
             $this->em->commit();
             $ok = true;
-        }catch (\Exception $e){
-            echo "\n".$e->getMessage();
+        } catch (\Exception $e) {
             $this->em->rollback();
             $this->em->close();
 
@@ -79,7 +88,8 @@ class Trabajador{
     /**
      * @return \AppBundle\Entity\Trabajador
      */
-    private function getTrabajador(){
+    private function getTrabajador()
+    {
         return $this->trabajador;
     }
 
@@ -94,6 +104,7 @@ class Trabajador{
             $this->trabajador->addConcepto($concepto);
             $ok = true;
         }
+
         return $ok;
     }
 
@@ -103,6 +114,9 @@ class Trabajador{
     public function agregarConceptosObligatorios()
     {
         $conceptos = $this->getConceptosObligatorios();
+
+//        if (!$this->conceptos == null) {
+
 
         foreach ($this->conceptos as $concepto) {
             if ($concepto->getObligatorio()) {
@@ -114,12 +128,12 @@ class Trabajador{
                 }
             }
         }
+//        }
         foreach ($conceptos as $concepto) {
             $this->conceptos->add($concepto);
         }
 
-
-        return $this->conceptos->count()  >=2;
+        return $this->conceptos->count() >= 2;
     }
 
     /**
@@ -130,10 +144,12 @@ class Trabajador{
     {
 
         $conceptos = $this->em->getRepository('AppBundle:Concepto')
-            ->findBy(array(
+            ->findBy(
+                array(
                     'obligatorio' => true,
-                    'activo' => true)
-        );
+                    'activo' => true
+                )
+            );
 
 
         return $conceptos;

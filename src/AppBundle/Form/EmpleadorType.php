@@ -16,7 +16,7 @@ class EmpleadorType extends AbstractType
     {
         $builder
             ->add('razon')
-            ->add('cuit',null,new \MinLength(3))
+            ->add('cuit')
             ->add('direccion')
             ->add('telefono')
             ->add('email','email')

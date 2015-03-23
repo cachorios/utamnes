@@ -14,17 +14,17 @@ class TrabajadorFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'filter_number_range')
+//            ->add('id', 'filter_number_range')
             ->add('estado_civil', 'filter_text')
             ->add('localidad', 'filter_number_range')
-            ->add('sexo', 'filter_text')
+//            ->add('sexo', 'filter_text')
             ->add('email', 'filter_text')
-            ->add('telefono', 'filter_text')
-            ->add('direccion', 'filter_text')
+//            ->add('telefono', 'filter_text')
+//            ->add('direccion', 'filter_text')
             ->add('nombre', 'filter_text')
             ->add('cuil', 'filter_text')
             ->add('legajo', 'filter_text')
-            ->add('fecha_actualizacion', 'filter_date_range')
+//            ->add('fecha_actualizacion', 'filter_date_range')
         ;
 
         $listener = function(FormEvent $event)
