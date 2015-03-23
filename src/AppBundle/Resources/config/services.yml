@@ -1,8 +1,12 @@
 services:
-    uta.trabajador:
-        class: AppBundle\Model\Trabajador
-        arguments: [@doctrine.orm.entity_manager , @security.token_storage]
+    uta.trabajadormodel:
+        class: AppBundle\Model\TrabajadorModel
+        arguments: [@doctrine.orm.entity_manager , @security.token_storage , @uta.empleador_activo]
 
     uta.empleadormodel:
         class: AppBundle\Model\EmpleadorModel
         arguments: [@service_container]
+
+    uta.empleador_activo:
+        class: AppBundle\Servicios\EmpleadorActivo
+        arguments: [@security.context , @doctrine.orm.entity_manager]

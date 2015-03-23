@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -34,7 +35,8 @@ class TrabajadorController extends Controller
      */
     public function indexAction(Request $request)
     {
-    list($filterForm, $queryBuilder) = $this->filter($request);
+
+        list($filterForm, $queryBuilder) = $this->filter($request);
     $pager = $this->getPager($queryBuilder);
 
         return array(
@@ -114,9 +116,13 @@ class TrabajadorController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($entity);
+//            $em->flush();
+
+            $trabajadorModel = $this->get('uta.trabajadormodel');
+            $trabajadorModel->iniciar($entity, new ArrayCollection());
+            $trabajadorModel->guardar();
 
             $this->get('session')->getFlashBag()->add('success',"El Trabajador $entity se creó correctamente.");
             if ($request->request->get('save_mode')== 'save_and_close') {
@@ -258,7 +264,12 @@ class TrabajadorController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $em->flush();
+
+            $trabajadorModel = $this->get('uta.trabajadormodel');
+
+            $trabajadorModel->iniciar($entity, $entity->getConceptos());
+            $trabajadorModel->guardar();
+
             $this->get('session')->getFlashBag()->add('success',"El Trabajador $entity se actualizó correctamente.");
             return $this->redirect($this->generateUrl('app_trabajador'));
         }
