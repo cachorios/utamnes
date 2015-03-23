@@ -345,7 +345,7 @@ class UsuarioController extends Controller
     private function getInicialPsw(){
         $prefijos = array("Lar","LAR", "LAr", "L_A_R","L-A-R","EA","eA","Taragui", "MunDo");
 
-        return $prefijos[rand(0,count($prefijos)-1)]. substr(microtime(),0,8);
+        return $prefijos[rand(0,count($prefijos)-1)] . substr(microtime(),0,-5);
 
     }
 }

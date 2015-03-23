@@ -10,7 +10,6 @@ namespace AppBundle\Model;
 
 
 use AppBundle\Entity\Empleador;
-use FOS\UserBundle\Event\FormEvent;
 use RBSoft\UsuarioBundle\Entity\Usuario;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -24,11 +23,9 @@ class EmpleadorModel
     protected $container;
 
     public function __construct(ContainerInterface $contonedor)
-        //EntityManager $em, SecurityContext $security_context, UserManager $userManager)
     {
         $this->container = $contonedor;
-        //$this->user = $security_context->getToken()->getUser();
-        //$this->userManager = $userManager;
+
     }
 
     /**
@@ -38,6 +35,7 @@ class EmpleadorModel
     public function setEmpleador(Empleador $empleador)
     {
         $this->empleador = $empleador;
+
         return $this;
     }
 
@@ -50,7 +48,6 @@ class EmpleadorModel
          */
         $this->empleador->setFechaActualizacion(new \DateTime("now"));
 
-        //todo falta el user
         $usuario_autenticado = $this->container->get("security.context")->getToken()->getUser();
         $this->empleador->setUsuarioActualizador($usuario_autenticado);
 
@@ -59,19 +56,7 @@ class EmpleadorModel
         $userCreate = false;
         try {
 
-            if($this->empleador->getId() == null){
-                $userManager = $this->container->get("fos_user.user_manager");
-                $user = $userManager->createUser();
-                $user->setUsername( $this->empleador->getCuit() ); //Será el cuit del empleador
-                $user->setNombre($this->empleador->getRazon());
-                $user->setEmail($this->empleador->getEmail());
-                $pass = $this->getInicialPsw();
-                $user->setPlainPassword($this->getInicialPsw($pass));
-                $user->addRole("ROLE_EMPLEADOR");
-
-                $userToEmail = clone $user;
-                $userManager->updateUser($user, true);
-                $this->empleador->setUsuario($user);
+            if ($this->empleador->getId() == null) {
                 $userCreate = true;
             }
 
@@ -80,15 +65,28 @@ class EmpleadorModel
             $em->flush();
             $em->commit();
 
-            if($userCreate){
+            if ($userCreate) {
+                $userManager = $this->container->get("fos_user.user_manager");
+
+                $user = $userManager->createUser();
+                $user->setUsername($this->empleador->getCuit()); //Será el cuit del empleador
+                $user->setNombre($this->empleador->getRazon());
+                $user->setEmail($this->empleador->getEmail());
+                $pass = $this->getInicialPsw();
+                $user->setPlainPassword($pass);
+                $user->addRole("ROLE_EMPLEADOR");
+
+                $userToEmail = clone $user;
+                $userManager->updateUser($user, true);
+                $this->empleador->setUsuario($user);
+
                 $userToEmail->setPlainPassword($pass);
                 $this->sendMail($userToEmail, $user);
             }
 
 
-
             $ok = true;
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             echo "\n".$e->getMessage();
             $this->em->rollback();
             $this->em->close();
@@ -97,10 +95,11 @@ class EmpleadorModel
         return $ok;
     }
 
-    private function getInicialPsw(){
-        $prefijos = array("Lar","LAR", "LAr", "L_A_R","L-A-R","EA","eA","Taragui", "MunDo");
+    private function getInicialPsw()
+    {
+        $prefijos = array("Lar", "LAR", "LAr", "L_A_R", "L-A-R", "EA", "eA", "Taragui", "MunDo");
 
-        return $prefijos[rand(0,count($prefijos)-1)]. substr(microtime(),0,8);
+        return $prefijos[rand(0, count($prefijos) - 1)] . substr(microtime(), 2, 6);
 
     }
 
