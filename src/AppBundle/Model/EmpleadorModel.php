@@ -25,7 +25,6 @@ class EmpleadorModel
     public function __construct(ContainerInterface $contonedor)
     {
         $this->container = $contonedor;
-
     }
 
     /**
@@ -122,13 +121,5 @@ class EmpleadorModel
         $mailer = $this->container->get("fos_user.mailer");
         $mailer->sendConfirmationEmailMessage($usuario);
 
-
-        /*
-        $session = $this->container->get("session");
-        $router = $this->container->get("router");
-
-        $session->set('fos_user_send_confirmation_email/email', $usuario->getEmail());
-        $url = $router->generate('fos_user_registration_check_email');
-        $event->setResponse(new RedirectResponse($url)); */
     }
 }

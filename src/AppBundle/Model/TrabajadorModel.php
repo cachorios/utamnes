@@ -46,7 +46,7 @@ class TrabajadorModel
 //            $this->usuario = null;
     }
 
-    public function iniciar(\AppBundle\Entity\Trabajador $trabajador, ArrayCollection $conceptos)
+    public function iniciar(\AppBundle\Entity\Trabajador $trabajador,  $conceptos)
     {
         $this->trabajador = $trabajador;
         $this->conceptos = $conceptos;
@@ -70,7 +70,6 @@ class TrabajadorModel
             }
 
             $this->trabajador->setEmpleador($this->empleador);
-            $this->trabajador->setUsuario($this->empleador->getUsuario());
 
             $this->em->persist($this->trabajador);
             $this->em->flush();
