@@ -1,11 +1,16 @@
-formatter.name: pretty
-
+formatter.name: progress
+#progress (default)
+#html
+#pretty
+#junit
+#dot
 suites:
     app:
         namespace: AppBundle
 #        psr4_prefix: AppBundle
-        src_path: src/AppBundle
-        spec_path: src/AppBundle
+#        src_path: src/AppBundle
+#        spec_path: src/AppBundle
+#        spec_prefix: Spec
 #
 #extensions:
 #    - PhpSpec\Symfony2Extension\Extension

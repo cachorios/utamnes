@@ -33,17 +33,17 @@ class TrabajadorModel
      */
     protected $conceptos;
 
-    protected $em, $usuario;
+    protected $em;
+    /**
+     * @var \AppBundle\Entity\Empleador
+     */
     protected $empleador;
 
-    public function __construct(EntityManager $em , $token_st , EmpleadorActivo $empleadorActivo)
+    public function __construct(EntityManager $em , EmpleadorActivo $empleadorActivo)
     {
         $this->em = $em;
-//        if($token_st->getToken())
-        $this->usuario = $token_st->getToken()->getUser();
         $this->empleador = $empleadorActivo->getEmpleador();
-//        else
-//            $this->usuario = null;
+
     }
 
     public function iniciar(\AppBundle\Entity\Trabajador $trabajador,  $conceptos)
@@ -53,15 +53,16 @@ class TrabajadorModel
     }
 
 
-    public function guardar()
+    /*public function guardar()
     {
         $ok = false;
 
         /**
          * Datos de la modificacion para auditoria
          */
+    /*
         $this->trabajador->setFechaActualizacion(new \DateTime("now"));
-        $this->trabajador->setUsuario($this->usuario);
+        $this->trabajador->setUsuario($this->empleador->getUsuario());
 
         $this->em->beginTransaction();
         try {
@@ -82,20 +83,14 @@ class TrabajadorModel
         }
 
         return $ok;
-    }
+    }*/
 
-    /**
-     * @return \AppBundle\Entity\Trabajador
-     */
-    private function getTrabajador()
-    {
-        return $this->trabajador;
-    }
+
 
     /**
      *
      */
-    private function asignarConceptos()
+   /* private function asignarConceptos()
     {
         $ok = false;
         $this->agregarConceptosObligatorios();
@@ -105,17 +100,15 @@ class TrabajadorModel
         }
 
         return $ok;
-    }
+    }*/
 
     /**
      * @return bool
      */
+    /*
     public function agregarConceptosObligatorios()
     {
         $conceptos = $this->getConceptosObligatorios();
-
-//        if (!$this->conceptos == null) {
-
 
         foreach ($this->conceptos as $concepto) {
             if ($concepto->getObligatorio()) {
@@ -127,18 +120,18 @@ class TrabajadorModel
                 }
             }
         }
-//        }
+
         foreach ($conceptos as $concepto) {
             $this->conceptos->add($concepto);
         }
 
         return $this->conceptos->count() >= 2;
     }
-
+/*
     /**
      * @return \Doctrine\Common\Collections\Collection
      */
-
+/*
     public function getConceptosObligatorios()
     {
 
@@ -153,5 +146,5 @@ class TrabajadorModel
 
         return $conceptos;
     }
-
+*/
 } 

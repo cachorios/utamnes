@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') or is_granted('ROLE_UTA')  %}
+{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_UTA')  %}
 {%    set home = "home_admin"  %}
-{% elseif is_granted('ROLE_UTA')  %}
-{%     set home = "admin_home" %}
+{% elseif is_granted('ROLE_EMPLEADOR')  %}
+{%     set home = "homepage" %}
 {% else %}
 {%    set home = "homepage" %}
 {% endif %}

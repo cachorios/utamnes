@@ -343,18 +343,18 @@ class Trabajador
         return $this->fecha_actualizacion;
     }
 
-    /**
-     * Set usuario
-     *
-     * @param \RBSoft\UsuarioBundle\Entity\Usuario $usuario
-     * @return Trabajador
-     */
-    public function setUsuario(\RBSoft\UsuarioBundle\Entity\Usuario $usuario = null)
-    {
-        $this->usuario = $usuario;
-
-        return $this;
-    }
+//    /**
+//     * Set usuario
+//     *
+//     * @param \RBSoft\UsuarioBundle\Entity\Usuario $usuario
+//     * @return Trabajador
+//     */
+//    public function setUsuario(\RBSoft\UsuarioBundle\Entity\Usuario $usuario = null)
+//    {
+//        $this->usuario = $usuario;
+//
+//        return $this;
+//    }
 
     /**
      * Get usuario
