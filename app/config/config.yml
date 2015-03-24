@@ -3,6 +3,8 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: assetic.yml    }
+    - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
+
 
 framework:
     #esi:             ~

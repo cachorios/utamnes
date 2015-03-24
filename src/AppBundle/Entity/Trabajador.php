@@ -2,6 +2,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+
 
 /**
  * @ORM\Entity
@@ -14,6 +16,7 @@ use Doctrine\ORM\Mapping AS ORM;
  */
 class Trabajador
 {
+    use ORMBehaviors\Timestampable\Timestampable;
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -69,7 +72,13 @@ class Trabajador
     /**
      * @ORM\Column(type="datetime", nullable=false)
      */
-    private $fecha_actualizacion;
+    private $fecha_ingreso;
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $fecha_baja;
+
+
 
     /**
      * @ORM\ManyToOne(targetEntity="RBSoft\UsuarioBundle\Entity\Usuario", inversedBy="trabajador")
@@ -85,14 +94,14 @@ class Trabajador
     private $empleador;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Concepto", inversedBy="trabajador", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Concepto", inversedBy="trabajador")
      * @ORM\JoinTable(
      *     name="ConceptoToTrabajador",
-     *     joinColumns={@ORM\JoinColumn(name="trabajador_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")},
+     *     joinColumns={@ORM\JoinColumn(name="trabajador_id", referencedColumnName="id", nullable=false)},
      *     inverseJoinColumns={@ORM\JoinColumn(name="concepto_id", referencedColumnName="id", nullable=false)}
      * )
      */
-    private $concepto;
+    private $conceptos;
 
 
     /**
@@ -100,7 +109,7 @@ class Trabajador
      */
     public function __construct()
     {
-        $this->concepto = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->conceptos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -320,41 +329,19 @@ class Trabajador
         return $this->legajo;
     }
 
+
     /**
-     * Set fecha_actualizacion
+     * Set usuario
      *
-     * @param \DateTime $fechaActualizacion
+     * @param \RBSoft\UsuarioBundle\Entity\Usuario $usuario
      * @return Trabajador
      */
-    public function setFechaActualizacion($fechaActualizacion)
+    public function setUsuario(\RBSoft\UsuarioBundle\Entity\Usuario $usuario = null)
     {
-        $this->fecha_actualizacion = $fechaActualizacion;
+        $this->usuario = $usuario;
 
         return $this;
     }
-
-    /**
-     * Get fecha_actualizacion
-     *
-     * @return \DateTime
-     */
-    public function getFechaActualizacion()
-    {
-        return $this->fecha_actualizacion;
-    }
-
-//    /**
-//     * Set usuario
-//     *
-//     * @param \RBSoft\UsuarioBundle\Entity\Usuario $usuario
-//     * @return Trabajador
-//     */
-//    public function setUsuario(\RBSoft\UsuarioBundle\Entity\Usuario $usuario = null)
-//    {
-//        $this->usuario = $usuario;
-//
-//        return $this;
-//    }
 
     /**
      * Get usuario
@@ -397,7 +384,14 @@ class Trabajador
      */
     public function addConcepto(\AppBundle\Entity\Concepto $concepto)
     {
-        $this->concepto[] = $concepto;
+        $found = false;
+        foreach($this->conceptos as $conc){
+            if($conc->getId() == $concepto->getId())
+                $found = true;
+        }
+
+        if(!$found)
+            $this->conceptos[] = $concepto;
 
         return $this;
     }
@@ -419,11 +413,59 @@ class Trabajador
      */
     public function getConceptos()
     {
-        return $this->concepto;
+        return $this->conceptos;
     }
 
     public function __toString()
     {
         return $this->getNombre();
     }
+
+    /**
+     * Set fecha_ingreso
+     *
+     * @param \DateTime $fechaIngreso
+     * @return Trabajador
+     */
+    public function setFechaIngreso($fechaIngreso)
+    {
+        $this->fecha_ingreso = $fechaIngreso;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha_ingreso
+     *
+     * @return \DateTime 
+     */
+    public function getFechaIngreso()
+    {
+        return $this->fecha_ingreso;
+    }
+
+    /**
+     * Set fecha_baja
+     *
+     * @param \DateTime $fechaBaja
+     * @return Trabajador
+     */
+    public function setFechaBaja($fechaBaja)
+    {
+        $this->fecha_baja = $fechaBaja;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha_baja
+     *
+     * @return \DateTime 
+     */
+    public function getFechaBaja()
+    {
+        return $this->fecha_baja;
+    }
+
+
 }

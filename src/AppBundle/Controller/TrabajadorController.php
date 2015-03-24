@@ -16,8 +16,6 @@ use AppBundle\Form\TrabajadorType;
 use AppBundle\Form\TrabajadorFilterType;
 
 
-
-
 /**
  * Trabajador controller.
  *
@@ -37,23 +35,23 @@ class TrabajadorController extends Controller
     {
 
         list($filterForm, $queryBuilder) = $this->filter($request);
-    $pager = $this->getPager($queryBuilder);
+        $pager = $this->getPager($queryBuilder);
 
         return array(
-            'pager'         => $pager,
-            'filterform'    => $filterForm->createView(),
+            'pager' => $pager,
+            'filterform' => $filterForm->createView(),
         );
     }
 
     /**
-    * Crea el paginador Pagerfanta
-    * @param Request $request
-    * @return SlidingPagination
-    * @throws NotFoundHttpException
-    */
+     * Crea el paginador Pagerfanta
+     * @param Request $request
+     * @return SlidingPagination
+     * @throws NotFoundHttpException
+     */
     private function getPager($q)
     {
-        $paginator  = $this->get('knp_paginator');
+        $paginator = $this->get('knp_paginator');
 
         $pagination = $paginator->paginate(
             $q,
@@ -61,6 +59,7 @@ class TrabajadorController extends Controller
             8,/*limit per page*/
             array('distinct' => false)
         );
+
         return $pagination;
 
     }
@@ -97,8 +96,9 @@ class TrabajadorController extends Controller
                 $filterData = $session->get('TrabajadorControllerFilter');
                 $filterForm = $this->createForm(new TrabajadorFilterType(), $filterData);
                 $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
-           }
+            }
         }
+
         return array($filterForm, $queryBuilder);
     }
 
@@ -116,40 +116,41 @@ class TrabajadorController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($entity);
-//            $em->flush();
 
             $trabajadorModel = $this->get('uta.trabajadormodel');
-            $trabajadorModel->iniciar($entity, new ArrayCollection());
-            $trabajadorModel->guardar();
+            $trabajadorModel->guardar($entity);
 
-            $this->get('session')->getFlashBag()->add('success',"El Trabajador $entity se creó correctamente.");
-            if ($request->request->get('save_mode')== 'save_and_close') {
-                    return $this->redirect($this->generateUrl('app_trabajador'));
-                }
-                return $this->redirect($this->generateUrl('app_trabajador_new'));
+            $this->get('session')->getFlashBag()->add('success', "El Trabajador $entity se creó correctamente.");
+            if ($request->request->get('save_mode') == 'save_and_close') {
+                return $this->redirect($this->generateUrl('app_trabajador'));
+            }
+
+            return $this->redirect($this->generateUrl('app_trabajador_new'));
         }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
     /**
-    * Creates a form to create a Trabajador entity.
-    *
-    * @param Trabajador $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Trabajador entity.
+     *
+     * @param Trabajador $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createCreateForm(Trabajador $entity)
     {
-        $form = $this->createForm(new TrabajadorType(), $entity, array(
-            'action' => $this->generateUrl('app_trabajador_create'),
-            'method' => 'POST',
-        ));
+        $form = $this->createForm(
+            new TrabajadorType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('app_trabajador_create'),
+                'method' => 'POST',
+            )
+        );
 
 
         return $form;
@@ -165,11 +166,11 @@ class TrabajadorController extends Controller
     public function newAction()
     {
         $entity = new Trabajador();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -193,7 +194,7 @@ class TrabajadorController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -219,29 +220,34 @@ class TrabajadorController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Trabajador entity.
-    *
-    * @param Trabajador $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Trabajador entity.
+     *
+     * @param Trabajador $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Trabajador $entity)
     {
-        $form = $this->createForm(new TrabajadorType(), $entity, array(
-            'action' => $this->generateUrl('app_trabajador_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+        $form = $this->createForm(
+            new TrabajadorType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('app_trabajador_update', array('id' => $entity->getId())),
+                'method' => 'PUT',
+            )
+        );
 
-        
+
         return $form;
     }
+
     /**
      * Edits an existing Trabajador entity.
      *
@@ -267,19 +273,20 @@ class TrabajadorController extends Controller
 
             $trabajadorModel = $this->get('uta.trabajadormodel');
 
-            $trabajadorModel->iniciar($entity, $entity->getConceptos());
-            $trabajadorModel->guardar();
+            $trabajadorModel->guardar($entity);
 
-            $this->get('session')->getFlashBag()->add('success',"El Trabajador $entity se actualizó correctamente.");
+            $this->get('session')->getFlashBag()->add('success', "El Trabajador $entity se actualizó correctamente.");
+
             return $this->redirect($this->generateUrl('app_trabajador'));
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Trabajador entity.
      *
@@ -318,14 +325,17 @@ class TrabajadorController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('app_trabajador_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array(
-                'label' => 'Delete',
-                'attr'  => array(
+            ->add(
+                'submit',
+                'submit',
+                array(
+                    'label' => 'Delete',
+                    'attr' => array(
                         'class' => 'btn btn-danger btn-sm'
+                    )
                 )
-            ))
-            ->getForm()
-        ;
+            )
+            ->getForm();
     }
 
 }

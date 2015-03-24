@@ -5,6 +5,12 @@ use Doctrine\ORM\Mapping AS ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="trabajadorLejajoUk", columns={"empleador_id","legajo"}),
+ *         @ORM\UniqueConstraint(name="trabajadorCuitUk", columns={"empleador_id","cuil"})
+ *     }
+ * )
  */
 class Trabajador
 {
@@ -63,6 +69,16 @@ class Trabajador
     /**
      * @ORM\Column(type="datetime", nullable=false)
      */
+    private $fecha_ingreso;
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $fecha_baja;
+
+
+    /**
+     * @ORM\Column(type="datetime", nullable=false)
+     */
     private $fecha_actualizacion;
 
     /**
@@ -71,29 +87,22 @@ class Trabajador
      */
     private $usuario;
 
-    /**
-     * 
-     */
-    private $trabajadorConcepto;
 
     /**
-     * 
-     * 
-     @ORM\ManyToOne(targetEntity="AppBundle\Entity\Empleador", inversedBy="trabajador")
-     @ORM\JoinColumn(name="empleador_id", referencedColumnName="id", nullable=false)*/
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Empleador", inversedBy="trabajador")
+     * @ORM\JoinColumn(name="empleador_id", referencedColumnName="id", nullable=false)
+     */
     private $empleador;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Concepto", mappedBy="trabajador")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Concepto", inversedBy="trabajador")
+     * @ORM\JoinTable(
+     *     name="ConceptoToTrabajador",
+     *     joinColumns={@ORM\JoinColumn(name="trabajador_id", referencedColumnName="id", nullable=false)},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="concepto_id", referencedColumnName="id", nullable=false)}
+     * )
      */
-    private $concepto;
-
-    /**
-     * 
-     * 
-     */
-    private $persona;
-
+    private $conceptos;
 
 
     /**
@@ -101,13 +110,13 @@ class Trabajador
      */
     public function __construct()
     {
-        $this->concepto = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->conceptos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -130,7 +139,7 @@ class Trabajador
     /**
      * Get estado_civil
      *
-     * @return string 
+     * @return string
      */
     public function getEstadoCivil()
     {
@@ -153,7 +162,7 @@ class Trabajador
     /**
      * Get localidad
      *
-     * @return integer 
+     * @return integer
      */
     public function getLocalidad()
     {
@@ -176,7 +185,7 @@ class Trabajador
     /**
      * Get sexo
      *
-     * @return string 
+     * @return string
      */
     public function getSexo()
     {
@@ -199,7 +208,7 @@ class Trabajador
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -222,7 +231,7 @@ class Trabajador
     /**
      * Get telefono
      *
-     * @return string 
+     * @return string
      */
     public function getTelefono()
     {
@@ -245,7 +254,7 @@ class Trabajador
     /**
      * Get direccion
      *
-     * @return string 
+     * @return string
      */
     public function getDireccion()
     {
@@ -268,7 +277,7 @@ class Trabajador
     /**
      * Get nombre
      *
-     * @return string 
+     * @return string
      */
     public function getNombre()
     {
@@ -291,7 +300,7 @@ class Trabajador
     /**
      * Get cuil
      *
-     * @return string 
+     * @return string
      */
     public function getCuil()
     {
@@ -314,7 +323,7 @@ class Trabajador
     /**
      * Get legajo
      *
-     * @return string 
+     * @return string
      */
     public function getLegajo()
     {
@@ -337,7 +346,7 @@ class Trabajador
     /**
      * Get fecha_actualizacion
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getFechaActualizacion()
     {
@@ -350,7 +359,7 @@ class Trabajador
      * @param \RBSoft\UsuarioBundle\Entity\Usuario $usuario
      * @return Trabajador
      */
-    public function setUsuario(\RBSoft\UsuarioBundle\Entity\Usuario $usuario)
+    public function setUsuario(\RBSoft\UsuarioBundle\Entity\Usuario $usuario = null)
     {
         $this->usuario = $usuario;
 
@@ -360,7 +369,7 @@ class Trabajador
     /**
      * Get usuario
      *
-     * @return \RBSoft\UsuarioBundle\Entity\Usuario 
+     * @return \RBSoft\UsuarioBundle\Entity\Usuario
      */
     public function getUsuario()
     {
@@ -383,7 +392,7 @@ class Trabajador
     /**
      * Get empleador
      *
-     * @return \AppBundle\Entity\Empleador 
+     * @return \AppBundle\Entity\Empleador
      */
     public function getEmpleador()
     {
@@ -398,7 +407,14 @@ class Trabajador
      */
     public function addConcepto(\AppBundle\Entity\Concepto $concepto)
     {
-        $this->concepto[] = $concepto;
+        $found = false;
+        foreach($this->conceptos as $conc){
+            if($conc->getId() == $concepto->getId())
+                $found = true;
+        }
+
+        if(!$found)
+            $this->conceptos[] = $concepto;
 
         return $this;
     }
@@ -416,10 +432,63 @@ class Trabajador
     /**
      * Get concepto
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getConcepto()
+    public function getConceptos()
     {
-        return $this->concepto;
+        return $this->conceptos;
     }
+
+    public function __toString()
+    {
+        return $this->getNombre();
+    }
+
+    /**
+     * Set fecha_ingreso
+     *
+     * @param \DateTime $fechaIngreso
+     * @return Trabajador
+     */
+    public function setFechaIngreso($fechaIngreso)
+    {
+        $this->fecha_ingreso = $fechaIngreso;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha_ingreso
+     *
+     * @return \DateTime 
+     */
+    public function getFechaIngreso()
+    {
+        return $this->fecha_ingreso;
+    }
+
+    /**
+     * Set fecha_baja
+     *
+     * @param \DateTime $fechaBaja
+     * @return Trabajador
+     */
+    public function setFechaBaja($fechaBaja)
+    {
+        $this->fecha_baja = $fechaBaja;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha_baja
+     *
+     * @return \DateTime 
+     */
+    public function getFechaBaja()
+    {
+        return $this->fecha_baja;
+    }
+
+
 }
