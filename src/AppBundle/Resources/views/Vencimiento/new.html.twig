@@ -1,0 +1,48 @@
+    {% extends '@RBSoftABMGenerador/layout.html.twig' %}
+    {% block id 'Vencimiento' %} 
+            {% block contenido -%}
+        {% embed '::portlet.html.twig' with {'titulo': 'Nuevo Vencimiento' } %}
+            {% block in_header %} 
+                <div class='pull-right'>
+            <div class="row">
+                
+
+
+
+<a href="{{ path('admin_vencimiento') }}" class="btn btn-sm btn-default">
+    Ir a la lista
+</a>
+
+
+            </div>
+        </div>
+            {% endblock %}
+
+                {% block cuerpo %} 
+                {% for type, flashMessages in app.session.flashbag.all() %} 
+                    {% for flashMessage in flashMessages %} 
+                        <div class='alert alert-{{ type }}'> 
+                            {{ flashMessage }} 
+                        </div> 
+                    {% endfor %} 
+                {% endfor %}
+        <p></p>
+        
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <div class="col-sm-offset-2 inner-actions">
+                    <button title="Guardar" class="form-submit-button btn btn-sm btn-default btn-primary" value="save_and_add" name="save_mode" type="submit">Guardar y Nuevo <span class="glyphicon glyphicon-ok"></span></button>
+                    <button title="Guardar y Salir" class="form-submit-button btn btn-sm btn-default btn-secondary" value="save_and_close" name="save_mode" type="submit">Guardar<span class="glyphicon glyphicon-remove"></span></button>
+                    <a class="page-close-button btn btn-sm btn-default" href="{{ path('admin_vencimiento')}}">Cerrar <span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+
+            {{ form_end(form) }}
+        
+
+
+
+        {% endblock %} 
+        {% endembed %} 
+
+        {% endblock contenido %}
+    

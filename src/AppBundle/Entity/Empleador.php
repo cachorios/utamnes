@@ -2,18 +2,29 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+
 
 /**
  * @ORM\Entity
  */
 class Empleador
 {
+    use Timestampable;
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var \AppBundle\Entity\Empresa
+     *
+     *  @ORM\ManyToOne(targetEntity="Empresa")
+     */
+    private $empresa;
+
 
     /**
      * @ORM\Column(type="string", length=64, nullable=false)
@@ -45,10 +56,6 @@ class Empleador
      */
     private $localidad;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=false)
-     */
-    private $fecha_actualizacion;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Trabajador", mappedBy="empleador")
@@ -328,5 +335,28 @@ class Empleador
     public function getUsuarioActualizador()
     {
         return $this->usuario_actualizador;
+    }
+
+    /**
+     * Set empresa
+     *
+     * @param \AppBundle\Entity\Empresa $empresa
+     * @return Empleador
+     */
+    public function setEmpresa(\AppBundle\Entity\Empresa $empresa = null)
+    {
+        $this->empresa = $empresa;
+
+        return $this;
+    }
+
+    /**
+     * Get empresa
+     *
+     * @return \AppBundle\Entity\Empresa 
+     */
+    public function getEmpresa()
+    {
+        return $this->empresa;
     }
 }

@@ -68,7 +68,6 @@
             <th class="{{ pager.isSorted('nombre') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'nombre '|trans | capitalize  }} </th>
             <th class="{{ pager.isSorted('cuil') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'cuil '|trans | capitalize  }} </th>
             <th class="{{ pager.isSorted('legajo') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'legajo '|trans | capitalize  }} </th>
-            <th class="{{ pager.isSorted('fecha_actualizacion') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'fecha_actualizacion '|trans | capitalize  }} </th>
             <th class="actions">{{'Acciones'|trans }}</th>
 
         </tr>
@@ -86,7 +85,6 @@
                     <td>{{ entity.nombre }}</td>
                     <td>{{ entity.cuil }}</td>
                     <td>{{ entity.legajo }}</td>
-                    <td>{% if entity.fechaactualizacion %}{{ entity.fechaactualizacion|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td class="actions">
 <div class="btn-group">
     <a href="{{ path('app_trabajador_show', { 'id': entity.id }) }}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Ver mas información" >

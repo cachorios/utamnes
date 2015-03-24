@@ -21,8 +21,8 @@ default:
                     goutte: ~
                 goutte:
                     goutte: ~
-                zombie:
-                    zombie: ~
+#                zombie:
+#                    zombie: ~
 #                selenium2:
 #                    selenium2: ~
 #                symfony2:

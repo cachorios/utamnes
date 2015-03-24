@@ -1,0 +1,109 @@
+    {% extends '@RBSoftABMGenerador/layout.html.twig' %}
+
+{% block id 'Vencimiento' %} 
+
+    {% block contenido -%}
+    {% embed '::portlet.html.twig' with {'titulo': 'Lista de Vencimiento <small>(' ~ pager.totalItemCount ~ ' )</small>' } %}  
+        {% block in_header %} 
+    <div class='pull-right'>
+
+            <a href="{{ path('admin_vencimiento_new') }}" class="button_nuevo btn btn-sm btn-primary">
+
+        {{'Nuevo Vencimiento'|trans }}
+
+        </a>
+
+        </div>
+
+        {% endblock %}
+
+        {% block cuerpo %} 
+            {% for type, flashMessages in app.session.flashbag.all() %} 
+                {% for flashMessage in flashMessages %} 
+                    <div class='alert alert-{{ type }}'> 
+                        {{ flashMessage }} 
+                    </div> 
+                {% endfor %} 
+            {% endfor %}
+
+    <form method='post' action='.' class='form-horizontal'>
+                    {% embed 'modal.html.twig' with { 'modal_id': 'filters', 'modal_titulo': 'Filtro de Vencimientos'} %} 
+                        {% block modal_contenido %} 
+                            {{ form_rest(filterform) }} 
+                        {% endblock %} 
+
+                        {% block modal_botones %} 
+
+        <input type='submit' class='btn btn-success' name='submit-filter' value='Aplicar'/>
+
+        <input type='submit' class='btn btn-primary' name='submit-filter' value="reset"/>
+
+                        {% endblock modal_botones %} 
+                    {% endembed %} 
+    </form>
+
+
+    <div class="row">
+        <div class="col-lg-10">
+        </div>
+        <div class="col-lg-2">
+            <div class="pull-right">
+                <a class='btn bg-success btn-xs dropdown-toggle' data-toggle='modal' data-target='#filters'>
+                    Filtro
+                    <span class='caret'></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped table-bordered  table-responsive">
+        <thead>
+        <tr>
+            <th class="{{ pager.isSorted('anio') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'anio '|trans | capitalize  }} </th>
+            <th class="{{ pager.isSorted('mes') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'mes '|trans | capitalize  }} </th>
+            <th class="{{ pager.isSorted('vencimiento') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'vencimiento '|trans | capitalize  }} </th>
+            <th class="{{ pager.isSorted('prorroga') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{'prorroga '|trans | capitalize  }} </th>
+            <th class="actions">{{'Acciones'|trans }}</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in pager %}
+        <tr>
+                    <td><a href="{{ path('admin_vencimiento_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td>{{ entity.anio }}</td>
+                    <td>{{ entity.mes }}</td>
+                    <td>{% if entity.vencimiento %}{{ entity.vencimiento|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if entity.prorroga %}{{ entity.prorroga|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td class="actions">
+<div class="btn-group">
+    <a href="{{ path('admin_vencimiento_show', { 'id': entity.id }) }}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Ver mas información" >
+        <span class="glyphicon glyphicon-eye-open"></span>
+        </a>
+    <a href="{{ path('admin_vencimiento_edit', { 'id': entity.id }) }}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Editar los datos" >
+        <span class="glyphicon glyphicon-edit"></span>
+        </a>
+</div>
+                    </td>
+        </tr>
+        {% else %}
+        <tr >
+            <td class="last-row" colspan="100" style="text-align: center;">{{'sin resultados'|trans }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col-lg-10">
+            {{ knp_pagination_render(pager) }}
+
+        </div>
+                    <div class="col-lg-2">
+
+            </div>
+            </div>
+
+         {% endblock %} 
+     {% endembed %} 
+
+    {% endblock contenido %}

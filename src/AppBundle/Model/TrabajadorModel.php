@@ -43,12 +43,6 @@ class TrabajadorModel
 
     }
 
-    public function iniciar(\AppBundle\Entity\Trabajador $trabajador, $conceptos)
-    {
-        $this->trabajador = $trabajador;
-        $this->conceptos = $conceptos;
-    }
-
 
     /**
      * @return \Doctrine\Common\Collections\Collection
@@ -78,7 +72,6 @@ class TrabajadorModel
         $this->em->beginTransaction();
 
         try {
-            $trabajador->setFechaActualizacion(new \DateTime("now"));
             $trabajador->setUsuario($this->empleador->getUsuario());
 
             $trabajador->setEmpleador($this->empleador);

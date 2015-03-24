@@ -9,17 +9,14 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormError;
 
-class TrabajadorFilterType extends AbstractType
+class VencimientoFilterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('estado_civil', 'filter_text')
-            ->add('localidad', 'filter_number_range')
-            ->add('email', 'filter_text')
-            ->add('nombre', 'filter_text')
-            ->add('cuil', 'filter_text')
-            ->add('legajo', 'filter_text')
+            ->add('anio', 'filter_number_range')
+            ->add('mes', 'filter_number_range')
+            ->add('vencimiento', 'filter_date_range')
 
         ;
 
@@ -44,6 +41,6 @@ class TrabajadorFilterType extends AbstractType
 
     public function getName()
     {
-        return 'appbundle_trabajadorfiltertype';
+        return 'appbundle_vencimientofiltertype';
     }
 }

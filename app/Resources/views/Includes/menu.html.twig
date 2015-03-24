@@ -22,6 +22,7 @@
             {{ menu.menu('Tablas','#') }}
                 {{ menu.item('Empleadores', 'fa-dashboard', path("admin_empleador") ) }}
                 {{ menu.item('Conceptos', 'fa-dashboard', path("admin_concepto") ) }}
+                {{ menu.item('Vencimientos', 'fa-dashboard', path("admin_vencimiento") ) }}
                 {{ menu.item('Usuarios de UTA', 'fa-dashboard', path("admin_usuario") ) }}
             {{ menu.finmenu() }}
             {% elseif home == "homepage" %}

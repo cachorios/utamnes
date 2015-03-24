@@ -2,18 +2,29 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+
 
 /**
  * @ORM\Entity
  */
 class Empleador
 {
+    use Timestampable;
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var \AppBundle\Entity\Empresa
+     *
+     *  @ORM\ManyToOne(targetEntity="Empresa")
+     */
+    private $empresa;
+
 
     /**
      * @ORM\Column(type="string", length=64, nullable=false)
@@ -45,10 +56,6 @@ class Empleador
      */
     private $localidad;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=false)
-     */
-    private $fecha_actualizacion;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Trabajador", mappedBy="empleador")
@@ -57,7 +64,7 @@ class Empleador
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="RBSoft\UsuarioBundle\Entity\Usuario")
+     * @ORM\ManyToOne(targetEntity="RBSoft\UsuarioBundle\Entity\Usuario", cascade={"all"} )
      */
     private $usuario;
 
@@ -305,5 +312,28 @@ class Empleador
 
     public function __toString(){
         return $this->getRazon();
+    }
+
+    /**
+     * Set usuario_actualizador
+     *
+     * @param \RBSoft\UsuarioBundle\Entity\Usuario $usuarioActualizador
+     * @return Empleador
+     */
+    public function setUsuarioActualizador(\RBSoft\UsuarioBundle\Entity\Usuario $usuarioActualizador = null)
+    {
+        $this->usuario_actualizador = $usuarioActualizador;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario_actualizador
+     *
+     * @return \RBSoft\UsuarioBundle\Entity\Usuario 
+     */
+    public function getUsuarioActualizador()
+    {
+        return $this->usuario_actualizador;
     }
 }

@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TrabajadorType extends AbstractType
+class VencimientoType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,15 +15,10 @@ class TrabajadorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('estado_civil')
-            ->add('localidad')
-            ->add('sexo')
-            ->add('email')
-            ->add('telefono')
-            ->add('direccion')
-            ->add('nombre')
-            ->add('cuil')
-            ->add('legajo')
+            ->add('anio')
+            ->add('mes')
+            ->add('vencimiento','date',array("widget"=>"single_text","attr" => array("class" => "datepicker", "data-date-format" => "dd/mm/yy")))
+            ->add('prorroga','date',array("widget"=>"single_text"))
         ;
     }
     
@@ -33,7 +28,7 @@ class TrabajadorType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Trabajador'
+            'data_class' => 'AppBundle\Entity\Vencimiento'
         ));
     }
 
@@ -42,6 +37,6 @@ class TrabajadorType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_trabajador';
+        return 'appbundle_vencimiento';
     }
 }
