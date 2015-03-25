@@ -1,0 +1,46 @@
+<fieldset>
+    <legend>Datos Personales</legend>
+    {{ form_row(form['cuil']) }}
+    {{ form_row(form['nombre']) }}
+    {{ form_row(form['sexo']) }}
+    {{ form_row(form['estado_civil']) }}
+
+    <legend>Datos de Localización</legend>
+    {{ form_row(form['telefono']) }}
+    {{ form_row(form['email']) }}
+    {{ form_row(form['direccion']) }}
+    {{ form_row(form['localidad']) }}
+    <legend>Datos Laborales</legend>
+    {{ form_row(form['legajo']) }}
+    <div class="form-group">
+        {{ form_label(form['fecha_ingreso']) }}
+        <div class="col-sm-10 input-group date">
+            {{ form_widget(form['fecha_ingreso']) }}
+            {#<div class="input-group-addon">.00</div>#}
+            <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form['fecha_baja']) }}
+        <div class="col-sm-10 input-group date">
+            {{ form_widget(form['fecha_baja']) }}
+            <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+        </div>
+    </div>
+
+</fieldset>
+
+{#<div class="form-group">#}
+    {#<label for="appbundle_trabajador_legajo" class="col-sm-2 control-label required">Legajo</label>#}
+    {#<div class="col-sm-10">#}
+        {#<input type="text" value="3279" class="form-control" maxlength="12" required="required" name="appbundle_trabajador[legajo]" id="appbundle_trabajador_legajo">#}
+    {#</div>#}
+{#</div>#}
+
+{#<div class="input-group date">#}
+    {#<label for="appbundle_trabajador_fecha_ingreso" class="col-sm-2 control-label required">Fecha ingreso</label>#}
+    {#<div class="col-sm-10">#}
+        {#<input type="text" value="10/01/2012" class="datepicker form-control" required="required" name="appbundle_trabajador[fecha_ingreso]" id="appbundle_trabajador_fecha_ingreso">#}
+    {#</div>#}
+{#</div>#}

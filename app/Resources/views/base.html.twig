@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_UTA')  %}
-{%    set home = "home_admin"  %}
-{% elseif is_granted('ROLE_EMPLEADOR')  %}
-{%     set home = "homepage" %}
+{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_UTA') %}
+    {% set home = "home_admin" %}
+{% elseif is_granted('ROLE_EMPLEADOR') %}
+    {% set home = "homepage" %}
 {% else %}
-{%    set home = "homepage" %}
+    {% set home = "homepage" %}
 {% endif %}
 
 
@@ -15,7 +15,7 @@
 <!--[if IE 8]>
 <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html lang="es" class="no-js" > <!--<![endif]-->
+<html lang="es" class="no-js"> <!--<![endif]-->
 <head>
     <title>UTA Misiones</title>
 
@@ -36,12 +36,14 @@
     <link rel="stylesheet" href="{{ asset('assets/css/mvpready-admin.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/mvpready-flat.css') }}">
     {% stylesheets '@stylesheets' %}
-        <link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
     {% endstylesheets %}
 
-    <link href="{{ asset('bundles/jbfileuploader/lib/jquery-file-upload/css/jquery.fileupload.css') }}" type="text/css" rel="stylesheet" />
-    <link href="{{ asset('bundles/jbfileuploader/css/jbfileupload.css') }}" type="text/css" rel="stylesheet" />
-    <link href="{{ asset('bundles/jbfileuploader/lib/jcrop/css/jquery.Jcrop.min.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('bundles/jbfileuploader/lib/jquery-file-upload/css/jquery.fileupload.css') }}" type="text/css"
+          rel="stylesheet"/>
+    <link href="{{ asset('bundles/jbfileuploader/css/jbfileupload.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('bundles/jbfileuploader/lib/jcrop/css/jquery.Jcrop.min.css') }}" type="text/css"
+          rel="stylesheet"/>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico">
@@ -53,8 +55,8 @@
     <script src="{{ asset('assets/js/libs/jquery.mb.browser.js') }} "></script>
     <script src="{{ asset('assets/js/libs/jquery.msgbox.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/libs/bootstrap.min.js') }} "></script>
-    <script src="{{ asset('assets/datepicker/js/bootstrap-datepicker.js') }} "></script>
-    <script src="{{ asset('assets/datepicker/locales/bootstrap-datepicker.es.min.js') }} "></script>
+    <script src="{{ asset('assets/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/datepicker/locales/bootstrap-datepicker.es.min.js') }}"></script>
 
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 
@@ -71,23 +73,23 @@
 
     {#<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>#}
     <style>
-    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_UTA')   %}
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_UTA')   %}
 
-            .navbar-inverse{
-                background-color: #362b36;
-            }
+        .navbar-inverse {
+            background-color: #362b36;
+        }
 
-    {% else %}
+        {% else %}
 
-    {% endif %}
-    .navbar {
-        border: 1px solid transparent;
-        margin-bottom: 20px;
-        min-height: 95px;
-        position: relative;
-    }
+        {% endif %}
+        .navbar {
+            border: 1px solid transparent;
+            margin-bottom: 20px;
+            min-height: 95px;
+            position: relative;
+        }
     </style>
-    <script src="{{ asset('bundles/rbsoftabmgenerador/fileupload/js/fileinput.min.js')}} "></script>
+    <script src="{{ asset('bundles/rbsoftabmgenerador/fileupload/js/fileinput.min.js') }} "></script>
 </head>
 
 <body class="{% block id '' %} ">
@@ -127,10 +129,9 @@
     </div>
 </footer>
 
-<div id="winModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" ></div>
+<div id="winModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <div id="veil"></div>
 <div id="prLoading" style="display: none">Cargando...</div>
-
 
 
 <!--[if lt IE 9]>
@@ -166,13 +167,19 @@
 
 <script>
 
+    $(function () {
+        $('.datepicker').datepicker({
+            format: "dd/mm/yyyy",
+            autoclose: true,
+            todayHighlight: true
+        });
+        $('.input-group.date').datepicker({
+            format: "dd/mm/yyyy",
+            autoclose: true,
+            todayHighlight: true
+        });
+    })
 
-$('.datepicker').datepicker({
-    format: "dd/mm/yyyy",
-    language: "es",
-    autoclose: true,
-    todayHighlight: true
-})
 
 </script>
 

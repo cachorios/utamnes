@@ -1,45 +1,47 @@
-    {% extends 'layout.html.twig' %}
+{% extends 'layout.html.twig' %}
 
     {% block id 'Trabajador' %} 
             {% block contenido -%}
-        {% embed '::portlet.html.twig' with {'titulo': 'Editar Trabajador: ' ~ entity} %}
-            {% block in_header %} 
-                <div class='pull-right'>
-            <div class="row">
-                
-    <div class="col-md-2 ">
-        <div class="pull-right">
-            {{ form(delete_form) }}
-        </div>
-    </div>
+                {% embed '::portlet.html.twig' with {'titulo': 'Editar Trabajador: ' ~ entity} %}
+                    {% block in_header %}
+                        <div class='pull-right'>
+                            <div class="row">
+
+                                <div class="col-md-2 ">
+                                    <div class="pull-right">
+                                        {{ form(delete_form) }}
+                                    </div>
+                                </div>
 
 
-
-<a href="{{ path('app_trabajador') }}" class="btn btn-sm btn-default">
-    Ir a la lista
-</a>
-
-
-            </div>
-        </div>
-            {% endblock %}
-
-                {% block cuerpo %} 
-        <p></p>
-        
-            {{ form_start(edit_form) }}
-                {{ form_widget(edit_form) }}
-                <div class="col-sm-offset-2 inner-actions">
-                    <input type="submit" value="Guardar" class="form-submit-button btn btn-sm btn-default btn-primary">
-                    <a class="page-close-button btn btn-sm btn-default" href="{{ path('app_trabajador')}}">Cerrar <span class="glyphicon glyphicon-remove"></span></a>
-
-                </div>
-
-            {{ form_end(edit_form) }}
-        
-        {% endblock %} 
-        {% endembed %} 
+                                <a href="{{ path('app_trabajador') }}" class="btn btn-sm btn-default">
+                                    Ir a la lista
+                                </a>
 
 
-        {% endblock contenido %}
+                            </div>
+                        </div>
+                    {% endblock %}
+
+                    {% block cuerpo %}
+                        <p></p>
+
+                        {{ form_start(edit_form) }}
+                        {#{{ form_widget(edit_form) }}#}
+                        {%  include  "@App/Trabajador/_form.html.twig" with {"form": edit_form}   %}
+                        <div class="col-sm-offset-2 inner-actions">
+                            <input type="submit" value="Guardar"
+                                   class="form-submit-button btn btn-sm btn-default btn-primary">
+                            <a class="page-close-button btn btn-sm btn-default" href="{{ path('app_trabajador') }}">Cerrar
+                                <span class="glyphicon glyphicon-remove"></span></a>
+
+                        </div>
+
+                        {{ form_end(edit_form) }}
+
+                    {% endblock %}
+                {% endembed %}
+
+
+            {% endblock contenido %}
     

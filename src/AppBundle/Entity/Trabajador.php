@@ -17,6 +17,20 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 class Trabajador
 {
     use ORMBehaviors\Timestampable\Timestampable;
+
+    static public
+        $ESTDO_CIVIL = array(
+            'S' => 'Soltero',
+            'C' => 'Casado',
+            'D' => 'Divorciado',
+            'V' => 'Viudo'
+            ),
+        $SEXO = array(
+                        'M' => 'Masculino',
+                        'F' => 'Femenino'
+                    )
+        ;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -25,19 +39,24 @@ class Trabajador
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=1, nullable=false)
+     * @ORM\Column(type="string", length=11, nullable=false)
      */
-    private $estado_civil;
+    private $cuil;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="string", length=64, nullable=false)
      */
-    private $localidad;
+    private $nombre;
 
     /**
      * @ORM\Column(type="string", length=1, nullable=false)
      */
     private $sexo;
+
+    /**
+     * @ORM\Column(type="string", length=1, nullable=false)
+     */
+    private $estado_civil;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
@@ -57,12 +76,8 @@ class Trabajador
     /**
      * @ORM\Column(type="string", length=64, nullable=false)
      */
-    private $nombre;
+    private $localidad;
 
-    /**
-     * @ORM\Column(type="string", length=11, nullable=false)
-     */
-    private $cuil;
 
     /**
      * @ORM\Column(type="string", length=12, nullable=false)

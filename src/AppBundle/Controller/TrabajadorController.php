@@ -28,7 +28,7 @@ class TrabajadorController extends Controller
      * Lists all Trabajador entities.
      *
      * @Route("/", name="app_trabajador")
-     * @Method("GET")
+     * @Method("GET|POST")
      * @Template()
      */
     public function indexAction(Request $request)

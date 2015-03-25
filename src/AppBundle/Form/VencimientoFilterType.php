@@ -14,9 +14,9 @@ class VencimientoFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('anio', 'filter_number_range')
-            ->add('mes', 'filter_number_range')
-            ->add('vencimiento', 'filter_date_range')
+            ->add('anio', 'filter_number_range', array("translation_domain" => "RBSoftABMGeneratorBundle"))
+            ->add('mes', 'filter_number_range', array("translation_domain" => "RBSoftABMGeneratorBundle"))
+            ->add('vencimiento', 'filter_date_range', array("translation_domain" => "RBSoftABMGeneratorBundle"))
 
         ;
 

@@ -30,7 +30,7 @@ assetic:
                 - %kernel.root_dir%/../web/assets/css/mvpready-admin.css
                 - %kernel.root_dir%/../web/assets/css/mvpready-flat.css
 
-#                - %kernel.root_dir%/../web/assets/css/datepicker/bootstrap-datepicker.min.css
+                - %kernel.root_dir%/../web/assets/datepicker/css/bootstrap-datepicker3.css
 
 
                 - bundles/rbsoftabmgenerador/fileupload//css/fileinput.min.css

@@ -43,6 +43,7 @@
 
         "phpspec/phpspec" :      "dev-master",
         "phpspec/symfony2-extension": "dev-master",
+        "phpspec/nyan-formatters": "1.*",
 
         "behat/behat": "~3.0",
         "behat/mink": "*",

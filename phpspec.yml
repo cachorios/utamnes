@@ -1,4 +1,4 @@
-formatter.name: progress
+formatter.name: nyan.dino
 #progress (default)
 #html
 #pretty
@@ -12,5 +12,6 @@ suites:
 #        spec_path: src/AppBundle
 #        spec_prefix: Spec
 #
-#extensions:
+extensions:
 #    - PhpSpec\Symfony2Extension\Extension
+    - PhpSpec\NyanFormattersExtension\Extension

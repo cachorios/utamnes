@@ -52,7 +52,7 @@ class Vencimiento
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="prorroga", type="date")
+     * @ORM\Column(name="prorroga", type="date", nullable=true)
      */
     private $prorroga;
 
