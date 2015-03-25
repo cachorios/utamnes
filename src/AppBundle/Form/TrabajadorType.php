@@ -15,15 +15,27 @@ class TrabajadorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('estado_civil')
-            ->add('localidad')
-            ->add('sexo')
-            ->add('email')
+            ->add('cuil')
+            ->add('nombre')
+            ->add('legajo')
+            ->add('email','email', array('required' => false))
             ->add('telefono')
             ->add('direccion')
-            ->add('nombre')
-            ->add('cuil')
-            ->add('legajo')
+            ->add('localidad')
+            ->add('sexo','choice', array(
+                    'choices' => array(
+                        'M' => 'Masculino',
+                        'F' => 'Femenino'
+                    )
+                ))
+            ->add('estado_civil', 'choice', array(
+                    'choices' => array(
+                        'S' => 'Soltero',
+                        'C' => 'Casado',
+                        'D' => 'Divorciado',
+                        'V' => 'Viudo'
+                    )
+                ))
         ;
     }
     
