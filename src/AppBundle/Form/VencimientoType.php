@@ -17,8 +17,14 @@ class VencimientoType extends AbstractType
         $builder
             ->add('anio')
             ->add('mes')
-            ->add('vencimiento','date',array("widget"=>"single_text","attr" => array("class" => "datepicker", "data-date-format" => "dd/mm/yy")))
-            ->add('prorroga','date',array("widget"=>"single_text"))
+            ->add('vencimiento','date',
+                array(
+                    "input" => "datetime",
+                    "widget"=>"single_text",
+                    'format' => 'dd/MM/yyyy',
+
+                    "attr" => array("class" => "datepicker")))
+            ->add('prorroga','date',array("widget"=>"single_text","attr" => array("class" => "datepicker"),"required" => false ))
         ;
     }
     

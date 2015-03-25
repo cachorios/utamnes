@@ -182,4 +182,9 @@ class Vencimiento
     {
         return $this->empresa;
     }
+
+    public function __toString(){
+        return sprintf("%d/%02d", $this->getAnio(), $this->getMes());
+    }
+
 }
