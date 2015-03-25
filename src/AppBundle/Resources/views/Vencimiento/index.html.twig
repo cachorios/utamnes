@@ -1,4 +1,4 @@
-    {% extends '@RBSoftABMGenerador/layout.html.twig' %}
+    {% extends 'layout.html.twig' %}
 
 {% block id 'Vencimiento' %} 
 
@@ -69,7 +69,7 @@
         <tbody>
         {% for entity in pager %}
         <tr>
-                    <td><a href="{{ path('admin_vencimiento_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    {#<td><a href="{{ path('admin_vencimiento_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>#}
                     <td>{{ entity.anio }}</td>
                     <td>{{ entity.mes }}</td>
                     <td>{% if entity.vencimiento %}{{ entity.vencimiento|date('Y-m-d H:i:s') }}{% endif %}</td>
