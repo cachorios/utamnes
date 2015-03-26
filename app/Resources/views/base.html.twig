@@ -76,7 +76,14 @@
         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_UTA')   %}
 
         .navbar-inverse {
-            background-color: #362b36;
+            background-color: steelblue;
+        }
+        .navbar-inverse .navbar-brand:hover {
+            background-color: steelblue;
+        }
+
+        .navbar-inverse .navbar-nav > li > a:hover {
+            background-color: #196090;
         }
 
         {% else %}
@@ -84,9 +91,26 @@
         {% endif %}
         .navbar {
             border: 1px solid transparent;
-            margin-bottom: 20px;
-            min-height: 95px;
+            margin-bottom: 5px;
+            min-height: 90px;
             position: relative;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            font-size: 13px;
+            padding-bottom: 35px;
+            padding-top: 32px;
+        }
+
+        .navbar-profile-avatar {
+            height: 87px;
+            width: 100%;
+        }
+        .navbar-inverse .navbar-nav > .navbar-profile > a {
+            height: 87px;
+            line-height: 87px;
+            padding-bottom: 0;
+            padding-top: 0;
         }
     </style>
     <script src="{{ asset('bundles/rbsoftabmgenerador/fileupload/js/fileinput.min.js') }} "></script>

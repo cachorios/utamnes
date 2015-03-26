@@ -27,7 +27,9 @@
             {{ menu.finmenu() }}
             {% elseif home == "homepage" %}
                 {{ menu.menuItem('Trabajadores', path("app_trabajador") ) }}{{ menu.finmenuItem() }}
-
+                {{ menu.menu('Liquidación','#') }}
+                    {{ menu.item('Periodos', 'fa-dashboard', path("app_periodo") ) }}
+                {{ menu.finmenu() }}
 
 
             {% endif %}

@@ -1,37 +1,46 @@
 <?php
+
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping AS ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * Periodo
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\PeriodoRepository")
  */
 class Periodo
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Obligacion", mappedBy="periodo")
+     *
+     *  @ORM\ManyToOne(targetEntity="Vencimiento")
      */
-    private $obligacion;
+    private $vencimiento;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\TrabajadorPeriodo", mappedBy="periodo")
+     * @var integer
+     *
+     * @ORM\Column(name="liquidacion", type="integer")
      */
-    private $trabajadorPeriodo;
+    private $liquidacion;
+
     /**
-     * Constructor
+     * @var integer
+     *
+     * @ORM\Column(name="tipo", type="integer")
      */
-    public function __construct()
-    {
-        $this->obligacion = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->trabajadorPeriodo = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    private $tipo;
+
 
     /**
      * Get id
@@ -43,69 +52,50 @@ class Periodo
         return $this->id;
     }
 
+  
     /**
-     * Add obligacion
+     * Set liquidacion
      *
-     * @param \AppBundle\Entity\Obligacion $obligacion
+     * @param integer $liquidacion
      * @return Periodo
      */
-    public function addObligacion(\AppBundle\Entity\Obligacion $obligacion)
+    public function setLiquidacion($liquidacion)
     {
-        $this->obligacion[] = $obligacion;
+        $this->liquidacion = $liquidacion;
 
         return $this;
     }
 
     /**
-     * Remove obligacion
+     * Get liquidacion
      *
-     * @param \AppBundle\Entity\Obligacion $obligacion
+     * @return integer 
      */
-    public function removeObligacion(\AppBundle\Entity\Obligacion $obligacion)
+    public function getLiquidacion()
     {
-        $this->obligacion->removeElement($obligacion);
+        return $this->liquidacion;
     }
 
     /**
-     * Get obligacion
+     * Set tipo
      *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getObligacion()
-    {
-        return $this->obligacion;
-    }
-
-    /**
-     * Add trabajadorPeriodo
-     *
-     * @param \AppBundle\Entity\TrabajadorPeriodo $trabajadorPeriodo
+     * @param integer $tipo
      * @return Periodo
      */
-    public function addTrabajadorPeriodo(\AppBundle\Entity\TrabajadorPeriodo $trabajadorPeriodo)
+    public function setTipo($tipo)
     {
-        $this->trabajadorPeriodo[] = $trabajadorPeriodo;
+        $this->tipo = $tipo;
 
         return $this;
     }
 
     /**
-     * Remove trabajadorPeriodo
+     * Get tipo
      *
-     * @param \AppBundle\Entity\TrabajadorPeriodo $trabajadorPeriodo
+     * @return integer 
      */
-    public function removeTrabajadorPeriodo(\AppBundle\Entity\TrabajadorPeriodo $trabajadorPeriodo)
+    public function getTipo()
     {
-        $this->trabajadorPeriodo->removeElement($trabajadorPeriodo);
-    }
-
-    /**
-     * Get trabajadorPeriodo
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTrabajadorPeriodo()
-    {
-        return $this->trabajadorPeriodo;
+        return $this->tipo;
     }
 }

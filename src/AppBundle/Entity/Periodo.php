@@ -1,37 +1,47 @@
 <?php
+
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping AS ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * Periodo
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\PeriodoRepository")
  */
 class Periodo
 {
+    static public $_TIPO = array("Original", "1er.Rect.", "2da.Rect.", "3er.Rect.", "4ta.Rect.");
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Obligacion", mappedBy="periodo")
+     *
+     *  @ORM\ManyToOne(targetEntity="Vencimiento")
      */
-    private $obligacion;
+    private $vencimiento;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\TrabajadorPeriodo", mappedBy="periodo")
+     * @var integer
+     *
+     * @ORM\Column(name="liquidacion", type="integer")
      */
-    private $trabajadorPeriodo;
+    private $liquidacion;
+
     /**
-     * Constructor
+     * @var integer
+     *
+     * @ORM\Column(name="tipo", type="integer")
      */
-    public function __construct()
-    {
-        $this->obligacion = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->trabajadorPeriodo = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    private $tipo;
+
 
     /**
      * Get id
@@ -43,69 +53,82 @@ class Periodo
         return $this->id;
     }
 
+  
     /**
-     * Add obligacion
+     * Set liquidacion
      *
-     * @param \AppBundle\Entity\Obligacion $obligacion
+     * @param integer $liquidacion
      * @return Periodo
      */
-    public function addObligacion(\AppBundle\Entity\Obligacion $obligacion)
+    public function setLiquidacion($liquidacion)
     {
-        $this->obligacion[] = $obligacion;
+        $this->liquidacion = $liquidacion;
 
         return $this;
     }
 
     /**
-     * Remove obligacion
+     * Get liquidacion
      *
-     * @param \AppBundle\Entity\Obligacion $obligacion
+     * @return integer 
      */
-    public function removeObligacion(\AppBundle\Entity\Obligacion $obligacion)
+    public function getLiquidacion()
     {
-        $this->obligacion->removeElement($obligacion);
+        return $this->liquidacion;
     }
 
     /**
-     * Get obligacion
+     * Set tipo
      *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getObligacion()
-    {
-        return $this->obligacion;
-    }
-
-    /**
-     * Add trabajadorPeriodo
-     *
-     * @param \AppBundle\Entity\TrabajadorPeriodo $trabajadorPeriodo
+     * @param integer $tipo
      * @return Periodo
      */
-    public function addTrabajadorPeriodo(\AppBundle\Entity\TrabajadorPeriodo $trabajadorPeriodo)
+    public function setTipo($tipo)
     {
-        $this->trabajadorPeriodo[] = $trabajadorPeriodo;
+        $this->tipo = $tipo;
 
         return $this;
     }
 
     /**
-     * Remove trabajadorPeriodo
+     * Get tipo
      *
-     * @param \AppBundle\Entity\TrabajadorPeriodo $trabajadorPeriodo
+     * @return integer 
      */
-    public function removeTrabajadorPeriodo(\AppBundle\Entity\TrabajadorPeriodo $trabajadorPeriodo)
+    public function getTipo()
     {
-        $this->trabajadorPeriodo->removeElement($trabajadorPeriodo);
+        return $this->tipo;
     }
 
     /**
-     * Get trabajadorPeriodo
+     * Set vencimiento
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @param \AppBundle\Entity\Vencimiento $vencimiento
+     * @return Periodo
      */
-    public function getTrabajadorPeriodo()
+    public function setVencimiento(\AppBundle\Entity\Vencimiento $vencimiento = null)
     {
-        return $this->trabajadorPeriodo;
+        $this->vencimiento = $vencimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get vencimiento
+     *
+     * @return \AppBundle\Entity\Vencimiento 
+     */
+    public function getVencimiento()
+    {
+        return $this->vencimiento;
+    }
+
+    public function __toString(){
+        return sprintf("%s - %d(%d)",$this->getVencimiento(),$this->getLiquidacion(), $this->getTipo());
+
+    }
+
+    public function getTipoStr(){
+        return self::$_TIPO[$this->getTipo()];
     }
 }

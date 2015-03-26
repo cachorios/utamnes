@@ -24,10 +24,10 @@ class TrabajadorType extends AbstractType
             ->add('direccion')
             ->add('localidad')
             ->add('sexo','choice', array(
-                    'choices' => Trabajador::$SEXO
+                    'choices' => Trabajador::$_SEXO
                 ))
             ->add('estado_civil', 'choice', array(
-                    'choices' => Trabajador::$ESTDO_CIVIL
+                    'choices' => Trabajador::$_ESTDO_CIVIL
                 ))
             ->add('fecha_ingreso','date',
                 array(

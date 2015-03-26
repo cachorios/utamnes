@@ -19,13 +19,13 @@ class Trabajador
     use ORMBehaviors\Timestampable\Timestampable;
 
     static public
-        $ESTDO_CIVIL = array(
+        $_ESTDO_CIVIL = array(
             'S' => 'Soltero',
             'C' => 'Casado',
             'D' => 'Divorciado',
             'V' => 'Viudo'
             ),
-        $SEXO = array(
+        $_SEXO = array(
                         'M' => 'Masculino',
                         'F' => 'Femenino'
                     )
