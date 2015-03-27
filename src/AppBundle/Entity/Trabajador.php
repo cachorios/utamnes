@@ -3,6 +3,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use RBSoft\UtilidadBundle\Validator\Constraints as RBAssert;
 
 
 /**
@@ -40,6 +41,7 @@ class Trabajador
 
     /**
      * @ORM\Column(type="string", length=11, nullable=false)
+     * @RBAssert\ContainsCuit
      */
     private $cuil;
 

@@ -4,9 +4,6 @@ namespace spec\AppBundle\Model;
 
 
 
-//require_once __DIR__ . '/../../../../../app/bootstrap.php.cache';
-//require_once __DIR__ . '/../../../../../app/AppKernel.php';
-
 use AppBundle\Entity\Empleador;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -18,6 +15,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class EmpleadorModelSpec extends ObjectBehavior
 {
     use SfContaineForSpec;
+
     function let()
     {
         $this->autenticar('20204894532');

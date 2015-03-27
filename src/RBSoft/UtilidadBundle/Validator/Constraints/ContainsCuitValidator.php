@@ -11,7 +11,7 @@ namespace RBSoft\UtilidadBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class ContainsCuitValidoValidator extends ConstraintValidator
+class ContainsCuitValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint)
     {

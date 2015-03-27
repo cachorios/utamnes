@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class ContainsCuitValido extends Constraint
+class ContainsCuit extends Constraint
 {
     public $message = 'No Valido, debe disponer mas de "%string%" items';
 }
