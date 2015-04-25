@@ -29,9 +29,12 @@
                 {{ menu.menuItem('Trabajadores', path("app_trabajador") ) }}{{ menu.finmenuItem() }}
                 {{ menu.menu('Liquidación','#') }}
                     {{ menu.item('Periodos', 'fa-dashboard', path("app_periodo") ) }}
+                    {{ menu.item('Remnuerativos del periodo', 'fa-dashboard', path("app_periodo") ) }}
+                    {{ menu.item('Importar desde SICOSS', 'fa-dashboard', path("app_periodo") ) }}
+                    {{ menu.item('Liquidar', 'fa-dashboard', path("app_periodo") ) }}
+
                 {{ menu.finmenu() }}
-
-
+                {{ menu.menuItem('Cuenta Correinte', path("app_trabajador") ) }}{{ menu.finmenuItem() }}
             {% endif %}
 
 
