@@ -65,6 +65,12 @@ class Concepto
 
 
     /**
+     * @var formula
+     * @ORM\Column(type="string", length=256, nullable=false)
+     */
+    private $formula;
+
+    /**
      * Get id
      *
      * @return integer
@@ -314,5 +320,29 @@ class Concepto
     public function __toString()
     {
         return $this->getDescripcion();
+    }
+
+    /**
+     * Set formula
+     *
+     * @param string $formula
+     *
+     * @return Concepto
+     */
+    public function setFormula($formula)
+    {
+        $this->formula = $formula;
+
+        return $this;
+    }
+
+    /**
+     * Get formula
+     *
+     * @return string
+     */
+    public function getFormula()
+    {
+        return $this->formula;
     }
 }

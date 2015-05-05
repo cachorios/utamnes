@@ -6,15 +6,15 @@
                 <source>Left number</source>
                 <target>Desde</target>
             </trans-unit>
-            <trans-unit id="1">
+            <trans-unit id="2">
                 <source>Right number</source>
                 <target>Hasta</target>
             </trans-unit>
-            <trans-unit id="1">
+            <trans-unit id="3">
                 <source>Left date</source>
                 <target>Desde</target>
             </trans-unit>
-            <trans-unit id="1">
+            <trans-unit id="4">
                 <source>Right date</source>
                 <target>Hasta</target>
             </trans-unit>

@@ -6,7 +6,7 @@
                 <source>Left number</source>
                 <target>Desde</target>
             </trans-unit>
-            <trans-unit id="1">
+            <trans-unit id="2">
                 <source>Right number</source>
                 <target>Hasta???</target>
             </trans-unit>

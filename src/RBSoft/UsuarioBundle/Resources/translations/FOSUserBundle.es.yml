@@ -25,8 +25,8 @@ security:
 profile:
     show:
         username: Nombre de usuario
-        email: Email
     edit:
+        email: Email
         submit: Actualizar usuario
     flash:
         updated: El perfil ha sido actualizado
@@ -94,3 +94,7 @@ form:
     password_confirmation: "Repita la contraseña:"
     new_password: "Nueva contraseña:"
     new_password_confirmation: "Repita la contraseña:"
+
+"Apellido y Nombre": Apellido y Nombre
+Telefono: Teléfono
+"Móvil": Móvil

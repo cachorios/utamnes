@@ -20,6 +20,7 @@ class ConceptoType extends AbstractType
             ->add('descripcion_corta')
             ->add('obligatorio')
             ->add('activo')
+            ->add('formulagit p')
             ->add('fecha_actualizacion',null, array(
                     'format' => 'dd-MM-yyyy hh:mm:ss',
                     'html5' => true,

@@ -34,7 +34,7 @@ class EmpleadorController extends Controller
     public function indexAction(Request $request)
     {
     list($filterForm, $queryBuilder) = $this->filter($request);
-    $pager = $this->getPager($queryBuilder);
+    $pager = $this->getPager($queryBuilder, $request);
 
         return array(
             'pager'         => $pager,
@@ -43,18 +43,18 @@ class EmpleadorController extends Controller
     }
 
     /**
-    * Crea el paginador Pagerfanta
-    * @param Request $request
-    * @return SlidingPagination
-    * @throws NotFoundHttpException
-    */
-    private function getPager($q)
+     * @param $q
+     * @param Request $request
+     * @return \Knp\Component\Pager\Pagination\PaginationInterface
+     * @throws NotFoundHttpException
+     */
+    private function getPager($q, Request $request)
     {
         $paginator  = $this->get('knp_paginator');
 
         $pagination = $paginator->paginate(
             $q,
-            $this->get('request')->query->get('page', 1)/*page number*/,
+            $request->query->get('page', 1)/*page number*/,
             8,/*limit per page*/
             array('distinct' => false)
         );
