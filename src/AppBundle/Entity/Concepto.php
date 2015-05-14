@@ -3,12 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * @ORM\Entity
  */
 class Concepto
 {
+    use ORMBehaviors\Timestampable\Timestampable;
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -41,27 +43,13 @@ class Concepto
      */
     private $activo;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=false)
-     */
-    private $fecha_actualizacion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="RBSoft\UsuarioBundle\Entity\Usuario", inversedBy="concepto")
-     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="RBSoft\UsuarioBundle\Entity\Usuario")
      */
     private $usuario;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Trabajador", mappedBy="concepto")
-     *
-     */
-    private $trabajador;
 
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ctacte", mappedBy="concepto")
-     */
-    private $ctacte;
 
 
     /**
@@ -86,8 +74,6 @@ class Concepto
      */
     public function __construct()
     {
-        $this->ctacte = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->trabajador = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -205,28 +191,6 @@ class Concepto
         return $this->activo;
     }
 
-    /**
-     * Set fecha_actualizacion
-     *
-     * @param \DateTime $fechaActualizacion
-     * @return Concepto
-     */
-    public function setFechaActualizacion($fechaActualizacion)
-    {
-        $this->fecha_actualizacion = $fechaActualizacion;
-
-        return $this;
-    }
-
-    /**
-     * Get fecha_actualizacion
-     *
-     * @return \DateTime
-     */
-    public function getFechaActualizacion()
-    {
-        return $this->fecha_actualizacion;
-    }
 
     /**
      * Set usuario

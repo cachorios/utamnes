@@ -96,29 +96,12 @@ class Trabajador
     private $fecha_baja;
 
 
-
-    /**
-     * @ORM\ManyToOne(targetEntity="RBSoft\UsuarioBundle\Entity\Usuario", inversedBy="trabajador")
-     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id", nullable=false)
-     */
-    private $usuario;
-
-
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Empleador", inversedBy="trabajador")
      * @ORM\JoinColumn(name="empleador_id", referencedColumnName="id", nullable=false)
      */
     private $empleador;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Concepto", inversedBy="trabajador")
-     * @ORM\JoinTable(
-     *     name="ConceptoToTrabajador",
-     *     joinColumns={@ORM\JoinColumn(name="trabajador_id", referencedColumnName="id", nullable=false)},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="concepto_id", referencedColumnName="id", nullable=false)}
-     * )
-     */
-    private $conceptos;
 
 
     /**
@@ -126,7 +109,6 @@ class Trabajador
      */
     public function __construct()
     {
-        $this->conceptos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -347,28 +329,6 @@ class Trabajador
     }
 
 
-    /**
-     * Set usuario
-     *
-     * @param \RBSoft\UsuarioBundle\Entity\Usuario $usuario
-     * @return Trabajador
-     */
-    public function setUsuario(\RBSoft\UsuarioBundle\Entity\Usuario $usuario = null)
-    {
-        $this->usuario = $usuario;
-
-        return $this;
-    }
-
-    /**
-     * Get usuario
-     *
-     * @return \RBSoft\UsuarioBundle\Entity\Usuario
-     */
-    public function getUsuario()
-    {
-        return $this->usuario;
-    }
 
     /**
      * Set empleador
@@ -393,45 +353,6 @@ class Trabajador
         return $this->empleador;
     }
 
-    /**
-     * Add concepto
-     *
-     * @param \AppBundle\Entity\Concepto $concepto
-     * @return Trabajador
-     */
-    public function addConcepto(\AppBundle\Entity\Concepto $concepto)
-    {
-        $found = false;
-        foreach($this->conceptos as $conc){
-            if($conc->getId() == $concepto->getId())
-                $found = true;
-        }
-
-        if(!$found)
-            $this->conceptos[] = $concepto;
-
-        return $this;
-    }
-
-    /**
-     * Remove concepto
-     *
-     * @param \AppBundle\Entity\Concepto $concepto
-     */
-    public function removeConcepto(\AppBundle\Entity\Concepto $concepto)
-    {
-        $this->concepto->removeElement($concepto);
-    }
-
-    /**
-     * Get concepto
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getConceptos()
-    {
-        return $this->conceptos;
-    }
 
     public function __toString()
     {

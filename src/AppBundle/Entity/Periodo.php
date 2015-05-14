@@ -43,6 +43,13 @@ class Periodo
     private $tipo;
 
 
+
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $activo;
+
     /**
      * Get id
      *
@@ -130,5 +137,28 @@ class Periodo
 
     public function getTipoStr(){
         return self::$_TIPO[$this->getTipo()];
+    }
+
+    /**
+     * Set activo
+     *
+     * @param boolean $activo
+     * @return Periodo
+     */
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
+
+        return $this;
+    }
+
+    /**
+     * Get activo
+     *
+     * @return boolean 
+     */
+    public function getActivo()
+    {
+        return $this->activo;
     }
 }

@@ -22,12 +22,7 @@ class EmpleadorType extends AbstractType
             ->add('telefono')
             ->add('email','email')
             ->add('localidad')
-            ->add('fecha_actualizacion',null, array(
-                    'format' => 'dd-MM-yyyy hh:mm:ss',
-                    'html5' => true,
-                    'widget' => 'single_text',
-                    'attr' => array('readonly' => true)))
-//            ->add('usuario')
+
         ;
     }
     

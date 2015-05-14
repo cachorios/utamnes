@@ -183,4 +183,100 @@ class Ctacte
     {
         return $this->fechaPago;
     }
+
+    /**
+     * Set empleador
+     *
+     * @param \AppBundle\Entity\Empleador $empleador
+     *
+     * @return Ctacte
+     */
+    public function setEmpleador(\AppBundle\Entity\Empleador $empleador = null)
+    {
+        $this->empleador = $empleador;
+
+        return $this;
+    }
+
+    /**
+     * Get empleador
+     *
+     * @return \AppBundle\Entity\Empleador
+     */
+    public function getEmpleador()
+    {
+        return $this->empleador;
+    }
+
+    /**
+     * Set periodo
+     *
+     * @param \AppBundle\Entity\Periodo $periodo
+     *
+     * @return Ctacte
+     */
+    public function setPeriodo(\AppBundle\Entity\Periodo $periodo = null)
+    {
+        $this->periodo = $periodo;
+
+        return $this;
+    }
+
+    /**
+     * Get periodo
+     *
+     * @return \AppBundle\Entity\Periodo
+     */
+    public function getPeriodo()
+    {
+        return $this->periodo;
+    }
+
+    /**
+     * Set concepto
+     *
+     * @param \AppBundle\Entity\Concepto $concepto
+     *
+     * @return Ctacte
+     */
+    public function setConcepto(\AppBundle\Entity\Concepto $concepto = null)
+    {
+        $this->concepto = $concepto;
+
+        return $this;
+    }
+
+    /**
+     * Get concepto
+     *
+     * @return \AppBundle\Entity\Concepto
+     */
+    public function getConcepto()
+    {
+        return $this->concepto;
+    }
+
+    /**
+     * Set rectificado
+     *
+     * @param \AppBundle\Entity\Periodo $rectificado
+     *
+     * @return Ctacte
+     */
+    public function setRectificado(\AppBundle\Entity\Periodo $rectificado = null)
+    {
+        $this->rectificado = $rectificado;
+
+        return $this;
+    }
+
+    /**
+     * Get rectificado
+     *
+     * @return \AppBundle\Entity\Periodo
+     */
+    public function getRectificado()
+    {
+        return $this->rectificado;
+    }
 }
