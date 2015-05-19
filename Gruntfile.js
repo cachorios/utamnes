@@ -43,12 +43,12 @@ module.exports = function(grunt) {
             },
             frontend: {
                 files: {
-                    './web/assets/js/frontend.js': './web/assets/js/frontend.js'
+                    './web/assets/js/frontend.min.js': './web/assets/js/frontend.js'
                 }
             },
             backend: {
                 files: {
-                    './web/assets/js/backend.js': './web/assets/js/backend.js'
+                    './web/assets/js/backend.min.js': './web/assets/js/backend.js'
                 }
             }
         },
