@@ -14,10 +14,10 @@
 /.idea/workspace.xml
 /composer.lock
 /web/bundles/*
-/web/assetic/*
+/web/assetisc/*
 
 /mvp-theme/
-
+/node_modules/
 /src/AppBundle/Entity/*.php~
 /src/*/*Bundle/Entity/*.php~
 
