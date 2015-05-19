@@ -42,10 +42,11 @@ class EmpleadorModel
     {
         $ok = false;
 
+        $userManager = $this->container->get("fos_user.user_manager");
+
         /**
          * Datos de la modificacion para auditoria
          */
-        $this->empleador->setFechaActualizacion(new \DateTime("now"));
 
         $usuario_autenticado = $this->container->get("security.context")->getToken()->getUser();
         $this->empleador->setUsuarioActualizador($usuario_autenticado);
@@ -57,15 +58,20 @@ class EmpleadorModel
 
             if ($this->empleador->getId() == null) {
                 $userCreate = true;
+                //verificar que el mail no este definido dentro de fos_user
+                $userExist = $userManager->findUserByEmail($this->empleador->getEmail());
+                if($userExist){
+                    throw new \Exception(sprintf("Existe un usuario con el mismo correo %s",$this->empleador->getEmail()));
+                }
             }
 
             $em->persist($this->empleador);
 
             $em->flush();
-            $em->commit();
+
 
             if ($userCreate) {
-                $userManager = $this->container->get("fos_user.user_manager");
+
 
                 $user = $userManager->createUser();
                 $user->setUsername($this->empleador->getCuit()); //Será el cuit del empleador
@@ -82,7 +88,7 @@ class EmpleadorModel
                 $userToEmail->setPlainPassword($pass);
                 $this->sendMail($userToEmail, $user);
             }
-
+            $em->commit();
 
             $ok = true;
         } catch (\Exception $e) {

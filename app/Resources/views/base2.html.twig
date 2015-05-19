@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_UTA') %}
+    {% set home = "home_admin" %}
+{% elseif is_granted('ROLE_EMPLEADOR') %}
+    {% set home = "homepage" %}
+{% else %}
+    {% set home = "homepage" %}
+{% endif %}
+
+
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="es" class="no-js"> <!--<![endif]-->
+<head>
+    <title>UTA Misiones</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="LAR">
+
+    <!-- Google Font: O00pen Sans -->
+    <link rel="stylesheet"
+          href="http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,300,700">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <!-- App CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/mvpready-admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/mvpready-flat.css') }}">
+    {% stylesheets '@stylesheets' %}
+    <link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+
+    <link href="{{ asset('bundles/jbfileuploader/lib/jquery-file-upload/css/jquery.fileupload.css') }}" type="text/css"
+          rel="stylesheet"/>
+    <link href="{{ asset('bundles/jbfileuploader/css/jbfileupload.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('bundles/jbfileuploader/lib/jcrop/css/jquery.Jcrop.min.css') }}" type="text/css"
+          rel="stylesheet"/>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Bootstrap core JavaScript
+<!-- Core JS -->
+
+    <script src="{{ asset('assets/js/libs/jquery-1.10.2.min.js') }} "></script>
+    <script src="{{ asset('assets/js/libs/jquery.mb.browser.js') }} "></script>
+    <script src="{{ asset('assets/js/libs/jquery.msgbox.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/libs/bootstrap.min.js') }} "></script>
+    <script src="{{ asset('assets/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/datepicker/locales/bootstrap-datepicker.es.min.js') }}"></script>
+
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    {% javascripts '@javascripts_header' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {#<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>#}
+    <style>
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_UTA')   %}
+
+        .navbar-inverse {
+            background-color: steelblue;
+        }
+        .navbar-inverse .navbar-brand:hover {
+            background-color: steelblue;
+        }
+
+        .navbar-inverse .navbar-nav > li > a:hover {
+            background-color: #196090;
+        }
+
+        {% else %}
+
+        {% endif %}
+        .navbar {
+            border: 1px solid transparent;
+            margin-bottom: 5px;
+            min-height: 90px;
+            position: relative;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            font-size: 13px;
+            padding-bottom: 35px;
+            padding-top: 32px;
+        }
+
+        .navbar-profile-avatar {
+            height: 87px;
+            width: auto;
+        }
+        .navbar-inverse .navbar-nav > .navbar-profile > a {
+            height: 87px;
+            line-height: 87px;
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+    </style>
+    <script src="{{ asset('bundles/rbsoftabmgenerador/fileupload/js/fileinput.min.js') }} "></script>
+</head>
+
+<body class="{% block id '' %}">
+
+
+<div id="wrapper">
+
+    <header class="navbar" role="banner">
+
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Cambiar Navegaci&ocute;n</span>
+                    <i class="fa fa-cog"></i>
+                </button>
+
+                <a href="{{ path(home) }}" class="navbar-brand navbar-brand-img">
+                    <img src="{{ asset('assets/img/logo.png') }}" width="70%" alt="UTA LOGO ">
+                </a>
+
+                {#{% if  is_granted('ROLE_EMPLEADOR')   %}#}
+                    {#<ul class="navbar navbar-brand">#}
+                        {#<li>#}
+                            {#ES UTA aaaaaaaaaaaaaaaaaa#}
+                        {#</li>#}
+                    {#</ul>#}
+
+                {#{% endif %}#}
+
+            </div>
+            {% block navbar %}
+                {% include 'includes/navbar.html.twig' %}
+            {% endblock %}
+        </div>
+        <!-- /.container -->
+    </header>
+    {% block topbar %}
+        {% include 'includes/menu.html.twig' %}
+    {% endblock %}
+    {% block body %}
+        cuerpo
+    {% endblock body %}
+</div>
+<!-- /#wrapper -->
+
+<footer class="footer">
+    <div class="container">
+        <p class="pull-left">Copyright &copy; 2015 - RBSoft </p>
+    </div>
+</footer>
+
+<div id="winModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<div id="veil"></div>
+<div id="prLoading" style="display: none">Cargando...</div>
+
+
+<!--[if lt IE 9]>
+<script src="{{ asset('assets/js/libs/excanvas.compiled.js')}} "></script>
+<![endif]-->
+
+<!-- Plugin JS -->
+{#<script src="{{ asset('assets/js/plugins/flot/jquery.flot.js') }} "></script>#}
+{#<script src="{{ asset('assets/js/plugins/flot/jquery.flot.tooltip.min.js') }} "></script>#}
+{#<script src="{{ asset('assets./js/plugins/flot/jquery.flot.pie.js') }} "></script>#}
+{#<script src="{{ asset('assets/js/plugins/flot/jquery.flot.resize.js') }} "></script>#}
+
+<!-- App JS -->
+<script src="{{ asset('assets/js/mvpready-core.js') }} "></script>
+<script src="{{ asset('assets/js/mvpready-admin.js') }} "></script>
+
+<!-- Plugin JS -->
+{#<script src="{{ asset('assets/js/demos/flot/line.js') }} "></script>#}
+{#<script src="{{ asset('assets/js/demos/flot/pie.js') }} "></script>#}
+{#<script src="{{ asset('assets/js/demos/flot/auto.js') }} "></script>#}
+
+
+
+{% block javascript_footer %}
+
+{% endblock %}
+
+{% javascripts '@javascripts_footer' %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+{#<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>#}
+
+<script>
+
+    $(function () {
+        $('.datepicker').datepicker({
+            format: "dd/mm/yyyy",
+            autoclose: true,
+            todayHighlight: true
+        });
+        $('.input-group.date').datepicker({
+            format: "dd/mm/yyyy",
+            autoclose: true,
+            todayHighlight: true
+        });
+    })
+
+
+</script>
+
+</body>
+</html>

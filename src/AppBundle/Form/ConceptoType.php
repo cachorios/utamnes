@@ -18,15 +18,11 @@ class ConceptoType extends AbstractType
             ->add('numero')
             ->add('descripcion')
             ->add('descripcion_corta')
-            ->add('obligatorio')
-            ->add('activo')
-            ->add('fecha_actualizacion',null, array(
-                    'format' => 'dd-MM-yyyy hh:mm:ss',
-                    'html5' => true,
-                    'widget' => 'single_text',
-                    'attr' => array('readonly' => true)))
-//            ->add('usuario')
-//            ->add('trabajador')
+            ->add('obligatorio',"checkbox",array("required" => false))
+            ->add('activo',"checkbox",array("required" => false))
+            ->add('formula',"textarea",array("attr" =>array("rows" =>8 )))
+
+
         ;
     }
     

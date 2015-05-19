@@ -21,7 +21,9 @@ class AppKernel extends Kernel
 
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
             new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
+
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),

@@ -1,58 +1,155 @@
 <?php
+
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping AS ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Liquidacion
+ *
+ * @ORM\Table()
  * @ORM\Entity
  */
 class Liquidacion
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TrabajadorPeriodo", inversedBy="liquidacion")
-     * @ORM\JoinColumn(name="trabajador_periodo_id", referencedColumnName="id")
+     * @var Trabajador
+     *  @ORM\ManyToOne(targetEntity="Trabajador")
      */
-    private $trabajadorPeriodo;
+    private $trabajador;
 
+    /**
+     * @var Periodo
+     *  @ORM\ManyToOne(targetEntity="Periodo")
+     */
+    private $periodo;
+
+    /**
+     *  @ORM\ManyToOne(targetEntity="Concepto")
+     */
+    private $concepto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="importe", type="decimal")
+     */
+    private $importe;
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
 
+
     /**
-     * Set trabajadorPeriodo
+     * Set importe
      *
-     * @param \AppBundle\Entity\TrabajadorPeriodo $trabajadorPeriodo
+     * @param string $importe
+     *
      * @return Liquidacion
      */
-    public function setTrabajadorPeriodo(\AppBundle\Entity\TrabajadorPeriodo $trabajadorPeriodo = null)
+    public function setImporte($importe)
     {
-        $this->trabajadorPeriodo = $trabajadorPeriodo;
+        $this->importe = $importe;
 
         return $this;
     }
 
     /**
-     * Get trabajadorPeriodo
+     * Get importe
      *
-     * @return \AppBundle\Entity\TrabajadorPeriodo 
+     * @return string
      */
-    public function getTrabajadorPeriodo()
+    public function getImporte()
     {
-        return $this->trabajadorPeriodo;
+        return $this->importe;
+    }
+
+    /**
+     * Set trabajador
+     *
+     * @param \AppBundle\Entity\Trabajador $trabajador
+     *
+     * @return Liquidacion
+     */
+    public function setTrabajador(\AppBundle\Entity\Trabajador $trabajador = null)
+    {
+        $this->trabajador = $trabajador;
+
+        return $this;
+    }
+
+    /**
+     * Get trabajador
+     *
+     * @return \AppBundle\Entity\Trabajador
+     */
+    public function getTrabajador()
+    {
+        return $this->trabajador;
+    }
+
+    /**
+     * Set periodo
+     *
+     * @param \AppBundle\Entity\Periodo $periodo
+     *
+     * @return Liquidacion
+     */
+    public function setPeriodo(\AppBundle\Entity\Periodo $periodo = null)
+    {
+        $this->periodo = $periodo;
+
+        return $this;
+    }
+
+    /**
+     * Get periodo
+     *
+     * @return \AppBundle\Entity\Periodo
+     */
+    public function getPeriodo()
+    {
+        return $this->periodo;
+    }
+
+    /**
+     * Set concepto
+     *
+     * @param \AppBundle\Entity\Concepto $concepto
+     *
+     * @return Liquidacion
+     */
+    public function setConcepto(\AppBundle\Entity\Concepto $concepto = null)
+    {
+        $this->concepto = $concepto;
+
+        return $this;
+    }
+
+    /**
+     * Get concepto
+     *
+     * @return \AppBundle\Entity\Concepto
+     */
+    public function getConcepto()
+    {
+        return $this->concepto;
     }
 }

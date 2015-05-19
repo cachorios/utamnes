@@ -51,8 +51,9 @@ class Conceptos extends AbstractFixture implements OrderedFixtureInterface, Cont
             $o->setObligatorio($a['obligatorio']);
             $o->setActivo($a['activo']);
             $o->setUsuario('cachorios@gmail.com');
-            $o->setFechaActualizacion(new \DateTime('now'));
+//            $o->setFechaActualizacion(new \DateTime('now'));
             $o->setUsuario(null);
+            $o->setFormula('2 + 2');
 
             $manager->persist($o);
             $manager->flush();

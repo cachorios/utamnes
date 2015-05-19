@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+{% block navbar %}
+    {% include 'includes/navbar.html.twig' %}
+{% endblock %}
+{% block topbar %}
+    {% include 'includes/menu.html.twig' %}
+{% endblock %}
+{% block body %}
+<div class="content">
+    <div class="container">
+        {% block container %}
+        <div class="row">
+            <div class="col-md-12">
+                {% block workarea %}{% endblock %}
+                {% block contenido %}{% endblock %}
+                {% block fos_user_content %}{% endblock %}
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+        {% endblock container %}
+    </div><!-- /.container -->
+</div><!-- .content -->
+
+
+{% endblock body %}
+
+{#{% block stylesheets %}{% endblock stylesheets %}#}
+{#{% block javascripts %}{% endblock javascripts %}#}

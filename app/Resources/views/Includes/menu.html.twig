@@ -1,32 +1,38 @@
 {% import ':includes:gen_menu.html.twig' as menu %}
 
-<div class="mainnav">
+<div class="mainnav ">
     <div class="container">
 
-        <a data-target=".mainnav-collapse" data-toggle="collapse" class="mainnav-toggle">
-            <span class="sr-only">Toggle navigation</span>
+        <a class="mainnav-toggle" data-toggle="collapse" data-target=".mainnav-collapse">
+            <span class="sr-only">Cambiar Navegacion</span>
             <i class="fa fa-bars"></i>
         </a>
 
-        <nav role="navigation" class="collapse mainnav-collapse">
-            <form role="search" class="mainnav-form pull-right">
-                <input type="text" placeholder="Búsqueda" class="form-control input-md mainnav-search-query">
+        <nav class="collapse mainnav-collapse" role="navigation">
+
+            <form class="mainnav-form" role="search">
+                <input type="text" class="form-control input-md mainnav-search-query" placeholder="Búsqueda">
                 <button class="btn btn-sm mainnav-form-btn"><i class="fa fa-search"></i></button>
             </form>
+
 
             {{ menu.menuItem('Inicio',path(home) ) }}{{ menu.finmenuItem() }}
 
 
             {% if home == "home_admin" %}
+                {{ menu.menu('Tablas','#') }}
+                    {{ menu.item('Empleadores', 'fa-dashboard', path("admin_empleador") ) }}
+                    {{ menu.item('Conceptos', 'fa-dashboard', path("admin_concepto") ) }}
+                    {{ menu.item('Vencimientos', 'fa-dashboard', path("admin_vencimiento") ) }}
 
-            {{ menu.menu('Tablas','#') }}
-                {{ menu.item('Empleadores', 'fa-dashboard', path("admin_empleador") ) }}
-                {{ menu.item('Conceptos', 'fa-dashboard', path("admin_concepto") ) }}
-                {{ menu.item('Vencimientos', 'fa-dashboard', path("admin_vencimiento") ) }}
-                {{ menu.item('Usuarios de UTA', 'fa-dashboard', path("admin_usuario") ) }}
-            {{ menu.finmenu() }}
+                {{ menu.finmenu() }}
+                {{ menu.menu('Seguridad','#') }}
+                    {{ menu.item('Usuarios de UTA', 'fa-dashboard', path("admin_usuario") ) }}
+                {{ menu.finmenu() }}
+
             {% elseif home == "homepage" %}
                 {{ menu.menuItem('Trabajadores', path("app_trabajador") ) }}{{ menu.finmenuItem() }}
+
                 {{ menu.menu('Liquidación','#') }}
                     {{ menu.item('Periodos', 'fa-dashboard', path("app_periodo") ) }}
                     {{ menu.item('Remnuerativos del periodo', 'fa-dashboard', path("app_periodo") ) }}
@@ -41,6 +47,7 @@
 
 
         </nav>
+
     </div>
     <!-- /.container -->
 </div>

@@ -1,0 +1,103 @@
+{% extends "::base.html.twig" %}
+{% block css %}
+    <link href="{{ asset('mvp-theme/bower_components/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('mvp-theme/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    {# Estilos para Forms #}
+    <link href="{{ asset('mvp-theme/bower_components/select2/select2.css') }}" rel="stylesheet">
+    <link href="{{ asset('mvp-theme/bower_components/jquery-icheck/skins/minimal/_all.css') }}" rel="stylesheet">
+    <link href="{{ asset('mvp-theme/bower_components/bootstrap-3-timepicker/css/bootstrap-timepicker.css') }}"  rel="stylesheet">
+    <link href="{{ asset('mvp-theme/bower_components/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet">
+    <link href="{{ asset('mvp-theme/bower_components/bootstrap-jasny/dist/css/jasny-bootstrap.css') }}"   rel="stylesheet">
+    {# fin estilos para forms #}
+
+    <link href="{{ asset('mvp-theme/css/mvpready-admin.css') }}" rel="stylesheet">
+{% endblock css %}
+
+<body class="{% block id '' %} ">
+
+{% block body %}
+<div id="wrapper">
+    <header class="navbar" role="banner">
+        <div class="container">
+            <button data-target=".navbar-collapse" data-toggle="collapse" type="button" class="navbar-toggle">
+                <span class="sr-only">Cambiar Navegacion</span>
+                <i class="fa fa-cog"></i>
+            </button>
+
+            <a href="{{ path(home) }}" class="navbar-brand navbar-brand-img">
+                <img src="{{ asset('assets/img/logo.png') }}" width="45%" alt="UTA LOGO ">
+            </a>
+
+            {% block navbar %}
+                {% include 'includes/navbar.html.twig' %}
+            {% endblock %}
+        </div>
+
+
+    </header>
+    {% block topbar %}
+        {% include 'includes/menu.html.twig' %}
+    {% endblock %}
+    <div class="content">
+        {#{% block content %}#}
+            cuerpo
+        {#{% endblock content %}#}
+    </div>
+
+
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="pull-left">Copyright &copy; 2015 - RBSoft </p>
+    </div>
+</footer>
+
+{% endblock body %}
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Core JS -->
+<script src="{{ asset("mvp-theme/bower_components/jquery/dist/jquery.js") }}"></script>
+<script src="{{ asset("mvp-theme/bower_components/bootstrap/dist/js/bootstrap.min.js") }}"></script>
+<script src="{{ asset("mvp-theme/bower_components/slimscroll/jquery.slimscroll.min.js") }}"></script>
+
+<script src="{{ asset("mvp-theme/bower_components/select2/select2.min.js") }}"></script>
+<script src="{{ asset("mvp-theme/bower_components/jquery-icheck/icheck.min.js") }}"></script>
+<script src="{{ asset("mvp-theme/bower_components/parsleyjs/dist/parsley.js") }}"></script>
+<script src="{{ asset("mvp-theme/bower_components/bootstrap-3-timepicker/js/bootstrap-timepicker.js") }}"></script>
+<script src="{{ asset("mvp-theme/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js") }}"></script>
+<script src="{{ asset("mvp-theme/bower_components/bootstrap-jasny/js/fileinput.js") }}"></script>
+
+
+{#<!-- App JS -->#}
+<script src="{{ asset("mvp-theme/global/js/mvpready-core.js") }}"></script>
+<script src="{{ asset("mvp-theme/global/js/mvpready-helpers.js") }}"></script>
+<script src="{{ asset("mvp-theme/js/mvpready-admin.js") }}"></script>
+
+<script src="{{ asset("mvp-theme/global/js/demos/form-plugins.js") }}"></script>
+
+
+<a id="back-to-top" href="#top" style="display: block;"> <span class="select2-hidden-accessible" role="status"
+                                                               aria-live="polite"></span></a>
+
+
+
+{#<script>#}
+
+{#$(function () {#}
+{#$('.datepicker').datepicker({#}
+{#format: "dd/mm/yyyy",#}
+{#autoclose: true,#}
+{#todayHighlight: true#}
+{#});#}
+{#$('.input-group.date').datepicker({#}
+{#format: "dd/mm/yyyy",#}
+{#autoclose: true,#}
+{#todayHighlight: true#}
+{#});#}
+{#})#}
+
+{#</script>#}
+</body>
+</html>
