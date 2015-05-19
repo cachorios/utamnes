@@ -6,4 +6,4 @@ AppBundle\Entity\Empleador:
         telefono: <es_AR:phoneNumber()>
         email: <email()>
         localidad: <es_AR:city()>
-        fecha_actualizacion: <dateTime('now')>
+#        fecha_actualizacion: <dateTime('now')>

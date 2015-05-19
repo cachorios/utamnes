@@ -16,9 +16,9 @@ class PeriodoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('vencimiento',null,array("label" => "Periodo"))
             ->add('liquidacion',null,array("label" => "Nro. de Liquidación"))
             ->add('tipo','choice',array("label" => "Presentación","choices" => Periodo::$_TIPO))
-            ->add('vencimiento',null,array("label" => "Periodo"))
         ;
     }
     
