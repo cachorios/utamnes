@@ -1,8 +1,9 @@
-{% extends "::base.html.twig" %}
+{% extends "::layout_backend.html.twig" %}
 
 {% block navbar  %}{% endblock %}
 {% block topbar %}{% endblock %}
-{% block body %}
+
+{% block content %}
 
     <div class="account-wrapper">
 
@@ -68,9 +69,9 @@
 
 {% endblock %}
 
-{% block stylesheets %}
-    {#<link rel="stylesheet" href="{{ asset("bundles/usuario/css/login.css") }}">#}
-    {#<link rel="stylesheet" href="{{ asset("bundles/usuario/css/animate-custom.css") }}">#}
-{% endblock %}
+{#{% block stylesheets %}#}
+    {#&#123;&#35;<link rel="stylesheet" href="{{ asset("bundles/usuario/css/login.css") }}">&#35;&#125;#}
+    {#&#123;&#35;<link rel="stylesheet" href="{{ asset("bundles/usuario/css/animate-custom.css") }}">&#35;&#125;#}
+{#{% endblock %}#}
 
 

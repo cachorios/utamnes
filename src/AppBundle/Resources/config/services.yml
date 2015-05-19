@@ -10,3 +10,7 @@ services:
     uta.empleador_activo:
         class: AppBundle\Servicios\EmpleadorActivo
         arguments: [@security.context , @doctrine.orm.entity_manager]
+
+    uta.liquidacion:
+        class: AppBundle\Servicios\LiquidacionManager
+        arguments: [@service_container]

@@ -16,5 +16,8 @@
 /web/bundles/*
 /web/assetic/*
 
+/mvp-theme/
+
 /src/AppBundle/Entity/*.php~
 /src/*/*Bundle/Entity/*.php~
+
