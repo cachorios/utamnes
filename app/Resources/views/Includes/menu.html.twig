@@ -16,10 +16,10 @@
             </form>
 
 
-            {{ menu.menuItem('Inicio',path(home) ) }}{{ menu.finmenuItem() }}
+            {{ menu.menuItem('Inicio',path("home_admin") ) }}{{ menu.finmenuItem() }}
 
 
-            {% if home == "home_admin" %}
+            {#{% if home == "home_admin" %}#}
                 {{ menu.menu('Tablas','#') }}
                     {{ menu.item('Empleadores', 'fa-dashboard', path("admin_empleador") ) }}
                     {{ menu.item('Conceptos', 'fa-dashboard', path("admin_concepto") ) }}
@@ -30,18 +30,18 @@
                     {{ menu.item('Usuarios de UTA', 'fa-dashboard', path("admin_usuario") ) }}
                 {{ menu.finmenu() }}
 
-            {% elseif home == "homepage" %}
-                {{ menu.menuItem('Trabajadores', path("app_trabajador") ) }}{{ menu.finmenuItem() }}
+            {#{% elseif home == "homepage" %}#}
+                {#{{ menu.menuItem('Trabajadores', path("app_trabajador") ) }}{{ menu.finmenuItem() }}#}
 
-                {{ menu.menu('Liquidación','#') }}
-                    {{ menu.item('Periodos', 'fa-dashboard', path("app_periodo") ) }}
-                    {{ menu.item('Remnuerativos del periodo', 'fa-dashboard', path("app_periodo") ) }}
-                    {{ menu.item('Importar desde SICOSS', 'fa-dashboard', path("app_periodo") ) }}
-                    {{ menu.item('Liquidar', 'fa-dashboard', path("app_periodo") ) }}
+                {#{{ menu.menu('Liquidación','#') }}#}
+                    {#{{ menu.item('Periodos', 'fa-dashboard', path("app_periodo") ) }}#}
+                    {#{{ menu.item('Remnuerativos del periodo', 'fa-dashboard', path("app_periodo") ) }}#}
+                    {#{{ menu.item('Importar desde SICOSS', 'fa-dashboard', path("app_periodo") ) }}#}
+                    {#{{ menu.item('Liquidar', 'fa-dashboard', path("app_periodo") ) }}#}
 
-                {{ menu.finmenu() }}
-                {{ menu.menuItem('Cuenta Correinte', path("app_trabajador") ) }}{{ menu.finmenuItem() }}
-            {% endif %}
+                {#{{ menu.finmenu() }}#}
+                {#{{ menu.menuItem('Cuenta Correinte', path("app_trabajador") ) }}{{ menu.finmenuItem() }}#}
+            {#{% endif %}#}
 
 
 

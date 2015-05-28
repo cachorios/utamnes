@@ -3,22 +3,37 @@ module.exports = function(grunt) {
     //Initializing the configuration object
     grunt.initConfig({
         // Task configuration
+        copy: {
+            fuentes: {
+                files: [
+                    {expand: true, cwd: './mvp-theme/bower_components/fontawesome/fonts/',  src:['**'] , dest: './web/assets/fonts'},
+                    {expand: true, cwd: './mvp-theme/bower_components/bootstrap/fonts/',  src:['**'] , dest: './web/assets/fonts'},
+
+                ]
+            }
+        },
         concat: {
             options: {
                 separator: ';'
             },
             js_frontend: {
                 src: [
-                    'mvp-theme/bower_components/jquery/dist/jquery.js',
-                    'mvp-theme/bower_components/bootstrap/dist/js/bootstrap.js',
-                    'mvp-theme/js/mvpready-landing.js.js'
+                    './mvp-theme/bower_components/jquery/dist/jquery.js',
+                    './mvp-theme/bower_components/bootstrap/dist/js/bootstrap.js',
+                    './mvp-theme/bower_components/slimscroll/jquery.slimscroll.min.js',
+                    './mvp-theme/global/js/mvpready-core.js',
+                    './mvp-theme/global/js/mvpready-helpers.js',
+                    './mvp-theme/js/mvpready-landing.js.js'
                     ],
-                dest: 'web/assets/js/frontend.js'
+                dest: './web/assets/js/frontend.js'
             },
             js_backend: {
                 src: [
                     './mvp-theme/bower_components/jquery/dist/jquery.js',
                     './mvp-theme/bower_components/bootstrap/dist/js/bootstrap.js',
+                    './mvp-theme/bower_components/slimscroll/jquery.slimscroll.min.js', //Para scrtoll to top
+                    './mvp-theme/global/js/mvpready-core.js',
+                    './mvp-theme/global/js/mvpready-helpers.js',
                     './mvp-theme/js/mvpready-admin.js'
                     ],
                 dest: './web/assets/js/backend.js'
@@ -31,10 +46,22 @@ module.exports = function(grunt) {
                 },
                 files: {
                     //compiling frontend.less into frontend.css
-                    "./web/assets/css/frontend.css":"./web/assets/less/frontend.less" //,
+                    "./web/assets/css/frontend.css":"./web/assets/less/frontend.less",
                     //compiling backend.less into backend.css
-                    //"./public/assets/stylesheets/backend.css":"./app/assets/stylesheets/backend.less"
+                    "./web/assets/css/backend.css":"./web/assets/less/backend.less" //,
+
                 }
+            }
+        },
+        cssmin: {
+            target: {
+                files: [{
+                    expand: true,
+                    cwd: './web/assets/css',
+                    src: ['*.css', '!*.min.css'],
+                    dest: './web/assets/css',
+                    ext: '.css'
+                }]
             }
         },
         uglify: {
@@ -43,12 +70,12 @@ module.exports = function(grunt) {
             },
             frontend: {
                 files: {
-                    './web/assets/js/frontend.min.js': './web/assets/js/frontend.js'
+                    './web/assets/js/frontend.js': './web/assets/js/frontend.js'
                 }
             },
             backend: {
                 files: {
-                    './web/assets/js/backend.min.js': './web/assets/js/backend.js'
+                    './web/assets/js/backend.js': './web/assets/js/backend.js'
                 }
             }
         },
@@ -83,6 +110,13 @@ module.exports = function(grunt) {
                 options: {
                     livereload: true                            //reloads the browser
                 }
+            },
+            css: {
+                files: ['./web/assets/css/*.css'],     //watched files
+                tasks: ['cssmin'],                                //tasks to run
+                options: {
+                    livereload: true                            //reloads the browser
+                }
             }
         }
     });
@@ -92,6 +126,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-filessrc');
 
     // Task definition
     grunt.registerTask('default', ['watch']);

@@ -25,9 +25,9 @@ security:
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, roles: [ROLE_ADMIN, ROLE_UTA] }
-        - { path: ^/admin/usuario, role: ROLE_ADMIN }
-        - { path: ^/app/, role: ROLE_EMPLEADOR }
-        - { path: ^/profile/, roles: [ROLE_USER, ROLE_EMPLEADOR, ROLE_UTA] }
-        - { path: ^/, roles: [ROLE_USER, ROLE_EMPLEADOR, ROLE_UTA] }
+#        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/admin/, roles: [ROLE_ADMIN, ROLE_UTA] }
+#        - { path: ^/admin/usuario, role: ROLE_ADMIN }
+#        - { path: ^/app/, role: ROLE_EMPLEADOR }
+#        - { path: ^/profile/, roles: [ROLE_USER, ROLE_EMPLEADOR, ROLE_UTA] }
+#        - { path: ^/, roles: [ROLE_USER, ROLE_EMPLEADOR, ROLE_UTA] }

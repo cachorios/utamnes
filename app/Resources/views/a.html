@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="es" class="no-js"> <!--<![endif]-->
+<head>
+
+    <title></title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Ap. y Cont. UTA" name="description">
+    <meta content="Luis Rios" name="author">
+
+    <!-- Google Font: Open Sans -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,300,700" rel="stylesheet">
+
+    <link href="/utamnes/web/assets/css/backend.css" rel="stylesheet">
+
+    <link href="/utamnes/web/mvp-theme/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/utamnes/web/mvp-theme/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/utamnes/web/mvp-theme/bower_components/select2/select2.css" rel="stylesheet">
+    <link href="/utamnes/web/mvp-theme/bower_components/jquery-icheck/skins/minimal/_all.css" rel="stylesheet">
+    <link href="/utamnes/web/mvp-theme/bower_components/bootstrap-3-timepicker/css/bootstrap-timepicker.css"  rel="stylesheet">
+    <link href="/utamnes/web/mvp-theme/bower_components/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet">
+    <link href="/utamnes/web/mvp-theme/bower_components/bootstrap-jasny/dist/css/jasny-bootstrap.css"   rel="stylesheet">
+
+    <link href="/utamnes/web/mvp-theme/css/mvpready-admin.css" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<body class="Concepto ">
+<div id="wrapper">
+    <header class="navbar" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button data-target=".navbar-collapse" data-toggle="collapse" type="button" class="navbar-toggle">
+                    <span class="sr-only">Cambiar Navegacion</span>
+                    <i class="fa fa-cog"></i>
+                </button>
+            </div>
+            <a href="/utamnes/web/app_dev.php/admin" class="navbar-brand navbar-brand-img">
+                <img src="/utamnes/web/assets/img/logo.png" width="50%" alt="UTA LOGO ">
+            </a>
+
+            <nav role="navigation" class="collapse navbar-collapse">
+
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li>
+                        <a href="javascript:;">Acerca de</a>
+                    </li>
+
+                    <li>
+                        <a href="javascript:;">Recursos</a>
+                    </li>
+
+                </ul>
+
+            </nav>                </div>
+
+
+    </header>
+
+    <div class="mainnav ">
+        <div class="container">
+
+            <a class="mainnav-toggle" data-toggle="collapse" data-target=".mainnav-collapse">
+                <span class="sr-only">Cambiar Navegacion</span>
+                <i class="fa fa-bars"></i>
+            </a>
+
+            <nav class="collapse mainnav-collapse" role="navigation">
+
+                <form class="mainnav-form" role="search">
+                    <input type="text" class="form-control input-md mainnav-search-query" placeholder="Búsqueda">
+                    <button class="btn btn-sm mainnav-form-btn"><i class="fa fa-search"></i></button>
+                </form>
+
+
+                <ul class="mainnav-menu">
+                    <li class=""><a href="/utamnes/web/app_dev.php/admin">Inicio<span class="sr-only"></span></a>
+                    </li>
+                </ul>
+
+
+
+                <ul class="mainnav-menu">
+                    <li class="dropdown ">
+                        <a data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            Tablas <i class="mainnav-caret"></i>
+                        </a>
+                        <ul role="menu" class="dropdown-menu">
+
+                            <li>
+                                <a href="/utamnes/web/app_dev.php/admin/empleador/">
+                                    <i class="fa fa-dashboard"></i>
+                                    &nbsp;&nbsp;Empleadores
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/utamnes/web/app_dev.php/admin/concepto/">
+                                    <i class="fa fa-dashboard"></i>
+                                    &nbsp;&nbsp;Conceptos
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/utamnes/web/app_dev.php/admin/vencimiento/">
+                                    <i class="fa fa-dashboard"></i>
+                                    &nbsp;&nbsp;Vencimientos
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="mainnav-menu">
+                    <li class="dropdown ">
+                        <a data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            Seguridad <i class="mainnav-caret"></i>
+                        </a>
+                        <ul role="menu" class="dropdown-menu">
+
+                            <li>
+                                <a href="/utamnes/web/app_dev.php/admin/usuario/">
+                                    <i class="fa fa-dashboard"></i>
+                                    &nbsp;&nbsp;Usuarios de UTA
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+
+
+
+
+
+
+
+
+            </nav>
+
+        </div>
+        <!-- /.container -->
+    </div>
+
+
+
+    <div class="content">
+        <div class="container">
+            <div class="portlet ">
+
+                <h3 class="portlet-title ">
+                    <u>Lista de Concepto <small>(6 )</small></u>
+                    <div class='pull-right'>
+
+                        <a href="/utamnes/web/app_dev.php/admin/concepto/new" class="button_nuevo btn btn-sm btn-primary">
+
+                            Nuevo Concepto
+
+                        </a>
+
+                    </div>
+
+                </h3>
+
+                <div class="portlet-body ">
+
+                    <form method='post' action='.' class='form-horizontal'>
+
+                        <div class="modal modal-styled fade in" id="filters" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Filtro de Conceptos</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group"><label class="col-sm-2 control-label">Numero</label><div class="col-sm-10"><div id="appbundle_conceptofiltertype_numero"><div class="form-group"><label class="col-sm-2 control-label" for="appbundle_conceptofiltertype_numero_left_number">Left number</label><div class="col-sm-10"><input type="text" id="appbundle_conceptofiltertype_numero_left_number" name="appbundle_conceptofiltertype[numero][left_number]" class="form-control" /></div></div><div class="form-group"><label class="col-sm-2 control-label" for="appbundle_conceptofiltertype_numero_right_number">Right number</label><div class="col-sm-10"><input type="text" id="appbundle_conceptofiltertype_numero_right_number" name="appbundle_conceptofiltertype[numero][right_number]" class="form-control" /></div></div></div></div></div><div class="form-group"><label class="col-sm-2 control-label" for="appbundle_conceptofiltertype_descripcion">Descripcion</label><div class="col-sm-10"><input type="text" id="appbundle_conceptofiltertype_descripcion" name="appbundle_conceptofiltertype[descripcion]" class="form-control" /></div></div><div class="form-group"><label class="col-sm-2 control-label" for="appbundle_conceptofiltertype_descripcion_corta">Descripcion corta</label><div class="col-sm-10"><input type="text" id="appbundle_conceptofiltertype_descripcion_corta" name="appbundle_conceptofiltertype[descripcion_corta]" class="form-control" /></div></div><input type="hidden" id="appbundle_conceptofiltertype__token" name="appbundle_conceptofiltertype[_token]" class="form-control" value="mJrCUk6FT0jMGkdtHMNykNH3OmBeUel07vJTySV47mw" />
+                                    </div>
+                                    <div class="modal-footer">
+
+                                        <input type='submit' class='btn btn-success' name='submit-filter' value='Aplicar'/>
+
+                                        <input type='submit' class='btn btn-primary' name='submit-filter' value="reset"/>
+
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>            </form>
+
+
+                    <div class="row">
+                        <div class="col-lg-10">
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="pull-right">
+                                <a class='btn bg-success btn-xs dropdown-toggle' data-toggle='modal' data-target='#filters'>
+                                    Filtro
+                                    <span class='caret'></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-bordered  table-responsive">
+                        <thead>
+                        <tr>
+                            <th class="headerSortUp"> Id  </th>
+                            <th class="headerSortUp"> Numero  </th>
+                            <th class="headerSortUp"> Descripcion  </th>
+                            <th class="headerSortUp"> Descripcion_corta  </th>
+                            <th class="headerSortUp"> Obligatorio  </th>
+                            <th class="headerSortUp"> Activo  </th>
+                            <th class="headerSortUp"> Updatedat </th>
+                            <th class="actions">Acciones</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><a href="/utamnes/web/app_dev.php/admin/concepto/1">1</a>
+                            </td>
+                            <td>401</td>
+                            <td>Cuota Gremial</td>
+                            <td>Cta Gremial</td>
+                            <td><span class="label label-primary">Si</span></td>
+                            <td><span class="label label-primary">Si</span></td>
+                            <td>2015-05-05 15:05:55</td>
+                            <td class="actions">
+                                <div class="btn-group">
+                                    <a href="/utamnes/web/app_dev.php/admin/concepto/1"
+                                       class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"
+                                       title="Ver mas información">
+                                        <span class="glyphicon glyphicon-eye-open"></span>
+                                    </a>
+                                    <a href="/utamnes/web/app_dev.php/admin/concepto/1/edit"
+                                       class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"
+                                       title="Editar los datos">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="/utamnes/web/app_dev.php/admin/concepto/2">2</a>
+                            </td>
+                            <td>412</td>
+                            <td>Seguro Funerario</td>
+                            <td>Seguro Funerario</td>
+                            <td><span class="label label-primary">Si</span></td>
+                            <td><span class="label label-primary">Si</span></td>
+                            <td>2015-05-05 15:10:46</td>
+                            <td class="actions">
+                                <div class="btn-group">
+                                    <a href="/utamnes/web/app_dev.php/admin/concepto/2"
+                                       class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"
+                                       title="Ver mas información">
+                                        <span class="glyphicon glyphicon-eye-open"></span>
+                                    </a>
+                                    <a href="/utamnes/web/app_dev.php/admin/concepto/2/edit"
+                                       class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"
+                                       title="Editar los datos">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="/utamnes/web/app_dev.php/admin/concepto/3">3</a>
+                            </td>
+                            <td>437</td>
+                            <td>Seguro de Vida</td>
+                            <td>Seguro Vida</td>
+                            <td><span class="label label-default">No</span></td>
+                            <td><span class="label label-primary">Si</span></td>
+                            <td>2015-05-14 12:58:28</td>
+                            <td class="actions">
+                                <div class="btn-group">
+                                    <a href="/utamnes/web/app_dev.php/admin/concepto/3"
+                                       class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"
+                                       title="Ver mas información">
+                                        <span class="glyphicon glyphicon-eye-open"></span>
+                                    </a>
+                                    <a href="/utamnes/web/app_dev.php/admin/concepto/3/edit"
+                                       class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"
+                                       title="Editar los datos">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="/utamnes/web/app_dev.php/admin/concepto/4">4</a>
+                            </td>
+                            <td>451</td>
+                            <td>Seguro Familiar Colectivo</td>
+                            <td>Seg. col</td>
+                            <td><span class="label label-default">No</span></td>
+                            <td><span class="label label-primary">Si</span></td>
+                            <td></td>
+                            <td class="actions">
+                                <div class="btn-group">
+                                    <a href="/utamnes/web/app_dev.php/admin/concepto/4"
+                                       class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"
+                                       title="Ver mas información">
+                                        <span class="glyphicon glyphicon-eye-open"></span>
+                                    </a>
+                                    <a href="/utamnes/web/app_dev.php/admin/concepto/4/edit"
+                                       class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"
+                                       title="Editar los datos">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="/utamnes/web/app_dev.php/admin/concepto/5">5</a>
+                            </td>
+                            <td>480</td>
+                            <td>Complemento OB. Social</td>
+                            <td>Comp.Ob.Soc.</td>
+                            <td><span class="label label-default">No</span></td>
+                            <td><span class="label label-primary">Si</span></td>
+                            <td></td>
+                            <td class="actions">
+                                <div class="btn-group">
+                                    <a href="/utamnes/web/app_dev.php/admin/concepto/5"
+                                       class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"
+                                       title="Ver mas información">
+                                        <span class="glyphicon glyphicon-eye-open"></span>
+                                    </a>
+                                    <a href="/utamnes/web/app_dev.php/admin/concepto/5/edit"
+                                       class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"
+                                       title="Editar los datos">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="/utamnes/web/app_dev.php/admin/concepto/6">6</a>
+                            </td>
+                            <td>485</td>
+                            <td>Prestamo mutual UTA</td>
+                            <td>Prestamo UTA</td>
+                            <td><span class="label label-default">No</span></td>
+                            <td><span class="label label-primary">Si</span></td>
+                            <td></td>
+                            <td class="actions">
+                                <div class="btn-group">
+                                    <a href="/utamnes/web/app_dev.php/admin/concepto/6"
+                                       class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"
+                                       title="Ver mas información">
+                                        <span class="glyphicon glyphicon-eye-open"></span>
+                                    </a>
+                                    <a href="/utamnes/web/app_dev.php/admin/concepto/6/edit"
+                                       class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"
+                                       title="Editar los datos">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="row">
+                        <div class="col-lg-10">
+
+
+
+                        </div>
+                        <div class="col-lg-2">
+
+                        </div>
+                    </div>
+
+                </div> <!-- /.portlet-body -->
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="pull-left">Copyright &copy; 2015 - RBSoft </p>
+        </div>
+    </footer>
+</div>
+    <!-- Bootstrap core JavaScript
+================================================== -->
+    <!-- Core JS -->
+    <script src="/utamnes/web/assets/js/backend.js"></script>
+
+
+    <script src="/utamnes/web/mvp-theme/bower_components/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <script src="/utamnes/web/mvp-theme/bower_components/select2/select2.min.js"></script>
+    <script src="/utamnes/web/mvp-theme/bower_components/jquery-icheck/icheck.min.js"></script>
+    <script src="/utamnes/web/mvp-theme/bower_components/parsleyjs/dist/parsley.js"></script>
+    <script src="/utamnes/web/mvp-theme/bower_components/bootstrap-3-timepicker/js/bootstrap-timepicker.js"></script>
+    <script src="/utamnes/web/mvp-theme/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="/utamnes/web/mvp-theme/bower_components/bootstrap-jasny/js/fileinput.js"></script>
+
+
+    <script src="/utamnes/web/mvp-theme/global/js/mvpready-core.js"></script>
+    <script src="/utamnes/web/mvp-theme/global/js/mvpready-helpers.js"></script>
+
+
+    <script src="/utamnes/web/mvp-theme/global/js/demos/form-plugins.js"></script>
+
+
+    <a id="back-to-top" href="#top" style="display: block;"> <span class="select2-hidden-accessible" role="status"
+                                                                   aria-live="polite"></span></a>
+
+
+
+
+
+    <a id="back-to-top" href="#top" style="display: block;"> <span class="select2-hidden-accessible" role="status" aria-live="polite"></span></a>
+
+
+
+
+</body>
+
+</html>

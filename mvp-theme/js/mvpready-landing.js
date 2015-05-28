@@ -31,7 +31,7 @@ var mvpready_landing = function () {
             , active = $(this).find ('.active.item')
 
         if (currItem.height () > nextH) {
-          next.height (active.height ())          
+          next.height (active.height ())
         }        
 
         active.parent().animate({ height: nextH }, 500, function () {
