@@ -42,9 +42,6 @@ class Periodo
      */
     private $tipo;
 
-
-
-
     /**
      * @ORM\Column(type="boolean", nullable=false)
      */

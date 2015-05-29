@@ -12,4 +12,28 @@ use Doctrine\ORM\EntityRepository;
  */
 class PeriodoRepository extends EntityRepository
 {
+    /**
+     * getMaxNumeroLiq
+     * Obtiene la liquidacion maxima para un periodo determinado
+     * @param $periodo
+     * @return int/mixed
+     */
+    public function getMaxNumeroLiq(Periodo $periodo)
+    {
+        $q = $this->_em->createQuery(
+            "
+            Select max(p.liquidacion)
+            From AppBundle:Periodo p
+            where p.vencimiento = :periodo
+             "
+        )
+
+//            ->setParameter('empleador', $emp->getId())
+            ->setParameter("periodo", $periodo);
+        $numero = $q->getSingleScalarResult();
+
+        return $numero ? $numero + 1 : 1;
+    }
+
+
 }

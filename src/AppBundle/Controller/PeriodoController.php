@@ -6,14 +6,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Component\Pager\Paginator;
 
 use AppBundle\Entity\Periodo;
 use AppBundle\Form\PeriodoType;
 use AppBundle\Form\PeriodoFilterType;
-
-
+use Symfony\Component\HttpFoundation\Response;
 
 
 /**
@@ -33,24 +33,24 @@ class PeriodoController extends Controller
      */
     public function indexAction(Request $request)
     {
-    list($filterForm, $queryBuilder) = $this->filter($request);
-    $pager = $this->getPager($queryBuilder);
+        list($filterForm, $queryBuilder) = $this->filter($request);
+        $pager = $this->getPager($queryBuilder);
 
         return array(
-            'pager'         => $pager,
-            'filterform'    => $filterForm->createView(),
+            'pager' => $pager,
+            'filterform' => $filterForm->createView(),
         );
     }
 
     /**
-    * Crea el paginador Pagerfanta
-    * @param Request $request
-    * @return SlidingPagination
-    * @throws NotFoundHttpException
-    */
+     * Crea el paginador Pagerfanta
+     * @param Request $request
+     * @return SlidingPagination
+     * @throws NotFoundHttpException
+     */
     private function getPager($q)
     {
-        $paginator  = $this->get('knp_paginator');
+        $paginator = $this->get('knp_paginator');
 
         $pagination = $paginator->paginate(
             $q,
@@ -94,7 +94,7 @@ class PeriodoController extends Controller
                 $filterData = $session->get('PeriodoControllerFilter');
                 $filterForm = $this->createForm(new PeriodoFilterType(), $filterData);
                 $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
-           }
+            }
         }
         return array($filterForm, $queryBuilder);
     }
@@ -117,26 +117,26 @@ class PeriodoController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('success',"El Periodo $entity se creó correctamente.");
-            if ($request->request->get('save_mode')== 'save_and_close') {
-                    return $this->redirect($this->generateUrl('app_periodo'));
-                }
-                return $this->redirect($this->generateUrl('app_periodo_new'));
+            $this->get('session')->getFlashBag()->add('success', "El Periodo $entity se creó correctamente.");
+            if ($request->request->get('save_mode') == 'save_and_close') {
+                return $this->redirect($this->generateUrl('app_periodo'));
+            }
+            return $this->redirect($this->generateUrl('app_periodo_new'));
         }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
     /**
-    * Creates a form to create a Periodo entity.
-    *
-    * @param Periodo $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Periodo entity.
+     *
+     * @param Periodo $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createCreateForm(Periodo $entity)
     {
         $form = $this->createForm(new PeriodoType(), $entity, array(
@@ -158,11 +158,11 @@ class PeriodoController extends Controller
     public function newAction()
     {
         $entity = new Periodo();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -186,7 +186,7 @@ class PeriodoController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -212,19 +212,19 @@ class PeriodoController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Periodo entity.
-    *
-    * @param Periodo $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Periodo entity.
+     *
+     * @param Periodo $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Periodo $entity)
     {
         $form = $this->createForm(new PeriodoType(), $entity, array(
@@ -232,9 +232,10 @@ class PeriodoController extends Controller
             'method' => 'PUT',
         ));
 
-        
+
         return $form;
     }
+
     /**
      * Edits an existing Periodo entity.
      *
@@ -258,16 +259,17 @@ class PeriodoController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success',"El Periodo $entity se actualizó correctamente.");
+            $this->get('session')->getFlashBag()->add('success', "El Periodo $entity se actualizó correctamente.");
             return $this->redirect($this->generateUrl('app_periodo'));
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Periodo entity.
      *
@@ -308,12 +310,26 @@ class PeriodoController extends Controller
             ->setMethod('DELETE')
             ->add('submit', 'submit', array(
                 'label' => 'Delete',
-                'attr'  => array(
-                        'class' => 'btn btn-danger btn-sm'
+                'attr' => array(
+                    'class' => 'btn btn-danger btn-sm'
                 )
             ))
-            ->getForm()
-        ;
+            ->getForm();
+    }
+
+    /**
+     * @param $periodo
+     * @Route("/check" , name="checkperiodo")
+     */
+    public function checkPeriodoAction(Request $request)
+    {
+        $periodo = $request->get("periodo");
+
+//        if(!(floor($periodo/100 <= date("Y"))))
+        $em = $this->getDoctrine()->getManager();
+        $num = $em->getRepository("AppBundle:Periodo")->getMaxNumeroLiq($periodo);
+
+        return new Response(json_encode(array("numero" => $num)));
     }
 
 }
