@@ -8,19 +8,43 @@ module.exports = function(grunt) {
                 files: [
                     {expand: true, cwd: './mvp-theme/bower_components/fontawesome/fonts/',  src:['**'] , dest: './web/assets/fonts'},
                     {expand: true, cwd: './mvp-theme/bower_components/bootstrap/fonts/',  src:['**'] , dest: './web/assets/fonts'},
+                    {expand: true, cwd: './mvp-theme/bower_components/bootstrap-fileinput/css/',  src:['**'] , dest: './web/assets/csstemp'},
 
                 ]
             }
         },
+        less: {
+            development: {
+                options: {
+                    compress: true  //minifying the result
+                },
+                files: {
+                    //compiling frontend.less into frontend.css
+                    "./web/assets/csstemp/frontend.css":"./web/assets/less/frontend.less",
+                    //compiling backend.less into backend.css
+                    "./web/assets/csstemp/backend.css":"./web/assets/less/backend.less" //,
+
+                }
+            }
+        },
         concat: {
             options: {
-                separator: ';'
+                separator: '\n'
+            },
+            css_frontend: {
+                src: ['./web/assets/csstemp/frontend.css', 'web/assets/csstemp/fileinput.css'],
+                dest: './web/assets/css/frontend.css'
+            },
+            css_backend: {
+                src: ['./web/assets/csstemp/backend.css', 'web/assets/csstemp/fileinput.css'],
+                dest: './web/assets/css/backend.css'
             },
             js_frontend: {
                 src: [
                     './mvp-theme/bower_components/jquery/dist/jquery.js',
                     './mvp-theme/bower_components/bootstrap/dist/js/bootstrap.js',
                     './mvp-theme/bower_components/slimscroll/jquery.slimscroll.min.js',
+                    './mvp-theme/bower_components/bootstrap-fileinput/js/fileinput.js',
                     './mvp-theme/global/js/mvpready-core.js',
                     './mvp-theme/global/js/mvpready-helpers.js',
                     './mvp-theme/js/mvpready-landing.js.js'
@@ -32,25 +56,12 @@ module.exports = function(grunt) {
                     './mvp-theme/bower_components/jquery/dist/jquery.js',
                     './mvp-theme/bower_components/bootstrap/dist/js/bootstrap.js',
                     './mvp-theme/bower_components/slimscroll/jquery.slimscroll.min.js', //Para scrtoll to top
+                    './mvp-theme/bower_components/bootstrap-fileinput/js/fileinput.js',
                     './mvp-theme/global/js/mvpready-core.js',
                     './mvp-theme/global/js/mvpready-helpers.js',
                     './mvp-theme/js/mvpready-admin.js'
                     ],
                 dest: './web/assets/js/backend.js'
-            }
-        },
-        less: {
-            development: {
-                options: {
-                    compress: true  //minifying the result
-                },
-                files: {
-                    //compiling frontend.less into frontend.css
-                    "./web/assets/css/frontend.css":"./web/assets/less/frontend.less",
-                    //compiling backend.less into backend.css
-                    "./web/assets/css/backend.css":"./web/assets/less/backend.less" //,
-
-                }
             }
         },
         cssmin: {
@@ -113,7 +124,7 @@ module.exports = function(grunt) {
             },
             css: {
                 files: ['./web/assets/css/*.css'],     //watched files
-                tasks: ['cssmin'],                                //tasks to run
+                tasks: ['concat:css_frontend','concat:css_backend','cssmin'],                                //tasks to run
                 options: {
                     livereload: true                            //reloads the browser
                 }
@@ -129,7 +140,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-filessrc');
+    grunt.loadNpmTasks('grunt-newer');
 
     // Task definition
-    grunt.registerTask('default', ['watch']);
+    grunt.registerTask('default', ['copy','less','concat','cssmin','uglify']);
 };

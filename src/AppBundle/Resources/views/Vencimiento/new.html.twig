@@ -1,4 +1,5 @@
-    {% extends '@RBSoftABMGenerador/layout.html.twig' %}
+{% extends ['::layout_backend.html.twig','layout.html.twig'] %}
+
     {% block id 'Vencimiento' %} 
             {% block contenido -%}
         {% embed '::portlet.html.twig' with {'titulo': 'Nuevo Vencimiento' } %}

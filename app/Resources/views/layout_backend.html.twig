@@ -4,16 +4,16 @@
     <link href="{{ asset("assets/css/backend.css") }}" rel="stylesheet">
 
     {# Estilos para Forms #}
-    <link href="{{ asset('mvp-theme/bower_components/select2/select2.css') }}" rel="stylesheet">
-    <link href="{{ asset('mvp-theme/bower_components/jquery-icheck/skins/minimal/_all.css') }}" rel="stylesheet">
-    <link href="{{ asset('mvp-theme/bower_components/bootstrap-3-timepicker/css/bootstrap-timepicker.css') }}"
-          rel="stylesheet">
-    <link href="{{ asset('mvp-theme/bower_components/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet">
-    <link href="{{ asset('mvp-theme/bower_components/bootstrap-jasny/dist/css/jasny-bootstrap.css') }}"
-          rel="stylesheet">
+    {#<link href="{{ asset('mvp-theme/bower_components/select2/select2.css') }}" rel="stylesheet">#}
+    {#<link href="{{ asset('mvp-theme/bower_components/jquery-icheck/skins/minimal/_all.css') }}" rel="stylesheet">#}
+    {#<link href="{{ asset('mvp-theme/bower_components/bootstrap-3-timepicker/css/bootstrap-timepicker.css') }}"#}
+          {#rel="stylesheet">#}
+    {#<link href="{{ asset('mvp-theme/bower_components/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet">#}
+    {#<link href="{{ asset('mvp-theme/bower_components/bootstrap-jasny/dist/css/jasny-bootstrap.css') }}"#}
+          {#rel="stylesheet">#}
     {# fin estilos para forms #}
 
-    <link href="{{ asset('mvp-theme/css/mvpready-admin.css') }}" rel="stylesheet">
+    {#<link href="{{ asset('mvp-theme/css/mvpready-admin.css') }}" rel="stylesheet">#}
     <link rel="shortcut icon" href="favicon.ico">
 {% endblock head %}
 
@@ -67,23 +67,23 @@
     <script src="{{ asset("assets/js/backend.js") }}"></script>
 
 
-    <script src="{{ asset("mvp-theme/bower_components/slimscroll/jquery.slimscroll.min.js") }}"></script>
+    {#<script src="{{ asset("mvp-theme/bower_components/slimscroll/jquery.slimscroll.min.js") }}"></script>#}
 
-    <script src="{{ asset("mvp-theme/bower_components/select2/select2.min.js") }}"></script>
-    <script src="{{ asset("mvp-theme/bower_components/jquery-icheck/icheck.min.js") }}"></script>
-    <script src="{{ asset("mvp-theme/bower_components/parsleyjs/dist/parsley.js") }}"></script>
-    <script src="{{ asset("mvp-theme/bower_components/bootstrap-3-timepicker/js/bootstrap-timepicker.js") }}"></script>
-    <script src="{{ asset("mvp-theme/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js") }}"></script>
-    <script src="{{ asset("mvp-theme/bower_components/bootstrap-jasny/js/fileinput.js") }}"></script>
+    {#<script src="{{ asset("mvp-theme/bower_components/select2/select2.min.js") }}"></script>#}
+    {#<script src="{{ asset("mvp-theme/bower_components/jquery-icheck/icheck.min.js") }}"></script>#}
+    {#<script src="{{ asset("mvp-theme/bower_components/parsleyjs/dist/parsley.js") }}"></script>#}
+    {#<script src="{{ asset("mvp-theme/bower_components/bootstrap-3-timepicker/js/bootstrap-timepicker.js") }}"></script>#}
+    {#<script src="{{ asset("mvp-theme/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js") }}"></script>#}
+
 
 
     {#<!-- App JS -->#}
-    <script src="{{ asset("mvp-theme/global/js/mvpready-core.js") }}"></script>
-    <script src="{{ asset("mvp-theme/global/js/mvpready-helpers.js") }}"></script>
+    {#<script src="{{ asset("mvp-theme/global/js/mvpready-core.js") }}"></script>#}
+    {#<script src="{{ asset("mvp-theme/global/js/mvpready-helpers.js") }}"></script>#}
 
     {#<script src="{{ asset("mvp-theme/js/mvpready-admin.js") }}"></script>#}
 
-    <script src="{{ asset("mvp-theme/global/js/demos/form-plugins.js") }}"></script>
+    {#<script src="{{ asset("mvp-theme/global/js/demos/form-plugins.js") }}"></script>#}
 
 
 
@@ -103,5 +103,6 @@
     {#})#}
 
     {#</script>#}
+    {% block script_main %}{% endblock %}
 
 {% endblock js_footer %}

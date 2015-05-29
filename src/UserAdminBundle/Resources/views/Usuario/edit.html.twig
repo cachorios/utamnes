@@ -1,5 +1,4 @@
-{% extends 'layout.html.twig' %}
-
+{% extends ['::layout_backend.html.twig','layout.html.twig'] %}
     {% block id 'Usuario' %} 
             {% block contenido -%}
                 {% embed '::portlet.html.twig' with {'titulo': 'Editar Usuario: ' ~ entity} %}

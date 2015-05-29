@@ -1,4 +1,4 @@
-    {% extends '@RBSoftABMGenerador/layout.html.twig' %}
+{% extends ['::layout_backend.html.twig','layout.html.twig'] %}
 
     {% block contenido -%}
     {% embed '::portlet.html.twig' with {'titulo': 'Ver Usuario: ' ~ entity} %}

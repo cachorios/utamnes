@@ -14,7 +14,7 @@
             {{ form_row(form['movil']) }}
             {{ form_row(form['email']) }}
             {{ form_row(form['current_password']) }}
-            {{ form_widget(form)  }}
+            {{ form_widget(form) }}
         </div>
     </div>
 
@@ -29,32 +29,3 @@
 
 </form>
 
-<script>
-
-    $(document).ready(function () {
-
-        $("#fos_user_profile_form_foto").fileinput({
-            {% set imagen_src = (user.foto  == null ? asset("assets/img/user_defaul.png" ) : asset("uploads/users/" ~ user.foto  )) %}
-            initialPreview: ["<img src='{{ imagen_src }}' class='file-preview-image'>"],
-
-            showCaption: false,
-            showRemove: false,
-            showUpload: false,
-
-            overwriteInitial: true,
-
-
-            showPreview: true,
-            browseClass: "btn btn-primary btn-sm",
-            {#fileType: "any",#}
-            allowedFileTypes: ['image'],
-            allowedPreviewTypes: ['image'],
-            'allowedFileExtensions': ['jpg', 'png', 'gif']
-
-
-        });
-
-
-    });
-
-</script>

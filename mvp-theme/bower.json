@@ -26,6 +26,7 @@
     "vegas": "~1.3.5",
     "downcount": "~1.0.0",
     "datatables-helper": "rodh/datatables-helper",
-    "bootstrap-3-timepicker": "rodh/bootstrap-3-timepicker#~0.2.6"
+    "bootstrap-3-timepicker": "rodh/bootstrap-3-timepicker#~0.2.6",
+    "bootstrap-fileinput": "~2.4.0"
   }
 }

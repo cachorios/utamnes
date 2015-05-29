@@ -1,11 +1,5 @@
 {% extends ['::layout_backend.html.twig','layout.html.twig'] %}
 
-{#{% block fos_user_content %}#}
-
-{#{% endblock fos_user_content %}#}
-
-
-
 
 {% block id 'Prodile' %}
 
@@ -21,3 +15,33 @@
         {% endblock %}
     {% endembed %}
 {% endblock contenido %}
+
+    {% block script_main %}
+        <script>
+
+            $(document).ready(function () {
+
+                $("#fos_user_profile_form_foto").fileinput({
+                    {% set imagen_src = (user.foto  == null ? asset("assets/img/user_defaul.png" ) : asset("uploads/users/" ~ user.foto  )) %}
+                    initialPreview: ["<img src='{{ imagen_src }}' class='file-preview-image'>"],
+
+                    showCaption: false,
+                    showRemove: false,
+                    showUpload: false,
+
+                    overwriteInitial: true,
+
+                    showPreview: true,
+                    browseClass: "btn btn-primary btn-sm",
+                    {#fileType: "any",#}
+                    allowedFileTypes: ['image'],
+                    allowedPreviewTypes: ['image'],
+                    'allowedFileExtensions': ['jpg', 'png', 'gif']
+
+
+                });
+
+
+            });
+        </script>
+    {% endblock script_main %}
