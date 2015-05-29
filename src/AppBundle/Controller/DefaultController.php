@@ -12,7 +12,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->redirect( $this->generateUrl("fos_user_profile_show"));
-//        return $this->render('default/index.html.twig');
+//        return $this->redirect( $this->generateUrl("fos_user_profile_show"));
+        return $this->render('@App/Default/index.html.twig');
     }
 }
