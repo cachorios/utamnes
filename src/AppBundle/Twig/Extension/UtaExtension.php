@@ -34,7 +34,7 @@ class UtaExtension  extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'empleadorActivo' => new \Twig_Function_Method($this, 'empleadorActivo'),
+            'empleadorActivo' => new \Twig_Function_Method($this, 'getEmpleadorActivo'),
 
         );
     }

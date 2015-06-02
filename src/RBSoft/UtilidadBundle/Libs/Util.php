@@ -32,6 +32,12 @@ class Util
 
         return $results;
     }
+
+    public static function formatCuit($cuit){
+        return sprintf("%d-%s/%d",substr($cuit,0,2),
+            number_format(substr($cuit,2,8),0,",","."),
+            substr($cuit,10,1));
+    }
 }
 
 

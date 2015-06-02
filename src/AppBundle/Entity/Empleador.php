@@ -3,6 +3,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use RBSoft\UtilidadBundle\Libs\Util;
 
 
 /**
@@ -311,7 +312,7 @@ class Empleador
     }
 
     public function __toString(){
-        return $this->getRazon();
+        return $this->getRazon() . " (". Util::formatCuit($this->cuit) . ")";
     }
 
     /**
