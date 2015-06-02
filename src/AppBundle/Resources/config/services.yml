@@ -14,3 +14,15 @@ services:
     uta.liquidacion:
         class: AppBundle\Servicios\LiquidacionManager
         arguments: [@service_container]
+
+    twig.extension.uta.empleador:
+        class:  AppBundle\Twig\Extension\UtaExtension
+        arguments: [@service_container]
+        tags:
+            - { name: twig.extension}
+
+    uta.after_login:
+        class: AppBundle\Servicios\LoginRedirect
+        arguments: [@router]
+#        tags:
+#            - { name: kernel.event_subscriber }
