@@ -67,12 +67,12 @@ class TrabajadorModel
     public function guardar(Trabajador $trabajador, $conceptos_original = null)
     {
 
-        $this->asignarConceptosObligatorios($trabajador);
+      //  $this->asignarConceptosObligatorios($trabajador);
 
         $this->em->beginTransaction();
 
         try {
-            $trabajador->setUsuario($this->empleador->getUsuario());
+            //$trabajador->setUsuario($this->empleador->getUsuario());
 
             $trabajador->setEmpleador($this->empleador);
             $this->em->persist($trabajador);
@@ -90,15 +90,15 @@ class TrabajadorModel
     }
 
 
-
-    private function asignarConceptosObligatorios(Trabajador $trabajador){
-        $obls= $this->getConceptosObligatorios();
-
-        foreach($obls as $obl){
-            $trabajador->addConcepto($obl);
-        }
-
-    return $trabajador->getConceptos();
-    }
+//
+//    private function asignarConceptosObligatorios(Trabajador $trabajador){
+//        $obls= $this->getConceptosObligatorios();
+//
+//        foreach($obls as $obl){
+//            $trabajador->addConcepto($obl);
+//        }
+//
+//    return $trabajador->getConceptos();
+//    }
 
 }
