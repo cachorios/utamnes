@@ -29,6 +29,12 @@ class Periodo
     private $vencimiento;
 
     /**
+     *
+     *  @ORM\ManyToOne(targetEntity="Empleador")
+     */
+    private $empleador;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="liquidacion", type="integer")
@@ -38,7 +44,8 @@ class Periodo
     /**
      * @var integer
      *
-     * @ORM\Column(name="tipo", type="integer")
+     * @ORM\Column(name="tipo", type="integer", nullable=false)
+     * 0 original, >0 nro de rectificativa
      */
     private $tipo;
 
@@ -128,7 +135,7 @@ class Periodo
     }
 
     public function __toString(){
-        return sprintf("%s - %d(%d)",$this->getVencimiento(),$this->getLiquidacion(), $this->getTipo());
+        return sprintf("%s - %d(%d)",$this->getVencimiento(),$this->getLiquidacion(), $this->getTipo(), $this->getEmpleador());
 
     }
 
@@ -157,5 +164,28 @@ class Periodo
     public function getActivo()
     {
         return $this->activo;
+    }
+
+    /**
+     * Set empleador
+     *
+     * @param \AppBundle\Entity\Empleador $empleador
+     * @return Periodo
+     */
+    public function setEmpleador(\AppBundle\Entity\Empleador $empleador = null)
+    {
+        $this->empleador = $empleador;
+
+        return $this;
+    }
+
+    /**
+     * Get empleador
+     *
+     * @return \AppBundle\Entity\Empleador 
+     */
+    public function getEmpleador()
+    {
+        return $this->empleador;
     }
 }

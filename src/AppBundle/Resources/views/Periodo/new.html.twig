@@ -61,9 +61,10 @@
                                     {
                                         url: '{{ path("checkperiodo") }}',
                                         data: {periodo: periodo},
+
                                         success: function (data, textStatus, jqXHR) {
                                             $("#appbundle_periodo_liquidacion").val(data.numero);
-//                                                $("appbundle_periodo_tipo").val(data.tipo);
+                                            $("#appbundle_periodo_tipo").val(data.tipo);
 
                                         },
                                         dataType: 'JSON',
