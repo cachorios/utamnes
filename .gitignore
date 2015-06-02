@@ -16,7 +16,9 @@
 /web/bundles/*
 /web/assetisc/*
 
-/mvp-theme/
+
+/mvp-theme/*
+!/mvp-theme/bower.json
 /node_modules/
 /src/AppBundle/Entity/*.php~
 /src/*/*Bundle/Entity/*.php~
