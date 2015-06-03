@@ -31,10 +31,11 @@ class PeriodoRepository extends EntityRepository
         )
 
             ->setParameter('empleador', $emp->getId())
-            ->setParameter("periodo", $periodo);
+            ->setParameter('periodo', $periodo);
         $numero = $q->getSingleScalarResult();
+        ld($numero);
 
-        return $numero ? $numero + 1 : 1;
+        return $numero ? $numero + 1 : 0;
     }
 
 

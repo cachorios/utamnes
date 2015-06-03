@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-{% extends 'layout.html.twig' %}
-=======
 {% extends '::layout_frontend.html.twig' %}
->>>>>>> afb199b8226cb001c11fe7708f78162be06c8bfe
 
 {% block id 'Periodo' %} 
 
@@ -29,6 +25,7 @@
                         </div>
                     {% endfor %}
                 {% endfor %}
+
 
                 <form method='post' action='.' class='form-horizontal'>
                     {% embed 'modal.html.twig' with { 'modal_id': 'filters', 'modal_titulo': 'Filtro de Periodos'} %}

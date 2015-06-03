@@ -114,6 +114,7 @@ class PeriodoController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setEmpleador($this->get('uta.empleador_activo')->getEmpleador());
             $em->persist($entity);
             $em->flush();
 
@@ -330,7 +331,7 @@ class PeriodoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $num = $em->getRepository("AppBundle:Periodo")->getMaxNumeroLiq($this->get('uta.empleador_activo')->getEmpleador(), $periodo);
 
-        return new Response(json_encode(array("numero" => $num, "tipo" => 0)));
+        return new Response(json_encode(array("numero" => $num , "tipo" => 0)));
     }
 
 }
