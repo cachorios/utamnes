@@ -47,6 +47,15 @@ class Periodo
      */
     private $activo;
 
+
+
+    public function __construct()
+    {
+        $this->setActivo(0);
+    }
+
+
+
     /**
      * Get id
      *

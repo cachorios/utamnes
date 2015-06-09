@@ -169,7 +169,7 @@ class PeriodoController extends Controller
     /**
      * Finds and displays a Periodo entity.
      *
-     * @Route("/{id}", name="app_periodo_show")
+     * @Route("/{id}/show", name="app_periodo_show")
      * @Method("GET")
      * @Template()
      */
@@ -319,16 +319,17 @@ class PeriodoController extends Controller
 
     /**
      * @param $periodo
-     * @Route("/check" , name="checkperiodo")
+     * @Route("/check" , name="periodo_check")
      */
     public function checkPeriodoAction(Request $request)
     {
         $periodo = $request->get("periodo");
 
 //        if(!(floor($periodo/100 <= date("Y"))))
+
         $em = $this->getDoctrine()->getManager();
         $num = $em->getRepository("AppBundle:Periodo")->getMaxNumeroLiq($periodo);
-
+//        ld($periodo,$num);
         return new Response(json_encode(array("numero" => $num)));
     }
 

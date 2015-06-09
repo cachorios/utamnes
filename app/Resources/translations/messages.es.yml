@@ -1,0 +1,29 @@
+#Trabajador
+'cuil': cuil
+'Nuevo Trabajador': 'Nuevo Trabajador'
+'Cuil': Cuil
+
+'Legajo': Legajo
+'Apellido y Nombre': 'Apellido y Nombre'
+'Localidad': Localidad
+'legajo': legajo
+'nombre': nombre
+'telefono': telefono
+'direccion': direccion
+'localidad': localidad
+'email': email
+'Acciones': Acciones
+
+Sexo: Sexo
+Masculino: Masculino
+Femenino: Femenino
+'Estado civil': Estado civil
+Soltero: Soltero
+Casado: Casado
+Divorciado: Divorciado
+Viudo: Viudo
+Telefono: Telefono
+Email: eMmail
+Direccion: Direccion
+'Fecha ingreso': Fecha ingreso
+'Fecha baja': Fecha baja

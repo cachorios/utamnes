@@ -1,4 +1,5 @@
 @import "base";
+
 @import "../../../mvp-theme/templates/landing/less/mvpready-landing";
 
 fieldset{
@@ -11,4 +12,16 @@ legend{
   margin-bottom: 0.75em;
   margin-top: 0;
   font-size: 18px;
+}
+
+
+body.trabajador li.trabajador,
+body.periodo li.periodos
+{
+    & > a,
+    & > a:hover {
+      color: @navbar-landing-link-active-color;
+      background: @navbar-landing-link-active-bg;
+      border-bottom: none;
+    }
 }

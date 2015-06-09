@@ -1,2 +1,145 @@
 {% extends '::layout_frontend.html.twig' %}
-{% block contenido %}??{% endblock %}
+{% block contenido %}
+    <div class="layout layout-stack-sm layout-main-left">
+
+        <div class="col-sm-4 col-sm-push-8 layout-sidebar">
+
+            <div class="well text-center">
+                <p><i class="fa fa-question-circle fa-5x text-muted"></i></p>
+                <h4>Tengo una pregunta?</h4>
+
+                <p>Como realizar una tarea o proceso, paso a paso. o utilicelo como guía de referencia </p>
+                <a class="btn btn-secondary" href="javascript:;">Obtener la respuesta!</a>
+            </div>
+            <!-- /.well -->
+
+            <br>
+
+            <div class="portlet">
+
+                <div class="heading-block">
+                    <h4>Categorías</h4>
+                </div>
+
+                <div class="list-group">
+
+                    <a class="list-group-item" href="javascript:;">
+                        Trabajadores
+                        <span class="badge badge-primary">6</span>
+                    </a>
+
+                    <a class="list-group-item" href="javascript:;">
+                        Liquidación
+                        <span class="badge badge-primary">5</span>
+                    </a>
+
+                    <a class="list-group-item" href="javascript:;">
+                        Cuenta Correinte
+                        <span class="badge badge-primary">1</span>
+                    </a>
+
+                    <a class="list-group-item" href="javascript:;">
+                        Seguridad
+                        <span class="badge badge-primary">4</span>
+                    </a>
+                </div>
+                <!-- /.list-group -->
+
+            </div>
+            <!-- /.portlet -->
+
+        </div>
+        <!-- /.layout-sidebar -->
+
+        <div class="col-sm-8 col-sm-pull-4 layout-main">
+
+            <div class="heading-block">
+                <h3>Informacion general</h3>
+            </div>
+
+            <div class="panel-group accordion-simple" id="accordion-help">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#faq-general-1" data-parent="#accordion-help" data-toggle="collapse"
+                               class="accordion-toggle"><i class="fa accordion-caret"></i>
+                                Ultimo Acceso </a>
+                        </h4>
+                    </div>
+                    <!-- .panel-heading -->
+
+                    <div class="panel-collapse collapse" id="faq-general-1">
+                        <div class="panel-body">
+                            <p>Fecha: 25/05/2015</p>
+
+                            <p>Hora: 15:22:33</p>
+
+                        </div>
+                        <!-- .panel-body -->
+                    </div>
+                    <!-- ./panel-collapse -->
+                </div>
+                <!-- .panel -->
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#faq-general-2" data-parent="#accordion-help" data-toggle="collapse"
+                               class="accordion-toggle"><i class="fa accordion-caret"></i>
+                                Cantidad de Empleados aportantes </a>
+                        </h4>
+                    </div>
+                    <!-- .panel-heading -->
+
+                    <div class="panel-collapse collapse" id="faq-general-2">
+                        <div class="panel-body">
+                            <p>Empleados: 3</p>
+                        </div>
+                        <!-- .panel-body -->
+                    </div>
+                    <!-- ./panel-collapse -->
+                </div>
+                <!-- .panel -->
+            </div>
+            <!-- /.accordion -->
+
+            <hr class="spacer-sm">
+
+            <div class="heading-block">
+                <h3>Liquidación</h3>
+            </div>
+
+            <div class="panel-group accordion-simple" id="accordion-help">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#faq-general-3" data-parent="#accordion-help" data-toggle="collapse"
+                               class="accordion-toggle"><i class="fa accordion-caret"></i>
+                                Ultima Liquidación </a>
+                        </h4>
+                    </div>
+                    <!-- .panel-heading -->
+
+                    <div class="panel-collapse collapse" id="faq-general-3">
+                        <div class="panel-body">
+                            <p>Periodo: 2015/05</p>
+
+                            <p>Aportes: 1525.23</p>
+
+                            <p>Contribuciones: 1525.23</p>
+
+
+                        </div>
+                        <!-- .panel-body -->
+                    </div>
+                    <!-- ./panel-collapse -->
+                </div>
+                <!-- .panel -->
+            </div>
+            <!-- /.accordion -->
+        </div>
+
+    </div> <!-- /.layout-main -->
+
+
+{% endblock %}

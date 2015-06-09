@@ -1,7 +1,6 @@
 {% extends '::layout_frontend.html.twig' %}
 
-
-{% block id 'Trabajador' %} 
+{% block id 'trabajador' %}
 
     {% block contenido -%}
         {% embed '::portlet.html.twig' with {'titulo': 'Lista de Trabajador <small>(' ~ pager.totalItemCount ~ ' )</small>' } %}
@@ -61,13 +60,13 @@
                 <table class="table table-striped table-bordered  table-responsive">
                     <thead>
                     <tr>
-                        <th class="{{ pager.isSorted('cuil') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'cuil '|trans | capitalize }} </th>
-                        <th class="{{ pager.isSorted('legajo') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'legajo '|trans | capitalize }} </th>
-                        <th class="{{ pager.isSorted('nombre') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'nombre '|trans | capitalize }} </th>
-                        <th class="{{ pager.isSorted('telefono') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'telefono '|trans | capitalize }} </th>
-                        <th class="{{ pager.isSorted('direccion') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'direccion '|trans | capitalize }} </th>
-                        <th class="{{ pager.isSorted('localidad') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'localidad '|trans | capitalize }} </th>
-                        <th class="{{ pager.isSorted('email') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'email '|trans | capitalize }} </th>
+                        <th class="{{ pager.isSorted('cuil') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'cuil'|trans | capitalize }} </th>
+                        <th class="{{ pager.isSorted('legajo') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'legajo'|trans | capitalize }} </th>
+                        <th class="{{ pager.isSorted('nombre') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'nombre'|trans | capitalize }} </th>
+                        <th class="{{ pager.isSorted('telefono') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'telefono'|trans | capitalize }} </th>
+                        <th class="{{ pager.isSorted('direccion') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'direccion'|trans | capitalize }} </th>
+                        <th class="{{ pager.isSorted('localidad') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'localidad'|trans | capitalize }} </th>
+                        <th class="{{ pager.isSorted('email') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'email'|trans | capitalize }} </th>
                         <th class="actions">{{ 'Acciones'|trans }}</th>
 
                     </tr>

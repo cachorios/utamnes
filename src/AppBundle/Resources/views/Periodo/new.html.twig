@@ -54,16 +54,16 @@
             <script>
                 $("#appbundle_periodo_vencimiento").change(
                         function () {
-                            alert("hola");
+
                             periodo = this.value;
 
                             $.ajax(
                                     {
-                                        url: '{{ path("checkperiodo") }}',
+                                        url: '{{ path("periodo_check") }}',
                                         data: {periodo: periodo},
                                         success: function (data, textStatus, jqXHR) {
                                             $("#appbundle_periodo_liquidacion").val(data.numero);
-//                                                $("appbundle_periodo_tipo").val(data.tipo);
+                                            //$("appbundle_periodo_tipo").val(0);
 
                                         },
                                         dataType: 'JSON',

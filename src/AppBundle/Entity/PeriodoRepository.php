@@ -18,7 +18,7 @@ class PeriodoRepository extends EntityRepository
      * @param $periodo
      * @return int/mixed
      */
-    public function getMaxNumeroLiq(Periodo $periodo)
+    public function getMaxNumeroLiq( $periodo)
     {
         $q = $this->_em->createQuery(
             "
