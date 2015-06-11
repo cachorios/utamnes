@@ -1,6 +1,6 @@
 {% extends '::layout_frontend.html.twig' %}
 
-{% block id 'Periodo' %} 
+{% block id 'periodo' %}
 
     {% block contenido -%}
         {% embed '::portlet.html.twig' with {'titulo': 'Lista de Periodo <small>(' ~ pager.totalItemCount ~ ' )</small>' } %}
@@ -25,7 +25,6 @@
                         </div>
                     {% endfor %}
                 {% endfor %}
-
 
                 <form method='post' action='.' class='form-horizontal'>
                     {% embed 'modal.html.twig' with { 'modal_id': 'filters', 'modal_titulo': 'Filtro de Periodos'} %}

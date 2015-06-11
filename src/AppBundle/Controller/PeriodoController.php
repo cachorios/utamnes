@@ -320,8 +320,7 @@ class PeriodoController extends Controller
 
     /**
      * @param $periodo
-     *
-     * @Route("/checkperiodo" , name="checkperiodo")
+     * @Route("/check" , name="periodo_check")
      */
     public function checkPeriodoAction(Request $request)
     {
@@ -331,7 +330,8 @@ class PeriodoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $num = $em->getRepository("AppBundle:Periodo")->getMaxNumeroLiq($this->get('uta.empleador_activo')->getEmpleador(), $periodo);
 
-        return new Response(json_encode(array("numero" => $num , "tipo" => 0)));
+//        ld($periodo,$num);
+        return new Response(json_encode(array("numero" => $num)));
     }
 
 }

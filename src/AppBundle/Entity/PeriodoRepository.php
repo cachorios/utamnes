@@ -21,7 +21,6 @@ class PeriodoRepository extends EntityRepository
      */
     public function getMaxNumeroLiq(Empleador $emp, $periodo)
     {
-//        ld($emp,$periodo);
         $q = $this->_em->createQuery(
             "
             Select max(p.liquidacion)
@@ -30,12 +29,10 @@ class PeriodoRepository extends EntityRepository
              "
         )
 
-            ->setParameter('empleador', $emp->getId())
-            ->setParameter('periodo', $periodo);
+            ->setParameter("empleador", $emp->getId())
+            ->setParameter("periodo", $periodo);
         $numero = $q->getSingleScalarResult();
-        ld($numero);
-
-        return $numero ? $numero + 1 : 0;
+        return $numero >= 0  ? $numero + 1 : 0;
     }
 
 
