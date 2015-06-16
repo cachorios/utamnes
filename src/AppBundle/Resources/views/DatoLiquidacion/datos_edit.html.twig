@@ -35,9 +35,8 @@
                         <tr>
                             <th>Concepto</th>
                             <th>Descripción</th>
-                            <th>Req</th>
-                            <th>Liquida</th>
-                            <th>Valor</th>
+                            <th width="80">Liquida</th>
+                            <th width="80">Valor</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,21 +44,23 @@
                             <tr>
                                 <td class="col-sm-1">{{ concepto.numero }}</td>
                                 <td>{{ concepto.descripcion }}</td>
-                                <td>{{ concepto.obligatorio ? "Requerido" : "" }}</td>
-                                <td>{% if not concepto.obligatorio  %}
-                                        <button>Liquidar</button>
+                                <td align="center">
+                                    {% if not concepto.obligatorio  %}
+                                        <input type="checkbox" value="0" name="dato_conc[{{ concepto.numero }}]" id="">
+                                    {% else %}
+                                        <input type="checkbox" value="1" checked name="dato_conc[{{ concepto.numero }}]" id="" disabled>
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <input type="text" class="col-md-3 right" name="" value="" readonly>
+                                    <input type="text" class="right" name="dato_valor[{{ concepto.numero }}]" value="" readonly>
                                 </td>
                             </tr>
                         {% endfor %}
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="4" >Total:</td>
-                            <td>0.00</td>
+                            <td colspan="3" align="right" ><button>Liquidar</button> &nbsp;&nbsp;&nbsp;&nbsp;Total:</td>
+                            <td align="right">0.00</td>
                         </tr>
                     </tfoot>
                 </table>
