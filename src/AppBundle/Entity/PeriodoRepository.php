@@ -19,20 +19,65 @@ class PeriodoRepository extends EntityRepository
      * @param $periodo
      * @return int/mixed
      */
-    public function getMaxNumeroLiq(Empleador $emp, $periodo)
+    public function getLiquidaciones(Empleador $emp, $periodo)
     {
+//        $liqarray = array();
         $q = $this->_em->createQuery(
             "
-            Select max(p.liquidacion)
+            Select p.liquidacion, max(p.tipo)
             From AppBundle:Periodo p
             where p.empleador = :empleador AND p.vencimiento = :periodo
+            GROUP BY p.liquidacion
+            order BY p.liquidacion DESC, p.tipo DESC
              "
         )
-
             ->setParameter("empleador", $emp->getId())
             ->setParameter("periodo", $periodo);
-        $numero = $q->getSingleScalarResult();
-        return $numero >= 0  ? $numero + 1 : 0;
+
+        $liqarray = $q->getArrayResult();
+
+        //saco el numero de elementos
+        $longitud = count($liqarray);
+
+        //saco un numero mas de liquidacion
+//        ld($liqarray[0]['liquidacion']);
+        $liqmas = ($liqarray [0]['liquidacion'] )+ 1;
+
+
+        $liqarray[] = array($liqmas , 0);
+//                ld($liqarray[]);
+
+//        ld($liqarray);
+//        ld();
+//        ld($longitud);
+//        ld();
+//        ld($liqmas);
+
+        //Recorro todos los elementos
+//        for ($i = 0; $i < $longitud; $i++) {
+            //saco el valor de cada elemento
+//            ld($liqarray[$i]);
+//            echo "<br>";
+//        }
+
+//        $numero = $qmaxliq->getSingleScalarResult();
+
+//        ---------
+//        obtiene nro mayor de liquidacion para el periodo
+//        ---------
+//        $qmaxliq = $this->_em->createQuery(
+//            "
+//            Select max(p.liquidacion)
+//            From AppBundle:Periodo p
+//            where p.empleador = :empleador AND p.vencimiento = :periodo
+//             "
+//        )
+//            ->setParameter("empleador", $emp->getId())
+//            ->setParameter("periodo", $periodo);
+//        $numero = $qmaxliq->getSingleScalarResult();
+
+//        return $numero >= 0 ? $numero + 1 : 0;
+        return $liqarray;
     }
 
 
