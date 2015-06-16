@@ -28,9 +28,9 @@
 
                     {#<p></p>#}
 
-                    {{ form_start(form) }}
-                    {{ form_widget(form) }}
-                    {#{% include 'AppBundle:Periodo:_form.html.twig' with {'form': form} %}#}
+                    {#{{ form_start(form) }}#}
+                    {#{{ form_widget(form) }}#}
+                    {% include 'AppBundle:Periodo:_form.html.twig' with {'form': form} %}
                     <div class="col-sm-offset-2 inner-actions">
                         <button title="Guardar" class="form-submit-button btn btn-sm btn-default btn-primary"
                                 value="save_and_add" name="save_mode" type="submit">Guardar y Nuevo <span
@@ -55,6 +55,7 @@
         {% endblock contenido %}
         {% block script_main %}
             <script>
+                var liqs;
                 $("#appbundle_periodo_vencimiento").change(
                         function () {
 
@@ -65,8 +66,9 @@
                                         url: '{{ path("periodo_check") }}',
                                         data: {periodo: periodo},
                                         success: function (data, textStatus, jqXHR) {
+                                            liqs = data;
                                             $("#appbundle_periodo_liquidacion").val(data.numero);
-                                            //$("appbundle_periodo_tipo").val(0);
+                                            $("#appbundle_periodo_tipo").val(0);
 
                                         },
                                         dataType: 'JSON',

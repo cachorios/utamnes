@@ -24,7 +24,7 @@ class PeriodoRepository extends EntityRepository
 //        $liqarray = array();
         $q = $this->_em->createQuery(
             "
-            Select p.liquidacion, max(p.tipo)
+            Select p.liquidacion, max(p.tipo) as tipo
             From AppBundle:Periodo p
             where p.empleador = :empleador AND p.vencimiento = :periodo
             GROUP BY p.liquidacion
@@ -36,47 +36,12 @@ class PeriodoRepository extends EntityRepository
 
         $liqarray = $q->getArrayResult();
 
-        //saco el numero de elementos
-        $longitud = count($liqarray);
-
         //saco un numero mas de liquidacion
-//        ld($liqarray[0]['liquidacion']);
         $liqmas = ($liqarray [0]['liquidacion'] )+ 1;
 
 
-        $liqarray[] = array($liqmas , 0);
-//                ld($liqarray[]);
+        $liqarray[] = array('liquidacion' => $liqmas , 'tipo' => 0);
 
-//        ld($liqarray);
-//        ld();
-//        ld($longitud);
-//        ld();
-//        ld($liqmas);
-
-        //Recorro todos los elementos
-//        for ($i = 0; $i < $longitud; $i++) {
-            //saco el valor de cada elemento
-//            ld($liqarray[$i]);
-//            echo "<br>";
-//        }
-
-//        $numero = $qmaxliq->getSingleScalarResult();
-
-//        ---------
-//        obtiene nro mayor de liquidacion para el periodo
-//        ---------
-//        $qmaxliq = $this->_em->createQuery(
-//            "
-//            Select max(p.liquidacion)
-//            From AppBundle:Periodo p
-//            where p.empleador = :empleador AND p.vencimiento = :periodo
-//             "
-//        )
-//            ->setParameter("empleador", $emp->getId())
-//            ->setParameter("periodo", $periodo);
-//        $numero = $qmaxliq->getSingleScalarResult();
-
-//        return $numero >= 0 ? $numero + 1 : 0;
         return $liqarray;
     }
 

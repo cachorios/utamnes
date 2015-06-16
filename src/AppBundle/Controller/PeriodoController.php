@@ -330,8 +330,8 @@ class PeriodoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $num = $em->getRepository("AppBundle:Periodo")->getLiquidaciones($this->get('uta.empleador_activo')->getEmpleador(), $periodo);
 
-//        ld($periodo,$num);
-        return new Response(json_encode(array("numero" => $num)));
+//        ld($num);
+        return new Response(json_encode($num));
     }
 
 }
