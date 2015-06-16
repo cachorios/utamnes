@@ -327,11 +327,14 @@ class PeriodoController extends Controller
         $periodo = $request->get("periodo");
 
 //        if(!(floor($periodo/100 <= date("Y"))))
+
         $em = $this->getDoctrine()->getManager();
+
         $num = $em->getRepository("AppBundle:Periodo")->getLiquidaciones($this->get('uta.empleador_activo')->getEmpleador(), $periodo);
 
 //        ld($num);
         return new Response(json_encode($num));
+
     }
 
 }

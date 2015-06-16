@@ -67,9 +67,9 @@ class Periodo
 
 
 
-    public function __construct()
-    {
-        $this->setActivo(0);
+
+    public function __construct(){
+        $this->activo = 0;
     }
 
 
