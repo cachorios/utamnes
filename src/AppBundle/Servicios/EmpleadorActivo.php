@@ -31,4 +31,18 @@ class EmpleadorActivo {
         return $this->empleador;
     }
 
+    public function getConceptos()
+    {
+        $em = $this->em;
+        $qb = $em->createQueryBuilder();
+        $qb->select("c")
+            ->from("AppBundle:Concepto","c")
+            ->where("c.activo = 1")
+            ->orderBy('c.obligatorio','ASC')
+            ->orderBy('c.numero','ASC');
+
+        $q = $qb->getQuery();
+        return $q->execute();
+    }
+
 } 

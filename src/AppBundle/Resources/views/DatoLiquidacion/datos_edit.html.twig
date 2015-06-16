@@ -1,0 +1,81 @@
+
+
+{% embed "::modal_datosliq.html.twig"  with { 'modal_id': "datos_liq_" ~ trabajador.id , 'modal_titulo': "Datos de Liquidacion de: >> " ~ trabajador, size: "modal-lg" } %}
+    {% block modal_contenido %}
+
+
+            <input type="hidden" value="PUT" name="_method">
+            <fieldset>
+                <legend>Importe según SICOSS </legend>
+
+
+                {% for i,imp in importes %}
+
+                    {% if i == 0 %}
+                        <div class="form-group col-md-2">
+                            <label for="appbundle_datosliq_tr" class="col-md-2 control-label required">TR</label>
+                            <div class="col-md-12">
+                                <input type="text" value="{{ imp }}" class="form-control align-right" maxlength="11" required="required" name="datosliq[tr]" id="appbundle_datosliq_tr">
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="form-group col-md-2">
+                            <label for="appbundle_datosliq_imp{{ i }}" class="col-md-2 control-label required">IMP{{ i }}</label>
+                            <div class="col-md-12">
+                                <input type="text" value="{{ imp }}" class="form-control" maxlength="11" required="required" name="datosliq[imp{{ i }}]" id="appbundle_datosliq_imp{{ i }}">
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+
+                <legend>Conceptos a liquidar</legend>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Concepto</th>
+                            <th>Descripción</th>
+                            <th>Req</th>
+                            <th>Liquida</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for concepto in conceptos %}
+                            <tr>
+                                <td class="col-sm-1">{{ concepto.numero }}</td>
+                                <td>{{ concepto.descripcion }}</td>
+                                <td>{{ concepto.obligatorio ? "Requerido" : "" }}</td>
+                                <td>{% if not concepto.obligatorio  %}
+                                        <button>Liquidar</button>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <input type="text" class="col-md-3 right" name="" value="" readonly>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" >Total:</td>
+                            <td>0.00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+
+            </fieldset>
+
+
+            {#<input type="hidden" value="_O8Gmxr5_K3D4vfPD6-nM-myI9Htca-ADaJ_SUrg4f4" class="form-control" name="datosliq[_token]" id="appbundle_datosliq__token">#}
+
+
+    {% endblock modal_contenido %}
+    {% block modal_botones %}
+        <input type="submit" class="form-submit-button btn btn-sm btn-default btn-primary" value="Guardar">
+        {#<button class="btn btn-primary">Guardar Datos</button>#}
+    {% endblock %}
+
+{% endembed %}
+

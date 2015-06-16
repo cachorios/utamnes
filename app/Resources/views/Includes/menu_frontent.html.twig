@@ -8,19 +8,8 @@
             </a>
         </li>
 
-        {#<li class="dropdown ">#}
-            {#<a href="./page-pricing.html">#}
-                {#Pricing#}
-            {#</a>#}
-        {#</li>#}
 
-        {#<li class="dropdown ">#}
-            {#<a href="./page-contact.html">#}
-                {#Contact#}
-            {#</a>#}
-        {#</li>#}
-
-        <li class="dropdown periodo">
+        <li class="dropdown periodo dato_liquidacion">
 
             <a data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
                 Liquidación
@@ -36,9 +25,9 @@
                 </li>
 
                 <li>
-                    <a href="{{ path("app_periodo") }}">
+                    <a href="{{ path("liquidaciondato") }}">
                         <i class="fa fa-comments-o dropdown-icon"></i>
-                        Remnuerativos del periodo
+                        Datos del periodo
                     </a>
                 </li>
 
@@ -105,28 +94,28 @@
 
         </li>
 
-        <li class="dropdown">
+        {#<li class="dropdown">#}
 
-            <a data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="javascript:;" aria-expanded="false">
-                More
-                <i class="fa fa-caret-down navbar-caret"></i>
-            </a>
+            {#<a data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="javascript:;" aria-expanded="false">#}
+                {#More#}
+                {#<i class="fa fa-caret-down navbar-caret"></i>#}
+            {#</a>#}
 
-            <ul role="menu" class="dropdown-menu">
-                <li>
-                    <a href="../admin/">
-                        <i class="fa fa-external-link dropdown-icon"></i>
-                        Admin Template
-                    </a>
-                </li>
-                <li>
-                    <a href="../launch/">
-                        <i class="fa fa-external-link dropdown-icon"></i>
-                        Launch Template
-                    </a>
-                </li>
-            </ul>
-        </li>
+            {#<ul role="menu" class="dropdown-menu">#}
+                {#<li>#}
+                    {#<a href="../admin/">#}
+                        {#<i class="fa fa-external-link dropdown-icon"></i>#}
+                        {#Admin Template#}
+                    {#</a>#}
+                {#</li>#}
+                {#<li>#}
+                    {#<a href="../launch/">#}
+                        {#<i class="fa fa-external-link dropdown-icon"></i>#}
+                        {#Launch Template#}
+                    {#</a>#}
+                {#</li>#}
+            {#</ul>#}
+        {#</li>#}
 
     </ul>
 

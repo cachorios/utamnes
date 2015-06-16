@@ -3,6 +3,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use RBSoft\UtilidadBundle\Libs\Util;
 use RBSoft\UtilidadBundle\Validator\Constraints as RBAssert;
 
 
@@ -356,7 +357,7 @@ class Trabajador
 
     public function __toString()
     {
-        return $this->getNombre();
+        return $this->getNombre() . " (". Util::formatCuit( $this->getCuil())  ." )";
     }
 
     /**
