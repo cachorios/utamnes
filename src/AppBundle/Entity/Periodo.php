@@ -12,7 +12,19 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Periodo
 {
-    static public $_TIPO = array("Original", "1er.Rect.", "2da.Rect.", "3er.Rect.", "4ta.Rect.");
+    static public $_TIPO = array(
+        "Original",
+        "1er.Rect.",
+        "2da.Rect.",
+        "3er.Rect.",
+        "4ta.Rect.",
+        "5ta.Rect.",
+        "6ta.Rect.",
+        "7ma.Rect.",
+        "8va.Rect.",
+        "9na.Rect.",
+    );
+
     /**
      * @var integer
      *
@@ -44,8 +56,7 @@ class Periodo
     /**
      * @var integer
      *
-     * @ORM\Column(name="tipo", type="integer", nullable=false)
-     * 0 original, >0 nro de rectificativa
+     * @ORM\Column(name="tipo", type="integer")
      */
     private $tipo;
 
@@ -56,9 +67,12 @@ class Periodo
 
 
 
+
     public function __construct(){
         $this->activo = 0;
     }
+
+
 
     /**
      * Get id
@@ -188,7 +202,7 @@ class Periodo
     /**
      * Get empleador
      *
-     * @return \AppBundle\Entity\Empleador 
+     * @return \AppBundle\Entity\Empleador
      */
     public function getEmpleador()
     {
