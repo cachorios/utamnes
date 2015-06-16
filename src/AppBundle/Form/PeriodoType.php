@@ -18,7 +18,7 @@ class PeriodoType extends AbstractType
         $builder
             ->add('vencimiento',null,array("label" => "Periodo"))
             ->add('liquidacion',null,array("label" => "Nro. de Liquidación"))
-            ->add('tipo','choice',array("label" => "Presentación","choices" => Periodo::$_TIPO))
+            ->add('tipo','choice',array("label" => "Presentación","choices" => Periodo::$_TIPO,"disabled" =>true))
         ;
     }
     
