@@ -67,8 +67,16 @@
                                         data: {periodo: periodo},
                                         success: function (data, textStatus, jqXHR) {
                                             liqs = data;
-                                            $("#appbundle_periodo_liquidacion").val(data.numero);
-                                            $("#appbundle_periodo_tipo").val(0);
+                                            $("#appbundle_periodo_liquidacion").empty();
+                                            $("#appbundle_periodo_tipo").empty();
+
+                                            $.each(liqs, function(idx, obj) {
+                                                $("#appbundle_periodo_liquidacion").append("<option>" + obj.liquidacion + "</option>");
+//                                                $("#appbundle_periodo_tipo").append(obj.tipo);
+
+//                                                alert(obj.liquidacion);
+//                                                alert(obj.tipo);
+                                            });
 
                                         },
                                         dataType: 'JSON',
