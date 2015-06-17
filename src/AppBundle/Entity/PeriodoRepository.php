@@ -12,6 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class PeriodoRepository extends EntityRepository
 {
+
+    public function getPeriodoActivo($empleador_id)
+    {
+//        $this->_em->createQuery()
+    }
     /**
      * getMaxNumeroLiq
      * Obtiene la liquidacion maxima para un periodo determinado

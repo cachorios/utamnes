@@ -1,4 +1,4 @@
-{% extends ['::layout_backend.html.twig','layout.html.twig'] %}
+{% extends [  is_granted('ROLE_EMPLEADOR') ? '::layout_frontend.html.twig' : '::layout_backend.html.twig'   ,'layout.html.twig'] %}
 
 
 {% block id 'Prodile' %}

@@ -67,8 +67,12 @@ class PeriodoController extends Controller
         $session = $request->getSession();
         $filterForm = $this->createForm(new PeriodoFilterType());
 
+        $empleador = $this->get("uta.empleador_activo")->getEmpleador();
+
         $em = $this->getDoctrine()->getManager();
         $queryBuilder = $em->getRepository('AppBundle:Periodo')->createQueryBuilder("q");
+        $queryBuilder->where("q.empleador = :emp")
+            ->setParameter("emp",$empleador->getId()) ;
 
         // Reset filter
         if ($request->getMethod() == 'POST' && $request->get('submit-filter') == 'reset') {

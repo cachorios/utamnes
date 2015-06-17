@@ -1,4 +1,6 @@
-{% extends 'layout.html.twig' %}
+{% extends '::layout_frontend.html.twig' %}
+
+{% block id 'trabajador' %}
 
     {% block contenido -%}
         {% embed '::portlet.html.twig' with {'titulo': 'Ver Trabajador: ' ~ entity} %}

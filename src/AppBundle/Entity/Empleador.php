@@ -4,7 +4,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping AS ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use RBSoft\UtilidadBundle\Libs\Util;
-
+use RBSoft\UtilidadBundle\Validator\Constraints as RBAssert;
 
 /**
  * @ORM\Entity
@@ -34,6 +34,7 @@ class Empleador
 
     /**
      * @ORM\Column(type="string", length=11, nullable=false)
+     * @RBAssert\ContainsCuit
      */
     private $cuit;
 

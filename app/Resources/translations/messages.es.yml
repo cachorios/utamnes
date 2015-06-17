@@ -11,7 +11,7 @@
 'telefono': telefono
 'direccion': direccion
 'localidad': localidad
-'email': email
+'email': eMail
 'Acciones': Acciones
 
 Sexo: Sexo
@@ -23,7 +23,7 @@ Casado: Casado
 Divorciado: Divorciado
 Viudo: Viudo
 Telefono: Telefono
-Email: eMmail
+Email: eMail
 Direccion: Direccion
 'Fecha ingreso': Fecha ingreso
 'Fecha baja': Fecha baja
