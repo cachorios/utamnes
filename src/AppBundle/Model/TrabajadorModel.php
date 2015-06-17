@@ -10,6 +10,7 @@ namespace AppBundle\Model;
 
 
 use AppBundle\Entity\Empleador;
+use AppBundle\Entity\Periodo;
 use AppBundle\Entity\Trabajador;
 use AppBundle\Entity\TrabajadorConcepto;
 use AppBundle\Servicios\EmpleadorActivo;
@@ -90,15 +91,67 @@ class TrabajadorModel
     }
 
 
-//
-//    private function asignarConceptosObligatorios(Trabajador $trabajador){
-//        $obls= $this->getConceptosObligatorios();
-//
-//        foreach($obls as $obl){
-//            $trabajador->addConcepto($obl);
-//        }
-//
-//    return $trabajador->getConceptos();
-//    }
+    public function setTrabajadorId($id){
+        $this->trabajador = $this->em->getRepository("AppBundle:Trabajador")->find($id);
+    }
 
+    public function getTrabajador(){
+        return $this->trabajador;
+    }
+    public function getDatoLiquidacion(Periodo $periodo){
+        $dato = $this->em->getRepository("AppBundle:DatoLiquidacion")->findOneBy(array("periodo" => $periodo->getId(), "trabajador" => $this->trabajador->getId()));
+        return $dato;
+    }
+
+    public function getArrayDatosImporte(Periodo $periodo, $importes = array()){
+
+        $dato = $this->getDatoLiquidacion($periodo);
+
+        if($dato) {
+            foreach ($importes as $i => $v) {
+                switch ($i) {
+                    case 0:
+                        $importes[0] = $dato->getTr();
+                        break;
+                    case 1:
+                        $importes[1] = $dato->getImp1();
+                        break;
+                    case 2:
+                        $importes[2] = $dato->getImp2();
+                        break;
+                    case 3:
+                        $importes[3] = $dato->getImp3();
+                        break;
+                    case 4:
+                        $importes[4] = $dato->getImp4();
+                        break;
+                    case 5:
+                        $importes[5] = $dato->getImp5();
+                        break;
+                    case 6:
+                        $importes[6] = $dato->getImp6();
+                        break;
+                    case 7:
+                        $importes[7] = $dato->getImp7();
+                        break;
+                    case 8:
+                        $importes[8] = $dato->getImp8();
+                        break;
+                    case 9:
+                        $importes[9] = $dato->getImp9();
+                        break;
+                }
+            }
+        }
+        return $importes;
+    }
+
+
+    public function getLiquidacion(Periodo $periodo)
+    {
+        $liqs = $this->em->getRepository("AppBundle:Liquidacion")->findBy(array("trabajador" => $this->getTrabajador()->getId(),"periodo" => $periodo->getId()));
+
+      //  ld($liqs);
+        return $liqs;
+    }
 }

@@ -112,19 +112,26 @@ class DatoLiquidacionController extends Controller
     public function datoEditAction(Request $request){
 
         $em = $this->getDoctrine()->getManager();
-        $trabajador = $em->getRepository("AppBundle:Trabajador")->find($request->get("id"));
+        $trabModel= $this->get("uta.trabajadormodel");
 
-        $aImpportes = array();
-        $aImpportes[0] = 12300;
-        $aImpportes[1] = 10300;
-        $aImpportes[3] = 2000;
+        $trabModel->setTrabajadorId($request->get("id"));
 
-        $aConceptos = $this->get("uta.empleador_activo")->getConceptos();
+        //$em->getRepository("AppBundle:Trabajador")->find($request->get("id"));
+
+        $aImportes = array();
+        $aImportes[0] = 0;
+        $aImportes[1] = 0;
+        $aImportes[3] = 0;
+
+        $emp_activo = $this->get("uta.empleador_activo");
+        $aConceptos = $emp_activo->getConceptos();
+        $periodo = $emp_activo->getPeriodoActivo();
+
 
         $vista = $this->renderView("@App/DatoLiquidacion/datos_edit.html.twig",array(
-            "trabajador"    => $trabajador,
-            "importes"      => $aImpportes,
-            "conceptos"     => $aConceptos
+            "trabajador"    => $trabModel->getTrabajador(),
+            "importes"      => $trabModel->getArrayDatosImporte($periodo, $aImportes),
+            "liquidacion"   => $trabModel->getLiquidacion($periodo)
         ));
 
         $resp = new Response($vista);

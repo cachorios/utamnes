@@ -17,6 +17,10 @@ class EmpleadorActivo {
     private $empleador;
     private $em;
 
+    /**
+     * @var \AppBundle\Entity\Periodo $periodo
+     */
+    private $periodo;
 
 
     public function __construct(SecurityContext $context, EntityManager $em){
@@ -24,6 +28,9 @@ class EmpleadorActivo {
         $this->em = $em;
     }
 
+    /**
+     * @return \AppBundle\Entity\Empleador
+     */
     public function getEmpleador(){
         if($this->empleador === null){
             $this->empleador = $this->em->getRepository("AppBundle:Empleador")->findOneByUsuario($this->user->getId());
@@ -43,6 +50,17 @@ class EmpleadorActivo {
 
         $q = $qb->getQuery();
         return $q->execute();
+    }
+
+    public function getPeriodoActivo()
+    {
+        if($this->periodo === null) {
+            $this->periodo = $this->em->getRepository("AppBundle:Periodo")
+                ->findOneBy(array(
+                    'empleador' => $this->getEmpleador()->getId(),
+                    "activo" => 1));
+        }
+        return $this->periodo;
     }
 
 } 
