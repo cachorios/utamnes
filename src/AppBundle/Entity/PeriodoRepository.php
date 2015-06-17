@@ -37,18 +37,22 @@ class PeriodoRepository extends EntityRepository
         $liqarray = $q->getArrayResult();
 
         //saco un numero mas de liquidacion
-        $liqmas = ($liqarray [0]['liquidacion']) + 1;
+        if (count($liqarray) == 0) {
+            $liqarray[] = array('liquidacion' => 0, 'tipo' => 0);
+        } else {
+            $liqmas = ($liqarray [0]['liquidacion']) + 1;
 
 
-        $liqarray[] = array('liquidacion' => $liqmas, 'tipo' => 0);
+            $liqarray[] = array('liquidacion' => $liqmas, 'tipo');
 
-        usort($liqarray, array($this, 'misort'));
+            usort($liqarray, array($this, 'misort'));
+        }
 
         return $liqarray;
     }
 
     public function misort($a, $b)
     {
-        return $a['liquidacion'] <= $b['liquidacion']? -1 : 1;
+        return $a['liquidacion'] <= $b['liquidacion'] ? -1 : 1;
     }
 }

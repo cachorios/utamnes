@@ -68,15 +68,15 @@
                                         success: function (data, textStatus, jqXHR) {
                                             liqs = data;
                                             $("#appbundle_periodo_liquidacion").empty();
-                                            $("#appbundle_periodo_tipo").empty();
+//                                            $("#appbundle_periodo_tipo").empty();
 
-                                            $.each(liqs, function(idx, obj) {
+                                            $.each(liqs, function (idx, obj) {
                                                 $("#appbundle_periodo_liquidacion").append("<option>" + obj.liquidacion + "</option>");
-//                                                $("#appbundle_periodo_tipo").append(obj.tipo);
 
 //                                                alert(obj.liquidacion);
 //                                                alert(obj.tipo);
                                             });
+
 
                                         },
                                         dataType: 'JSON',
@@ -88,6 +88,12 @@
                             );
                         }
                 );
+                $("#appbundle_periodo_liquidacion").change(
+                        function(){
+                            alert('hola');
+                        }
+                );
+
             </script>
 
         {% endblock script_main %}
