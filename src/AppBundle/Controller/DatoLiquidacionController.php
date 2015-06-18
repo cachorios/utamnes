@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Proxies\__CG__\AppBundle\Entity\Periodo;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -134,7 +135,10 @@ class DatoLiquidacionController extends Controller
             $tk =  $request->get("_csrf_token");
 
             if($this->get("security.csrf.token_manager")->isTokenValid(new CsrfToken("datosliq", $tk))){
-                ld($datosliq, $dato_valor, $tk);
+//                ld($datosliq, $dato_valor, $tk);
+                $liqs = $trabModel->Liquidar($periodo,$datosliq, $dato_valor);
+                $trabModel->LiquidacionSave($periodo,$liqs, $datosliq);
+
             }else{
                 ld("errrorrrr!!");
             }
@@ -150,6 +154,10 @@ class DatoLiquidacionController extends Controller
 
         $resp = new Response($vista);
         return $resp;
+    }
+
+    private function saveDatosLiq(Trabajador $trabajador, Periodo $periodo, $datos, $liqs){
+
     }
 
 
