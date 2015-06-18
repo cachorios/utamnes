@@ -71,12 +71,11 @@
                                             $("#appbundle_periodo_tipo").empty();
 
                                             $.each(liqs, function (idx, obj) {
-                                                $("#appbundle_periodo_liquidacion").append("<option>" + obj.liquidacion + "</option>");
-//                                                $("#appbundle_periodo_tipo").val(obj.tipo);
+                                                if(liqs.length -1  == idx )
+                                                    $("#appbundle_periodo_liquidacion").append("<option selected>" + obj.liquidacion + "</option>");
+                                                else
+                                                    $("#appbundle_periodo_liquidacion").append("<option>" + obj.liquidacion + "</option>");
 
-
-//                                                alert(obj.liquidacion);
-                                                alert();
                                             });
 
 

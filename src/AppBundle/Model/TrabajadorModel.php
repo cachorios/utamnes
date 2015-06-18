@@ -10,6 +10,7 @@ namespace AppBundle\Model;
 
 
 use AppBundle\Entity\Empleador;
+use AppBundle\Entity\Liquidacion;
 use AppBundle\Entity\Periodo;
 use AppBundle\Entity\Trabajador;
 use AppBundle\Entity\TrabajadorConcepto;
@@ -37,10 +38,13 @@ class TrabajadorModel
      */
     protected $empleador;
 
+
+//, EmpleadorModel $empModel
     public function __construct(EntityManager $em, EmpleadorActivo $empleadorActivo)
     {
         $this->em = $em;
         $this->empleador = $empleadorActivo->getEmpleador();
+//        $this->empModel = $empModel;
 
     }
 
@@ -150,8 +154,22 @@ class TrabajadorModel
     public function getLiquidacion(Periodo $periodo)
     {
         $liqs = $this->em->getRepository("AppBundle:Liquidacion")->findBy(array("trabajador" => $this->getTrabajador()->getId(),"periodo" => $periodo->getId()));
+        $conceptos = $this->em->getRepository("AppBundle:Concepto")->findBy(array(),array("obligatorio" => "DESC",'numero' => "ASC") );
 
-      //  ld($liqs);
+        foreach($conceptos as $conc){
+           $f=0;
+           foreach($liqs as $liq){
+                if($liq->getConcepto()->getId() == $conc->getId()){
+                    $f = 1;
+                }
+           }
+            if($f== 0){
+                $nLiq = new Liquidacion();
+                $nLiq->setConcepto($conc);
+                $liqs[] = $nLiq;
+            }
+        }
+
         return $liqs;
     }
 }

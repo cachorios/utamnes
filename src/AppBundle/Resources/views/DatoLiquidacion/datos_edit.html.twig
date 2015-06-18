@@ -15,14 +15,14 @@
                         <div class="form-group col-md-2">
                             <label for="appbundle_datosliq_tr" class="col-md-2 control-label required">TR</label>
                             <div class="col-md-12">
-                                <input type="text" value="{{ imp }}" class="form-control align-right" maxlength="11" required="required" name="datosliq[tr]" id="appbundle_datosliq_tr">
+                                <input type="text" value="{{ imp }}" class="form-control text-right" maxlength="11" required="required" name="datosliq[tr]" id="appbundle_datosliq_tr">
                             </div>
                         </div>
                     {% else %}
                         <div class="form-group col-md-2">
                             <label for="appbundle_datosliq_imp{{ i }}" class="col-md-2 control-label required">IMP{{ i }}</label>
                             <div class="col-md-12">
-                                <input type="text" value="{{ imp }}" class="form-control" maxlength="11" required="required" name="datosliq[imp{{ i }}]" id="appbundle_datosliq_imp{{ i }}">
+                                <input type="text" value="{{ imp }}" class="form-control text-right" maxlength="11" required="required" name="datosliq[imp{{ i }}]" id="appbundle_datosliq_imp{{ i }}" >
                             </div>
                         </div>
                     {% endif %}
@@ -40,27 +40,33 @@
                         </tr>
                     </thead>
                     <tbody>
+                    {% set total = 0 %}
                         {% for liq in liquidacion %}
                             <tr>
                                 <td class="col-sm-1">{{ liq.concepto.numero }}</td>
                                 <td>{{ liq.concepto.descripcion }}</td>
                                 <td align="center">
                                     {% if not liq.concepto.obligatorio  %}
-                                        <input type="checkbox" value="0" name="dato_conc[{{ liq.concepto.numero }}]" id="">
+                                        {% if liq.importe == 0  %}
+                                            <input type="checkbox" value="0"  name="dato_conc[{{ liq.concepto.numero }}]" id="">
+                                        {% else %}
+                                            <input type="checkbox" value="1" checked  name="dato_conc[{{ liq.concepto.numero }}]" id="">
+                                        {% endif %}
                                     {% else %}
                                         <input type="checkbox" value="1" checked name="dato_conc[{{ liq.concepto.numero }}]" id="" disabled>
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <input type="text" class="right" name="dato_valor[{{ liq.concepto.numero }}]" value="" readonly>
+                                    {% set total = total + liq.importe %}
+                                    <input type="text" class="text-right" name="dato_valor[{{ liq.concepto.numero }}]" value="{{ liq.importe | number_format(2,',','.') }}" readonly >
                                 </td>
                             </tr>
                         {% endfor %}
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="3" align="right" ><button>Liquidar</button> &nbsp;&nbsp;&nbsp;&nbsp;Total:</td>
-                            <td align="right">0.00</td>
+                            <td colspan="3"  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-large btn-primary">Liquidar</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="pull-right">Total:</label></td>
+                            <td align="right">{{ total | number_format(2,',','.') }}</td>
                         </tr>
                     </tfoot>
                 </table>
