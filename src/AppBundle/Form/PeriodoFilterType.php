@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -15,6 +16,10 @@ class PeriodoFilterType extends AbstractType
     {
         $builder
             ->add('id', 'filter_number_range')
+            ->add('descripcion', 'filter_text', array('apply_filter' => function(QueryInterface $q , $field , $value){
+                $q->getQueryBuilder()
+                    ->andWhere("q.descripcion like '%{$value['value']}%'");
+            }))
             ->add('liquidacion', 'filter_number_range')
             ->add('tipo', 'filter_number_range')
         ;

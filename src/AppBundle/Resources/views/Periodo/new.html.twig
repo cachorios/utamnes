@@ -26,11 +26,12 @@
                     {% endfor %}
 
 
-                    {#<p></p>#}
+                    <p></p>
 
                     {#{{ form_start(form) }}#}
                     {#{{ form_widget(form) }}#}
                     {% include 'AppBundle:Periodo:_form.html.twig' with {'form': form} %}
+
                     <div class="col-sm-offset-2 inner-actions">
                         <button title="Guardar" class="form-submit-button btn btn-sm btn-default btn-primary"
                                 value="save_and_add" name="save_mode" type="submit">Guardar y Nuevo <span
@@ -69,10 +70,10 @@
                                             liqs = data;
                                             $("#appbundle_periodo_liquidacion").empty();
                                             $.each(liqs, function (idx, obj) {
-                                                if(liqs.length -1  == idx )
-                                                    $("#appbundle_periodo_liquidacion").append("<option selected>" + obj.liquidacion + "</option>");
-                                                else
-                                                    $("#appbundle_periodo_liquidacion").append("<option>" + obj.liquidacion + "</option>");
+//                                                if(liqs.length -1  == idx )
+//                                                    $("#appbundle_periodo_liquidacion").val(obj.liquidacion);
+//                                                else
+                                                $("#appbundle_periodo_liquidacion").val(obj.liquidacion);
 
                                             });
 
@@ -87,12 +88,6 @@
                             );
                         }
                 );
-//                $("#appbundle_periodo_liquidacion").change(
-//                        function(){
-////                            $("#appbundle_periodo_tipo").val(obj.tipo);
-//                            alert('adavdsv');
-//                        }
-//                );
 
             </script>
 

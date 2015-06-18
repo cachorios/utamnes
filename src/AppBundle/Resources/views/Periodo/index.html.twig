@@ -60,6 +60,7 @@
                     <thead>
                     <tr>
                         <th class="{{ pager.isSorted('id') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'Periodo '|trans | capitalize }} </th>
+                        <th class="{{ pager.isSorted('descripcion') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'Descripcion '|trans | capitalize }} </th>
                         <th class="{{ pager.isSorted('liquidacion') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'Nro. de liquidacion '|trans | capitalize }} </th>
                         <th class="{{ pager.isSorted('tipo') ? 'headerSortDown glyphicon-sort-by-attributes': 'headerSortUp' }}"> {{ 'Presentación '|trans | capitalize }} </th>
                         <th class="actions">{{ 'Acciones'|trans }}</th>
@@ -72,6 +73,7 @@
                             <td>
                                 <a href="{{ path('app_periodo_show', { 'id': entity.id }) }}">{{ entity.vencimiento }}</a>
                             </td>
+                            <td>{{ entity.descripcion }}</td>
                             <td>{{ entity.liquidacion }}</td>
                             <td>{{ entity.tipoStr }}</td>
                             <td class="actions">
