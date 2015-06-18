@@ -68,13 +68,15 @@
                                         success: function (data, textStatus, jqXHR) {
                                             liqs = data;
                                             $("#appbundle_periodo_liquidacion").empty();
-//                                            $("#appbundle_periodo_tipo").empty();
+                                            $("#appbundle_periodo_tipo").empty();
 
                                             $.each(liqs, function (idx, obj) {
                                                 $("#appbundle_periodo_liquidacion").append("<option>" + obj.liquidacion + "</option>");
+//                                                $("#appbundle_periodo_tipo").val(obj.tipo);
+
 
 //                                                alert(obj.liquidacion);
-//                                                alert(obj.tipo);
+                                                alert();
                                             });
 
 
@@ -88,11 +90,12 @@
                             );
                         }
                 );
-                $("#appbundle_periodo_liquidacion").change(
-                        function(){
-                            alert('hola');
-                        }
-                );
+//                $("#appbundle_periodo_liquidacion").change(
+//                        function(){
+////                            $("#appbundle_periodo_tipo").val(obj.tipo);
+//                            alert('adavdsv');
+//                        }
+//                );
 
             </script>
 

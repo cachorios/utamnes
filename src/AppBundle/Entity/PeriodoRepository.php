@@ -48,9 +48,10 @@ class PeriodoRepository extends EntityRepository
             $liqmas = ($liqarray [0]['liquidacion']) + 1;
 
 
-            $liqarray[] = array('liquidacion' => $liqmas, 'tipo');
+            $liqarray[] = array('liquidacion' => $liqmas, 'tipo' => 0);
 
             usort($liqarray, array($this, 'misort'));
+//            ld($liqarray);
         }
 
         return $liqarray;
