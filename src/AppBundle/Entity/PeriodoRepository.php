@@ -56,6 +56,38 @@ class PeriodoRepository extends EntityRepository
 
         return $liqarray;
     }
+    public function getRectificarLiquidacion(Empleador $emp, $periodo)
+    {
+//        $liqarray = array();
+        $q = $this->_em->createQuery(
+            "
+            Select p.liquidacion, max(p.tipo) as tipo, p.descripcion
+            From AppBundle:Periodo p
+            where p.empleador = :empleador AND p.vencimiento = :periodo
+            GROUP BY p.liquidacion
+            order BY p.liquidacion DESC, p.tipo DESC
+             "
+        )
+            ->setParameter("empleador", $emp->getId())
+            ->setParameter("periodo", $periodo);
+
+        $liqarray = $q->getArrayResult();
+//
+//        //saco un numero mas de liquidacion
+//        if (count($liqarray) == 0) {
+//            $liqarray[] = array('liquidacion' => 0, 'tipo' => 0);
+//        } else {
+//            $liqmas = ($liqarray [0]['liquidacion']) + 1;
+//
+//
+//            $liqarray[] = array('liquidacion' => $liqmas, 'tipo' => 0);
+//
+//            usort($liqarray, array($this, 'misort'));
+////            ld($liqarray);
+//        }
+
+        return $liqarray;
+    }
 
     public function misort($a, $b)
     {
