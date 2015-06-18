@@ -68,8 +68,6 @@
                                         success: function (data, textStatus, jqXHR) {
                                             liqs = data;
                                             $("#appbundle_periodo_liquidacion").empty();
-                                            $("#appbundle_periodo_tipo").empty();
-
                                             $.each(liqs, function (idx, obj) {
                                                 if(liqs.length -1  == idx )
                                                     $("#appbundle_periodo_liquidacion").append("<option selected>" + obj.liquidacion + "</option>");
