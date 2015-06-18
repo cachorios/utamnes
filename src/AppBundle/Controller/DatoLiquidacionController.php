@@ -15,6 +15,7 @@ use AppBundle\Entity\Trabajador;
 use AppBundle\Form\TrabajadorType;
 use AppBundle\Form\TrabajadorFilterType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Csrf\CsrfToken;
 
 
 /**
@@ -106,32 +107,45 @@ class DatoLiquidacionController extends Controller
     /**
      * @param Request $request
      * @Route("/datoedit", name="datoedit")
+     * @Method("GET|POST")
      * @throws NotFoundHttpException
      * @return Response
      */
     public function datoEditAction(Request $request){
 
         $em = $this->getDoctrine()->getManager();
-        $trabModel= $this->get("uta.trabajadormodel");
 
+        $trabModel= $this->get("uta.trabajadormodel");
         $trabModel->setTrabajadorId($request->get("id"));
 
-        //$em->getRepository("AppBundle:Trabajador")->find($request->get("id"));
+        $emp_activo = $this->get("uta.empleador_activo");
+        $periodo = $emp_activo->getPeriodoActivo();
+
 
         $aImportes = array();
         $aImportes[0] = 0;
         $aImportes[1] = 0;
         $aImportes[3] = 0;
 
-        $emp_activo = $this->get("uta.empleador_activo");
-        $aConceptos = $emp_activo->getConceptos();
-        $periodo = $emp_activo->getPeriodoActivo();
+
+        if($request->getMethod()=="POST"){
+            $datosliq =  $request->get("datosliq");
+            $dato_valor =  $request->get("dato_valor");
+            $tk =  $request->get("_csrf_token");
+
+            if($this->get("security.csrf.token_manager")->isTokenValid(new CsrfToken("datosliq", $tk))){
+                ld($datosliq, $dato_valor, $tk);
+            }else{
+                ld("errrorrrr!!");
+            }
+        }
 
 
         $vista = $this->renderView("@App/DatoLiquidacion/datos_edit.html.twig",array(
             "trabajador"    => $trabModel->getTrabajador(),
             "importes"      => $trabModel->getArrayDatosImporte($periodo, $aImportes),
-            "liquidacion"   => $trabModel->getLiquidacion($periodo)
+            "liquidacion"   => $trabModel->getLiquidacion($periodo),
+            "csrf_token"    => $this->get("security.csrf.token_manager")->getToken("datosliq")
         ));
 
         $resp = new Response($vista);

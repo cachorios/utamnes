@@ -3,8 +3,8 @@
 {% embed "::modal_datosliq.html.twig"  with { 'modal_id': "datos_liq_" ~ trabajador.id , 'modal_titulo': "Datos de Liquidacion de: >> " ~ trabajador, size: "modal-lg" } %}
     {% block modal_contenido %}
 
-
-            <input type="hidden" value="PUT" name="_method">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+            {#<input type="hidden" value="PUT" name="_method">#}
             <fieldset>
                 <legend>Importe según SICOSS </legend>
 

@@ -1,6 +1,6 @@
 <div class="modal modal-styled fade in" id="{{ modal_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
-    <form class="form-horizontal" action="." method="post" name="appbundle_datosliq">
+    <form class="form-horizontal" action="{{ path("datoedit",{'id': trabajador.id}) }}" method="post" name="appbundle_datosliq">
         <div class="modal-dialog {{ size is defined ? size :  "modal-md" }}">
             <div class="modal-content">
                 <div class="modal-header">

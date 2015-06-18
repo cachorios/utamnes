@@ -41,8 +41,8 @@ class SecurityController extends Controller
         $lastUsername = (null === $session) ? '' : $session->get(SecurityContext::LAST_USERNAME);
 
         $csrfToken = $this->
-            container->has('form.csrf_provider')
-            ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
+            container->has('security.csrf.token_manager')
+            ? $this->container->get('security.csrf.token_manager')->getToken('authenticate')
             : null;
 
         return $this->renderLogin(array(
