@@ -16,10 +16,20 @@ class PeriodoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $datos = $options['data'];
+
+        if($datos->getId()){
+            $builder
+                ->add('vencimiento',null,array('label' =>"Periodo" , 'disabled' => true));
+        }else{
+            $builder
+                ->add('vencimiento',null,array('label' =>"Periodo"));
+        }
+
         $builder
-            ->add('vencimiento',null,array("label" => "Periodo"))
-            ->add('liquidacion','choice',array("label" => "Nro. de Liquidación",'choices'=>array()))
-            ->add('tipo','choice',array("label" => "Presentación","choices" => Periodo::$_TIPO, 'disabled' => true ))
+            ->add('liquidacion',null,array("label" => "Nro. de Liquidación" , 'read_only' => true))
+            ->add('tipo',null,array("label" => "Presentación" , 'disabled' => true))
+            ->add('descripcion',null,array("label" => "Descripcion" , 'required' => true))
         ;
     }
     

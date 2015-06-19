@@ -1,4 +1,5 @@
-{#{{ form_widget(form) }}#}
+{{ form_start(form) }}
+{{ form_errors(form) }}
 
 {{ form_row(form.vencimiento) }}
 {{ form_widget(form.vencimiento, {'attr': {'class': 'form-control' }}) }}
@@ -8,3 +9,7 @@
 
 {{ form_row(form.tipo) }}
 {{ form_widget(form.tipo, {'attr': {'class': 'form-control' }}) }}
+
+{{ form_row(form.descripcion) }}
+{{ form_widget(form.descripcion, {'attr': {'class': 'form-control' }}) }}
+

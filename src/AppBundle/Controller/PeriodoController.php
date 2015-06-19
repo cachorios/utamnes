@@ -58,6 +58,7 @@ class PeriodoController extends Controller
             8,/*limit per page*/
             array('distinct' => false)
         );
+
         return $pagination;
 
     }
@@ -72,7 +73,7 @@ class PeriodoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $queryBuilder = $em->getRepository('AppBundle:Periodo')->createQueryBuilder("q");
         $queryBuilder->where("q.empleador = :emp")
-            ->setParameter("emp",$empleador->getId()) ;
+            ->setParameter("emp", $empleador->getId());
 
         // Reset filter
         if ($request->getMethod() == 'POST' && $request->get('submit-filter') == 'reset') {
@@ -100,6 +101,7 @@ class PeriodoController extends Controller
                 $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
             }
         }
+
         return array($filterForm, $queryBuilder);
     }
 
@@ -126,6 +128,7 @@ class PeriodoController extends Controller
             if ($request->request->get('save_mode') == 'save_and_close') {
                 return $this->redirect($this->generateUrl('app_periodo'));
             }
+
             return $this->redirect($this->generateUrl('app_periodo_new'));
         }
 
@@ -144,10 +147,14 @@ class PeriodoController extends Controller
      */
     private function createCreateForm(Periodo $entity)
     {
-        $form = $this->createForm(new PeriodoType(), $entity, array(
-            'action' => $this->generateUrl('app_periodo_create'),
-            'method' => 'POST',
-        ));
+        $form = $this->createForm(
+            new PeriodoType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('app_periodo_create'),
+                'method' => 'POST',
+            )
+        );
 
 
         return $form;
@@ -232,10 +239,14 @@ class PeriodoController extends Controller
      */
     private function createEditForm(Periodo $entity)
     {
-        $form = $this->createForm(new PeriodoType(), $entity, array(
-            'action' => $this->generateUrl('app_periodo_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+        $form = $this->createForm(
+            new PeriodoType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('app_periodo_update', array('id' => $entity->getId())),
+                'method' => 'PUT',
+            )
+        );
 
 
         return $form;
@@ -265,6 +276,7 @@ class PeriodoController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', "El Periodo $entity se actualizó correctamente.");
+
             return $this->redirect($this->generateUrl('app_periodo'));
         }
 
@@ -313,12 +325,16 @@ class PeriodoController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('app_periodo_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array(
-                'label' => 'Delete',
-                'attr' => array(
-                    'class' => 'btn btn-danger btn-sm'
+            ->add(
+                'submit',
+                'submit',
+                array(
+                    'label' => 'Delete',
+                    'attr' => array(
+                        'class' => 'btn btn-danger btn-sm'
+                    )
                 )
-            ))
+            )
             ->getForm();
     }
 
@@ -334,7 +350,62 @@ class PeriodoController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $num = $em->getRepository("AppBundle:Periodo")->getLiquidaciones($this->get('uta.empleador_activo')->getEmpleador(), $periodo);
+        $num = $em->getRepository("AppBundle:Periodo")->getLiquidaciones(
+            $this->get('uta.empleador_activo')->getEmpleador(),
+            $periodo
+        );
+
+//        ld($num);
+        return new Response(json_encode($num));
+
+    }
+
+    /**
+     * @Route("/rectificar", name="app_periodo_rectificar")
+     * @Template("AppBundle:Periodo:rectificar.html.twig")
+     */
+    public function rectificarAction(Request $request)
+    {
+        $entity = new Periodo();
+        $form = $this->rectficarCreateCreateForm($entity);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $entity->setEmpleador($this->get('uta.empleador_activo')->getEmpleador());
+            $em->persist($entity);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('success', "El Periodo $entity se creó correctamente.");
+            if ($request->request->get('save_mode') == 'save_and_close') {
+                return $this->redirect($this->generateUrl('app_periodo'));
+            }
+
+            return $this->redirect($this->generateUrl('app_periodo_new'));
+        }
+
+        return array(
+            'entity' => $entity,
+            'form' => $form->createView(),
+        );
+    }
+
+    /**
+     * @param $periodo
+     * @Route("/checkrectificar" , name="rectificar_check")
+     */
+    public function rectificarPeriodoAction(Request $request)
+    {
+        $periodo = $request->get("periodo");
+
+//        if(!(floor($periodo/100 <= date("Y"))))
+
+        $em = $this->getDoctrine()->getManager();
+
+        $num = $em->getRepository("AppBundle:Periodo")->getRectificarLiquidacion(
+            $this->get('uta.empleador_activo')->getEmpleador(),
+            $periodo
+        );
 
 //        ld($num);
         return new Response(json_encode($num));

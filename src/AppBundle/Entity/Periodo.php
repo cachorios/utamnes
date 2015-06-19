@@ -47,6 +47,11 @@ class Periodo
     private $empleador;
 
     /**
+     * @ORM\Column(type="string", length=128, nullable=true)
+     */
+    private $descripcion;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="liquidacion", type="integer")
@@ -156,7 +161,7 @@ class Periodo
     }
 
     public function __toString(){
-        return sprintf("%s - %d(%d)",$this->getVencimiento(),$this->getLiquidacion(), $this->getTipo(), $this->getEmpleador());
+        return sprintf("%s - %d(%d)",$this->getVencimiento(),$this->getLiquidacion(), $this->getTipo(), $this->getEmpleador(), $this->getDescripcion());
 
     }
 
@@ -208,5 +213,28 @@ class Periodo
     public function getEmpleador()
     {
         return $this->empleador;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Periodo
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
     }
 }

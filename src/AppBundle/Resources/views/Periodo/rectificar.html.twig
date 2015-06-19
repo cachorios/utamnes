@@ -1,7 +1,7 @@
 {% extends '::layout_frontend.html.twig' %}
     {% block id 'Periodo' %}
         {% block contenido -%}
-            {% embed '::portlet.html.twig' with {'titulo': 'Nuevo Periodo' } %}
+            {% embed '::portlet.html.twig' with {'titulo': 'Rectificar Periodo' } %}
                 {% block in_header %}
                     <div class='pull-right'>
                         <div class="row">
@@ -33,12 +33,9 @@
                     {% include 'AppBundle:Periodo:_form.html.twig' with {'form': form} %}
 
                     <div class="col-sm-offset-2 inner-actions">
-                        <button title="Guardar" class="form-submit-button btn btn-sm btn-default btn-primary"
-                                value="save_and_add" name="save_mode" type="submit">Guardar y Nuevo <span
-                                    class="glyphicon glyphicon-ok"></span></button>
                         <button title="Guardar y Salir"
                                 class="form-submit-button btn btn-sm btn-default btn-secondary"
-                                value="save_and_close" name="save_mode" type="submit">Guardar<span
+                                value="save_and_close" name="save_mode" type="submit">Rectificar<span
                                     class="glyphicon glyphicon-remove"></span></button>
                         <a class="page-close-button btn btn-sm btn-default" href="{{ path('app_periodo') }}">Cerrar
                             <span class="glyphicon glyphicon-remove"></span></a>
@@ -64,7 +61,7 @@
 
                             $.ajax(
                                     {
-                                        url: '{{ path("periodo_check") }}',
+                                        url: '{{ path("rectificar_check") }}',
                                         data: {periodo: periodo},
                                         success: function (data, textStatus, jqXHR) {
                                             liqs = data;
@@ -74,6 +71,7 @@
 //                                                    $("#appbundle_periodo_liquidacion").val(obj.liquidacion);
 //                                                else
                                                 $("#appbundle_periodo_liquidacion").val(obj.liquidacion);
+                                                $("#appbundle_periodo_descripcion").val(obj.descripcion);
 
                                             });
 
