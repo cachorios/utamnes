@@ -83,11 +83,7 @@
                             <td>{{ entity.email }}</td>
                             <td class="actions">
                                 <div class="btn-group">
-                                    {#<a href="{{ path('app_trabajador_show', { 'id': entity.id }) }}"#}
-                                    {#class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"#}
-                                    {#title="Ver mas información">#}
-                                    {#<span class="glyphicon glyphicon-eye-open"></span>#}
-                                    {#</a>#}
+
                                     <a href="{{ path('datoedit', { 'id': entity.id }) }}"
                                        class="btn btn-xs btn-default datoedit_accion" data-toggle="tooltip"
                                        data-placement="top"
@@ -123,7 +119,16 @@
 
 {% block script_main %}
     <script>
+
+
         $(document).ready(function () {
+
+
+            $("body").on('hidden.bs.modal', function () {
+              
+                $("#datos_liq").remove();
+            });
+
 
             $(".datoedit_accion").on("click", function (e) {
                 e.preventDefault();
@@ -131,12 +136,13 @@
                 $.ajax(
                         {
                             url: sUrl,
-//                            data: {periodo: periodo},
                             success: function (data, textStatus, jqXHR) {
-                                $(data).modal({
+                                $("body").append(data);
+
+                                $("#datos_liq").modal({
                                     show: true
                                 });
-                                //alert(data)
+
 
                             },
                             dataType: 'html',

@@ -1,6 +1,5 @@
 
-
-{% embed "::modal_datosliq.html.twig"  with { 'modal_id': "datos_liq_" ~ trabajador.id , 'modal_titulo': "Datos de Liquidacion de: >> " ~ trabajador, size: "modal-lg" } %}
+{% embed "::modal_datosliq.html.twig"  with { 'modal_id': "datos_liq", 'modal_titulo': "Datos de Liquidacion de: >> " ~ trabajador, size: "modal-lg" } %}
     {% block modal_contenido %}
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
@@ -58,24 +57,21 @@
                                 </td>
                                 <td>
                                     {% set total = total + liq.importe %}
-                                    <input type="text" class="text-right" name="dato_valor[{{ liq.concepto.numero }}]" value="{{ liq.importe | number_format(2,',','.') }}" readonly >
+                                    <input id="conc{{ liq.concepto.numero }}" type="text" class="text-right" name="dato_valor[{{ liq.concepto.numero }}]" value="{{ liq.importe | number_format(2,',','.') }}" readonly >
                                 </td>
                             </tr>
                         {% endfor %}
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="3"  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-large btn-primary">Liquidar</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="pull-right">Total:</label></td>
-                            <td align="right">{{ total | number_format(2,',','.') }}</td>
+                            <td colspan="3"  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="btnLiquidar" class="btn btn-large btn-primary" href="{{ path("liquidar_trabajador",{"id": trabajador.id}) }}"  >Liquidar</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="pull-right">Total:</label></td>
+                            <td align="right"><strong id="datoliqtotal">{{ total | number_format(2,',','.') }}</strong></td>
                         </tr>
                     </tfoot>
                 </table>
 
 
             </fieldset>
-
-
-            {#<input type="hidden" value="_O8Gmxr5_K3D4vfPD6-nM-myI9Htca-ADaJ_SUrg4f4" class="form-control" name="datosliq[_token]" id="appbundle_datosliq__token">#}
 
 
     {% endblock modal_contenido %}

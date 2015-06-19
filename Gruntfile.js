@@ -42,6 +42,7 @@ module.exports = function(grunt) {
             js_frontend: {
                 src: [
                     './mvp-theme/bower_components/jquery/dist/jquery.js',
+                    './mvp-theme/bower_components/jquery-form/jquery.form.js',
                     './mvp-theme/bower_components/bootstrap/dist/js/bootstrap.js',
                     './mvp-theme/bower_components/slimscroll/jquery.slimscroll.min.js',
                     './mvp-theme/bower_components/bootstrap-fileinput/js/fileinput.js',

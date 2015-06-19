@@ -1,6 +1,7 @@
 <div class="modal modal-styled fade in" id="{{ modal_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
-    <form class="form-horizontal" action="{{ path("datoedit",{'id': trabajador.id}) }}" method="post" name="appbundle_datosliq">
+    {% set formId =  'now'|date("U")  %}
+    <form class="form-horizontal" action="{{ path("datoedit",{'id': trabajador.id}) }}" method="post" name="appbundle_datosliq" id="formLiq{{ formId }}">
         <div class="modal-dialog {{ size is defined ? size :  "modal-md" }}">
             <div class="modal-content">
                 <div class="modal-header">
@@ -9,6 +10,7 @@
                     <h4 class="modal-title" id="myModalLabel">{{ modal_titulo }}</h4>
                 </div>
                 <div class="modal-body">
+                    <div id="output1"></div>
                     {% block modal_contenido %} content{% endblock modal_contenido %}
                 </div>
                 <div class="modal-footer">
@@ -20,4 +22,79 @@
             </div>
         </div>
     </form>
+    <script>
+
+
+        $(document).ready(function(e) {
+            $("#btnLiquidar").on("click",function(e){
+                e.preventDefault();
+                var queryString =$('#formLiq{{ formId }}').formSerialize();
+//                $.post(this.href, queryString);
+
+                sUrl  = this.href;
+                $.ajax(
+                        {
+                            method: 'post',
+                            data: queryString,
+                            url: sUrl,
+                            success: function (data, textStatus, jqXHR) {
+                                $("#datoliqtotal").text(data.total);
+                                $.each(data.valor,function(i,valor){
+
+                                    $("#conc"+i).val(valor);
+                                });
+
+                            },
+                            dataType: 'json',
+                            error: function (data, textStatus, jqXHR) {
+
+                            }
+
+                        }
+                );
+                return false;
+            });
+
+                var options = {
+                    target: '#output1',   // target element(s) to be updated with server response
+//                beforeSubmit:  showRequest,  // pre-submit callback
+                    success: showResponse, // post-submit callback
+
+                    // other available options:
+                    //url:       url         // override for form's 'action' attribute
+                    //type:      type        // 'get' or 'post', override for form's 'method' attribute
+                    dataType:  'json'        // 'xml', 'script', or 'json' (expected server response type)
+                    //clearForm: true        // clear all form fields after successful submit
+                    //resetForm: true        // reset the form after successful submit
+
+                    // $.ajax options can be used here too, for example:
+                    //timeout:   3000
+                };
+
+            $('#formLiq{{ formId }}').ajaxForm(options);
+
+        });
+        function showResponse(responseText, statusText, xhr, $form)  {
+            // for normal html responses, the first argument to the success callback
+            // is the XMLHttpRequest object's responseText property
+
+            // if the ajaxForm method was passed an Options Object with the dataType
+            // property set to 'xml' then the first argument to the success callback
+            // is the XMLHttpRequest object's responseXML property
+
+            // if the ajaxForm method was passed an Options Object with the dataType
+            // property set to 'json' then the first argument to the success callback
+            // is the json data object returned by the server
+
+//            alert('status: ' + statusText + '\n\nresponseText: \n' + responseText +
+//            '\n\nThe output div should have already been updated with the responseText.');
+            alert(responseText.msg);
+            $("#{{ modal_id }}").modal('hide');
+
+
+
+        }
+
+    </script>
 </div>
+

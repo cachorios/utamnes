@@ -130,18 +130,22 @@ class DatoLiquidacionController extends Controller
 
 
         if($request->getMethod()=="POST"){
+
             $datosliq =  $request->get("datosliq");
             $dato_valor =  $request->get("dato_valor");
             $tk =  $request->get("_csrf_token");
 
             if($this->get("security.csrf.token_manager")->isTokenValid(new CsrfToken("datosliq", $tk))){
-//                ld($datosliq, $dato_valor, $tk);
                 $liqs = $trabModel->Liquidar($periodo,$datosliq, $dato_valor);
                 $trabModel->LiquidacionSave($periodo,$liqs, $datosliq);
-
+                $estado = array('estado' => 'success','msg'=>'La liquidación guardó con éxito');
             }else{
-                ld("errrorrrr!!");
+                $estado = array('estado' => "error","msg"=>"Error de formulario, requiere un token valido");
+
             }
+
+            return new Response(json_encode($estado));
+
         }
 
 
@@ -156,8 +160,30 @@ class DatoLiquidacionController extends Controller
         return $resp;
     }
 
-    private function saveDatosLiq(Trabajador $trabajador, Periodo $periodo, $datos, $liqs){
+    /**
+     * @Route("/liquidar_trabajador", name="liquidar_trabajador")
+     * @param Request $request
+     */
+    public function liquidarAction(Request $request){
+        $trabModel= $this->get("uta.trabajadormodel");
+        $trabModel->setTrabajadorId($request->get("id"));
 
+        $emp_activo = $this->get("uta.empleador_activo");
+        $periodo = $emp_activo->getPeriodoActivo();
+
+        $datosliq =  $request->get("datosliq");
+        $dato_valor =  $request->get("dato_valor");
+
+        $liqs = $trabModel->Liquidar($periodo,$datosliq, $dato_valor);
+        $ret = array();
+        $suma= 0;
+        foreach($liqs as $liq){
+            $suma += $liq->getImporte();
+            $ret['valor'][$liq->getConcepto()->getNumero()] = number_format($liq->getImporte(),2,',','.');
+        }
+        $ret['total'] = number_format($suma,2,',','.');
+
+        return new Response(json_encode($ret));
     }
 
 
