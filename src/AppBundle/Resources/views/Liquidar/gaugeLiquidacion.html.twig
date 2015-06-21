@@ -1,0 +1,78 @@
+{% extends 'layout_frontend.html.twig' %}
+{% block id 'gauge' %}
+
+{% block contenido -%}
+    {% embed '::portlet.html.twig' with {'titulo':'Liquidar: '~ periodo } %}
+        {% block cuerpo %}
+            <h3>Cálculos de Aportes y contribuciones</h3>
+
+            <p><br>
+                Al finalizar la liquidacion...
+
+                <br>
+                <br>
+            </p>
+            <style>
+                #progressbar {
+                    background-color: #314657;
+                    border-radius: 13px; /* (height of inner div) / 2 + padding */
+                    padding: 3px;
+                }
+
+                #progressbar > div {
+                    background-color: #d74b4b;
+                    width: 0%; /* Adjust with JavaScript */
+                    height: 30px;
+                    border-radius: 10px;
+                }
+
+                #progress-value {
+                    height: 30px;
+                    text-align: center;
+                    vertical-align: middle;
+                    font-size: 25px;
+                }
+            </style>
+            <div class="row">
+                <div class="col-sm-11">
+                    <div id="progressbar">
+                        <div></div>
+                    </div>
+                </div>
+                <div class="col_sm-1">
+                    <span id="progress-value">0%</span>
+                </div>
+                <br><br><br>
+
+            </div>
+        {% endblock cuerpo %}
+    {% endembed %}
+
+{% endblock contenido %}
+
+{% block script_main %}
+    <script>
+        hacerAlgo = function(){
+            $.Zebra_Dialog(
+                    "<strong>Proceso concluído!</strong>",{
+                    'buttons':  [ 'Aceptar'],
+                    'onClose': function() { window.location = "{{ path('homepage') }}";}
+                    }
+            );
+
+            {#$.Zebra_Dialog(#}
+                    {#"<strong>Proceso concluído!</strong>",{#}
+                        {#'buttons':  [#}
+                            {#{   caption: 'Aceptar',#}
+                                {#callback: function() { window.location = "{{ path('homepage') }}";}#}
+                            {#}#}
+                        {#]#}
+                    {#}#}
+            {#);#}
+        }
+
+
+    </script>
+
+{% endblock %}
+

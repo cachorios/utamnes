@@ -38,6 +38,26 @@ class Util
             number_format(substr($cuit,2,8),0,",","."),
             substr($cuit,10,1));
     }
+
+    static public function microtime_float()
+    {
+        list($useg, $seg) = explode(" ", microtime());
+        return ((float)$useg + (float)$seg);
+    }
+
+    static public function round($num, $dec)
+    {
+
+        $mul = pow(10,$dec);
+        $numInt = intval($num*$mul );
+        $paraDec = $num *$mul - $numInt;
+
+        if($paraDec>0.5)
+            $numInt++;
+
+        return round($numInt/$mul,2);
+
+    }
 }
 
 

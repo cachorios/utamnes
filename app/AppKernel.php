@@ -41,6 +41,7 @@ class AppKernel extends Kernel
             new RBSoft\ABMGeneradorBundle\RBSoftABMGeneradorBundle(),
             new RBSoft\UtilidadBundle\UtilidadBundle(),
 
+            new Tg\DemoStreamBundle\TgDemoStreamBundle(),
 
             new AppBundle\AppBundle(),
             new UserAdminBundle\UserAdminBundle(),

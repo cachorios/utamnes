@@ -14,6 +14,7 @@ use AppBundle\Entity\Periodo;
 use AppBundle\Form\PeriodoType;
 use AppBundle\Form\PeriodoFilterType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 /**
@@ -407,9 +408,50 @@ class PeriodoController extends Controller
             $periodo
         );
 
-//        ld($num);
         return new Response(json_encode($num));
 
+    }
+
+
+    /**
+     * @param Periodo $periodo
+     * @Route("/setperiodo/{id}", name="setperiodo")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function setperiodoAction(Request $request){
+
+        $empleador = $this->get("uta.empleador_activo")->getEmpleador();
+        //Verficar que el periodo recibido pertenezca al empleador
+        $em = $this->getDoctrine()->getEntityManager();
+        $periodoId = $request->get("id");
+        $periodo = $em->getRepository("AppBundle:Periodo")->find($periodoId);
+
+        if( !$periodo->getEmpleador()->getId() == $empleador->getId()){
+
+            throw( new NotFoundHttpException("El periodo no pertenece al empleador activo"));
+
+        }
+
+        $q = $em->createQueryBuilder()
+            ->update("AppBundle:Periodo","p")
+            ->set("p.activo",0)
+            ->where("p.empleador = ?1")
+            ->setParameter(1, $empleador->getId())
+            ->getQuery();
+        $q->execute();
+
+        $q = $em->createQueryBuilder()
+            ->update("AppBundle:Periodo","p")
+            ->set("p.activo",1)
+            ->where("p.empleador = ?1")
+            ->andWhere("p.id = ?2")
+            ->setParameter(1, $empleador->getId())
+            ->setParameter(2, $periodoId)
+            ->getQuery();
+        $q->execute();
+
+
+        return $this->redirectToRoute("app_periodo");
     }
 
 }

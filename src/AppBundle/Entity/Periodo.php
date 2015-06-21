@@ -70,12 +70,17 @@ class Periodo
      */
     private $activo;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $fecha_presentacion;
+
 
 
 
     public function __construct(){
         $this->setTipo(0);
-        $this->activo = 0;
+        $this->setActivo(0);
     }
 
 
@@ -161,7 +166,7 @@ class Periodo
     }
 
     public function __toString(){
-        return sprintf("%s - %d(%d)",$this->getVencimiento(),$this->getLiquidacion(), $this->getTipo(), $this->getEmpleador(), $this->getDescripcion());
+        return sprintf("%s - %d(%s)",$this->getVencimiento(),$this->getLiquidacion(), self::$_TIPO[$this->getTipo()] );
 
     }
 
@@ -236,5 +241,28 @@ class Periodo
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+
+    /**
+     * Set fecha_presentacion
+     *
+     * @param \DateTime $fechaPresentacion
+     * @return Periodo
+     */
+    public function setFechaPresentacion($fechaPresentacion)
+    {
+        $this->fecha_presentacion = $fechaPresentacion;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha_presentacion
+     *
+     * @return \DateTime 
+     */
+    public function getFechaPresentacion()
+    {
+        return $this->fecha_presentacion;
     }
 }

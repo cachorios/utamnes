@@ -38,18 +38,23 @@ class TrabajadorModel
     /**
      * @var \AppBundle\Entity\Empleador
      */
-    protected $empleador;
+    protected $empleadorSrv;
 
-
-//, EmpleadorModel $empModel
     public function __construct(EntityManager $em, EmpleadorActivo $empleadorActivo)
     {
         $this->em = $em;
-        $this->empleador = $empleadorActivo->getEmpleador();
+        $this->empleadorSrv = $empleadorActivo;
 //        $this->empModel = $empModel;
 
     }
 
+    /**
+     * @return Empleador
+     */
+    public function getEmpleadorActivo()
+    {
+        return $this->empleadorSrv->getEmpleador();
+    }
 
     /**
      * @return \Doctrine\Common\Collections\Collection
@@ -97,6 +102,17 @@ class TrabajadorModel
     }
 
 
+    /**
+     * @param Trabajador $tra
+     */
+    public function setTrabajor(Trabajador $tra)
+    {
+        $this->trabajador = $tra;
+    }
+
+    /**
+     * @param $id
+     */
     public function setTrabajadorId($id)
     {
         $this->trabajador = $this->em->getRepository("AppBundle:Trabajador")->find($id);
@@ -116,44 +132,78 @@ class TrabajadorModel
         return $dato;
     }
 
-    public function getArrayDatosImporte(Periodo $periodo, $importes = array())
+    /**
+     * @param Periodo $periodo
+     * @param bool liqGlobal //Si liquida global
+     * @return array
+     */
+    public function getArrayDatosImporte(Periodo $periodo, $liqGlobal = false)
     {
+
+        if($liqGlobal == true)
+            $importes = array();
+        else
+            $importes = $this->empleadorSrv->getImporteFormula();
+
 
         $dato = $this->getDatoLiquidacion($periodo);
 
         if ($dato) {
-            foreach ($importes as $i => $v) {
-                switch ($i) {
-                    case 0:
-                        $importes[0] = $dato->getTr();
-                        break;
-                    case 1:
-                        $importes[1] = $dato->getImp1();
-                        break;
-                    case 2:
-                        $importes[2] = $dato->getImp2();
-                        break;
-                    case 3:
-                        $importes[3] = $dato->getImp3();
-                        break;
-                    case 4:
-                        $importes[4] = $dato->getImp4();
-                        break;
-                    case 5:
-                        $importes[5] = $dato->getImp5();
-                        break;
-                    case 6:
-                        $importes[6] = $dato->getImp6();
-                        break;
-                    case 7:
-                        $importes[7] = $dato->getImp7();
-                        break;
-                    case 8:
-                        $importes[8] = $dato->getImp8();
-                        break;
-                    case 9:
-                        $importes[9] = $dato->getImp9();
-                        break;
+            if ($liqGlobal == true) {
+                if($dato->getTr()<>0)
+                    $importes['tr'] = $dato->getTr();
+                if($dato->getImp1()<>0)
+                    $importes['imp1'] = $dato->getImp1();
+                if($dato->getImp2()<>0)
+                    $importes['imp2'] = $dato->getImp2();
+                if($dato->getImp3()<>0)
+                    $importes['imp3'] = $dato->getImp3();
+                if($dato->getImp4()<>0)
+                    $importes['imp4'] = $dato->getImp4();
+                if($dato->getImp5()<>0)
+                    $importes['imp5'] = $dato->getImp5();
+                if($dato->getImp6()<>0)
+                    $importes['imp6'] = $dato->getImp6();
+                if($dato->getImp8()<>0)
+                    $importes['imp7'] = $dato->getImp7();
+                if($dato->getImp9()<>0)
+                    $importes['imp8'] = $dato->getImp8();
+                if($dato->getImp9()<>0)
+                    $importes['imp9'] = $dato->getImp9();
+            } else {
+                foreach ($importes as $i => $v) {
+                    switch ($i) {
+                        case 0:
+                            $importes[0] = $dato->getTr();
+                            break;
+                        case 1:
+                            $importes[1] = $dato->getImp1();
+                            break;
+                        case 2:
+                            $importes[2] = $dato->getImp2();
+                            break;
+                        case 3:
+                            $importes[3] = $dato->getImp3();
+                            break;
+                        case 4:
+                            $importes[4] = $dato->getImp4();
+                            break;
+                        case 5:
+                            $importes[5] = $dato->getImp5();
+                            break;
+                        case 6:
+                            $importes[6] = $dato->getImp6();
+                            break;
+                        case 7:
+                            $importes[7] = $dato->getImp7();
+                            break;
+                        case 8:
+                            $importes[8] = $dato->getImp8();
+                            break;
+                        case 9:
+                            $importes[9] = $dato->getImp9();
+                            break;
+                    }
                 }
             }
         }
@@ -195,7 +245,7 @@ class TrabajadorModel
      * @param $concs
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function Liquidar(Periodo $periodo, $datos, $concs)
+    public function liquidar(Periodo $periodo, $datos, $concs)
     {
         $concsLiq = $this->getConceptosLiquidar($concs);
 
@@ -219,36 +269,48 @@ class TrabajadorModel
         return $liqs;
     }
 
-    public function LiquidacionSave(Periodo $periodo,ArrayCollection $liqs, $datos)
+    public function liquidar_global(Periodo $periodo)
     {
-        if(! $datosLiq = $this->getDatoLiquidacion($periodo)){
+        $datos = $this->getArrayDatosImporte($periodo, true);
+
+        $liqsDato = $this->getLiquidacion($periodo);
+        $liqs = $this->liquidar($periodo, $datos, $liqsDato);
+        $this->liquidacionSave($periodo, $liqs, $datos);
+
+        return $liqs;
+    }
+
+    public function liquidacionSave(Periodo $periodo, ArrayCollection $liqs, $datos)
+    {
+        if (!$datosLiq = $this->getDatoLiquidacion($periodo)) {
             $datosLiq = new DatoLiquidacion();
             $datosLiq->setTrabajador($this->getTrabajador());
             $datosLiq->setPeriodo($periodo);
         }
 
-        $datosLiq->setTr( isset($datos['tr']) ? $datos['tr'] : 0  );
-        $datosLiq->setImp1( isset($datos['imp1']) ? $datos['imp1'] : 0  );
-        $datosLiq->setImp2( isset($datos['imp2']) ? $datos['imp2'] : 0  );
-        $datosLiq->setImp3( isset($datos['imp3']) ? $datos['imp3'] : 0  );
-        $datosLiq->setImp4( isset($datos['imp4']) ? $datos['imp4'] : 0  );
-        $datosLiq->setImp5( isset($datos['imp5']) ? $datos['imp5'] : 0  );
-        $datosLiq->setImp6( isset($datos['imp6']) ? $datos['imp6'] : 0  );
-        $datosLiq->setImp7( isset($datos['imp7']) ? $datos['imp7'] : 0  );
-        $datosLiq->setImp8( isset($datos['imp8']) ? $datos['imp8'] : 0  );
-        $datosLiq->setImp9( isset($datos['imp9']) ? $datos['imp9'] : 0  );
+        $datosLiq->setTr(isset($datos['tr']) ? $datos['tr'] : 0);
+        $datosLiq->setImp1(isset($datos['imp1']) ? $datos['imp1'] : 0);
+        $datosLiq->setImp2(isset($datos['imp2']) ? $datos['imp2'] : 0);
+        $datosLiq->setImp3(isset($datos['imp3']) ? $datos['imp3'] : 0);
+        $datosLiq->setImp4(isset($datos['imp4']) ? $datos['imp4'] : 0);
+        $datosLiq->setImp5(isset($datos['imp5']) ? $datos['imp5'] : 0);
+        $datosLiq->setImp6(isset($datos['imp6']) ? $datos['imp6'] : 0);
+        $datosLiq->setImp7(isset($datos['imp7']) ? $datos['imp7'] : 0);
+        $datosLiq->setImp8(isset($datos['imp8']) ? $datos['imp8'] : 0);
+        $datosLiq->setImp9(isset($datos['imp9']) ? $datos['imp9'] : 0);
 
         $this->em->persist($datosLiq);
         //Borrar las liquidaciones
         $this->em->getRepository("AppBundle:Liquidacion")->createQueryBuilder("")
-            ->delete("AppBundle:Liquidacion",'l')
-            ->where("l.trabajador = ". $this->getTrabajador()->getId())
-            ->andWhere("l.periodo= ". $periodo->getId())
+            ->delete("AppBundle:Liquidacion", 'l')
+            ->where("l.trabajador = ".$this->getTrabajador()->getId())
+            ->andWhere("l.periodo= ".$periodo->getId())
             ->getQuery()
             ->execute();
 
-        foreach($liqs as $liq)
+        foreach ($liqs as $liq) {
             $this->em->persist($liq);
+        }
 
         $this->em->flush();
     }

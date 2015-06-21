@@ -1,0 +1,28 @@
+{% extends '::layout_frontend.html.twig' %}
+
+{% block id 'liquidar' %}
+
+{% block contenido -%}
+    {% embed '::portlet.html.twig' with {'titulo': 'Liquidar' } %}
+        {% block cuerpo %}
+            <span>Periodo:</span>&nbsp; <strong>{{ periodo }}</strong>
+            <hr class="spacer-sm">
+            <ul>
+                <li>
+                    El proceso de liquidación realiza el calculo de los aportes y contribuciones para cada trabajador.
+                </li>
+                <li>
+                    Genera un registro en cuenta corriente, con estado "no presentado"
+                </li>
+
+                <li>
+                    Si ya existiere liquidación, simplemente se reemplazará por la nueva liquidación.
+                </li>
+            </ul>
+            <p></p>
+            <p></p>
+            <hr class="spacer-md">
+            <a href="{{ path("liquidarprocess") }}" class="btn btn-large btn-primary">Realizar Cálculo</a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

@@ -123,12 +123,6 @@ class DatoLiquidacionController extends Controller
         $periodo = $emp_activo->getPeriodoActivo();
 
 
-        $aImportes = array();
-        $aImportes[0] = 0;
-        $aImportes[1] = 0;
-        $aImportes[3] = 0;
-
-
         if($request->getMethod()=="POST"){
 
             $datosliq =  $request->get("datosliq");
@@ -136,8 +130,8 @@ class DatoLiquidacionController extends Controller
             $tk =  $request->get("_csrf_token");
 
             if($this->get("security.csrf.token_manager")->isTokenValid(new CsrfToken("datosliq", $tk))){
-                $liqs = $trabModel->Liquidar($periodo,$datosliq, $dato_valor);
-                $trabModel->LiquidacionSave($periodo,$liqs, $datosliq);
+                $liqs = $trabModel->liquidar($periodo,$datosliq, $dato_valor);
+                $trabModel->liquidacionSave($periodo,$liqs, $datosliq);
                 $estado = array('estado' => 'success','msg'=>'La liquidación guardó con éxito');
             }else{
                 $estado = array('estado' => "error","msg"=>"Error de formulario, requiere un token valido");
@@ -151,7 +145,7 @@ class DatoLiquidacionController extends Controller
 
         $vista = $this->renderView("@App/DatoLiquidacion/datos_edit.html.twig",array(
             "trabajador"    => $trabModel->getTrabajador(),
-            "importes"      => $trabModel->getArrayDatosImporte($periodo, $aImportes),
+            "importes"      => $trabModel->getArrayDatosImporte($periodo),
             "liquidacion"   => $trabModel->getLiquidacion($periodo),
             "csrf_token"    => $this->get("security.csrf.token_manager")->getToken("datosliq")
         ));

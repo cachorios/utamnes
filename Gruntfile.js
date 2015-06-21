@@ -9,9 +9,14 @@ module.exports = function(grunt) {
                     {expand: true, cwd: './mvp-theme/bower_components/fontawesome/fonts/',  src:['**'] , dest: './web/assets/fonts'},
                     {expand: true, cwd: './mvp-theme/bower_components/bootstrap/fonts/',  src:['**'] , dest: './web/assets/fonts'},
                     {expand: true, cwd: './mvp-theme/bower_components/bootstrap-fileinput/css/',  src:['**'] , dest: './web/assets/csstemp'},
-
+                    {expand: true, cwd: './mvp-theme/bower_components/zebra_dialog/public/css/default',  src:['*.css'] , dest: './web/assets/csstemp'},
+                    {expand: true, cwd: './mvp-theme/bower_components/zebra_dialog/public/css/default',  src:['*.png'] , dest: './web/assets/css'}
                 ]
             }
+            //img_png:{
+            //    src: './mvp-theme/bower_components/zebra_dialog/public/css/default/*.png',
+            //    dest: './web/assets/css/'
+            //}
         },
         less: {
             development: {
@@ -32,7 +37,7 @@ module.exports = function(grunt) {
                 separator: '\n'
             },
             css_frontend: {
-                src: ['./web/assets/csstemp/frontend.css', 'web/assets/csstemp/fileinput.css'],
+                src: ['./web/assets/csstemp/frontend.css', 'web/assets/csstemp/fileinput.css', 'web/assets/csstemp/zebra_dialog.css'],
                 dest: './web/assets/css/frontend.css'
             },
             css_backend: {
@@ -46,6 +51,7 @@ module.exports = function(grunt) {
                     './mvp-theme/bower_components/bootstrap/dist/js/bootstrap.js',
                     './mvp-theme/bower_components/slimscroll/jquery.slimscroll.min.js',
                     './mvp-theme/bower_components/bootstrap-fileinput/js/fileinput.js',
+                    './mvp-theme/bower_components/zebra_dialog/public/javascript/zebra_dialog.src.js',
                     './mvp-theme/global/js/mvpready-core.js',
                     './mvp-theme/global/js/mvpready-helpers.js',
                     './mvp-theme/js/mvpready-landing.js.js'
@@ -58,6 +64,7 @@ module.exports = function(grunt) {
                     './mvp-theme/bower_components/bootstrap/dist/js/bootstrap.js',
                     './mvp-theme/bower_components/slimscroll/jquery.slimscroll.min.js', //Para scrtoll to top
                     './mvp-theme/bower_components/bootstrap-fileinput/js/fileinput.js',
+                    './mvp-theme/bower_components/zebra_dialog/public/javascript/zebra_dialog.src.js',
                     './mvp-theme/global/js/mvpready-core.js',
                     './mvp-theme/global/js/mvpready-helpers.js',
                     './mvp-theme/js/mvpready-admin.js'

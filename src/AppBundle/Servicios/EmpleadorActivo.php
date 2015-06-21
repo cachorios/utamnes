@@ -9,6 +9,10 @@
 namespace AppBundle\Servicios;
 
 
+use AppBundle\Entity\Concepto;
+use AppBundle\Entity\Ctacte;
+use AppBundle\Entity\Empleador;
+use AppBundle\Entity\Periodo;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\SecurityContext;
 
@@ -63,4 +67,34 @@ class EmpleadorActivo {
         return $this->periodo;
     }
 
+    /**
+     * @return \AppBundle\Entity\Trabajador[]|array
+     */
+    public function getTrabajadores(){
+        $list = $this->em->getRepository("AppBundle:Trabajador")->findBy(array("empleador" => $this->getEmpleador()->getId(),"fecha_baja" => null),array("legajo" => "ASC"));
+        return $list;
+    }
+
+    public function getImporteFormula(){
+        $aImportes = array();
+        $aImportes[0] = 0;
+        $aImportes[1] = 0;
+        $aImportes[3] = 0;
+
+        return $aImportes;
+    }
+
+    public function guardarCuentaCte(Empleador $empleador, Periodo $periodo, Concepto $concepto,$importe){
+        $cta = new Ctacte();
+        $cta->setEmpleador($empleador)
+            ->setPeriodo($periodo)
+            ->setConcepto($concepto)
+            ->setImporte($importe)
+            ->setPago(0);
+        ;
+
+        $this->em->persist($cta);
+        $this->em->flush();
+
+    }
 } 

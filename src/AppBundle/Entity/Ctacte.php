@@ -64,16 +64,18 @@ class Ctacte
     /**
      * @var string
      *
-     * @ORM\Column(name="comprobante", type="string", length=64)
+     * @ORM\Column(name="comprobante", type="string", length=64, nullable=true)
      */
     private $comprobante;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fechaPago", type="date")
+     * @ORM\Column(name="fechaPago", type="date", nullable=true)
      */
     private $fechaPago;
+
+
 
 
     /**
