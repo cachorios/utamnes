@@ -84,7 +84,29 @@ class EmpleadorActivo {
         return $aImportes;
     }
 
+
+    public function borrarCtacte(Empleador $empleador, Periodo $periodo){
+        /**
+         * Antes de guardarlo se debe borrar el anterior
+         */
+
+        $this->em->createQueryBuilder()
+            ->delete("AppBundle:Ctacte",'c')
+            ->where("c.empleador = :emp")
+            ->andWhere("c.periodo = :periodo")
+
+             ->setParameter("emp", $empleador->getId())
+            ->setParameter('periodo', $periodo->getId())
+            ->getQuery()
+            ->execute();
+        return $this;
+    }
+
     public function guardarCuentaCte(Empleador $empleador, Periodo $periodo, Concepto $concepto,$importe){
+
+
+
+
         $cta = new Ctacte();
         $cta->setEmpleador($empleador)
             ->setPeriodo($periodo)

@@ -49,6 +49,11 @@ class Liquidar
         /**
          * Guardar cuenta corriente
          */
+        /**
+         * Antes de guardarlo se debe borrar el anterior
+         */
+        $this->empAct->borrarCtacte($this->empAct->getEmpleador(), $this->empAct->getPeriodoActivo());
+
         foreach($this->totales as $reg){
             $this->empAct->guardarCuentaCte($this->empAct->getEmpleador(), $this->empAct->getPeriodoActivo(), $reg['concepto'],$reg['total'] );
         }

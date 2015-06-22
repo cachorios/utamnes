@@ -10,4 +10,20 @@ namespace AppBundle\Entity;
  */
 class CtacteRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getCtactesQB(Empleador $empleador){
+        $qb =$this->_em->createQueryBuilder()
+            ->select('c','p','o')
+            ->from("AppBundle:Ctacte",'c')
+            ->leftJoin("c.periodo","p")
+            ->leftJoin('p.vencimiento','v')
+            ->leftJoin("c.concepto",'o')
+            ->where("c.empleador = :emp")
+            ->orderBy("v.anio",'ASC')
+            ->addOrderBy("v.mes",'ASC')
+            ->addOrderBy("o.numero",'ASC')
+            ->setParameter("emp",$empleador->getId());
+
+    return $qb;
+
+    }
 }

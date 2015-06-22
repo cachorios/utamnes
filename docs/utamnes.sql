@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2015-06-17 17:19:13
+Date: 2015-06-21 21:04:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,17 +34,13 @@ CREATE TABLE `concepto` (
   UNIQUE KEY `UNIQ_9DF5EA86F55AE19E` (`numero`),
   KEY `IDX_9DF5EA86DB38439E` (`usuario_id`),
   CONSTRAINT `FK_9DF5EA86DB38439E` FOREIGN KEY (`usuario_id`) REFERENCES `fos_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of concepto
 -- ----------------------------
-INSERT INTO `concepto` VALUES ('1', null, '401', 'Cuota Gremial', 'Cuota Grem.', '1', '1', '2 + 2', '2015-06-17 16:15:38', '2015-06-17 16:15:38');
-INSERT INTO `concepto` VALUES ('2', null, '412', 'Seguro Funerario', 'Seg. Fun.', '1', '1', '2 + 2', '2015-06-17 16:15:38', '2015-06-17 16:15:38');
-INSERT INTO `concepto` VALUES ('3', null, '437', 'Seguro de Vida', 'Seguro Vida', '1', '0', '2 + 2', '2015-06-17 16:15:38', '2015-06-17 16:15:38');
-INSERT INTO `concepto` VALUES ('4', null, '451', 'Seguro Familiar Colectivo', 'Seg. col', '0', '1', '2 + 2', '2015-06-17 16:15:38', '2015-06-17 16:15:38');
-INSERT INTO `concepto` VALUES ('5', null, '480', 'Complemento OB. Social', 'Comp.Ob.Soc.', '0', '1', '2 + 2', '2015-06-17 16:15:38', '2015-06-17 16:15:38');
-INSERT INTO `concepto` VALUES ('6', null, '485', 'Prestamo mutual UTA', 'Prestamo UTA', '0', '1', '2 + 2', '2015-06-17 16:15:38', '2015-06-17 16:15:38');
+INSERT INTO `concepto` VALUES ('1', null, '401', 'Cuota Gremial', 'Cuota Grem.', '1', '1', '[TR] * 0.12', '2015-06-17 16:15:38', '2015-06-17 16:15:38');
+INSERT INTO `concepto` VALUES ('2', null, '412', 'Seguro Funerario', 'Seg. Fun.', '1', '1', '([TR]+[IMP1]) * 0.20', '2015-06-17 16:15:38', '2015-06-17 16:15:38');
 
 -- ----------------------------
 -- Table structure for `ctacte`
@@ -58,8 +54,8 @@ CREATE TABLE `ctacte` (
   `rectificado_id` int(11) DEFAULT NULL,
   `importe` decimal(10,0) NOT NULL,
   `pago` decimal(10,0) NOT NULL,
-  `comprobante` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `fechaPago` date NOT NULL,
+  `comprobante` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fechaPago` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_8BDC53547981C10B` (`empleador_id`),
   KEY `IDX_8BDC53549C3921AB` (`periodo_id`),
@@ -69,11 +65,15 @@ CREATE TABLE `ctacte` (
   CONSTRAINT `FK_8BDC53547981C10B` FOREIGN KEY (`empleador_id`) REFERENCES `empleador` (`id`),
   CONSTRAINT `FK_8BDC53549C3921AB` FOREIGN KEY (`periodo_id`) REFERENCES `periodo` (`id`),
   CONSTRAINT `FK_8BDC5354FA7F3492` FOREIGN KEY (`rectificado_id`) REFERENCES `periodo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of ctacte
 -- ----------------------------
+INSERT INTO `ctacte` VALUES ('7', '101', '1', '1', null, '3300', '0', null, null);
+INSERT INTO `ctacte` VALUES ('8', '101', '1', '2', null, '5580', '0', null, null);
+INSERT INTO `ctacte` VALUES ('9', '101', '2', '1', null, '2160', '0', null, null);
+INSERT INTO `ctacte` VALUES ('10', '101', '2', '2', null, '3600', '0', null, null);
 
 -- ----------------------------
 -- Table structure for `datoliquidacion`
@@ -98,11 +98,16 @@ CREATE TABLE `datoliquidacion` (
   KEY `IDX_5B26F3CFEC3656E` (`trabajador_id`),
   CONSTRAINT `FK_5B26F3CF9C3921AB` FOREIGN KEY (`periodo_id`) REFERENCES `periodo` (`id`),
   CONSTRAINT `FK_5B26F3CFEC3656E` FOREIGN KEY (`trabajador_id`) REFERENCES `trabajador` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of datoliquidacion
 -- ----------------------------
+INSERT INTO `datoliquidacion` VALUES ('1', '1', '1', '14500', '200', '0', '500', '0', '0', '0', '0', '0', '0');
+INSERT INTO `datoliquidacion` VALUES ('2', '1', '2', '13000', '200', '0', '500', '0', '0', '0', '0', '0', '0');
+INSERT INTO `datoliquidacion` VALUES ('5', null, null, '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `datoliquidacion` VALUES ('6', '2', '1', '8500', '0', '0', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `datoliquidacion` VALUES ('7', '2', '2', '9500', '0', '0', '0', '0', '0', '0', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `empleador`
@@ -289,7 +294,7 @@ CREATE TABLE `fos_user` (
 -- Records of fos_user
 -- ----------------------------
 INSERT INTO `fos_user` VALUES ('1', 'cachorios', 'cachorios', 'cachorios@gmail.com', 'cachorios@gmail.com', '1', '4h3tosw5eha80c04gk04c8ow08co4gg', '0ZzmQiXMb2emEoVhFris0DscMklPNsY0ZvExxhz66azRBv8fZQfeFviKQ8B3q8RubjZCtXYtSQe2jykgC3nQGg==', '2015-06-17 17:28:01', '0', '0', null, null, null, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}', '0', null, null, null, null, 'user55819211cbd75.jpg');
-INSERT INTO `fos_user` VALUES ('2', '2020', '2020', 'cachitorios@hotmail.com', 'cachitorios@hotmail.com', '1', 'dpgnx5f0m0owk48880os8cw4wssgc0s', '28/fyGo/8N5JdSfY6E37dsUCCJCr/ssA7m4gI3B51fLj/GY2ir+GyHZDQLqNIEApLFRQrimGJHs36YGdRszqJA==', '2015-06-17 21:12:20', '0', '0', null, null, null, 'a:1:{i:0;s:14:\"ROLE_EMPLEADOR\";}', '0', null, 'El Topo Trans', null, null, 'user5581980613866.JPG');
+INSERT INTO `fos_user` VALUES ('2', '2020', '2020', 'cachitorios@hotmail.com', 'cachitorios@hotmail.com', '1', 'dpgnx5f0m0owk48880os8cw4wssgc0s', '28/fyGo/8N5JdSfY6E37dsUCCJCr/ssA7m4gI3B51fLj/GY2ir+GyHZDQLqNIEApLFRQrimGJHs36YGdRszqJA==', '2015-06-21 22:31:05', '0', '0', null, null, null, 'a:1:{i:0;s:14:\"ROLE_EMPLEADOR\";}', '0', null, 'El Topo Trans', null, null, 'user5581980613866.JPG');
 
 -- ----------------------------
 -- Table structure for `liquidacion`
@@ -308,14 +313,19 @@ CREATE TABLE `liquidacion` (
   CONSTRAINT `FK_96ACD4EE6C2330BD` FOREIGN KEY (`concepto_id`) REFERENCES `concepto` (`id`),
   CONSTRAINT `FK_96ACD4EE9C3921AB` FOREIGN KEY (`periodo_id`) REFERENCES `periodo` (`id`),
   CONSTRAINT `FK_96ACD4EEEC3656E` FOREIGN KEY (`trabajador_id`) REFERENCES `trabajador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of liquidacion
 -- ----------------------------
-INSERT INTO `liquidacion` VALUES ('1', '1', '1', '1', '1000');
-INSERT INTO `liquidacion` VALUES ('2', '1', '1', '2', '500');
-INSERT INTO `liquidacion` VALUES ('3', '1', '1', '3', '300');
+INSERT INTO `liquidacion` VALUES ('17', '1', '1', '1', '1740');
+INSERT INTO `liquidacion` VALUES ('18', '1', '1', '2', '2940');
+INSERT INTO `liquidacion` VALUES ('19', '2', '1', '1', '1560');
+INSERT INTO `liquidacion` VALUES ('20', '2', '1', '2', '2640');
+INSERT INTO `liquidacion` VALUES ('25', '1', '2', '1', '1020');
+INSERT INTO `liquidacion` VALUES ('26', '1', '2', '2', '1700');
+INSERT INTO `liquidacion` VALUES ('27', '2', '2', '1', '1140');
+INSERT INTO `liquidacion` VALUES ('28', '2', '2', '2', '1900');
 
 -- ----------------------------
 -- Table structure for `obligacion`
@@ -344,17 +354,20 @@ CREATE TABLE `periodo` (
   `liquidacion` int(11) NOT NULL,
   `tipo` int(11) NOT NULL,
   `activo` tinyint(1) NOT NULL,
+  `descripcion` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fecha_presentacion` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_BCABFD718A82E59F` (`vencimiento_id`),
   KEY `IDX_BCABFD717981C10B` (`empleador_id`),
   CONSTRAINT `FK_BCABFD717981C10B` FOREIGN KEY (`empleador_id`) REFERENCES `empleador` (`id`),
   CONSTRAINT `FK_BCABFD718A82E59F` FOREIGN KEY (`vencimiento_id`) REFERENCES `vencimiento` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of periodo
 -- ----------------------------
-INSERT INTO `periodo` VALUES ('1', '2', '101', '0', '0', '1');
+INSERT INTO `periodo` VALUES ('1', '2', '101', '0', '0', '0', null, null);
+INSERT INTO `periodo` VALUES ('2', '2', '101', '1', '0', '1', 'Otra liq', null);
 
 -- ----------------------------
 -- Table structure for `trabajador`
@@ -381,12 +394,13 @@ CREATE TABLE `trabajador` (
   UNIQUE KEY `trabajadorCuitUk` (`empleador_id`,`cuil`),
   KEY `IDX_D487F0F7981C10B` (`empleador_id`),
   CONSTRAINT `FK_D487F0F7981C10B` FOREIGN KEY (`empleador_id`) REFERENCES `empleador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of trabajador
 -- ----------------------------
 INSERT INTO `trabajador` VALUES ('1', '101', '20145445109', 'Facundo Cabrera', 'M', 'S', 'facu@gmail.com', '12', '12', 'Posadas', '1001', '1999-05-01 00:00:00', null, '2015-06-17 17:02:56', '2015-06-17 17:02:56');
+INSERT INTO `trabajador` VALUES ('2', '101', '20000000001', 'Falero Nikolas', 'M', 'S', 'nikofa@gmail.com', '15', '121', 'Posadas', '12', '2013-05-01 00:00:00', null, '2015-06-19 04:48:56', '2015-06-19 04:48:56');
 
 -- ----------------------------
 -- Table structure for `trabajadorperiodo`

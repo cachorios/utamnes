@@ -3,4 +3,53 @@
 {% block id 'ctacte' %}
 
 {% block contenido -%}
+    {% embed "portlet.html.twig" with  {"titulo": "Estado de Cuenta Corriente"} %}
+        {% block cuerpo %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Periodo</th>
+                        <th>Concepto</th>
+                        <th>Vencimiento</th>
+                        <th>Importe</th>
+                        <th>Pago</th>
+                        <th>Comprobante</th>
+                        <th>Saldo Act.</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                {% set timp, tpago, tsaldo = 0,0,0 %}
+                {% for cta in ctactes  %}
+                    <tr>
+                        <td>{{ cta.periodo }}</td>
+                        <td>{{ cta.concepto }}</td>
+                        <td>{{ cta.periodo.vencimiento.vencimiento | date('d/m/y') }}</td>
+                        <td>{{ cta.importe }}</td>
+                        <td>{{ cta.pago }}</td>
+                        <td>{{ cta.comprobante }}</td>
+                        <td>{{ cta.importe - cta.pago }}</td>
+                        {% set timp, tpago, tsaldo =
+                                timp+cta.importe,
+                                tpago+ cta.pago,
+                                tsaldo+ cta.importe -cta.pago
+                        %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="3" align="right" >Total:</th>
+                    <th> {{ timp }}</th>
+                    <th> {{ tpago }}</th>
+                    <th></th>
+                    <th>{{ tsaldo }}</th>
+
+
+                </tr>
+                </tfoot>
+            </table>
+
+        {% endblock %}
+    {% endembed %}
 {% endblock %}

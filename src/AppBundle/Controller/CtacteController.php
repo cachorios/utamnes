@@ -25,7 +25,10 @@ class CtacteController  extends Controller{
      * @Route("/", name="ctacte")
      */
     public function indexAction(){
-
-        return array();
+        $em = $this->getDoctrine()->getManager();
+        $ctactes = $em->getRepository("AppBundle:Ctacte")->getCtactesQB($this->get("uta.empleador_activo")->getEmpleador())
+            ->getQuery()
+            ->execute();
+        return array("ctactes" => $ctactes);
     }
 }
