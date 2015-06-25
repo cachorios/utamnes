@@ -29,9 +29,10 @@ class DefaultController extends Controller
 
 
 
+        $file = 'rpt'.date("U");
         $jr->process(
             $base.'/uploads/boleta_bco.jasper',
-            $base.'/uploads/rpt'.date("U"),
+            $base.'/uploads/'.$file,
             array("pdf"),
             array(),
             array(
@@ -54,6 +55,6 @@ class DefaultController extends Controller
 //            "F:/web/utamnes/web/uploads",array("pdf"),array(),array(),true,true);
 
 
-        return $this->render('@App/Default/index.html.twig');
+        return $this->render('@App/Default/index.html.twig', array("pdf" =>  $file.'.pdf'));
     }
 }
