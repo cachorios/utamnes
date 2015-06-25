@@ -29,7 +29,7 @@ class DefaultController extends Controller
 
 
 
-        $file = 'rpt'.date("U");
+        $file = uniqid("rpt") ;
         $jr->process(
             $base.'/uploads/boleta_bco.jasper',
             $base.'/uploads/'.$file,

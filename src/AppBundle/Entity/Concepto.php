@@ -7,6 +7,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * @ORM\Entity
+ * @ORM\Table("concepto")
  */
 class Concepto
 {
