@@ -34,7 +34,7 @@ class DefaultController extends Controller
             array(),
             array(
                 'driver'    => 'mysql',
-                'host'      => "localhost",
+                'host'      => "127.0.0.1",
                 'database'  => 'utamnes',
                 'username'  => 'root',
                 'password'  => '7219'
