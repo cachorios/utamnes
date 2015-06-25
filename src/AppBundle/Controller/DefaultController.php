@@ -26,8 +26,8 @@ class DefaultController extends Controller
 
         $jr->process(
             $base.'/boleta_bco.jasper',
-            false,
-            array("pdf", "rtf"),
+            $base.'/uploads',
+            array("pdf"),
             array(),
             array(
                 'driver'    => 'mysql',
