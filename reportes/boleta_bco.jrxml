@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="boleta_bco" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9b7ee0e9-1490-43ac-a8ec-d1586db37c9b">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e6e806f7-754c-449a-a828-41c6c3bc807d">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -19,9 +19,9 @@
      empleador.`localidad` AS empleador_localidad,
      empleador.`id` AS empleador_id
 FROM
-     `periodo` periodo INNER JOIN `ctacte` ctacte ON periodo.`id` = ctacte.`periodo_id`
-     INNER JOIN `vencimiento` vencimiento ON periodo.`vencimiento_id` = vencimiento.`id`
-     LEFT OUTER JOIN `empleador` empleador ON ctacte.`empleador_id` = empleador.`id`
+     `Periodo` periodo INNER JOIN `Ctacte` ctacte ON periodo.`id` = ctacte.`periodo_id`
+     INNER JOIN `Vencimiento` vencimiento ON periodo.`vencimiento_id` = vencimiento.`id`
+     LEFT OUTER JOIN `Empleador` empleador ON ctacte.`empleador_id` = empleador.`id`
 WHERE
      ctacte.`empleador_id` = 101
      and periodo.`id` = 1
@@ -52,58 +52,41 @@ GROUP BY
 	<field name="empleador_direccion" class="java.lang.String"/>
 	<field name="empleador_localidad" class="java.lang.String"/>
 	<field name="empleador_id" class="java.lang.Integer"/>
-	<field name="field1" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="25" width="552" height="32" uuid="1a107472-825d-44bd-a902-66a7e975d42b"/>
-				<textElement textAlignment="Center">
-					<font fontName="Arial" size="18" isBold="true" isUnderline="true"/>
-				</textElement>
-				<text><![CDATA[BOLETA PARA PAGO]]></text>
-			</staticText>
+			<textField>
+				<reportElement x="140" y="25" width="100" height="20" uuid="a8ae8ade-7341-4115-969c-a046b7bac250"/>
+				<textFieldExpression><![CDATA[$F{periodo_liquidacion}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch">
-			<textField>
-				<reportElement x="452" y="7" width="100" height="20" uuid="42f46bfa-5433-4b63-9183-4ce5215a34ef"/>
-				<textFieldExpression><![CDATA[$F{vencimiento_vencimiento}]]></textFieldExpression>
-			</textField>
-		</band>
+		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="26" splitType="Stretch">
+		<band height="61" splitType="Stretch">
 			<staticText>
-				<reportElement x="452" y="2" width="100" height="20" uuid="8da2f418-7872-4c95-9245-e6253c778f85"/>
+				<reportElement x="466" y="2" width="100" height="20" uuid="72a6a0da-eb2e-4da0-a771-1ed86b835828"/>
 				<text><![CDATA[saldo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4" y="2" width="100" height="20" uuid="3c821917-c681-4d3f-b7c8-56bc2fd880ac"/>
-				<text><![CDATA[vencimiento_anio]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="115" y="2" width="100" height="20" uuid="753d58b4-fdf2-4339-995a-7ea1d9e977c9"/>
-				<text><![CDATA[vencimiento_mes]]></text>
+				<reportElement x="111" y="2" width="100" height="20" uuid="e939ad92-142d-4cdc-97b3-65c0e2ba4471"/>
+				<text><![CDATA[periodo_tipo]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="28" splitType="Stretch">
+		<band height="125" splitType="Stretch">
 			<textField>
-				<reportElement x="452" y="0" width="100" height="20" uuid="3df41600-cc9b-457f-83a6-50f34e7ece79"/>
+				<reportElement x="466" y="21" width="100" height="20" uuid="1c31f8d9-17bc-4722-aaed-85073cba2a71"/>
 				<textFieldExpression><![CDATA[$F{saldo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="4" y="0" width="100" height="20" uuid="12d2b03c-a844-49a4-9425-646dc81a01d2"/>
-				<textFieldExpression><![CDATA[$F{vencimiento_anio}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="115" y="0" width="100" height="20" uuid="b34a94ca-6010-4264-bc9c-e43c9f21b556"/>
-				<textFieldExpression><![CDATA[$F{vencimiento_mes}]]></textFieldExpression>
+				<reportElement x="111" y="32" width="100" height="20" uuid="dcc66f62-57de-4ab3-9362-56819db4768c"/>
+				<textFieldExpression><![CDATA[$F{periodo_tipo}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
