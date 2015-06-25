@@ -28,7 +28,7 @@ class DefaultController extends Controller
             ->execute();
 
         $jr->process(
-            $base.'/boleta_bco.jasper',
+            $base.'/uploads/boleta_bco.jasper',
             $base.'/uploads',
             array("pdf"),
             array(),
