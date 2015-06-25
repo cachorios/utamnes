@@ -22,7 +22,10 @@ class DefaultController extends Controller
 
         $base = $this->get('kernel')->getRootDir() . '/../web';
 
-        $jr->compile($base.'/boleta_bco.jrxml')->execute();
+        $jr->compile(
+            $base.'/boleta_bco.jrxml',
+            $base.'/uploads')
+            ->execute();
 
         $jr->process(
             $base.'/boleta_bco.jasper',
