@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="boleta_banco" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="412fbe28-4874-4712-b804-517fb948d592">
 	<property name="ireport.zoom" value="1.3310000000000035"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="110"/>
 	<parameter name="empleador_id" class="java.lang.Integer" isForPrompting="false">
 		<defaultValueExpression><![CDATA[101]]></defaultValueExpression>
 	</parameter>
@@ -73,7 +73,7 @@ GROUP BY
 		<band height="544" splitType="Stretch">
 			<textField>
 				<reportElement x="54" y="198" width="45" height="20" uuid="545660d3-a610-422d-8701-1ff02a88f59c"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{periodostr}]]></textFieldExpression>
@@ -122,14 +122,14 @@ GROUP BY
 				<reportElement x="9" y="514" width="250" height="1" uuid="3f158508-c856-47df-a3b1-e84d72896f89"/>
 			</line>
 			<componentElement>
-				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="23" y="463" width="217" height="39" uuid="09e47c2c-6dc7-4100-ad4a-874853b0fdb5"/>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="23" y="463" width="217" height="51" uuid="09e47c2c-6dc7-4100-ad4a-874853b0fdb5"/>
 				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Int2of5" drawText="true" checksumRequired="false" barWidth="2" barHeight="60">
 					<jr:codeExpression><![CDATA[$F{barcode}]]></jr:codeExpression>
 				</jr:barbecue>
 			</componentElement>
 			<textField>
 				<reportElement x="240" y="198" width="19" height="20" uuid="7d608d1b-f4da-4865-9a35-2b9bf439d0e2"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{periodo_tipo}]]></textFieldExpression>
@@ -143,17 +143,19 @@ GROUP BY
 			</textField>
 			<staticText>
 				<reportElement x="9" y="198" width="45" height="20" uuid="8cf850d3-3a5d-498e-9277-f611c7bbc2f5"/>
+				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Periodo:]]></text>
 			</staticText>
 			<textField pattern="00">
 				<reportElement x="218" y="198" width="19" height="20" uuid="9188bc75-1415-47ed-a692-67810a9e79e9"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{periodo_liquidacion}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="111" y="198" width="100" height="20" uuid="4df84523-395b-4a61-8b94-ffa9142ebb2e"/>
+				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Nro. de Liquidación:]]></text>
 			</staticText>
 			<staticText>
@@ -284,7 +286,7 @@ GROUP BY
 			</staticText>
 			<textField pattern="00">
 				<reportElement x="491" y="198" width="19" height="20" uuid="1ebfc7d2-5999-42be-8f56-6c253ab92e11"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{periodo_liquidacion}]]></textFieldExpression>
@@ -344,6 +346,7 @@ GROUP BY
 			</textField>
 			<staticText>
 				<reportElement x="282" y="198" width="45" height="20" uuid="b7502676-602a-44dd-8df8-e5f4e4359610"/>
+				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Periodo:]]></text>
 			</staticText>
 			<staticText>
@@ -352,7 +355,7 @@ GROUP BY
 			</staticText>
 			<textField>
 				<reportElement x="513" y="198" width="19" height="20" uuid="f52ed96e-2d9b-4551-98da-1cd182082e6f"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{periodo_tipo}]]></textFieldExpression>
@@ -404,6 +407,7 @@ GROUP BY
 			</textField>
 			<staticText>
 				<reportElement x="384" y="198" width="100" height="20" uuid="9d583682-a024-4395-8c6b-c45f05ed9a06"/>
+				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Nro. de Liquidación:]]></text>
 			</staticText>
 			<textField>
@@ -446,6 +450,7 @@ GROUP BY
 			</staticText>
 			<staticText>
 				<reportElement x="551" y="198" width="45" height="20" uuid="eafe879e-b661-479c-a190-e63d695a7163"/>
+				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Periodo:]]></text>
 			</staticText>
 			<textField>
@@ -464,6 +469,7 @@ GROUP BY
 			</staticText>
 			<staticText>
 				<reportElement x="653" y="198" width="100" height="20" uuid="0654a352-d70c-4b14-855c-2c3efe0a8641"/>
+				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Nro. de Liquidación:]]></text>
 			</staticText>
 			<textField>
@@ -506,7 +512,7 @@ GROUP BY
 			</textField>
 			<textField>
 				<reportElement x="782" y="198" width="19" height="20" uuid="90f2edef-1697-4ae7-bd70-fca647dd713a"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{periodo_tipo}]]></textFieldExpression>
@@ -557,7 +563,7 @@ GROUP BY
 			</textField>
 			<textField pattern="00">
 				<reportElement x="760" y="198" width="19" height="20" uuid="39bedd1c-852f-480f-bb92-b7801c6c5ff4"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{periodo_liquidacion}]]></textFieldExpression>
@@ -611,14 +617,14 @@ GROUP BY
 			</line>
 			<textField>
 				<reportElement x="327" y="198" width="45" height="20" uuid="054860cd-5652-4f69-8896-60db433f09bb"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{periodostr}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="596" y="198" width="45" height="20" uuid="e709979d-af5c-4f0b-8dda-a6a64a9d65df"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{periodostr}]]></textFieldExpression>
