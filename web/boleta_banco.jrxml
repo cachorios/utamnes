@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="boleta_banco" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="412fbe28-4874-4712-b804-517fb948d592">
-	<property name="ireport.zoom" value="0.8264462809917371"/>
+	<property name="ireport.zoom" value="1.3310000000000035"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="59"/>
 	<parameter name="empleador_id" class="java.lang.Integer" isForPrompting="false">
 		<defaultValueExpression><![CDATA[101]]></defaultValueExpression>
 	</parameter>
@@ -12,6 +12,7 @@
 	<queryString>
 		<![CDATA[SELECT
     periodo.`id` as comprobante,
+    CONCAT(vencimiento.anio, LPAD( vencimiento.mes,2,'00')) periodostr,
     CONCAT(
 	lpad(empleador.`id`,6,'0'),
 	lpad(periodo.`id`,8,'0'),
@@ -53,6 +54,7 @@ GROUP BY
      empleador.`id`]]>
 	</queryString>
 	<field name="comprobante" class="java.lang.Integer"/>
+	<field name="periodostr" class="java.lang.String"/>
 	<field name="barcode" class="java.lang.String"/>
 	<field name="saldo" class="java.math.BigDecimal"/>
 	<field name="periodo_liquidacion" class="java.lang.Integer"/>
@@ -69,9 +71,16 @@ GROUP BY
 	<field name="empleador_id" class="java.lang.Integer"/>
 	<detail>
 		<band height="544" splitType="Stretch">
+			<textField>
+				<reportElement x="54" y="198" width="45" height="20" uuid="545660d3-a610-422d-8701-1ff02a88f59c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{periodostr}]]></textFieldExpression>
+			</textField>
 			<image scaleImage="FillFrame">
 				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="11" y="27" width="65" height="62" uuid="932f4d8e-29f6-4fbb-a927-f08f13facbf5"/>
-				<imageExpression><![CDATA["F:\\web\\utamnes\\web\\assets\\img\\logo_img.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["logo_img.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="82" y="37" width="175" height="18" uuid="6737c79d-6c60-4a9f-a32c-078806c0f606"/>
@@ -136,13 +145,6 @@ GROUP BY
 				<reportElement x="9" y="198" width="45" height="20" uuid="8cf850d3-3a5d-498e-9277-f611c7bbc2f5"/>
 				<text><![CDATA[Periodo:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="54" y="198" width="45" height="20" uuid="a239c603-fad1-44a2-8db8-d7703665fd67"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vencimiento_anio} + '/'+  new DecimalFormat("00").format($F{vencimiento_mes})]]></textFieldExpression>
-			</textField>
 			<textField pattern="00">
 				<reportElement x="218" y="198" width="19" height="20" uuid="9188bc75-1415-47ed-a692-67810a9e79e9"/>
 				<textElement>
@@ -288,8 +290,8 @@ GROUP BY
 				<textFieldExpression><![CDATA[$F{periodo_liquidacion}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="FillFrame">
-				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="284" y="27" width="65" height="62" uuid="bb335ffc-7b39-4935-9a0f-9a37a586b045"/>
-				<imageExpression><![CDATA["F:\\web\\utamnes\\web\\assets\\img\\logo_img.jpg"]]></imageExpression>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="284" y="26" width="65" height="62" uuid="bb335ffc-7b39-4935-9a0f-9a37a586b045"/>
+				<imageExpression><![CDATA["logo_img.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="355" y="37" width="175" height="18" uuid="df190ae2-b529-45ec-9f5d-ff65455d5b3f"/>
@@ -344,13 +346,6 @@ GROUP BY
 				<reportElement x="282" y="198" width="45" height="20" uuid="b7502676-602a-44dd-8df8-e5f4e4359610"/>
 				<text><![CDATA[Periodo:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="327" y="198" width="45" height="20" uuid="fe5a23a1-71ca-4cae-a90a-ebc477695992"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vencimiento_anio} + '/'+  new DecimalFormat("00").format($F{vencimiento_mes})]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="282" y="286" width="100" height="20" uuid="4401743c-ee04-42d4-8489-983d62b04cd8"/>
 				<text><![CDATA[Importe declarado]]></text>
@@ -486,13 +481,6 @@ GROUP BY
 				<text><![CDATA[COMPROBANTE:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="596" y="198" width="45" height="20" uuid="ff52390b-9738-4dcb-a12e-1c8006b3c238"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vencimiento_anio} + '/'+  new DecimalFormat("00").format($F{vencimiento_mes})]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="627" y="126" width="172" height="20" uuid="acc51181-70ec-413a-9914-5eb3d8ad9ab7"/>
 				<textElement>
 					<font isBold="true"/>
@@ -537,7 +525,7 @@ GROUP BY
 			</line>
 			<image scaleImage="FillFrame">
 				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="553" y="27" width="65" height="62" uuid="f6505fa6-defb-4d68-a3dd-74e1cacf7ca4"/>
-				<imageExpression><![CDATA["F:\\web\\utamnes\\web\\assets\\img\\logo_img.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["logo_img.jpg"]]></imageExpression>
 			</image>
 			<line>
 				<reportElement x="551" y="514" width="250" height="1" uuid="ec0cea77-6134-4cc7-9749-ec695be8f6dc"/>
@@ -621,6 +609,20 @@ GROUP BY
 			<line>
 				<reportElement x="551" y="186" width="250" height="1" uuid="e5ad83f8-a732-4a27-8c83-a763e7fb24b5"/>
 			</line>
+			<textField>
+				<reportElement x="327" y="198" width="45" height="20" uuid="054860cd-5652-4f69-8896-60db433f09bb"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{periodostr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="596" y="198" width="45" height="20" uuid="e709979d-af5c-4f0b-8dda-a6a64a9d65df"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{periodostr}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 </jasperReport>
