@@ -71,7 +71,7 @@ GROUP BY
 		<band height="544" splitType="Stretch">
 			<image scaleImage="FillFrame">
 				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="11" y="27" width="65" height="62" uuid="932f4d8e-29f6-4fbb-a927-f08f13facbf5"/>
-				<imageExpression><![CDATA["F:\\web\\utamnes\\web\\assets\\img\\logo_img.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["logo_img.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="82" y="37" width="175" height="18" uuid="6737c79d-6c60-4a9f-a32c-078806c0f606"/>
@@ -289,7 +289,7 @@ GROUP BY
 			</textField>
 			<image scaleImage="FillFrame">
 				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="284" y="27" width="65" height="62" uuid="bb335ffc-7b39-4935-9a0f-9a37a586b045"/>
-				<imageExpression><![CDATA["F:\\web\\utamnes\\web\\assets\\img\\logo_img.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["logo_img.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="355" y="37" width="175" height="18" uuid="df190ae2-b529-45ec-9f5d-ff65455d5b3f"/>
@@ -537,7 +537,7 @@ GROUP BY
 			</line>
 			<image scaleImage="FillFrame">
 				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="553" y="27" width="65" height="62" uuid="f6505fa6-defb-4d68-a3dd-74e1cacf7ca4"/>
-				<imageExpression><![CDATA["F:\\web\\utamnes\\web\\assets\\img\\logo_img.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["logo_img.jpg"]]></imageExpression>
 			</image>
 			<line>
 				<reportElement x="551" y="514" width="250" height="1" uuid="ec0cea77-6134-4cc7-9749-ec695be8f6dc"/>
