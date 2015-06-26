@@ -22,16 +22,16 @@ class DefaultController extends Controller
 
         $base = $this->get('kernel')->getRootDir() . '/../web';
 
-        $jr->compile(
-            $base.'/boleta_bco.jrxml',
-            $base.'/uploads')
-            ->execute();
+//        $jr->compile(
+//            $base.'/boleta_bco.jrxml',
+//            $base.'/uploads')
+//            ->execute();
 
 
 
         $file = uniqid("rpt") ;
         $jr->process(
-            $base.'/uploads/boleta_bco.jasper',
+            $base.'/uploads/boleta_banco.jasper',
             $base.'/uploads/'.$file,
             array("pdf"),
             array(),

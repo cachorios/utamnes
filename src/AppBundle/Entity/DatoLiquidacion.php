@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * DatoLiquidacion
  *
- * @ORM\Table()
+ * @ORM\Table("datos_liquidacion")
  * @ORM\Entity
  */
 class DatoLiquidacion

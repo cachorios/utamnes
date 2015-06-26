@@ -7,6 +7,7 @@ use RBSoft\UtilidadBundle\Libs\Util;
 use RBSoft\UtilidadBundle\Validator\Constraints as RBAssert;
 
 /**
+ *  @ORM\Table("empleador")
  * @ORM\Entity
  */
 class Empleador

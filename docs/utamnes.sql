@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : MySqlConneccion
-Source Server Version : 50616
-Source Host           : localhost:3306
+Source Server         : linode
+Source Server Version : 50541
+Source Host           : 45.79.162.102:3306
 Source Database       : utamnes
 
 Target Server Type    : MYSQL
-Target Server Version : 50616
+Target Server Version : 50541
 File Encoding         : 65001
 
-Date: 2015-06-21 21:04:29
+Date: 2015-06-25 20:55:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,7 +37,7 @@ CREATE TABLE `Concepto` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of concepto
+-- Records of Concepto
 -- ----------------------------
 INSERT INTO `Concepto` VALUES ('1', null, '401', 'Cuota Gremial', 'Cuota Grem.', '1', '1', '[TR] * 0.12', '2015-06-17 16:15:38', '2015-06-17 16:15:38');
 INSERT INTO `Concepto` VALUES ('2', null, '412', 'Seguro Funerario', 'Seg. Fun.', '1', '1', '([TR]+[IMP1]) * 0.20', '2015-06-17 16:15:38', '2015-06-17 16:15:38');
@@ -65,21 +65,21 @@ CREATE TABLE `Ctacte` (
   CONSTRAINT `FK_8BDC53547981C10B` FOREIGN KEY (`empleador_id`) REFERENCES `Empleador` (`id`),
   CONSTRAINT `FK_8BDC53549C3921AB` FOREIGN KEY (`periodo_id`) REFERENCES `Periodo` (`id`),
   CONSTRAINT `FK_8BDC5354FA7F3492` FOREIGN KEY (`rectificado_id`) REFERENCES `Periodo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of ctacte
+-- Records of Ctacte
 -- ----------------------------
-INSERT INTO `Ctacte` VALUES ('7', '101', '1', '1', null, '3300', '0', null, null);
-INSERT INTO `Ctacte` VALUES ('8', '101', '1', '2', null, '5580', '0', null, null);
-INSERT INTO `Ctacte` VALUES ('9', '101', '2', '1', null, '2160', '0', null, null);
-INSERT INTO `Ctacte` VALUES ('10', '101', '2', '2', null, '3600', '0', null, null);
+INSERT INTO `Ctacte` VALUES ('15', '101', '2', '1', null, '2160', '0', null, null);
+INSERT INTO `Ctacte` VALUES ('16', '101', '2', '2', null, '3600', '0', null, null);
+INSERT INTO `Ctacte` VALUES ('17', '101', '1', '1', null, '3300', '0', null, null);
+INSERT INTO `Ctacte` VALUES ('18', '101', '1', '2', null, '5580', '0', null, null);
 
 -- ----------------------------
--- Table structure for `Datoliquidacion`
+-- Table structure for `DatoLiquidacion`
 -- ----------------------------
-DROP TABLE IF EXISTS `Datoliquidacion`;
-CREATE TABLE `Datoliquidacion` (
+DROP TABLE IF EXISTS `DatoLiquidacion`;
+CREATE TABLE `DatoLiquidacion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `periodo_id` int(11) DEFAULT NULL,
   `trabajador_id` int(11) DEFAULT NULL,
@@ -101,13 +101,13 @@ CREATE TABLE `Datoliquidacion` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of datoliquidacion
+-- Records of DatoLiquidacion
 -- ----------------------------
-INSERT INTO `Datoliquidacion` VALUES ('1', '1', '1', '14500', '200', '0', '500', '0', '0', '0', '0', '0', '0');
-INSERT INTO `Datoliquidacion` VALUES ('2', '1', '2', '13000', '200', '0', '500', '0', '0', '0', '0', '0', '0');
-INSERT INTO `Datoliquidacion` VALUES ('5', null, null, '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');
-INSERT INTO `Datoliquidacion` VALUES ('6', '2', '1', '8500', '0', '0', '0', '0', '0', '0', '0', '0', '0');
-INSERT INTO `Datoliquidacion` VALUES ('7', '2', '2', '9500', '0', '0', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `DatoLiquidacion` VALUES ('1', '1', '1', '14500', '200', '0', '500', '0', '0', '0', '0', '0', '0');
+INSERT INTO `DatoLiquidacion` VALUES ('2', '1', '2', '13000', '200', '0', '500', '0', '0', '0', '0', '0', '0');
+INSERT INTO `DatoLiquidacion` VALUES ('5', null, null, '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `DatoLiquidacion` VALUES ('6', '2', '1', '8500', '0', '0', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `DatoLiquidacion` VALUES ('7', '2', '2', '9500', '0', '0', '0', '0', '0', '0', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `Empleador`
@@ -136,7 +136,7 @@ CREATE TABLE `Empleador` (
 ) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of empleador
+-- Records of Empleador
 -- ----------------------------
 INSERT INTO `Empleador` VALUES ('1', null, null, null, 'Acosta y Puga', '93255736', 'Zúñiga  91 18 A\nFabiana del Este, AR-V 8463', '(31)6327-3512', 'justus87@runolfsson.org', 'Puerto Isidora', '2015-06-17 16:15:37', '2015-06-17 16:15:37');
 INSERT INTO `Empleador` VALUES ('2', null, null, null, 'Jaime y Mojica', '86486143', 'Mario  68230 Hab. 692\nSamantha del Mirador, AR-S 16783', '(2730)1544-9977', 'carter.stephanie@jast.com', 'Don Juana', '2015-06-17 16:15:37', '2015-06-17 16:15:37');
@@ -256,7 +256,7 @@ CREATE TABLE `Empresa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of empresa
+-- Records of Empresa
 -- ----------------------------
 
 -- ----------------------------
@@ -293,8 +293,8 @@ CREATE TABLE `fos_user` (
 -- ----------------------------
 -- Records of fos_user
 -- ----------------------------
-INSERT INTO `fos_user` VALUES ('1', 'cachorios', 'cachorios', 'cachorios@gmail.com', 'cachorios@gmail.com', '1', '4h3tosw5eha80c04gk04c8ow08co4gg', '0ZzmQiXMb2emEoVhFris0DscMklPNsY0ZvExxhz66azRBv8fZQfeFviKQ8B3q8RubjZCtXYtSQe2jykgC3nQGg==', '2015-06-17 17:28:01', '0', '0', null, null, null, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}', '0', null, null, null, null, 'user55819211cbd75.jpg');
-INSERT INTO `fos_user` VALUES ('2', '2020', '2020', 'cachitorios@hotmail.com', 'cachitorios@hotmail.com', '1', 'dpgnx5f0m0owk48880os8cw4wssgc0s', '28/fyGo/8N5JdSfY6E37dsUCCJCr/ssA7m4gI3B51fLj/GY2ir+GyHZDQLqNIEApLFRQrimGJHs36YGdRszqJA==', '2015-06-21 22:31:05', '0', '0', null, null, null, 'a:1:{i:0;s:14:\"ROLE_EMPLEADOR\";}', '0', null, 'El Topo Trans', null, null, 'user5581980613866.JPG');
+INSERT INTO `fos_user` VALUES ('1', 'cachorios', 'cachorios', 'cachorios@gmail.com', 'cachorios@gmail.com', '1', '4h3tosw5eha80c04gk04c8ow08co4gg', '0ZzmQiXMb2emEoVhFris0DscMklPNsY0ZvExxhz66azRBv8fZQfeFviKQ8B3q8RubjZCtXYtSQe2jykgC3nQGg==', '2015-06-23 20:34:54', '0', '0', null, null, null, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}', '0', null, null, null, null, 'user55819211cbd75.jpg');
+INSERT INTO `fos_user` VALUES ('2', '2020', '2020', 'cachitorios@hotmail.com', 'cachitorios@hotmail.com', '1', 'dpgnx5f0m0owk48880os8cw4wssgc0s', '28/fyGo/8N5JdSfY6E37dsUCCJCr/ssA7m4gI3B51fLj/GY2ir+GyHZDQLqNIEApLFRQrimGJHs36YGdRszqJA==', '2015-06-25 17:16:56', '0', '0', null, null, null, 'a:1:{i:0;s:14:\"ROLE_EMPLEADOR\";}', '0', null, 'El Topo Trans', null, null, 'user5581980613866.JPG');
 
 -- ----------------------------
 -- Table structure for `Liquidacion`
@@ -313,19 +313,19 @@ CREATE TABLE `Liquidacion` (
   CONSTRAINT `FK_96ACD4EE6C2330BD` FOREIGN KEY (`concepto_id`) REFERENCES `Concepto` (`id`),
   CONSTRAINT `FK_96ACD4EE9C3921AB` FOREIGN KEY (`periodo_id`) REFERENCES `Periodo` (`id`),
   CONSTRAINT `FK_96ACD4EEEC3656E` FOREIGN KEY (`trabajador_id`) REFERENCES `Trabajador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of liquidacion
+-- Records of Liquidacion
 -- ----------------------------
-INSERT INTO `Liquidacion` VALUES ('17', '1', '1', '1', '1740');
-INSERT INTO `Liquidacion` VALUES ('18', '1', '1', '2', '2940');
-INSERT INTO `Liquidacion` VALUES ('19', '2', '1', '1', '1560');
-INSERT INTO `Liquidacion` VALUES ('20', '2', '1', '2', '2640');
-INSERT INTO `Liquidacion` VALUES ('25', '1', '2', '1', '1020');
-INSERT INTO `Liquidacion` VALUES ('26', '1', '2', '2', '1700');
-INSERT INTO `Liquidacion` VALUES ('27', '2', '2', '1', '1140');
-INSERT INTO `Liquidacion` VALUES ('28', '2', '2', '2', '1900');
+INSERT INTO `Liquidacion` VALUES ('39', '1', '2', '1', '1020');
+INSERT INTO `Liquidacion` VALUES ('40', '1', '2', '2', '1700');
+INSERT INTO `Liquidacion` VALUES ('41', '2', '2', '1', '1140');
+INSERT INTO `Liquidacion` VALUES ('42', '2', '2', '2', '1900');
+INSERT INTO `Liquidacion` VALUES ('43', '1', '1', '1', '1740');
+INSERT INTO `Liquidacion` VALUES ('44', '1', '1', '2', '2940');
+INSERT INTO `Liquidacion` VALUES ('45', '2', '1', '1', '1560');
+INSERT INTO `Liquidacion` VALUES ('46', '2', '1', '2', '2640');
 
 -- ----------------------------
 -- Table structure for `Periodo`
@@ -348,10 +348,10 @@ CREATE TABLE `Periodo` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of periodo
+-- Records of Periodo
 -- ----------------------------
-INSERT INTO `Periodo` VALUES ('1', '2', '101', '0', '0', '0', null, null);
-INSERT INTO `Periodo` VALUES ('2', '2', '101', '1', '0', '1', 'Otra liq', null);
+INSERT INTO `Periodo` VALUES ('1', '2', '101', '0', '0', '1', null, null);
+INSERT INTO `Periodo` VALUES ('2', '2', '101', '1', '0', '0', 'Otra liq', null);
 
 -- ----------------------------
 -- Table structure for `Trabajador`
@@ -381,7 +381,7 @@ CREATE TABLE `Trabajador` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of trabajador
+-- Records of Trabajador
 -- ----------------------------
 INSERT INTO `Trabajador` VALUES ('1', '101', '20145445109', 'Facundo Cabrera', 'M', 'S', 'facu@gmail.com', '12', '12', 'Posadas', '1001', '1999-05-01 00:00:00', null, '2015-06-17 17:02:56', '2015-06-17 17:02:56');
 INSERT INTO `Trabajador` VALUES ('2', '101', '20000000001', 'Falero Nikolas', 'M', 'S', 'nikofa@gmail.com', '15', '121', 'Posadas', '12', '2013-05-01 00:00:00', null, '2015-06-19 04:48:56', '2015-06-19 04:48:56');
@@ -403,7 +403,7 @@ CREATE TABLE `Vencimiento` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of vencimiento
+-- Records of Vencimiento
 -- ----------------------------
 INSERT INTO `Vencimiento` VALUES ('1', null, '2015', '5', '2015-06-10', null);
 INSERT INTO `Vencimiento` VALUES ('2', null, '2015', '4', '2015-05-10', null);

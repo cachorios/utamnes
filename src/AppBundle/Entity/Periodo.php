@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Periodo
  *
- * @ORM\Table()
+ * @ORM\Table("periodo")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\PeriodoRepository")
  */
 class Periodo

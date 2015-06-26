@@ -9,7 +9,7 @@ use RBSoft\UtilidadBundle\Validator\Constraints as RBAssert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(
+ * @ORM\Table("trabajador",
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(name="trabajadorLejajoUk", columns={"empleador_id","legajo"}),
  *         @ORM\UniqueConstraint(name="trabajadorCuitUk", columns={"empleador_id","cuil"})
