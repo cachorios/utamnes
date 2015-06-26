@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="boleta_banco" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="412fbe28-4874-4712-b804-517fb948d592">
 	<property name="ireport.zoom" value="1.3310000000000035"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="59"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="empleador_id" class="java.lang.Integer" isForPrompting="false">
 		<defaultValueExpression><![CDATA[101]]></defaultValueExpression>
 	</parameter>
@@ -85,14 +85,14 @@ GROUP BY
 			<staticText>
 				<reportElement x="82" y="37" width="175" height="18" uuid="6737c79d-6c60-4a9f-a32c-078806c0f606"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Verdana" size="11" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+					<font fontName="SansSerif" size="11" isBold="true" isUnderline="false" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[UNION TRANVIEROS]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="82" y="50" width="175" height="26" uuid="957b0bc3-2e20-465c-bfe9-bfc7ee9ca79d"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Verdana" size="11" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+					<font fontName="SansSerif" size="11" isBold="true" isUnderline="false" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[AUTOMOTOR - MISIONES]]></text>
 			</staticText>
@@ -296,7 +296,7 @@ GROUP BY
 			<staticText>
 				<reportElement x="355" y="37" width="175" height="18" uuid="df190ae2-b529-45ec-9f5d-ff65455d5b3f"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Verdana" size="11" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+					<font fontName="SansSerif" size="11" isBold="true" isUnderline="false" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[UNION TRANVIEROS]]></text>
 			</staticText>
@@ -314,7 +314,7 @@ GROUP BY
 			<staticText>
 				<reportElement x="355" y="50" width="175" height="26" uuid="b85b946c-52cf-410b-9e56-a97ecc3592db"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Verdana" size="11" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+					<font fontName="SansSerif" size="11" isBold="true" isUnderline="false" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[AUTOMOTOR - MISIONES]]></text>
 			</staticText>
@@ -458,7 +458,7 @@ GROUP BY
 			<staticText>
 				<reportElement x="624" y="37" width="175" height="18" uuid="a5c8b940-2c23-41e7-b5ff-39bbf8a83f8a"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Verdana" size="11" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+					<font fontName="SansSerif" size="11" isBold="true" isUnderline="false" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[UNION TRANVIEROS]]></text>
 			</staticText>
@@ -591,7 +591,7 @@ GROUP BY
 			<staticText>
 				<reportElement x="624" y="50" width="175" height="26" uuid="7cf7d797-c2c0-4516-a589-0d0fe9d4d521"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Verdana" size="11" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+					<font fontName="SansSerif" size="11" isBold="true" isUnderline="false" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[AUTOMOTOR - MISIONES]]></text>
 			</staticText>
