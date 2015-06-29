@@ -110,9 +110,15 @@ class ReporteMan
         $jasperPrint = $fillManager->fillReport($reporte, $params, $conn);
         $ouputfile = $ouput;
 
+
+       $exporter= new Java("net.sf.jasperreports.engine.export.JRPdfExporter");
+
+       $exporter->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT,$jasperPrint);
+       $exporter->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME,$ouputfile);
+       /*
         $exportManager = new JavaClass("net.sf.jasperreports.engine.JasperExportManager");
         $exportManager->exportReportToPdfFile($jasperPrint, $ouputfile);
-
+        */
     }
 
 }
