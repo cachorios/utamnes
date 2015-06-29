@@ -89,7 +89,9 @@ class CtacteController extends Controller
             array("pdf"),
             array(
                 "empleador_id" => $empleador_id,
-                "periodo_id" => $periodo_id),
+                "periodo_id" => $periodo_id,
+                "SUBREPORT_DIR"      => $base.'/reportes'
+            ),
             array(
                 'driver'    => 'mysql',
                 'host'      => "127.0.0.1",
