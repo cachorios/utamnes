@@ -2,12 +2,12 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="boleta_banco" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="412fbe28-4874-4712-b804-517fb948d592">
 	<property name="ireport.zoom" value="1.3310000000000035"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="110"/>
+	<property name="ireport.y" value="14"/>
 	<parameter name="empleador_id" class="java.lang.Integer" isForPrompting="false">
 		<defaultValueExpression><![CDATA[101]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["F:\\web\\utamnes\\reportes\\"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="periodo_id" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
@@ -81,6 +81,10 @@ GROUP BY
 				</textElement>
 				<textFieldExpression><![CDATA[$F{periodostr}]]></textFieldExpression>
 			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="11" y="27" width="65" height="62" uuid="932f4d8e-29f6-4fbb-a927-f08f13facbf5"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"/logo_img.jpg"]]></imageExpression>
+			</image>
 			<staticText>
 				<reportElement x="82" y="37" width="175" height="18" uuid="6737c79d-6c60-4a9f-a32c-078806c0f606"/>
 				<textElement verticalAlignment="Middle">
@@ -290,6 +294,10 @@ GROUP BY
 				</textElement>
 				<textFieldExpression><![CDATA[$F{periodo_liquidacion}]]></textFieldExpression>
 			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="284" y="26" width="65" height="62" uuid="bb335ffc-7b39-4935-9a0f-9a37a586b045"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"/logo_img.jpg"]]></imageExpression>
+			</image>
 			<staticText>
 				<reportElement x="355" y="37" width="175" height="18" uuid="df190ae2-b529-45ec-9f5d-ff65455d5b3f"/>
 				<textElement verticalAlignment="Middle">
@@ -524,6 +532,10 @@ GROUP BY
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
+			<image scaleImage="FillFrame">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="553" y="27" width="65" height="62" uuid="f6505fa6-defb-4d68-a3dd-74e1cacf7ca4"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"/logo_img.jpg"]]></imageExpression>
+			</image>
 			<line>
 				<reportElement x="551" y="514" width="250" height="1" uuid="ec0cea77-6134-4cc7-9749-ec695be8f6dc"/>
 			</line>
