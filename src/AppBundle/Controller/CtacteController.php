@@ -9,6 +9,7 @@
 namespace AppBundle\Controller;
 
 
+use JasperPHP\JasperPHP;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -50,7 +51,9 @@ class CtacteController extends Controller
         $empleador_id = $emp->getEmpleador()->getId();
         $periodo_id = $request->get("periodo_id", $emp->getPeriodoActivo()->getId() );
 
-        $base = $this->get('kernel')->getRootDir() . '/../';
+        $base = $this->get('kernel')->getRootDir() . '/..';
+
+       /*
         $rbrep = $this->get("rb.reporte");
 
         $rbrep->procesar(
@@ -67,10 +70,50 @@ class CtacteController extends Controller
             ),
             $base."web/uploads/boleta_{$empleador_id}_{$periodo_id}.pdf"
         );
+       */
+
+
+        $jr = new JasperPHP();
+
+        $jr->compile(
+            $base.'/reportes/boleta_banco.jrxml',
+            $base.'/web/uploads')
+            ->execute();
+
+        $file = uniqid("boleta_{$empleador_id}_{$periodo_id}");
+
+//        ld( $base.'reportes/boleta_banco.jasper',$base.'web/uploads/'.$file);
+        $jr->process(
+            $base.'/web/uploads/boleta_banco.jasper',
+            $base.'/web/uploads/'.$file,
+            array("pdf"),
+            array(),
+            array(
+                'driver'    => 'mysql',
+                'host'      => "127.0.0.1",
+                'database'  => 'utamnes',
+                'username'  => 'root',
+                'password'  => '7219'
+    )
+        )->execute();
+
+
+//
+//        $jr->process(
+//            'boleta_bco.jasper',
+//            false,
+//            array("pdf", "rtf"),
+//            array("php_version" => phpversion())
+//        )->execute();
+
+//        $jr->process("F:/web/utamnes/web/hello_world.jrxml",
+//            "F:/web/utamnes/web/uploads",array("pdf"),array(),array(),true,true);
+
+
 
         return array(
             "titulo" => "Boleta para Pago en Banco: Periodo: " . $emp->getPeriodoActivo() ,
-            "pdf"    => "uploads/boleta_{$empleador_id}_{$periodo_id}.pdf"
+            "pdf"    => "uploads/".$file.".pdf"
         );
 
     }
