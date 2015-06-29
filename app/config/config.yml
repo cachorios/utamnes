@@ -142,3 +142,7 @@ fos_user:
 knp_paginator:
     template:
         pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
+
+
+parameters:
+        retport_dir: "%kernel.root_dir%/../retportes"

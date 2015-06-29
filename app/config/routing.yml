@@ -1,3 +1,8 @@
+rb_soft_reporte:
+    resource: "@RBSoftReporteBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 _user_admin:
     resource: "@UserAdminBundle/Controller/"
     type:     annotation

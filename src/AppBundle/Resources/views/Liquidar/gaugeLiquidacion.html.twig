@@ -55,20 +55,19 @@
         hacerAlgo = function(){
             $.Zebra_Dialog(
                     "<strong>Proceso concluído!</strong>",{
-                    'buttons':  [ 'Aceptar'],
-                    'onClose': function() { window.location = "{{ path('homepage') }}";}
+                    'buttons':  [
+                        {   caption: 'Imprimir Boleta',
+                            callback: function() { window.location = "{{ path('imprimir_boleta') }}";}
+                        },
+                        {   caption: 'Continuar',
+                            callback: function() { window.location = "{{ path('ctacte') }}";}
+                        },
+                    ]
+
                     }
             );
 
-            {#$.Zebra_Dialog(#}
-                    {#"<strong>Proceso concluído!</strong>",{#}
-                        {#'buttons':  [#}
-                            {#{   caption: 'Aceptar',#}
-                                {#callback: function() { window.location = "{{ path('homepage') }}";}#}
-                            {#}#}
-                        {#]#}
-                    {#}#}
-            {#);#}
+
         }
 
 
