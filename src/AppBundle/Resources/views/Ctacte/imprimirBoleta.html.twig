@@ -18,19 +18,23 @@
                     </div>
                 </section>
 
-                <script>
-                    $(document).ready(function(){
-//                        $("#pdf").css('height',"600px");
-//                        $("#viewer").css('min-height',"600px");
 
-                    });
-                    $(window).resize(function(){
-                      //  $("#pdf").css('height',$(window).height() *.85);
-                    });
-
-
-                </script>
 
             {% endblock %}
         {% endembed %}
     {% endblock %}
+
+{% block script_main  %}
+    <script>
+        $(document).ready(function(){
+//                        $("#pdf").css('height',"600px");
+//                        $("#viewer").css('min-height',"600px");
+
+        });
+        $(window).resize(function(){
+            //  $("#pdf").css('height',$(window).height() *.85);
+        });
+
+
+    </script>
+{% endblock %}

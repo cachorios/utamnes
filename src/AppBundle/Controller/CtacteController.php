@@ -87,7 +87,9 @@ class CtacteController extends Controller
             $base.'/web/uploads/boleta_banco.jasper',
             $base.'/web/uploads/'.$file,
             array("pdf"),
-            array(),
+            array(
+                "empleador_id" => $empleador_id,
+                "periodo_id" => $periodo_id),
             array(
                 'driver'    => 'mysql',
                 'host'      => "127.0.0.1",
