@@ -57,7 +57,7 @@ class CtacteController extends Controller
             $base."reportes/boleta_banco.jrxml",
             array(
                 "empleador-id" => $empleador_id,
-                "periodo_id",$periodo_id
+                "periodo_id" => $periodo_id
             ),
             array(
                 "tipo"      => "mysql",
