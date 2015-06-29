@@ -52,15 +52,16 @@ class CtacteController extends Controller
         $periodo_id = $request->get("periodo_id", $emp->getPeriodoActivo()->getId() );
 
         $base = $this->get('kernel')->getRootDir() . '/..';
+        $file = uniqid("boleta_{$empleador_id}_{$periodo_id}");
 
-       /*
         $rbrep = $this->get("rb.reporte");
 
         $rbrep->procesar(
-            $base."reportes/boleta_banco.jrxml",
+            $base."/reportes/boleta_banco.jrxml",
             array(
                 "empleador-id" => $empleador_id,
-                "periodo_id" => $periodo_id
+                "periodo_id" => $periodo_id,
+                "SUBREPORT_DIR" => $base.'/reportes'
             ),
             array(
                 "tipo"      => "mysql",
@@ -68,11 +69,11 @@ class CtacteController extends Controller
                 "user"      => "root",
                 "password"  => "7219"
             ),
-            $base."web/uploads/boleta_{$empleador_id}_{$periodo_id}.pdf"
+            $base."/web/uploads/".$file.".pdf"
         );
-       */
 
 
+/*
         $jr = new JasperPHP();
 
         $jr->compile(
@@ -88,9 +89,9 @@ class CtacteController extends Controller
             $base.'/web/uploads/'.$file,
             array("pdf"),
             array(
-                "empleador_id" => $empleador_id,
-                "periodo_id" => $periodo_id,
-                "SUBREPORT_DIR"      => $base.'/reportes'
+                "empleador_id"  => $empleador_id,
+                "periodo_id"    => $periodo_id,
+                "SUBREPORT_DIR" => $base.'/reportes'
             ),
             array(
                 'driver'    => 'mysql',
@@ -101,7 +102,7 @@ class CtacteController extends Controller
     )
         )->execute();
 
-
+    */
 //
 //        $jr->process(
 //            'boleta_bco.jasper',
