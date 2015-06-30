@@ -17,6 +17,7 @@ class PeriodoRepository extends EntityRepository
     {
 //        $this->_em->createQuery()
     }
+
     /**
      * getMaxNumeroLiq
      * Obtiene la liquidacion maxima para un periodo determinado
@@ -46,6 +47,10 @@ class PeriodoRepository extends EntityRepository
             $liqarray[] = array('liquidacion' => 0, 'tipo' => 0);
         } else {
             $liqmas = ($liqarray [0]['liquidacion']) + 1;
+//            ld($liqmas);
+
+            $permas = ($liqarray [0]['tipo']) + 1;
+//            ld($permas);
 
 
             $liqarray[] = array('liquidacion' => $liqmas, 'tipo' => 0);
@@ -56,6 +61,8 @@ class PeriodoRepository extends EntityRepository
 
         return $liqarray;
     }
+
+
     public function getRectificarLiquidacion(Empleador $emp, $periodo)
     {
 //        $liqarray = array();
@@ -72,21 +79,53 @@ class PeriodoRepository extends EntityRepository
             ->setParameter("periodo", $periodo);
 
         $liqarray = $q->getArrayResult();
-//
-//        //saco un numero mas de liquidacion
-//        if (count($liqarray) == 0) {
-//            $liqarray[] = array('liquidacion' => 0, 'tipo' => 0);
-//        } else {
-//            $liqmas = ($liqarray [0]['liquidacion']) + 1;
-//
-//
-//            $liqarray[] = array('liquidacion' => $liqmas, 'tipo' => 0);
-//
-//            usort($liqarray, array($this, 'misort'));
-////            ld($liqarray);
-//        }
 
         return $liqarray;
+    }
+
+    public function getDescripcionLiquidacion(Empleador $emp, $periodo, $liquidacion)
+    {
+        $q = $this->_em->createQuery(
+            "
+            Select p.liquidacion, max(p.tipo) as tipo, p.descripcion
+            From AppBundle:Periodo p
+            where p.empleador = :empleador AND p.vencimiento = :periodo AND p.liquidacion = :liquidacion
+            GROUP BY p.liquidacion
+            order BY p.liquidacion DESC, p.tipo DESC
+             "
+        )
+            ->setParameter("empleador", $emp->getId())
+            ->setParameter("periodo", $periodo)
+            ->setParameter("liquidacion", $liquidacion);
+
+        $descarray = $q->getArrayResult();
+//        ld($descarray);
+
+        return count($descarray)>0 ? $descarray[0] : array();
+
+
+    }
+
+    public function getUltimoTipo(Empleador $emp, $periodo, $liquidacion)
+    {
+        $q = $this->_em->createQuery(
+            "
+            Select p
+            From AppBundle:Periodo p
+            where p.empleador = :empleador AND p.vencimiento = :periodo AND p.liquidacion = :liquidacion
+            order BY p.liquidacion DESC, p.tipo DESC
+             "
+        )
+            ->setParameter("empleador", $emp->getId())
+            ->setParameter("periodo", $periodo)
+            ->setParameter("liquidacion", $liquidacion);
+
+        $periodos = $q->execute();
+//        ld($descarray);
+
+        return count($periodos)>0 ? $periodos[0] : array();
+
+
     }
 
     public function misort($a, $b)

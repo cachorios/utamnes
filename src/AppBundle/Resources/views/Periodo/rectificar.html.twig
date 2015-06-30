@@ -54,6 +54,7 @@
         {% block script_main %}
             <script>
                 var liqs;
+                var descripcion;
                 $("#appbundle_periodo_vencimiento").change(
                         function () {
 
@@ -66,12 +67,15 @@
                                         success: function (data, textStatus, jqXHR) {
                                             liqs = data;
                                             $("#appbundle_periodo_liquidacion").empty();
+                                            $("#appbundle_periodo_liquidacion").append('<option value = " " selected></option>');
+                                            $("#appbundle_periodo_tipo").val("");
+                                            $("#appbundle_periodo_descripcion").val("");
                                             $.each(liqs, function (idx, obj) {
 //                                                if(liqs.length -1  == idx )
 //                                                    $("#appbundle_periodo_liquidacion").val(obj.liquidacion);
 //                                                else
-                                                $("#appbundle_periodo_liquidacion").val(obj.liquidacion);
-                                                $("#appbundle_periodo_descripcion").val(obj.descripcion);
+                                                $("#appbundle_periodo_liquidacion").append('<option selected="">' + obj.liquidacion +'</option>');
+//                                                $("#appbundle_periodo_descripcion").val(obj.descripcion);
 
                                             });
 
@@ -86,7 +90,34 @@
                             );
                         }
                 );
+                $("#appbundle_periodo_liquidacion").change(
+                        function () {
+                            liquidacion = this.value;
+                            periodo = $("#appbundle_periodo_vencimiento").val();
 
+                            $.ajax(
+                                    {
+
+                                        url: '{{ path("descripcion_check") }}',
+                                        data: {liquidacion: liquidacion , periodo: periodo},
+                                        success: function (data,txtStatus,jqXHR){
+                                            $("#appbundle_periodo_liquidacion").val(data.liquidacion);
+
+                                            $("#appbundle_periodo_tipo").val(data.tipo);
+//                                            alert(data.tipo);
+                                            $("#appbundle_periodo_descripcion").val(data.descripcion);
+
+                                        },
+                                        dataType: 'JSON',
+                                        error: function(data, txtStatus, jqXHR){
+
+                                        }
+                                    }
+
+                            );
+//                            alert('sgsgdfsgsdf');
+
+                        }
+                );
             </script>
-
         {% endblock script_main %}
