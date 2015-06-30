@@ -12,6 +12,7 @@ use Knp\Component\Pager\Paginator;
 
 use AppBundle\Entity\Periodo;
 use AppBundle\Form\PeriodoType;
+use AppBundle\Form\RectificarPeriodoType;
 use AppBundle\Form\PeriodoFilterType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -73,7 +74,13 @@ class PeriodoController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $queryBuilder = $em->getRepository('AppBundle:Periodo')->createQueryBuilder("q");
-        $queryBuilder->where("q.empleador = :emp")
+        $queryBuilder
+            ->join('q.vencimiento','v')
+            ->where("q.empleador = :emp")
+            ->orderBy('v.anio')
+            ->addOrderBy('v.mes')
+            ->addOrderBy('q.liquidacion','ASC')
+            ->addOrderBy('q.tipo','ASC')
             ->setParameter("emp", $empleador->getId());
 
         // Reset filter
@@ -367,29 +374,69 @@ class PeriodoController extends Controller
      */
     public function rectificarAction(Request $request)
     {
-        $entity = new Periodo();
-        $form = $this->rectficarCreateCreateForm($entity);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        if($request->getMethod()=='POST'){
+            $form = $request->get("appbundle_periodo");
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity->setEmpleador($this->get('uta.empleador_activo')->getEmpleador());
-            $em->persist($entity);
+            $periodo= $form['vencimiento'];
+            $liq=$form['liquidacion'];
+            $emp =$this->get('uta.empleador_activo')->getEmpleador();
+            $entity = $em->getRepository("AppBundle:Periodo")->getUltimoTipo($emp,$periodo,$liq);
+
+            $periodo = new Periodo();
+
+            $periodo->setEmpleador($emp)
+                ->setVencimiento($entity->getVencimiento())
+                ->setLiquidacion($entity->getLiquidacion())
+                ->setTipo($entity->getTipo() + 1)
+                ->setDescripcion($entity->getDescripcion());
+
+
+            $em->persist($periodo);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('success', "El Periodo $entity se creó correctamente.");
+            $this->get('session')->getFlashBag()->add('success', "El Periodo $periodo se rectifico correctamente.");
             if ($request->request->get('save_mode') == 'save_and_close') {
                 return $this->redirect($this->generateUrl('app_periodo'));
             }
 
-            return $this->redirect($this->generateUrl('app_periodo_new'));
+        }else{
+            $entity = new Periodo();
+            $form = $this->rectificarCreateCreateForm($entity);
         }
+
+
 
         return array(
             'entity' => $entity,
             'form' => $form->createView(),
         );
     }
+
+
+    /**
+     * Creates a form to create a Periodo entity.
+     *
+     * @param Periodo $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function rectificarCreateCreateForm(Periodo $entity)
+    {
+        $form = $this->createForm(
+            new RectificarPeriodoType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('app_periodo_rectificar'),
+                'method' => 'POST',
+            )
+        );
+
+
+        return $form;
+    }
+
+
 
     /**
      * @param $periodo
@@ -409,6 +456,31 @@ class PeriodoController extends Controller
         );
 
         return new Response(json_encode($num));
+
+    }
+
+    /**
+     * @param $periodo
+     * @param $liquidacion
+     * @Route("/checkDescripcion" , name="descripcion_check")
+     */
+    public function checkDescripcionAction(Request $request)
+    {
+        $periodo = $request->get("periodo");
+        $liquidacion = $request->get("liquidacion");
+
+//        if(!(floor($periodo/100 <= date("Y"))))
+
+        $em = $this->getDoctrine()->getManager();
+
+        $descrip = $em->getRepository("AppBundle:Periodo")->getDescripcionLiquidacion(
+            $this->get('uta.empleador_activo')->getEmpleador(),
+            $periodo,
+            $liquidacion
+        );
+//        ld($descrip);
+
+        return new Response(json_encode($descrip));
 
     }
 
