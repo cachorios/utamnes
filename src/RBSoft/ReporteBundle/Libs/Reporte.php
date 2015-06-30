@@ -119,6 +119,7 @@ class ReporteMan
         */
 
         $exportManager = new JavaClass("net.sf.jasperreports.engine.JasperExportManager");
+        $exportManager->__client->cancelProxyCreationTag = 0;
         $exportManager->exportReportToPdfFile($jasperPrint, $ouputfile);
 
     }

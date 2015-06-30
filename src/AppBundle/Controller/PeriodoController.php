@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Doctrine\DBAL\Query\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -72,7 +73,12 @@ class PeriodoController extends Controller
         $empleador = $this->get("uta.empleador_activo")->getEmpleador();
 
         $em = $this->getDoctrine()->getManager();
-        $queryBuilder = $em->getRepository('AppBundle:Periodo')->createQueryBuilder("q");
+        /**
+         * @var QueryBuilder $queryBuilder
+         */
+
+        $queryBuilder = $em->getRepository('AppBundle:Periodo')->createQueryBuilder("q") ;
+
         $queryBuilder->where("q.empleador = :emp")
             ->setParameter("emp", $empleador->getId());
 
