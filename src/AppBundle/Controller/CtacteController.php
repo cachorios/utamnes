@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 
 
 use JasperPHP\JasperPHP;
+use RBSoft\UtilidadBundle\Libs\Util;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -102,8 +103,14 @@ class CtacteController extends Controller
     )
         )->execute();
 
+        $cont = true;
+        $time = Util::microtime_float();
+        while($cont){
 
-
+            if(file_exists($base.'/web/uploads/'.$file.".pdf") || (Util::microtime_float() - $time) > 150  ){
+                $cont = false;
+            }
+        }
 
 
         return array(
