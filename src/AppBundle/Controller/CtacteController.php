@@ -113,7 +113,7 @@ class CtacteController extends Controller
         }
         $time = Util::microtime_float();
         while((Util::microtime_float() - $time) < 10){
-            ld(Util::microtime_float() - $time);
+            ///ld(Util::microtime_float() - $time);
         }
 
 
