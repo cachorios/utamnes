@@ -111,6 +111,10 @@ class CtacteController extends Controller
                 $cont = false;
             }
         }
+        $time = Util::microtime_float();
+        while((Util::microtime_float() - $time) < 150){
+            ld(Util::microtime_float() - $time);
+        }
 
 
         return array(
