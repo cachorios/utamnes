@@ -107,12 +107,12 @@ class CtacteController extends Controller
         $time = Util::microtime_float();
         while($cont){
 
-            if(file_exists($base.'/web/uploads/'.$file.".pdf") || (Util::microtime_float() - $time) > 150  ){
+            if(file_exists($base.'/web/uploads/'.$file.".pdf") || (Util::microtime_float() - $time) > 10  ){
                 $cont = false;
             }
         }
         $time = Util::microtime_float();
-        while((Util::microtime_float() - $time) < 150){
+        while((Util::microtime_float() - $time) < 10){
             ld(Util::microtime_float() - $time);
         }
 
