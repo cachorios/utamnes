@@ -74,15 +74,7 @@ class PeriodoController extends Controller
         $empleador = $this->get("uta.empleador_activo")->getEmpleador();
 
         $em = $this->getDoctrine()->getManager();
-<<<<<<< HEAD
-        /**
-         * @var QueryBuilder $queryBuilder
-         */
 
-        $queryBuilder = $em->getRepository('AppBundle:Periodo')->createQueryBuilder("q") ;
-
-        $queryBuilder->where("q.empleador = :emp")
-=======
         $queryBuilder = $em->getRepository('AppBundle:Periodo')->createQueryBuilder("q");
         $queryBuilder
             ->join('q.vencimiento','v')
@@ -91,7 +83,7 @@ class PeriodoController extends Controller
             ->addOrderBy('v.mes')
             ->addOrderBy('q.liquidacion','ASC')
             ->addOrderBy('q.tipo','ASC')
->>>>>>> 3d97471f9f0185629002edd499d996c4cd5287c5
+
             ->setParameter("emp", $empleador->getId());
 
         // Reset filter

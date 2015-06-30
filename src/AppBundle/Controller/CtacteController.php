@@ -54,6 +54,7 @@ class CtacteController extends Controller
         $base = $this->get('kernel')->getRootDir() . '/..';
         $file = uniqid("boleta_{$empleador_id}_{$periodo_id}");
 
+        /*
         $rbrep = $this->get("rb.reporte");
 
         $rbrep->procesar(
@@ -71,9 +72,8 @@ class CtacteController extends Controller
             ),
             $base."/web/uploads/".$file.".pdf"
         );
+        */
 
-
-/*
         $jr = new JasperPHP();
 
         $jr->compile(
@@ -102,17 +102,7 @@ class CtacteController extends Controller
     )
         )->execute();
 
-    */
-//
-//        $jr->process(
-//            'boleta_bco.jasper',
-//            false,
-//            array("pdf", "rtf"),
-//            array("php_version" => phpversion())
-//        )->execute();
 
-//        $jr->process("F:/web/utamnes/web/hello_world.jrxml",
-//            "F:/web/utamnes/web/uploads",array("pdf"),array(),array(),true,true);
 
 
 
