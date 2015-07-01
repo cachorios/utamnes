@@ -107,16 +107,14 @@ class CtacteController extends Controller
         $time = Util::microtime_float();
         while($cont){
 
-            if(file_exists($base.'/web/uploads/'.$file.".pdf") || (Util::microtime_float() - $time) > 10  ){
+            if(filesize ($base.'/web/uploads/'.$file.".pdf")>0 || (Util::microtime_float() - $time) > 15  ){
                 $cont = false;
             }
         }
-        $time = Util::microtime_float();
-//        while((Util::microtime_float() - $time) < 2){
+//        $time = Util::microtime_float();
+//        while((Util::microtime_float() - $time) < 4){
 //            ///ld(Util::microtime_float() - $time);
 //        }
-        //ld($base.'/web/uploads/'.$file.".pdf");
-        file_get_contents($base.'/web/uploads/'.$file.".pdf");
 
         return array(
             "titulo" => "Boleta para Pago en Banco: Periodo: " . $emp->getPeriodoActivo() ,
