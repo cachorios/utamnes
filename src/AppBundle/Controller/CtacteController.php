@@ -50,9 +50,9 @@ class CtacteController extends Controller
     {
         $emp = $this->get("uta.empleador_activo");
         $empleador_id = $emp->getEmpleador()->getId();
-        $periodo_id = $request->get("periodo_id", $emp->getPeriodoActivo()->getId() );
+        $periodo_id = $request->get("periodo_id", $emp->getPeriodoActivo()->getId());
 
-        $base = $this->get('kernel')->getRootDir() . '/..';
+        $base = $this->get('kernel')->getRootDir().'/..';
         $file = uniqid("boleta_{$empleador_id}_{$periodo_id}");
 
         /*
@@ -76,38 +76,41 @@ class CtacteController extends Controller
         */
 
         $jr = new JasperPHP();
-
-        $jr->compile(
-            $base.'/reportes/boleta_banco.jrxml',
-            $base.'/web/uploads')
-            ->execute();
+        
+        if (!file_exists($base.'/web/uploads/boleta_banco.jasper')) {
+            $jr->compile(
+                $base.'/reportes/boleta_banco.jrxml',
+                $base.'/web/uploads'
+            )
+                ->execute();
+        }
 
         $file = uniqid("boleta_{$empleador_id}_{$periodo_id}");
 
-//        ld( $base.'reportes/boleta_banco.jasper',$base.'web/uploads/'.$file);
         $jr->process(
             $base.'/web/uploads/boleta_banco.jasper',
             $base.'/web/uploads/'.$file,
             array("pdf"),
             array(
-                "empleador_id"  => $empleador_id,
-                "periodo_id"    => $periodo_id,
+                "empleador_id" => $empleador_id,
+                "periodo_id" => $periodo_id,
                 "SUBREPORT_DIR" => $base.'/reportes'
             ),
             array(
-                'driver'    => 'mysql',
-                'host'      => "127.0.0.1",
-                'database'  => 'utamnes',
-                'username'  => 'root',
-                'password'  => '7219'
-    )
+                'driver' => 'mysql',
+                'host' => "127.0.0.1",
+                'database' => 'utamnes',
+                'username' => 'root',
+                'password' => '7219'
+            )
         )->execute();
+
 
         $cont = true;
         $time = Util::microtime_float();
-        while($cont){
+        while ($cont) {
 
-            if(filesize ($base.'/web/uploads/'.$file.".pdf")>0 || (Util::microtime_float() - $time) > 15  ){
+            if (filesize($base.'/web/uploads/'.$file.".pdf") > 0 || (Util::microtime_float() - $time) > 15) {
                 $cont = false;
             }
         }
@@ -117,8 +120,8 @@ class CtacteController extends Controller
 //        }
 
         return array(
-            "titulo" => "Boleta para Pago en Banco: Periodo: " . $emp->getPeriodoActivo() ,
-            "pdf"    => "uploads/".$file.".pdf"
+            "titulo" => "Boleta para Pago en Banco: Periodo: ".$emp->getPeriodoActivo(),
+            "pdf" => "uploads/".$file.".pdf"
         );
 
     }
