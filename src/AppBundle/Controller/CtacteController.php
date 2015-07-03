@@ -76,7 +76,7 @@ class CtacteController extends Controller
         */
 
         $jr = new JasperPHP();
-        
+
         if (!file_exists($base.'/web/uploads/boleta_banco.jasper')) {
             $jr->compile(
                 $base.'/reportes/boleta_banco.jrxml',
