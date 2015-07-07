@@ -28,7 +28,7 @@ class PeriodoType extends AbstractType
 
         $builder
             ->add('liquidacion',null,array("label" => "Nro. de Liquidación" , 'read_only' => true))
-            ->add('tipo',null,array("label" => "Presentación" , 'disabled' => true))
+//            ->add('tipo',null,array("label" => "Presentación" , 'disabled' => true))
             ->add('descripcion',null,array("label" => "Descripcion" , 'required' => true))
         ;
     }
