@@ -44,6 +44,7 @@ class TrabajadorModel
     {
         $this->em = $em;
         $this->empleadorSrv = $empleadorActivo;
+
 //        $this->empModel = $empModel;
 
     }
@@ -86,7 +87,7 @@ class TrabajadorModel
         try {
             //$trabajador->setUsuario($this->empleador->getUsuario());
 
-            $trabajador->setEmpleador($this->empleador);
+            $trabajador->setEmpleador($this->empleadorSrv->getEmpleador());
             $this->em->persist($trabajador);
             $this->em->flush();
             $this->em->commit();
@@ -321,8 +322,7 @@ class TrabajadorModel
         $valor = array(
             'tr' => 0,
             'imp1' => 0,
-            '
-            imp2' => 0,
+            'imp2' => 0,
             'imp3' => 0,
             'imp4' => 0,
             'imp5' => 0,

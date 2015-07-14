@@ -99,9 +99,10 @@ class PeriodoRepository extends EntityRepository
             ->setParameter("liquidacion", $liquidacion);
 
         $descarray = $q->getArrayResult();
+
 //        ld($descarray);
 
-        return count($descarray)>0 ? $descarray[0] : array();
+        return count($descarray) > 0 ? $descarray[0] : array();
 
 
     }
@@ -121,9 +122,10 @@ class PeriodoRepository extends EntityRepository
             ->setParameter("liquidacion", $liquidacion);
 
         $periodos = $q->execute();
+
 //        ld($descarray);
 
-        return count($periodos)>0 ? $periodos[0] : array();
+        return count($periodos) > 0 ? $periodos[0] : array();
 
 
     }

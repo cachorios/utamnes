@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * DatoLiquidacion
  *
  * @ORM\Table("datos_liquidacion")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\DatoLiquidacionRepository")
  */
 class DatoLiquidacion
 {

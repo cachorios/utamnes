@@ -12,6 +12,7 @@ use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Component\Pager\Paginator;
 
 use AppBundle\Entity\Periodo;
+use AppBundle\Entity\DatoLiquidacion;
 use AppBundle\Form\PeriodoType;
 use AppBundle\Form\RectificarPeriodoType;
 use AppBundle\Form\PeriodoFilterType;
@@ -381,27 +382,28 @@ class PeriodoController extends Controller
         if($request->getMethod()=='POST'){
             $form = $request->get("appbundle_periodo");
 
-            $periodo= $form['vencimiento'];
-            $liq=$form['liquidacion'];
-            $emp =$this->get('uta.empleador_activo')->getEmpleador();
-            $entity = $em->getRepository("AppBundle:Periodo")->getUltimoTipo($emp,$periodo,$liq);
+            $periodo = $form['vencimiento'];
+            $liq = $form['liquidacion'];
+            $emp = $this->get('uta.empleador_activo')->getEmpleador();
+            $entity = $em->getRepository('AppBundle:Periodo')->getUltimoTipo($emp,$periodo,$liq);
 
             $periodo = new Periodo();
-
+            $tipo = $entity->getTipo();
             $periodo->setEmpleador($emp)
                 ->setVencimiento($entity->getVencimiento())
                 ->setLiquidacion($entity->getLiquidacion())
-                ->setTipo($entity->getTipo() + 1)
+                ->setTipo($tipo + 1)
                 ->setDescripcion($entity->getDescripcion());
 
-
             $em->persist($periodo);
+
+            $em->getRepository('AppBundle:DatoLiquidacion')->copyDatoLiquidacion($entity , $periodo);
+
             $em->flush();
 
+
             $this->get('session')->getFlashBag()->add('success', "El Periodo $periodo se rectifico correctamente.");
-            if ($request->request->get('save_mode') == 'save_and_close') {
-                return $this->redirect($this->generateUrl('app_periodo'));
-            }
+                return $this->redirect($this->generateUrl('setperiodo',array('id' => $periodo->getId())));
 
         }else{
             $entity = new Periodo();
@@ -498,7 +500,9 @@ class PeriodoController extends Controller
         $empleador = $this->get("uta.empleador_activo")->getEmpleador();
         //Verficar que el periodo recibido pertenezca al empleador
         $em = $this->getDoctrine()->getEntityManager();
+
         $periodoId = $request->get("id");
+
         $periodo = $em->getRepository("AppBundle:Periodo")->find($periodoId);
 
         if( !$periodo->getEmpleador()->getId() == $empleador->getId()){
