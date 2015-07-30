@@ -147,7 +147,8 @@ class DatoLiquidacionController extends Controller
             "trabajador"    => $trabModel->getTrabajador(),
             "importes"      => $trabModel->getArrayDatosImporte($periodo),
             "liquidacion"   => $trabModel->getLiquidacion($periodo),
-            "csrf_token"    => $this->get("security.csrf.token_manager")->getToken("datosliq")
+            "csrf_token"    => $this->get("security.csrf.token_manager")->getToken("datosliq"),
+            "periodo"       => $periodo
         ));
 
         $resp = new Response($vista);

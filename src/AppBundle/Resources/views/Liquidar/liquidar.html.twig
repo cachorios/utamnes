@@ -9,7 +9,8 @@
             <hr class="spacer-sm">
             <ul>
                 <li>
-                    El proceso de liquidación realiza el calculo de los aportes y contribuciones para cada trabajador.
+                    El proceso de liquidación realiza el calculo de los aportes y contribuciones para cada
+                    trabajador.
                 </li>
                 <li>
                     Genera un registro en cuenta corriente, con estado "no presentado"
@@ -22,7 +23,15 @@
             <p></p>
             <p></p>
             <hr class="spacer-md">
-            <a href="{{ path("liquidarprocess") }}" class="btn btn-large btn-primary">Realizar Cálculo</a>
+            {% if not periodo.fechaPresentacion %}
+                <a href="{{ path("liquidarprocess") }}" class="btn btn-large btn-primary">Realizar Cálculo</a>
+            {% else %}
+                <div class="alert alert-danger" role="alert">
+                    <h4>El Período que esta intentando Liquidar ya ha sido "Presentado". <br>
+                        Si desea realizar algún cambio deberá "rectificar" el Período.
+                    </h4>
+                </div>
+            {% endif %}
         {% endblock %}
     {% endembed %}
 {% endblock %}

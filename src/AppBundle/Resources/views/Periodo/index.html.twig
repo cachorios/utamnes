@@ -94,11 +94,13 @@
                                        title="Ver mas información">
                                         <span class="glyphicon glyphicon-eye-open"></span>
                                     </a>
+                                    {% if not entity.fechaPresentacion %}
                                     <a href="{{ path('app_periodo_edit', { 'id': entity.id }) }}"
                                        class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"
                                        title="Editar los datos">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
+                                    {% endif %}
                                     <a href="{{ path('setperiodo', {'id': entity.id }) }}"
                                        class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top"
                                        title="Fijar como activo">
