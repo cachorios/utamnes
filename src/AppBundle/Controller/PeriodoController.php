@@ -77,13 +77,12 @@ class PeriodoController extends Controller
 
         $queryBuilder = $em->getRepository('AppBundle:Periodo')->createQueryBuilder("q");
         $queryBuilder
-            ->join('q.vencimiento','v')
+            ->join('q.vencimiento', 'v')
             ->where("q.empleador = :emp")
             ->orderBy('v.anio')
             ->addOrderBy('v.mes')
-            ->addOrderBy('q.liquidacion','ASC')
-            ->addOrderBy('q.tipo','ASC')
-
+            ->addOrderBy('q.liquidacion', 'ASC')
+            ->addOrderBy('q.tipo', 'ASC')
             ->setParameter("emp", $empleador->getId());
 
         // Reset filter
@@ -378,13 +377,13 @@ class PeriodoController extends Controller
     public function rectificarAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        if($request->getMethod()=='POST'){
+        if ($request->getMethod() == 'POST') {
             $form = $request->get("appbundle_periodo");
 
-            $periodo= $form['vencimiento'];
-            $liq=$form['liquidacion'];
-            $emp =$this->get('uta.empleador_activo')->getEmpleador();
-            $entity = $em->getRepository("AppBundle:Periodo")->getUltimoTipo($emp,$periodo,$liq);
+            $periodo = $form['vencimiento'];
+            $liq = $form['liquidacion'];
+            $emp = $this->get('uta.empleador_activo')->getEmpleador();
+            $entity = $em->getRepository("AppBundle:Periodo")->getUltimoTipo($emp, $periodo, $liq);
 
             $periodo = new Periodo();
 
@@ -403,11 +402,10 @@ class PeriodoController extends Controller
                 return $this->redirect($this->generateUrl('app_periodo'));
             }
 
-        }else{
+        } else {
             $entity = new Periodo();
             $form = $this->rectificarCreateCreateForm($entity);
         }
-
 
 
         return array(
@@ -438,7 +436,6 @@ class PeriodoController extends Controller
 
         return $form;
     }
-
 
 
     /**
@@ -481,6 +478,7 @@ class PeriodoController extends Controller
             $periodo,
             $liquidacion
         );
+
 //        ld($descrip);
 
         return new Response(json_encode($descrip));
@@ -493,7 +491,8 @@ class PeriodoController extends Controller
      * @Route("/setperiodo/{id}", name="setperiodo")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function setperiodoAction(Request $request){
+    public function setperiodoAction(Request $request)
+    {
 
         $empleador = $this->get("uta.empleador_activo")->getEmpleador();
         //Verficar que el periodo recibido pertenezca al empleador
@@ -501,23 +500,23 @@ class PeriodoController extends Controller
         $periodoId = $request->get("id");
         $periodo = $em->getRepository("AppBundle:Periodo")->find($periodoId);
 
-        if( !$periodo->getEmpleador()->getId() == $empleador->getId()){
+        if (!$periodo->getEmpleador()->getId() == $empleador->getId()) {
 
-            throw( new NotFoundHttpException("El periodo no pertenece al empleador activo"));
+            throw(new NotFoundHttpException("El periodo no pertenece al empleador activo"));
 
         }
 
         $q = $em->createQueryBuilder()
-            ->update("AppBundle:Periodo","p")
-            ->set("p.activo",0)
+            ->update("AppBundle:Periodo", "p")
+            ->set("p.activo", 0)
             ->where("p.empleador = ?1")
             ->setParameter(1, $empleador->getId())
             ->getQuery();
         $q->execute();
 
         $q = $em->createQueryBuilder()
-            ->update("AppBundle:Periodo","p")
-            ->set("p.activo",1)
+            ->update("AppBundle:Periodo", "p")
+            ->set("p.activo", 1)
             ->where("p.empleador = ?1")
             ->andWhere("p.id = ?2")
             ->setParameter(1, $empleador->getId())
@@ -527,6 +526,40 @@ class PeriodoController extends Controller
 
 
         return $this->redirectToRoute("app_periodo");
+    }
+
+    /**
+     * @Route("/presentar/{id}", name="presentar_periodo")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function presentarAction(Request $request)
+    {
+        $empleador = $this->get("uta.empleador_activo")->getEmpleador();
+
+        //Verficar que el periodo recibido pertenezca al empleador
+        $em = $this->getDoctrine()->getEntityManager();
+        $periodoId = $request->get("id");
+        $periodo = $em->getRepository("AppBundle:Periodo")->find($periodoId);
+
+        if (!$periodo->getEmpleador()->getId() == $empleador->getId()) {
+            throw(new NotFoundHttpException("El periodo no pertenece al empleador activo"));
+        }
+
+        if ( $periodo->getFechaPresentacion()){
+            throw(new NotFoundHttpException("El periodo ya fué presentado"));
+        }
+
+
+        $periodo->setFechaPresentacion(new \DateTime("now"));
+
+        $em->persist($periodo);
+        $em->flush();
+
+
+
+
+        return $this->redirectToRoute("app_periodo");
+
     }
 
 }
