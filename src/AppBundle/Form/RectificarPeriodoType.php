@@ -29,7 +29,7 @@ class RectificarPeriodoType extends AbstractType
         $builder
             ->add('liquidacion','choice',array("label" => "Nro. de Liquidación", "choices" => array()))
             ->add('tipo','choice',array("label" => "Presentación" , "choices" => Periodo::$_TIPO , 'disabled' => true))
-            ->add('descripcion', null ,array("label" => "Descripcion"))
+            ->add('descripcion', null ,array("label" => "Descripcion" , 'disabled' => true))
         ;
     }
     

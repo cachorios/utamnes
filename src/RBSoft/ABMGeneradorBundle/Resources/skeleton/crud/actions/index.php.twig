@@ -18,7 +18,7 @@
     {
 {% block method_body %}
     list($filterForm, $queryBuilder) = $this->filter($request);
-    $pager = $this->getPager($queryBuilder);
+    $pager = $this->getPager($queryBuilder, $request);
 {% endblock method_body %}
 
 {% block method_return %}
