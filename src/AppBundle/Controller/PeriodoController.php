@@ -560,9 +560,6 @@ class PeriodoController extends Controller
         $em->persist($periodo);
         $em->flush();
 
-
-
-
         return $this->redirectToRoute("app_periodo");
 
     }
