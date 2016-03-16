@@ -70,7 +70,7 @@ class PeriodoRepository extends EntityRepository
             "
             Select p.liquidacion, max(p.tipo) as tipo, p.descripcion
             From AppBundle:Periodo p
-            where p.empleador = :empleador AND p.vencimiento = :periodo
+            where p.empleador = :empleador AND p.vencimiento = :periodo AND p.fecha_presentacion IS NOT NULL
             GROUP BY p.liquidacion
             order BY p.liquidacion DESC, p.tipo DESC
              "

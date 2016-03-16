@@ -79,6 +79,7 @@ class PeriodoController extends Controller
         $queryBuilder = $em->getRepository('AppBundle:Periodo')->createQueryBuilder("q");
         $queryBuilder
             ->join('q.vencimiento', 'v')
+            ->leftJoin("q.")
             ->where("q.empleador = :emp")
             ->orderBy('v.anio')
             ->addOrderBy('v.mes')
@@ -385,7 +386,7 @@ class PeriodoController extends Controller
             $liq = $form['liquidacion'];
             $emp = $this->get('uta.empleador_activo')->getEmpleador();
 
-            $entity = $em->getRepository("AppBundle:Periodo")->getUltimoTipo($emp,$periodo,$liq);
+            $entity = $em->getRepository("AppBundle:Periodo")->getUltimoTipo($emp, $periodo, $liq);
 
             $periodo = new Periodo();
             $tipo = $entity->getTipo();
@@ -397,13 +398,23 @@ class PeriodoController extends Controller
 
             $em->persist($periodo);
 
-            $em->getRepository('AppBundle:DatoLiquidacion')->copyDatoLiquidacion($entity , $periodo);
+            $ctactes = $em->getRepository("AppBundle:Ctacte")->findBy(
+                array("periodo" => $entity->getId(), "rectificado" => null)
+            );
+
+            foreach ($ctactes as $ctacte) {
+                $ctacte->setRectificado($periodo);
+                $em->persist($ctacte);
+
+            }
+
+            $em->getRepository('AppBundle:DatoLiquidacion')->copyDatoLiquidacion($entity, $periodo);
 
             $em->flush();
 
-
             $this->get('session')->getFlashBag()->add('success', "El Periodo $periodo se rectifico correctamente.");
-                return $this->redirect($this->generateUrl('setperiodo',array('id' => $periodo->getId())));
+
+            return $this->redirect($this->generateUrl('setperiodo', array('id' => $periodo->getId())));
 
         } else {
             $entity = new Periodo();
@@ -550,7 +561,7 @@ class PeriodoController extends Controller
             throw(new NotFoundHttpException("El periodo no pertenece al empleador activo"));
         }
 
-        if ( $periodo->getFechaPresentacion()){
+        if ($periodo->getFechaPresentacion()) {
             throw(new NotFoundHttpException("El periodo ya fué presentado"));
         }
 
